@@ -8,5 +8,7 @@ function revealAnswer() {
     });
     mp.start.setColor("green");
     mp.end.setColor("red");
+    document.getElementById("reset-btn").style.display = "none"
+    document.getElementById("reveal-answer").style.display = "none"
 }
 setTimeout(construct, 100)
