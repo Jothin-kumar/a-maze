@@ -18,8 +18,11 @@ class Player {
             this.currentElem.setAttribute("fill", "rgba(255, 255, 255, .25)");
             this.prevElem = this.currentElem
         }
+        if (this.steps === 1) {
+            this.start = new Date().getTime()
+        }
         if (this.x == this.endPos.x && this.y == this.endPos.y) {
-            gameOver(this.steps)
+            gameOver(this.steps, this.start)
         }
     }
 }

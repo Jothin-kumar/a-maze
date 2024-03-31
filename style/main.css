@@ -51,6 +51,8 @@ body {
     border: 2px solid olive;
     border-radius: 5px;
     text-align: center;
+    min-width: 20vw;
+    min-height: 20vh;
 }
 #game-over-parent > button {
     background-color: black;
