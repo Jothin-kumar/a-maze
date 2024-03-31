@@ -1,9 +1,10 @@
 canMove = (x1, y1, x2, y2) => window.lines[`${x1+x2},${y1+y2}`].hidden
 
 class Player {
-    constructor(x, y, endPos) {
+    constructor(x, y, startPos, endPos) {
         this.x = x;
         this.y = y;
+        this.startPos = startPos
         this.endPos = endPos;
         this.steps = 0
         this.prevElem = window.mazeSquares[`${x},${y}`].elem;
@@ -25,10 +26,21 @@ class Player {
             gameOver(this.steps, this.start)
         }
     }
+    reset() {
+        this.x = this.startPos.x
+        this.y = this.startPos.y
+        this.prevElem = window.mazeSquares[`${this.x},${this.y}`].elem;
+        for (let key in window.mazeSquares) {
+            window.mazeSquares[key].elem.setAttribute("fill", "black");
+        }
+        this.startPos.elem.setAttribute("fill", "green");
+        this.endPos.elem.setAttribute("fill", "red");
+        this.steps = 0
+    }
 }
 startPos = window.mp.start;
 endPos = window.mp.end;
-window.player = new Player(startPos.x, startPos.y, endPos);
+window.player = new Player(startPos.x, startPos.y, startPos, endPos);
 
 window.addEventListener("keydown", (e) => {
     if (window.answerRevealed) {
