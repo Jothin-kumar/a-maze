@@ -5,6 +5,7 @@ class MazeDot {
         this.x = x;
         this.y = y;
         this.type = "";
+        this.used = false;
         this.elem = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
         this.elem.setAttribute('cx', x*10);
         this.elem.setAttribute('cy', y*10);
@@ -29,13 +30,9 @@ for (let x = 1; x < 50; x++) {
     }
 }
 
-const start = pickRandomElement(Object.values(window.mazeDots));
-start.setColor("green");
-start.setRadius(3);
-start.type = "start";
-
 class Path {
-    constructor() {
+    constructor(start) {
+        this.start = start;
         this.path = [start];
     }
     addDot(dot) {
@@ -46,8 +43,7 @@ class Path {
             return false;
         }
         this.path.push(dot);
-        dot.setColor("blue");
-        dot.setRadius(2);
+        dot.used = true;
         dot.type = "path";
         return true;
     }
@@ -58,24 +54,17 @@ class Path {
         if (this.path.length > 100) {
             throw new PathInvalidError("Path too long");
         }
-        this.path[this.path.length-1].setColor("red");
-        this.path[this.path.length-1].setRadius(3);
-        this.path[this.path.length-1].type = "end";
+        this.end = this.path[this.path.length-1];
+        this.end.type = "end";
     }
     reset() {
         Object.values(window.mazeDots).forEach(dot => {
-            dot.setColor("rgba(255, 255, 255, .5)");
-            dot.setRadius(1);
             dot.type = "";
         });
-        this.path = [start];
-        start.setColor("green");
-        start.setRadius(3);
-        start.type = "start";
+        this.path = [this.start];
+        this.start.type = "start";
     }
 }
-const path = window.path = new Path();
-
 function getUnusedNeighbors(dot) {
     const neighbors = {};
     function handler(x, y) {
@@ -88,29 +77,53 @@ function getUnusedNeighbors(dot) {
     return neighbors;
 }
 
-while (path.path.length < 100) {
-    try {
-        let neighbors = getUnusedNeighbors(path.path[path.path.length-1]);
-    if (Object.keys(neighbors).length === 0) {
-        path.path[path.path.length-1].setColor("black");
-        path.path[path.path.length-1].type = "prohibited";
-        path.path.pop();
-    }
-    else {
-        choosen = pickRandomElement(Object.values(neighbors));
-        path.addDot(choosen);
-        Object.values(neighbors).forEach(dot => {
-            if (dot !== choosen) {
-                dot.setColor("black");
-                dot.type = "prohibited";
+function constructPath(start) {
+    start.type = "start";
+    const path = new Path(start);
+    while (path.path.length < 100) {
+        try {
+            let neighbors = getUnusedNeighbors(path.path[path.path.length-1]);
+            if (Object.keys(neighbors).length === 0) {
+                path.path[path.path.length-1].type = "prohibited";
+                path.path.pop();
             }
-        });
+            else {
+                choosen = pickRandomElement(Object.values(neighbors));
+                path.addDot(choosen);
+                Object.values(neighbors).forEach(dot => {
+                    if (dot !== choosen) {
+                        dot.type = "prohibited";
+                    }
+                });
+            }
+        }
+        catch (e) {
+            console.warn(e);
+            console.log("resetting...");
+            path.reset();
+        }
     }
-    }
-    catch (e) {
-        console.error(e);
-        console.log("resetting...");
-        path.reset();
-    }
+    path.finish();
+    Object.values(window.mazeDots).filter(dot => dot.type === "prohibited").forEach(dot => {  // Dots prohibited only for current path
+        dot.type = "";
+    })
+    return path;
 }
-path.finish();
+
+const mp = window.mp = constructPath(pickRandomElement(Object.values(window.mazeDots))); // Main path
+
+while (Object.values(window.mazeDots).filter(dot => !dot.used).length > 50) {
+    let path = constructPath(pickRandomElement(Object.values(window.mazeDots).filter(dot => !dot.type)));
+    path.path.forEach(dot => {
+        dot.setColor('yellow');
+    })
+}
+
+mp.path.forEach(dot => {
+    dot.setColor('blue');
+    dot.setRadius(2);
+})
+mp.start.setColor('green');
+mp.start.setRadius(3);
+mp.end.setColor('red');
+mp.end.setRadius(3);
