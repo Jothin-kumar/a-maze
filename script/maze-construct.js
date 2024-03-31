@@ -22,8 +22,8 @@ class MazeSquare {
 
 const mg = window.mg = document.getElementById('maze-grid');
 
-for (let x = 1; x < 70; x++) {
-    for (let y = 1; y < 70; y++) {
+for (let x = 1; x < 50; x++) {
+    for (let y = 1; y < 50; y++) {
         new MazeSquare(x, y);
     }
 }
