@@ -7,17 +7,36 @@ class Player {
         this.startPos = startPos
         this.endPos = endPos;
         this.steps = 0
-        this.prevElem = window.mazeSquares[`${x},${y}`].elem;
+        this.pathElems = []
     }
     moveBy(x, y) {
         if (canMove(this.x, this.y, this.x+x, this.y+y)) {
             this.x += x;
             this.y += y;
             this.steps += 1
-            this.prevElem.setAttribute("fill", "rgba(0, 0, 255, .75)");
-            this.currentElem = window.mazeSquares[`${this.x},${this.y}`].elem
-            this.currentElem.setAttribute("fill", "rgba(255, 255, 255, .25)");
-            this.prevElem = this.currentElem
+            let currentElem = window.mazeSquares[`${this.x},${this.y}`].elem
+            if (this.pathElems.includes(currentElem)) {
+                this.pathElems.forEach((elem) => {
+                    elem.setAttribute("fill", "black")
+                })
+                this.pathElems = [currentElem]
+            }
+            else {
+                this.pathElems.push(currentElem)
+            }
+            this.pathElems.push()
+            this.pathElems.forEach((elem) => {
+                let i = this.pathElems.indexOf(elem)
+                let l = this.pathElems.length
+                if (elem === this.startPos.elem) {}
+                else {
+                    let transperancy = 1 - (l-i)*.05
+                    if (transperancy < 0) {
+                        transperancy = 0
+                    }
+                    elem.setAttribute("fill", `rgba(0, 0, 255, ${transperancy})`)
+                }
+            })
         }
         if (this.steps === 1) {
             this.start = new Date().getTime()
@@ -29,7 +48,7 @@ class Player {
     reset() {
         this.x = this.startPos.x
         this.y = this.startPos.y
-        this.prevElem = window.mazeSquares[`${this.x},${this.y}`].elem;
+        this.pathElems = []
         for (let key in window.mazeSquares) {
             window.mazeSquares[key].elem.setAttribute("fill", "black");
         }
