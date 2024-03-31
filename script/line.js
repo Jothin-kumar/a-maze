@@ -2,6 +2,7 @@ window.lines = {};
 
 class Line {
     constructor(x1, y1, x2, y2) {
+        this.hidden = false
         this.elem = document.createElementNS("http://www.w3.org/2000/svg", "line");
         window.lines[`${x1+x2},${y1+y2}`] = this;
         if (x1 == x2) {
@@ -23,6 +24,7 @@ class Line {
     }
     hide() {
         this.elem.setAttribute("stroke", "black");
+        this.hidden = true
     }
 }
 for (let x = 1; x < 70; x++) {

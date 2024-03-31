@@ -4,6 +4,7 @@
 body {
     background-color: black;
     color: white;
+    user-select: none;
 }
 @media print {
     #maze-grid {
@@ -36,4 +37,26 @@ body {
 
 #main, #controls {
     display: none;
+}
+
+#game-over-parent {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border: 2px solid olive;
+    border-radius: 5px;
+    text-align: center;
+}
+#game-over-parent > button {
+    background-color: black;
+    border: orange 2px solid;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
