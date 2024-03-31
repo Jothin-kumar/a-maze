@@ -1,23 +1,22 @@
-window.mazeDots = {}
+window.mazeSquares = {}
 
-class MazeDot {
+class MazeSquare {
     constructor(x, y) {
         this.x = x;
         this.y = y;
         this.type = "";
         this.used = false;
-        this.elem = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
-        this.elem.setAttribute('cx', x*10);
-        this.elem.setAttribute('cy', y*10);
-        this.elem.setAttribute('r', 1);
+        this.elem = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
+        this.elem.setAttribute('width', 10);
+        this.elem.setAttribute('height', 10);
+        this.elem.setAttribute('x', x*10-5);
+        this.elem.setAttribute('y', y*10-5);
+        this.elem.setAttribute('fill', 'black');
         window.mg.appendChild(this.elem);
-        window.mazeDots[`${x},${y}`] = this;
+        window.mazeSquares[`${x},${y}`] = this;
     }
     setColor(color) {
         this.elem.setAttribute('fill', color);
-    }
-    setRadius(radius) {
-        this.elem.setAttribute('r', radius);
     }
 }
 
@@ -25,7 +24,7 @@ const mg = window.mg = document.getElementById('maze-grid');
 
 for (let x = 1; x < 50; x++) {
     for (let y = 1; y < 50; y++) {
-        new MazeDot(x, y);
+        new MazeSquare(x, y);
     }
 }
 
@@ -57,7 +56,7 @@ class Path {
         this.end.type = "end";
     }
     reset() {
-        Object.values(window.mazeDots).forEach(dot => {
+        Object.values(window.mazeSquares).forEach(dot => {
             dot.type = "";
         });
         this.path = [this.start];
@@ -67,7 +66,7 @@ class Path {
 function getUnusedNeighbors(dot) {
     const neighbors = {};
     function handler(x, y) {
-        let potentialUnusedNeighbor = window.mazeDots[`${dot.x+x},${dot.y+y}`];
+        let potentialUnusedNeighbor = window.mazeSquares[`${dot.x+x},${dot.y+y}`];
         if (potentialUnusedNeighbor && !potentialUnusedNeighbor.type) {
             neighbors[`${x},${y}`] = (potentialUnusedNeighbor);
         }
@@ -106,20 +105,25 @@ function constructPath(start, pathLength = 100, condition = (dot) => true){
         }
     }
     path.finish();
-    Object.values(window.mazeDots).filter(dot => dot.type === "prohibited").forEach(dot => {  // Dots prohibited only for current path
+    Object.values(window.mazeSquares).filter(dot => dot.type === "prohibited").forEach(dot => {  // Dots prohibited only for current path
         dot.type = "";
     })
     return path;
 }
 
-const mp = window.mp = constructPath(pickRandomElement(Object.values(window.mazeDots))); // Main path
+const mp = window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares))); // Main path
 var c = 0
 function main() {
-    while (Object.values(window.mazeDots).filter((d) => !d.used).length > 0 && c < 10000) {
+    while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 10000) {
         pathLine(constructPath(pickRandomElement(mp.path), 50, (dot) => !dot.used).path)
-        pathLine(constructPath(pickRandomElement(Object.values(window.mazeDots).filter((d) => !d.used)), 10, (dot) => !dot.used).path);
+        pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => !d.used)), 10, (dot) => !dot.used).path);
         c++;
     }
-    pathLine(mp.path, "green");
+    pathLine(mp.path);
+    mp.path.forEach((dot) => {
+       dot.setColor("rgba(0, 0, 255, .25)");
+    });
+    mp.start.setColor("green");
+    mp.end.setColor("red");
 }
 setTimeout(main, 100);
