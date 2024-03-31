@@ -20,6 +20,7 @@ class Line {
         this.elem.setAttribute("x2", x2*10);
         this.elem.setAttribute("y2", y2*10);
         this.elem.setAttribute("stroke", "white");
+        this.elem.setAttribute("stroke-width", 2);
         window.mg.appendChild(this.elem);
     }
     hide() {
