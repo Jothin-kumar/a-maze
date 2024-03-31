@@ -22,8 +22,8 @@ class MazeSquare {
 
 const mg = window.mg = document.getElementById('maze-grid');
 
-for (let x = 1; x < 50; x++) {
-    for (let y = 1; y < 50; y++) {
+for (let x = 1; x < 70; x++) {
+    for (let y = 1; y < 70; y++) {
         new MazeSquare(x, y);
     }
 }
@@ -49,7 +49,7 @@ class Path {
         if (this.path.length < 10) {
             throw new PathInvalidError("Path too short");
         }
-        if (this.path.length > 100) {
+        if (this.path.length > 200) {
             throw new PathInvalidError("Path too long");
         }
         this.end = this.path[this.path.length-1];
@@ -75,7 +75,7 @@ function getUnusedNeighbors(dot) {
     return neighbors;
 }
 
-function constructPath(start, pathLength = 100, condition = (dot) => true){
+function constructPath(start, pathLength = 169, condition = (dot) => true){
     start.type = "start";
     const path = new Path(start);
     while (path.path.length < pathLength) {

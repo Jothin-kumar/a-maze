@@ -25,8 +25,8 @@ class Line {
         this.elem.setAttribute("stroke", "black");
     }
 }
-for (let x = 1; x < 50; x++) {
-    for (let y = 1; y < 50; y++) {
+for (let x = 1; x < 70; x++) {
+    for (let y = 1; y < 70; y++) {
         new Line(x, y, x+1, y);
         new Line(x, y, x, y+1);
     }
