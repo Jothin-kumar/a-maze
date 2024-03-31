@@ -10,7 +10,6 @@ class MazeDot {
         this.elem.setAttribute('cx', x*10);
         this.elem.setAttribute('cy', y*10);
         this.elem.setAttribute('r', 1);
-        this.elem.setAttribute('fill', 'rgba(255, 255, 255, .5)');
         window.mg.appendChild(this.elem);
         window.mazeDots[`${x},${y}`] = this;
     }
@@ -77,10 +76,10 @@ function getUnusedNeighbors(dot) {
     return neighbors;
 }
 
-function constructPath(start) {
+function constructPath(start, pathLength = 100, condition = (dot) => true){
     start.type = "start";
     const path = new Path(start);
-    while (path.path.length < 100) {
+    while (path.path.length < pathLength) {
         try {
             let neighbors = getUnusedNeighbors(path.path[path.path.length-1]);
             if (Object.keys(neighbors).length === 0) {
@@ -89,6 +88,9 @@ function constructPath(start) {
             }
             else {
                 choosen = pickRandomElement(Object.values(neighbors));
+                if (!condition(choosen)) {
+                    return path;
+                }
                 path.addDot(choosen);
                 Object.values(neighbors).forEach(dot => {
                     if (dot !== choosen) {
@@ -111,19 +113,13 @@ function constructPath(start) {
 }
 
 const mp = window.mp = constructPath(pickRandomElement(Object.values(window.mazeDots))); // Main path
-
-while (Object.values(window.mazeDots).filter(dot => !dot.used).length > 50) {
-    let path = constructPath(pickRandomElement(Object.values(window.mazeDots).filter(dot => !dot.type)));
-    path.path.forEach(dot => {
-        dot.setColor('yellow');
-    })
+var c = 0
+function main() {
+    while (Object.values(window.mazeDots).filter((d) => !d.used).length > 0 && c < 10000) {
+        pathLine(constructPath(pickRandomElement(mp.path), 50, (dot) => !dot.used).path)
+        pathLine(constructPath(pickRandomElement(Object.values(window.mazeDots).filter((d) => !d.used)), 10, (dot) => !dot.used).path);
+        c++;
+    }
+    pathLine(mp.path, "green");
 }
-
-mp.path.forEach(dot => {
-    dot.setColor('blue');
-    dot.setRadius(2);
-})
-mp.start.setColor('green');
-mp.start.setRadius(3);
-mp.end.setColor('red');
-mp.end.setRadius(3);
+setTimeout(main, 100);
