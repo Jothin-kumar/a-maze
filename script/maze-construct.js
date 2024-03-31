@@ -113,17 +113,16 @@ function constructPath(start, pathLength = 169, condition = (dot) => true){
 
 const mp = window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares))); // Main path
 var c = 0
-function main() {
+function construct() {
     while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 10000) {
         pathLine(constructPath(pickRandomElement(mp.path), 50, (dot) => !dot.used).path)
         pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => !d.used)), 10, (dot) => !dot.used).path);
         c++;
     }
     pathLine(mp.path);
-    mp.path.forEach((dot) => {
-       dot.setColor("rgba(0, 0, 255, .25)");
-    });
     mp.start.setColor("green");
     mp.end.setColor("red");
+    document.getElementById("main").style.display = "block"
+    document.getElementById("controls").style.display = "block"
+    document.getElementById("loading").style.display = "none"
 }
-setTimeout(main, 100);

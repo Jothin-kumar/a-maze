@@ -1,0 +1,39 @@
+#maze-grid {
+    background-color: black;
+}
+body {
+    background-color: black;
+    color: white;
+}
+@media print {
+    #maze-grid {
+        filter: invert(100%);
+    }
+}
+@media screen and (orientation: landscape) {
+    #main {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+#controls {
+    width: 100vw;
+    position: fixed;
+    background-color: black;
+    padding: 10px;
+}
+#controls > button {
+    background-color: black;
+    border: olive 2px solid;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#main, #controls {
+    display: none;
+}
