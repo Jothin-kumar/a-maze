@@ -8,3 +8,8 @@
 body {
     background-color: black;
 }
+@media print {
+    #maze-grid {
+        filter: invert(100%);
+    }
+}
