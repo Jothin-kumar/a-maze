@@ -9,9 +9,3 @@ function revealAnswer() {
     mp.end.setColor("red");
 }
 setTimeout(construct, 100)
-window.addEventListener("touchstart", () => {
-    document.body.requestFullscreen();
-})
-window.addEventListener("click", () => {
-    document.body.requestFullscreen();
-})
