@@ -13,7 +13,7 @@ class Player {
             this.x += x;
             this.y += y;
             this.steps += 1
-            this.prevElem.setAttribute("fill", "rgba(0, 0, 200, .25)");
+            this.prevElem.setAttribute("fill", "rgba(0, 0, 255, .75)");
             this.currentElem = window.mazeSquares[`${this.x},${this.y}`].elem
             this.currentElem.setAttribute("fill", "rgba(255, 255, 255, .25)");
             this.prevElem = this.currentElem
