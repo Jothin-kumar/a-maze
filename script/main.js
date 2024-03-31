@@ -1,4 +1,5 @@
 function revealAnswer() {
+    window.answerRevealed = true;
     Object.values(window.mazeSquares).forEach((dot) => {
         dot.setColor("black");
     })

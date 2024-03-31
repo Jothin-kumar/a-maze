@@ -31,6 +31,9 @@ endPos = window.mp.end;
 window.player = new Player(startPos.x, startPos.y, endPos);
 
 window.addEventListener("keydown", (e) => {
+    if (window.answerRevealed) {
+        return
+    }
     switch (e.key) {
         case "w":
         case "W":
