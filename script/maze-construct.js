@@ -115,8 +115,8 @@ const mp = window.mp = constructPath(pickRandomElement(Object.values(window.maze
 var c = 0
 function construct() {
     while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 10000) {
-        pathLine(constructPath(pickRandomElement(mp.path), 50, (dot) => !dot.used).path)
-        pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => !d.used)), 10, (dot) => !dot.used).path);
+        pathLine(constructPath(pickRandomElement(mp.path), randRange(50, 169), (dot) => !dot.used).path)
+        pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => !d.used)), randRange(10, 25), (dot) => !dot.used).path);
         c++;
     }
     pathLine(mp.path);
