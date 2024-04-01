@@ -3,6 +3,7 @@
     grid-template-columns: auto auto auto;
     width: fit-content;
     background-color: rgb(0, 100, 0);
+    border: olive solid 2px;
     padding: 10px;
     border-radius: 50%;
 
