@@ -6,10 +6,17 @@
     <title>Maze</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/portrait.css">
+    <link rel="stylesheet" href="style/onscreen-nav.css">
 </head>
 <body>
     <div id="loading">
         <p>Loading...</p>
+    </div>
+    <div id="onscreen-nav">
+        <div></div><button onclick="window.player.moveUp()">&uarr;</button>
+        <div></div><button onclick="window.player.moveLeft()">&larr;</button>
+        <div></div><button onclick="window.player.moveRight()">&rarr;</button>
+        <div></div><button onclick="window.player.moveDown()">&darr;</button>
     </div>
     <div id="controls">
         <button onclick="revealAnswer()" id="reveal-answer">Reveal Answer</button>

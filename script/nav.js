@@ -45,6 +45,10 @@ class Player {
             gameOver(this.steps, this.start)
         }
     }
+    moveUp() {this.moveBy(0, -1)}
+    moveDown() {this.moveBy(0, 1)}
+    moveLeft() {this.moveBy(-1, 0)}
+    moveRight() {this.moveBy(1, 0)}
     reset() {
         this.x = this.startPos.x
         this.y = this.startPos.y
@@ -69,22 +73,22 @@ window.addEventListener("keydown", (e) => {
         case "w":
         case "W":
         case "ArrowUp":
-            player.moveBy(0, -1);
+            player.moveUp();
             break;
         case "s":
         case "S":
         case "ArrowDown":
-            player.moveBy(0, 1);
+            player.moveDown();
             break;
         case "a":
         case "A":
         case "ArrowLeft":
-            player.moveBy(-1, 0);
+            player.moveLeft();
             break;
         case "d":
         case "D":
         case "ArrowRight":
-            player.moveBy(1, 0);
+            player.moveRight();
             break;
     }
 })

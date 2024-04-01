@@ -1,0 +1,30 @@
+#onscreen-nav {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: fit-content;
+    background-color: rgb(0, 100, 0);
+    padding: 10px;
+    border-radius: 50%;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10px;
+    z-index: 1;
+    display: none;
+}
+#onscreen-nav.show-onscreen-nav {
+    display: grid;
+}
+@media screen and (orientation: landscape) {
+    #onscreen-nav {
+        display: none !important; /* On screen nav only for portrait */
+    }
+}
+#onscreen-nav > button {
+    background-color: rgba(0, 0, 0, .69);
+    border: 0;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+}
