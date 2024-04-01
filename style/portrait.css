@@ -1,0 +1,23 @@
+@media screen and (orientation: portrait) {
+    body {
+        margin: 0;
+    }
+    #main {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+    #maze-grid {
+        margin: 10px;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #controls {
+        width: max-content;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

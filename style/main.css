@@ -25,6 +25,7 @@ body {
     position: fixed;
     background-color: black;
     padding: 10px;
+    z-index: 1;
 }
 #controls > button {
     background-color: black;
