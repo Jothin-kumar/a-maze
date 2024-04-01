@@ -28,4 +28,5 @@
     color: white;
     border-radius: 5px;
     padding: 10px;
+    outline: none !important;
 }
