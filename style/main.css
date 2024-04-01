@@ -63,3 +63,20 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+
+#loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: loading 1.5s infinite;
+    text-align: center;
+}
+@keyframes loading {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .5;
+    }
+}
