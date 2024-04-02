@@ -94,6 +94,7 @@ body {
 
     width: fit-content;
     overflow-y: scroll;
+    scrollbar-width: none;
     max-width: 95vw;
     max-height: 95vh;
     min-width: 70vw;
@@ -115,4 +116,5 @@ body {
     transform: translate(-50%, -50%);
     height: 90%;
     overflow-y: scroll;
+    scrollbar-width: none;
 }
