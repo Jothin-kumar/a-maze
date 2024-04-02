@@ -118,3 +118,12 @@ body {
     overflow-y: scroll;
     scrollbar-width: none;
 }
+#close-help-btn {
+    padding: 10px;
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    border: sandybrown 1px solid;
+    z-index: 11;
+    border-radius: 5px;
+}
