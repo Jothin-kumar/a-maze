@@ -3,6 +3,7 @@
     grid-template-columns: auto auto auto;
     padding: 10px;
     border-radius: 50%;
+    background-color: rgba(244, 165, 96, .5);
 
     position: absolute;
     left: 50%;
