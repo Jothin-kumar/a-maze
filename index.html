@@ -21,7 +21,7 @@
     <div id="controls">
         <button onclick="revealAnswer()" id="reveal-answer">Reveal Answer</button>
         <button onclick="window.player.reset()" id="reset-btn">Reset</button>
-        <button onclick="help()">Help</button> <!-- TODO -->
+        <button onclick="showHelp()">Help</button> <!-- TODO -->
         <button onclick="window.location.reload()">New Maze</button>
     </div>
     <div id="main">
@@ -36,6 +36,27 @@
         <p id="game-over"></p>
         <button onclick="window.location.reload()">Play Again</button>
     </div>
+    <div id="help-parent">
+        <div id="help">
+            <h2>How to play?</h2>
+            <ul>
+                <li>Find the <strong>green dot</strong> in the maze. This will be the <strong>starting position</strong></li>
+                <li>Find the <strong>red dot</strong> in the maze. This will be the <strong>final position</strong></li>
+                <li>Start navigating to the final position</li>
+            </ul>
+            <h2>Navigation</h2>
+            <ul>
+                <li><strong>Devices with physical keyboard: </strong>Use arrow keys or WASD</li>
+                <li><strong>Touch screen devices: </strong>Maze can be scrolled. Use onscreen navigation buttons</li>
+            </ul>
+            <i>* On touch devices, double tap to reset onscreen navigation buttons</i>
+            <h2>Common problems</h2>
+            <ul>
+                <li><strong>Visibility issues: </strong>Disable your dark reader browser extension</li>
+            </ul>
+            <br><p>Click to exit help screen</p>
+        </div>
+    </div>
     
     <script src="script/helper.js"></script>
     <script src="script/maze-construct.js"></script>
@@ -45,5 +66,6 @@
     <script src="script/nav.js"></script>
     <script src="script/on-screen-nav.js"></script>
     <script src="script/focus-start.js"></script>
+    <script src="script/help.js"></script>
 </body>
 </html>

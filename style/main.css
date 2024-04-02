@@ -80,3 +80,34 @@ body {
         opacity: .5;
     }
 }
+
+#help-parent {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    width: fit-content;
+    overflow-y: scroll;
+    max-width: 95vw;
+    max-height: 95vh;
+    min-width: 70vw;
+    min-height: 70vh;
+    overflow: scroll;
+    padding: 10px;
+
+    background-color: black;
+    border: olive 2px solid;
+    border-radius: 10px;
+    z-index: 10;
+
+    display: none;
+}
+#help {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 90%;
+    overflow-y: scroll;
+}
