@@ -29,4 +29,8 @@ onscreenNav.addEventListener('touchmove', handleTouchMove, false);
 window.addEventListener("contextmenu", (e) => {
     e.preventDefault();
     onscreenNav.style.transform = "";
+    initialX = 0;
+    initialY = 0;
+    currentX = 0;
+    currentY = 0;
 })
