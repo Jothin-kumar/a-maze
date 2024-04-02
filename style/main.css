@@ -39,6 +39,11 @@ body {
 #main, #controls {
     display: none;
 }
+@media print {
+    #onscreen-nav, #controls {
+        display: none !important;
+    }
+}
 
 #game-over-parent {
     display: none;
