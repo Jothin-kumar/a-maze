@@ -15,7 +15,7 @@ async function revealAnswer() {
     await new Promise(r => setTimeout(r, 200))
     mp.path.forEach((dot) => {
         if (![mp.start, mp.end].includes(dot)) {
-            dot.setColor("rgba(200, 200, 255, .9)");
+            dot.setColor("rgba(0, 50, 200, .31)");
         }
     });
 }
