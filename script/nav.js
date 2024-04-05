@@ -34,7 +34,7 @@ class Player {
                     if (transperancy < 0) {
                         transperancy = 0
                     }
-                    elem.setAttribute("fill", `rgba(0, 0, 255, ${transperancy})`)
+                    elem.setAttribute("fill", `rgba(200, 200, 255, ${transperancy})`)
                 }
             })
         }
