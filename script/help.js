@@ -5,4 +5,21 @@ function showHelp() {
 function hideHelp() {
     help.style.display = "none"
 }
-help.addEventListener("click", hideHelp)
+window.addEventListener("keydown", (e) => {
+    if (["Escape", "q", "Q"].includes(e.key)) {
+        hideHelp()
+    }
+})
+
+function helpBtn() {
+    if (help.style.display === "block") {
+        hideHelp()
+    } else {
+        showHelp()
+    }
+}
+document.addEventListener("click", (e) => {
+    if (e.target !== help && !help.contains(e.target) && e.target.id !== "help-btn") {
+        hideHelp()
+    }
+})
