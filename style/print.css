@@ -1,0 +1,30 @@
+@media print {
+    @page {
+        margin: 0;
+    }
+
+    #maze-grid {
+        filter: invert(100%);
+    }
+
+    #onscreen-nav, #controls {
+        display: none !important;
+    }
+    #main {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #help-parent, #game-over-parent {
+        display: none !important;
+    }
+
+    #print-msg {
+        display: block !important;
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        text-align: center;
+    }
+}

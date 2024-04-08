@@ -7,11 +7,6 @@ body {
     user-select: none;
     overscroll-behavior: none;
 }
-@media print {
-    #maze-grid {
-        filter: invert(100%);
-    }
-}
 @media screen and (orientation: landscape) {
     #main {
         position: absolute;
@@ -39,20 +34,6 @@ body {
 
 #main, #controls {
     display: none;
-}
-@media print {
-    #onscreen-nav, #controls {
-        display: none !important;
-    }
-    #main {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
-    #help-parent, #game-over-parent {
-        display: none !important;
-    }
 }
 
 #game-over-parent {
