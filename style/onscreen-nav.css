@@ -25,10 +25,10 @@
     border: olive solid 2px;
     font-size: large;
     font-weight: bolder;
-    width: 3rem;
-    height: 3rem;
+    width: 3em;
+    height: 3em;
     color: white;
-    border-radius: 50%;
+    border-radius: 10%;
     padding: 10px;
     outline: none !important;
 }
