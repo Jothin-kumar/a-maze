@@ -69,6 +69,17 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+#game-over-maze-parent {
+    max-width: 95vw;
+    overflow: scroll;
+    margin: 10px;
+}
+#game-over-maze-parent > #main {
+    transform: unset;
+    position: unset;
+    width: 500px;
+    height: 500px;
+}
 
 #loading {
     position: absolute;
