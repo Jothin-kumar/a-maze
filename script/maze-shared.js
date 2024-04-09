@@ -23,3 +23,13 @@ function loadMazeFromShared(data) {
 
     postConstruct()
 }
+
+function shareMaze(button) {
+    const data = exportMaze();
+    const url = new URL(window.location);
+    url.searchParams.set("maze-data", data);
+    navigator.clipboard.writeText(url.href);
+    const originalText = button.innerText;
+    button.innerText = "Copied!";
+    setTimeout(() => button.innerText = originalText, 2500);
+}

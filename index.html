@@ -24,7 +24,8 @@
         <button onclick="revealAnswer()" id="reveal-answer">Reveal Answer</button>
         <button onclick="window.player.reset()" id="reset-btn">Reset</button>
         <button onclick="helpBtn()" id="help-btn">Help</button>
-        <button onclick="window.location.reload()">New Maze</button>
+        <button onclick="window.location = window.location.pathname">New Maze</button>
+        <button onclick="shareMaze(this)">Share Maze</button>
     </div>
     <div id="main">
         <svg id="maze-grid" height="500" width="500" xmlns="http://www.w3.org/2000/svg">
@@ -38,6 +39,7 @@
         <p id="game-over"></p>
         <div id="game-over-maze-parent"></div>
         <button onclick="window.location.reload()">Play Again</button>
+        <button onclick="shareMaze(this)">Share Maze</button>
     </div>
     <div id="help-parent">
         <div id="help">
@@ -81,13 +83,13 @@
     <script src="script/helper.js"></script>
     <script src="script/maze-construct.js"></script>
     <script src="script/line.js"></script>
-    <script>setTimeout(construct, 100)</script>
+    <script src="script/maze-shared.js"></script>
+    <script src="script/main.js"></script>
     <script src="script/reveal.js"></script>
     <script src="script/game-over.js"></script>
     <script src="script/nav.js"></script>
     <script src="script/on-screen-nav.js"></script>
     <script src="script/focus-start.js"></script>
     <script src="script/help.js"></script>
-    <script src="script/maze-shared.js"></script>
 </body>
 </html>
