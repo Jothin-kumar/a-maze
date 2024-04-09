@@ -46,8 +46,18 @@ function loadMazeFromShared(data) {
 }
 
 function shareMaze(button) {
-    const data = exportMaze();
     const originalText = button.innerText;
+
+    const usp = new URLSearchParams(window.location.search);
+    if (usp.has("share-url")) {
+        const shareURL = usp.get("share-url");
+        if (shareURL.startsWith("a-maze.jothin.tech/share?s=") || shareURL.startsWith("mazes.jothin.tech/@")) {
+            finish("https://" + shareURL);
+            return
+        }
+    }
+
+    const data = exportMaze();
     button.innerText = "Exporting...";
 
     function shortenURL(url, callback) {
@@ -60,7 +70,7 @@ function shareMaze(button) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
-                    callback(JSON.parse(xhr.responseText)["short_url"]);
+                    callback(JSON.parse(xhr.responseText)["short_url"].replace("spoo.me/", `${window.location.host}/share?s=`));
                 } else {
                     callback(false);
                 }
@@ -72,17 +82,17 @@ function shareMaze(button) {
     try {
         shortenURL(`https://a-maze.jothin.tech/?maze-data=${data}`, (shortURL) => {
             if (!shortURL) {
-                button.innerText = "Error.";
-                setTimeout(() => button.innerText = originalText, 2500);
-                return;
+                window.shortURL = `https://a-maze.jothin.tech/?maze-data=${data}`
             }
-            navigator.clipboard.writeText(shortURL);
-            button.innerText = "Copied!";
-            setTimeout(() => button.innerText = originalText, 2500);
+            finish(shortURL)
         });
     }
     catch {
-        button.innerText = "Error.";
+        finish(`https://a-maze.jothin.tech/?maze-data=${data}`)
+    }
+    function finish(url) {
+        navigator.clipboard.writeText(url);
+        button.innerText = "Copied!";
         setTimeout(() => button.innerText = originalText, 2500);
     }
 }

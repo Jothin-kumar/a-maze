@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <style>
+            body {
+                background-color: black;
+                color: white;
+                user-select: none;
+            }
+            div {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+            a {
+                background-color: black;
+                color: white;
+                text-decoration: none;
+                cursor: pointer;
+                border: olive 1px solid;
+                padding: 5px;
+                font-size: small;
+                border-radius: 10px;
+                margin: auto;
+            }
+        </style>
+        <script>
+            async function main() {
+                const usp = new URLSearchParams(window.location.search)
+                if (usp.has("s")) {
+                    r = await fetch(`https://spoo.me/${usp.get("s")}`)
+                    if (r.url.startsWith("https://a-maze.jothin.tech/?maze-data=")) {
+                        const mazeUSP = new URLSearchParams((new URL(r.url)).search)
+                        mazeUSP.set("share-url", `a-maze.jothin.tech/share?s=${usp.get("s")}`)
+                        window.location.href = r.url + mazeUSP.toString()
+                    }
+                }
+            }
+            main()
+        </script>
+    </head>
+    <body>
+        <div>
+            <p>Loading shared maze...</p>
+            <br>
+            <a href="/">New Maze</a>
+        </div>
+        <noscript>
+            <style>
+                a {
+                    display: none;
+                }
+                p {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            </style>
+            <p>This application requires JavaScript. Enable it and refresh the page</p>
+        </noscript>
+    </body>
+</html>

@@ -2,7 +2,8 @@
     "parent-dir": ".",
     "vars": [],
     "pages": [
-        "/index.html"
+        "/index.html",
+        "/share.html"
     ],
     "line-end": "\n"
 }
