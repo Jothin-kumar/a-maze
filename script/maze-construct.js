@@ -111,7 +111,7 @@ function constructPath(start, pathLength = 169, condition = (dot) => true){
     return path;
 }
 
-const mp = window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares))); // Main path
+window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares))); // Main path
 var c = 0
 function construct() {
     while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 10000) {
@@ -120,6 +120,9 @@ function construct() {
         c++;
     }
     pathLine(mp.path);
+    postConstruct();
+}
+function postConstruct() {
     mp.start.setColor("green");
     mp.end.setColor("red");
     document.getElementById("main").style.display = "block"
@@ -127,4 +130,7 @@ function construct() {
     document.getElementById("loading").style.display = "none"
     document.getElementById("onscreen-nav").classList.add("show-onscreen-nav")
     focusStart()
+    startPos = window.mp.start;
+    endPos = window.mp.end;
+    window.player = new Player(startPos.x, startPos.y, startPos, endPos);
 }
