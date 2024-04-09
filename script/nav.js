@@ -66,7 +66,7 @@ endPos = window.mp.end;
 window.player = new Player(startPos.x, startPos.y, startPos, endPos);
 
 window.addEventListener("keydown", (e) => {
-    if (window.answerRevealed) {
+    if (window.answerRevealed || window.gameIsOver) {
         return
     }
     switch (e.key) {

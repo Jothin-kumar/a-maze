@@ -4,6 +4,7 @@ function gameOver(steps, startTime) {
         score = 1;
     }
     score = (score*100).toFixed(2);
+    window.gameIsOver = true;
     const main = document.getElementById("main");
     document.getElementById("game-over-maze-parent").appendChild(main);
     player.reset()
