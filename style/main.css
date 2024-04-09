@@ -91,7 +91,7 @@ body {
 }
 #loading-might-take-a-while {
     opacity: 0;
-    animation: display-slowly 3s 5s forwards;
+    animation: display-slowly 2s 3s forwards;
 }
 @keyframes display-slowly {
     0% {
