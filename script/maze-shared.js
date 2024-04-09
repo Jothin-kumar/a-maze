@@ -47,10 +47,42 @@ function loadMazeFromShared(data) {
 
 function shareMaze(button) {
     const data = exportMaze();
-    const url = new URL(window.location);
-    url.searchParams.set("maze-data", data);
-    navigator.clipboard.writeText(url.href);
     const originalText = button.innerText;
-    button.innerText = "Copied!";
-    setTimeout(() => button.innerText = originalText, 2500);
+    button.innerText = "Exporting...";
+
+    function shortenURL(url, callback) {
+        const data = new URLSearchParams();
+        data.append('url', url);
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://spoo.me/', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Accept', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    callback(JSON.parse(xhr.responseText)["short_url"]);
+                } else {
+                    callback(false);
+                }
+            }
+        };
+        xhr.send(data);
+    }
+
+    try {
+        shortenURL(`https://a-maze.jothin.tech/?maze-data=${data}`, (shortURL) => {
+            if (!shortURL) {
+                button.innerText = "Error.";
+                setTimeout(() => button.innerText = originalText, 2500);
+                return;
+            }
+            navigator.clipboard.writeText(shortURL);
+            button.innerText = "Copied!";
+            setTimeout(() => button.innerText = originalText, 2500);
+        });
+    }
+    catch {
+        button.innerText = "Error.";
+        setTimeout(() => button.innerText = originalText, 2500);
+    }
 }
