@@ -143,7 +143,7 @@ body {
     z-index: 11;
     border-radius: 5px;
 }
-#error-msg {
+#msg {
     position: absolute;
     left: 50%;
     top: 50%;

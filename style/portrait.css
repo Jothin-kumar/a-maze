@@ -23,4 +23,8 @@
     #help {
         width: 90%;
     }
+    #msg {
+        width: 90vw;
+        text-align: center;
+    }
 }
