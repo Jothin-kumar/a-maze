@@ -10,6 +10,7 @@
         transform: translate(-50%, -50%);
         overflow: scroll;
         scrollbar-width: none;
+        text-align: center;
     }
     #main::-webkit-scrollbar {
         display: none;
