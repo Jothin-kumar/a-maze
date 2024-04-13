@@ -19,6 +19,5 @@ function getDifficulty() {
     }
     
     difficulty *= Object.values(lines).filter(l => l.hidden).length / Object.values(lines).length;
-    difficulty = Math.round(difficulty);
     return difficulty;
 }
