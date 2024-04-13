@@ -7,6 +7,10 @@ body {
     user-select: none;
     overscroll-behavior: none;
 }
+#main {
+    max-height: 50vh;
+    overflow-y: scroll;
+}
 @media screen and (orientation: landscape) {
     #main {
         position: absolute;

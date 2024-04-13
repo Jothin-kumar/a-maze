@@ -3,6 +3,7 @@ const easy = "easy"
 const medium = "medium"
 const hard = "hard"
 window.currentLevel = medium
+window.gridSize = 49
 
 if (sp.has("maze-data")) {
     setTimeout(() => {
@@ -21,6 +22,17 @@ else {
     if (sp.has("level")) {
         const level = sp.get("level")
         setCurrentLevel(level)
+        switch (level) {
+            case easy:
+                configForGridSize(25)
+                break
+            case medium:
+                configForGridSize(49)
+                break
+            case hard:
+                configForGridSize(69)
+                break
+        }
     }
     a = new Date().getTime()
     for (let i = 0; i < 10000000; i++) {i+1}
@@ -58,6 +70,23 @@ function setCurrentLevel(lvl) {
     window.currentLevel = lvl
     document.querySelectorAll("#levels-control > button").forEach(e => e.classList.remove("current-lvl"))
     document.getElementById(lvl).classList.add("current-lvl")
+}
+function configForGridSize(size) { // Example: size = 49 for 49x49 grid
+    window.gridSize = size
+    const mg = document.getElementById("maze-grid")
+    const a = size*10 + 10
+    mg.setAttribute("height", a)
+    mg.setAttribute("width", a)
+    const b = a - 5
+    document.getElementById("maze-grid-line-1").setAttribute("x2", b)
+    document.getElementById("maze-grid-line-2").setAttribute("y1", b)
+    document.getElementById("maze-grid-line-2").setAttribute("x2", b)
+    document.getElementById("maze-grid-line-2").setAttribute("y2", b)
+    document.getElementById("maze-grid-line-3").setAttribute("y2", b)
+    document.getElementById("maze-grid-line-4").setAttribute("x1", b)
+    document.getElementById("maze-grid-line-4").setAttribute("y2", b)
+    document.getElementById("maze-grid-line-4").setAttribute("x2", b)
+
 }
 
 if (sp.has("share-url")) {

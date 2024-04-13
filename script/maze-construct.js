@@ -22,12 +22,6 @@ class MazeSquare {
 
 const mg = window.mg = document.getElementById('maze-grid');
 
-for (let x = 1; x < 50; x++) {
-    for (let y = 1; y < 50; y++) {
-        new MazeSquare(x, y);
-    }
-}
-
 class Path {
     constructor(start) {
         this.start = start;
@@ -111,9 +105,21 @@ function constructPath(start, pathLength = 169, condition = (dot) => true){
     return path;
 }
 
-window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares))); // Main path
 var c = 0
 function construct() {
+    for (let x = 1; x < window.gridSize + 1; x++) {
+        for (let y = 1; y < window.gridSize + 1; y++) {
+            new MazeSquare(x, y);
+        }
+    }
+    for (let x = 1; x < window.gridSize + 1; x++) {
+        for (let y = 1; y < window.gridSize + 1; y++) {
+            new Line(x, y, x+1, y);
+            new Line(x, y, x, y+1);
+        }
+    }
+
+    window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares))); // Main path
     while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 10000) {
         pathLine(constructPath(pickRandomElement(mp.path), randRange(50, 169), (dot) => !dot.used).path)
         pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => !d.used)), randRange(10, 25), (dot) => !dot.used).path);

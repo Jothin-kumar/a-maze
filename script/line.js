@@ -28,12 +28,6 @@ class Line {
         this.hidden = true
     }
 }
-for (let x = 1; x < 50; x++) {
-    for (let y = 1; y < 50; y++) {
-        new Line(x, y, x+1, y);
-        new Line(x, y, x, y+1);
-    }
-}
 
 function clearLine(x1, y1, x2, y2) {
     window.lines[`${x1+x2},${y1+y2}`].hide();
