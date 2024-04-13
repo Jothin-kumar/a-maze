@@ -15,11 +15,6 @@
 #onscreen-nav.show-onscreen-nav {
     display: grid;
 }
-@media screen and (orientation: landscape) {
-    #onscreen-nav {
-        display: none !important; /* On screen nav only for portrait */
-    }
-}
 #onscreen-nav > button {
     background-color: rgb(0, 0, 169, .9);
     border: olive solid 2px;

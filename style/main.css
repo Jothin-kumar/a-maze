@@ -24,6 +24,7 @@ body {
     padding: 10px;
     z-index: 1;
     text-align: center;
+    bottom: 0;
 }
 #controls > button {
     background-color: black;
