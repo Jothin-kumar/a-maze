@@ -66,26 +66,34 @@ window.addEventListener("keydown", (e) => {
     if (window.answerRevealed || window.gameIsOver) {
         return
     }
+    const w = document.getElementById("onscreen-nav-w")
+    const s = document.getElementById("onscreen-nav-s")
+    const a = document.getElementById("onscreen-nav-a")
+    const d = document.getElementById("onscreen-nav-d")
     switch (e.key) {
         case "w":
         case "W":
         case "ArrowUp":
-            player.moveUp();
+            w.focus()
+            w.click()
             break;
         case "s":
         case "S":
         case "ArrowDown":
-            player.moveDown();
+            s.focus()
+            s.click()
             break;
         case "a":
         case "A":
         case "ArrowLeft":
-            player.moveLeft();
+            a.focus()
+            a.click()
             break;
         case "d":
         case "D":
         case "ArrowRight":
-            player.moveRight();
+            d.focus()
+            d.click()
             break;
     }
 })

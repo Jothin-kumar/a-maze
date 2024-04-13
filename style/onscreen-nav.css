@@ -28,6 +28,6 @@
     outline: none !important;
 }
 #onscreen-nav > button:focus {
-    background-color: rgba(0, 0, 169, 1);
+    background-color: rgba(0, 69, 169, 1);
     color: white;
 }
