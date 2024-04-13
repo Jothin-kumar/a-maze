@@ -21,6 +21,11 @@
         <div></div><button id="onscreen-nav-s" onclick="window.player.moveDown()">S</button>
     </div>
     <div id="controls">
+        <div id="levels-control">
+            <button onclick="toLevel('easy')" id="easy">Easy</button>
+            <button onclick="toLevel('medium')" id="medium" class="current-lvl">Medium</button>
+            <button onclick="toLevel('hard')" id="hard">Hard</but>
+        </div>
         <button onclick="revealAnswer()" id="reveal-answer">Reveal Answer</button>
         <button onclick="window.player.reset()" id="reset-btn">Reset</button>
         <button onclick="helpBtn()" id="help-btn">Help</button>

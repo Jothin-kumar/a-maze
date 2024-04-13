@@ -1,4 +1,9 @@
 const sp = new URLSearchParams(window.location.search)
+const easy = "easy"
+const medium = "medium"
+const hard = "hard"
+window.currentLevel = medium
+
 if (sp.has("maze-data")) {
     setTimeout(() => {
         try {
@@ -13,6 +18,10 @@ if (sp.has("maze-data")) {
     }, 100)
 }
 else {
+    if (sp.has("level")) {
+        const level = sp.get("level")
+        setCurrentLevel(level)
+    }
     a = new Date().getTime()
     for (let i = 0; i < 10000000; i++) {i+1}
     b = new Date().getTime()
@@ -27,6 +36,28 @@ else {
             window.location.href = "https://mazes.jothin.tech"
         }, 3000)
     }
+}
+
+function toLevel(lvl) {
+    if (lvl === window.currentLevel) return
+    const usp = new URLSearchParams("")
+    switch (lvl) {
+        case easy:
+            usp.set("level", easy)
+            break
+        case medium:
+            usp.set("level", medium)
+            break
+        case hard:
+            usp.set("level", hard)
+            break
+    }
+    window.location.search = usp.toString()
+}
+function setCurrentLevel(lvl) {
+    window.currentLevel = lvl
+    document.querySelectorAll("#levels-control > button").forEach(e => e.classList.remove("current-lvl"))
+    document.getElementById(lvl).classList.add("current-lvl")
 }
 
 if (sp.has("share-url")) {
