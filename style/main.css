@@ -68,6 +68,10 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+#game-over-parent > button:hover {
+    background-color: rgba(100, 200, 100, .1);
+    border-color: darkgoldenrod;
+}
 #game-over-maze-parent {
     max-width: 95vw;
     overflow: scroll;
