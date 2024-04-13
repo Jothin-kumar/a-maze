@@ -36,6 +36,10 @@ body {
     display: inline-block;
     margin: 2px;
 }
+#controls > button:hover {
+    background-color: rgba(100, 200, 100, .1);
+    border-color: darkgoldenrod;
+}
 
 #main, #controls {
     display: none;
