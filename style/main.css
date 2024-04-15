@@ -8,8 +8,8 @@ body {
     overscroll-behavior: none;
 }
 #main {
-    max-height: 50vh;
-    overflow-y: scroll;
+    max-height: 69vh;
+    overflow: scroll;
 }
 @media screen and (orientation: landscape) {
     #main {
