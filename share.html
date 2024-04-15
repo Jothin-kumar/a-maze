@@ -33,7 +33,7 @@
                     if (r.url.startsWith("https://a-maze.jothin.tech/?maze-data=")) {
                         const mazeUSP = new URLSearchParams((new URL(r.url)).search)
                         mazeUSP.set("share-url", `a-maze.jothin.tech/share?s=${usp.get("s")}`)
-                        window.location.href = r.url + mazeUSP.toString()
+                        window.location.href = `https://a-maze.jothin.tech/?${mazeUSP.toString()}`
                     }
                 }
             }

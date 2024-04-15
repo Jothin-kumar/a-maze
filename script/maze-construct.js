@@ -106,7 +106,7 @@ function constructPath(start, pathLength = 169, condition = (dot) => true){
 }
 
 var c = 0
-function construct() {
+function preConstruct() {
     for (let x = 1; x < window.gridSize + 1; x++) {
         for (let y = 1; y < window.gridSize + 1; y++) {
             new MazeSquare(x, y);
@@ -118,7 +118,9 @@ function construct() {
             new Line(x, y, x, y+1);
         }
     }
-
+}
+function construct() {
+    preConstruct();
     window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares))); // Main path
     while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 10000) {
         pathLine(constructPath(pickRandomElement(mp.path), randRange(50, 169), (dot) => !dot.used).path)

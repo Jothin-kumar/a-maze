@@ -24,7 +24,8 @@ function exportMaze() {
 }
 
 function loadMazeFromShared(data) {
-    mp.start = window.mazeSquares[decodeToCoords(data.slice(0, 2)).join(",")];
+    preConstruct();
+    window.mp = new Path(window.mazeSquares[decodeToCoords(data.slice(0, 2)).join(",")]);
     mp.end = window.mazeSquares[decodeToCoords(data.slice(2, 4)).join(",")];
 
     data = data.slice(4).split("-");
