@@ -1,13 +1,13 @@
 // Format: start end correctPathSquares-hiddenLinesXExcess-hiddenLinesYExcess
 // (without space)
-// Every 2 consecutive alphabets represent a coordinate
+// Every 2 consecutive encodeChrs represent a coordinate
 // for hiddenLines, coordinate is half
 
-const alphabets = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-numToAlpha = (n) => alphabets[n-1];
-alphaToNum = (a) => alphabets.indexOf(a) + 1;
-coordToAlpha = (x, y) => numToAlpha(x) + numToAlpha(y);
-alphaToCoord = (alpha) => [alphaToNum(alpha[0]), alphaToNum(alpha[1])];
+const encodeChrs = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~!*;";
+encodeFromNum = (n) => encodeChrs[n-1];
+decodeToNum = (a) => encodeChrs.indexOf(a) + 1;
+encodeFromCoords = (x, y) => encodeFromNum(x) + encodeFromNum(y);
+decodeToCoords = (alpha) => [decodeToNum(alpha[0]), decodeToNum(alpha[1])];
 
 
 function exportMaze() {
@@ -16,30 +16,30 @@ function exportMaze() {
     const hiddenLinesXExcess = hiddenLines.filter(l => l[0] % 2 == 1);
     const hiddenLinesYExcess = hiddenLines.filter(l => l[1] % 2 == 1);
 
-    let compressedData =  `${coordToAlpha(mp.start.x, mp.start.y)}${coordToAlpha(mp.end.x, mp.end.y)}`
-    compressedData += correctPathElems.map(sq => coordToAlpha(sq.x, sq.y)).join("")
-    compressedData += `-${hiddenLinesXExcess.map(l => coordToAlpha((l[0]-1)/2, l[1]/2)).join("")}`
-    compressedData += `-${hiddenLinesYExcess.map(l => coordToAlpha(l[0]/2, (l[1]-1)/2)).join("")}`
+    let compressedData =  `${encodeFromCoords(mp.start.x, mp.start.y)}${encodeFromCoords(mp.end.x, mp.end.y)}`
+    compressedData += correctPathElems.map(sq => encodeFromCoords(sq.x, sq.y)).join("")
+    compressedData += `-${hiddenLinesXExcess.map(l => encodeFromCoords((l[0]-1)/2, l[1]/2)).join("")}`
+    compressedData += `-${hiddenLinesYExcess.map(l => encodeFromCoords(l[0]/2, (l[1]-1)/2)).join("")}`
     return compressedData;
 }
 
 function loadMazeFromShared(data) {
-    mp.start = window.mazeSquares[alphaToCoord(data.slice(0, 2)).join(",")];
-    mp.end = window.mazeSquares[alphaToCoord(data.slice(2, 4)).join(",")];
+    mp.start = window.mazeSquares[decodeToCoords(data.slice(0, 2)).join(",")];
+    mp.end = window.mazeSquares[decodeToCoords(data.slice(2, 4)).join(",")];
 
     data = data.slice(4).split("-");
 
     mp.path = [mp.start];
     for (let i = 0; i < data[0].length; i += 2) {
-        mp.path.push(window.mazeSquares[alphaToCoord(data[0].slice(i, i+2)).join(",")]);
+        mp.path.push(window.mazeSquares[decodeToCoords(data[0].slice(i, i+2)).join(",")]);
     }
     mp.path.push(mp.end);
 
     for (let i = 0; i < data[1].length; i += 2) {
-        window.lines[`${2*alphaToNum(data[1][i])+1},${2*alphaToNum(data[1][i+1])}`].hide();
+        window.lines[`${2*decodeToNum(data[1][i])+1},${2*decodeToNum(data[1][i+1])}`].hide();
     }
     for (let i = 0; i < data[2].length; i += 2) {
-        window.lines[`${2*alphaToNum(data[2][i])},${2*alphaToNum(data[2][i+1])+1}`].hide();
+        window.lines[`${2*decodeToNum(data[2][i])},${2*decodeToNum(data[2][i+1])+1}`].hide();
     }
 
     postConstruct()
