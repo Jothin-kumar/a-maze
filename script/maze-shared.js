@@ -84,7 +84,7 @@ function shareMaze(button) {
             if (!shortURL) {
                 window.shortURL = `https://a-maze.jothin.tech/?maze-data=${data}`
             }
-            finish(shortURL)
+            finish(window.shortURL || shortURL)
         });
     }
     catch {
