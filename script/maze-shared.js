@@ -79,16 +79,18 @@ function shareMaze(button) {
         xhr.send(data);
     }
 
+    const toBeShortenedURL = usp.has("level") ? `https://a-maze.jothin.tech/?maze-data=${data}&level=${usp.get("level")}` : `https://a-maze.jothin.tech/?maze-data=${data}`;
+
     try {
-        shortenURL(`https://a-maze.jothin.tech/?maze-data=${data}`, (shortURL) => {
+        shortenURL(toBeShortenedURL, (shortURL) => {
             if (!shortURL) {
-                window.shortURL = `https://a-maze.jothin.tech/?maze-data=${data}`
+                window.shortURL = toBeShortenedURL
             }
             finish(window.shortURL || shortURL)
         });
     }
     catch {
-        finish(`https://a-maze.jothin.tech/?maze-data=${data}`)
+        finish(toBeShortenedURL)
     }
     function finish(url) {
         navigator.clipboard.writeText(url);
