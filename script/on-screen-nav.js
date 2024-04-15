@@ -26,6 +26,21 @@ function handleTouchMove(event) {
 onscreenNav.addEventListener('touchstart', handleTouchStart, false);
 onscreenNav.addEventListener('touchmove', handleTouchMove, false);
 
+// Add event listeners for mouse events
+onscreenNav.addEventListener('mousedown', (e) => {
+    initialX = e.clientX - currentX;
+    initialY = e.clientY - currentY;
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+    });
+});
+function handleMouseMove(e) {
+    currentX = e.clientX - initialX;
+    currentY = e.clientY - initialY;
+    onscreenNav.style.transform = `translate(${currentX}px, ${currentY}px)`;
+}
+
 window.addEventListener("contextmenu", (e) => {
     e.preventDefault();
     onscreenNav.style.transform = "";
