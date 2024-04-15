@@ -3,7 +3,7 @@
 // Every 2 consecutive encodeChrs represent a coordinate
 // for hiddenLines, coordinate is half
 
-const encodeChrs = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~!*;";
+const encodeChrs = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!._$+()";
 encodeFromNum = (n) => encodeChrs[n-1];
 decodeToNum = (a) => encodeChrs.indexOf(a) + 1;
 encodeFromCoords = (x, y) => encodeFromNum(x) + encodeFromNum(y);
