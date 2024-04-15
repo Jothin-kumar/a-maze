@@ -121,10 +121,16 @@ function preConstruct() {
 }
 function construct() {
     preConstruct();
-    window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares))); // Main path
+    const vals = {
+        25: [69, 10, 34, 20],
+        49: [169, 50, 169, 25],
+        69: [200, 69, 200, 88]
+    }
+    const val = vals[window.gridSize]
+    window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares)), val[0]); // Main path
     while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 10000) {
-        pathLine(constructPath(pickRandomElement(mp.path), randRange(50, 169), (dot) => !dot.used).path)
-        pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => !d.used)), randRange(10, 25), (dot) => !dot.used).path);
+        pathLine(constructPath(pickRandomElement(mp.path), randRange(val[1], val[2]), (dot) => !dot.used).path)
+        pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => !d.used)), randRange(val[1], val[3]), (dot) => !dot.used).path);
         c++;
     }
     pathLine(mp.path);
