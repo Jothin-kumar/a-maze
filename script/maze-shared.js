@@ -94,6 +94,7 @@ function shareMaze(button) {
         finish(toBeShortenedURL)
     }
     function finish(url) {
+        document.getElementById("print-msg").innerText = url
         navigator.clipboard.writeText(url);
         button.innerText = "Copied!";
         setTimeout(() => button.innerText = originalText, 2500);
