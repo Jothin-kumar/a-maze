@@ -43,7 +43,7 @@ class Path {
         if (this.path.length < 10) {
             throw new PathInvalidError("Path too short");
         }
-        if (this.path.length > 200) {
+        if (this.path.length > 256) {
             throw new PathInvalidError("Path too long");
         }
         this.end = this.path[this.path.length-1];
@@ -122,15 +122,16 @@ function preConstruct() {
 function construct() {
     preConstruct();
     const vals = {
-        25: [69, 10, 34, 20],
-        49: [169, 50, 169, 25],
-        69: [200, 69, 200, 88]
+        25: [69, 88, 10, 34, 20],
+        49: [169, 175, 50, 169, 25],
+        69: [200, 256, 69, 200, 88]
     }
     const val = vals[window.gridSize]
-    window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares)), val[0]); // Main path
+    console.log(val);
+    window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares)), randRange(val[0], val[1])); // Main path
     while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 10000) {
-        pathLine(constructPath(pickRandomElement(mp.path), randRange(val[1], val[2]), (dot) => !dot.used).path)
-        pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => !d.used)), randRange(val[1], val[3]), (dot) => !dot.used).path);
+        pathLine(constructPath(pickRandomElement(mp.path), randRange(val[2], val[3]), (dot) => !dot.used).path)
+        pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => !d.used)), randRange(val[2], val[4]), (dot) => !dot.used).path);
         c++;
     }
     pathLine(mp.path);
