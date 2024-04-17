@@ -44,6 +44,7 @@ class Player {
         if (this.x == this.endPos.x && this.y == this.endPos.y) {
             gameOver(this.steps, this.start)
         }
+        updateNav()
     }
     moveUp() {this.moveBy(0, -1)}
     moveDown() {this.moveBy(0, 1)}
@@ -59,6 +60,7 @@ class Player {
         this.startPos.elem.setAttribute("fill", "green");
         this.endPos.elem.setAttribute("fill", "red");
         this.steps = 0
+        updateNav()
     }
 }
 
@@ -97,3 +99,38 @@ window.addEventListener("keydown", (e) => {
             break;
     }
 })
+
+function updateNav() {
+    const w = document.getElementById("onscreen-nav-w")
+    const s = document.getElementById("onscreen-nav-s")
+    const a = document.getElementById("onscreen-nav-a")
+    const d = document.getElementById("onscreen-nav-d")
+
+    const x = window.player.x
+    const y = window.player.y
+    
+    if (!canMove(x, y, x, y-1)) {
+        w.setAttribute("disabled", "")
+    }
+    else {
+        w.removeAttribute("disabled")
+    }
+    if (!canMove(x, y, x, y+1)) {
+        s.setAttribute("disabled", "")
+    }
+    else {
+        s.removeAttribute("disabled")
+    }
+    if (!canMove(x, y, x-1, y)) {
+        a.setAttribute("disabled", "")
+    }
+    else {
+        a.removeAttribute("disabled")
+    }
+    if (!canMove(x, y, x+1, y)) {
+        d.setAttribute("disabled", "")
+    }
+    else {
+        d.removeAttribute("disabled")
+    }
+}

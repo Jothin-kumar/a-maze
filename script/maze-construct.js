@@ -148,4 +148,5 @@ function postConstruct() {
     startPos = window.mp.start;
     endPos = window.mp.end;
     window.player = new Player(startPos.x, startPos.y, startPos, endPos);
+    updateNav()
 }
