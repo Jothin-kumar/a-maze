@@ -33,3 +33,9 @@
 #onscreen-nav > button:disabled {
     opacity: .2;
 }
+#onscreen-nav-assist {
+    border-radius: 50% !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    margin: auto;
+}
