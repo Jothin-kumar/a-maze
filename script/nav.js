@@ -1,4 +1,11 @@
-canMove = (x1, y1, x2, y2) => window.lines[`${x1+x2},${y1+y2}`].hidden
+canMove = (x1, y1, x2, y2) => {
+    try {
+        return window.lines[`${x1+x2},${y1+y2}`].hidden
+    }
+    catch {
+        return false
+    }
+}
 
 class Player {
     constructor(x, y, startPos, endPos) {
