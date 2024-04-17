@@ -15,9 +15,13 @@ class Player {
         this.endPos = endPos;
         this.steps = 0
         this.pathElems = []
+        this.prevX = null
+        this.prevY = null
     }
     moveBy(x, y) {
         if (canMove(this.x, this.y, this.x+x, this.y+y)) {
+            this.prevX = this.x
+            this.prevY = this.y
             this.x += x;
             this.y += y;
             this.steps += 1
@@ -104,6 +108,11 @@ window.addEventListener("keydown", (e) => {
             d.focus()
             d.click()
             break;
+        case " ":
+            e.preventDefault()  // Prevent spacebar from triggering the "click" event on the focused button
+            document.getElementById("onscreen-nav-assist").focus()
+            document.getElementById("onscreen-nav-assist").click()
+            break;
     }
 })
 
@@ -115,29 +124,69 @@ function updateNav() {
 
     const x = window.player.x
     const y = window.player.y
+
+    const possibleMoves = []
     
     if (!canMove(x, y, x, y-1)) {
         w.setAttribute("disabled", "")
     }
     else {
         w.removeAttribute("disabled")
+        possibleMoves.push(w)
     }
     if (!canMove(x, y, x, y+1)) {
         s.setAttribute("disabled", "")
     }
     else {
         s.removeAttribute("disabled")
+        possibleMoves.push(s)
     }
     if (!canMove(x, y, x-1, y)) {
         a.setAttribute("disabled", "")
     }
     else {
         a.removeAttribute("disabled")
+        possibleMoves.push(a)
     }
     if (!canMove(x, y, x+1, y)) {
         d.setAttribute("disabled", "")
     }
     else {
         d.removeAttribute("disabled")
+        possibleMoves.push(d)
+    }
+
+    const navAssistBtn = document.getElementById("onscreen-nav-assist")
+    if (possibleMoves.length === 1) {
+        navAssistBtn.onclick = possibleMoves[0].onclick
+        navAssistBtn.removeAttribute("disabled")
+    }
+    else if (possibleMoves.length == 2) {
+        function isPrevPos(pm) {
+            switch (pm) {
+                case w:
+                    return (player.prevX === player.x &&player.prevY === player.y-1)
+                case s:
+                    return (player.prevX === player.x &&player.prevY === player.y+1)
+                case a:
+                    return (player.prevX === player.x-1 &&player.prevY === player.y)
+                case d:
+                    return (player.prevX === player.x+1 &&player.prevY === player.y)
+            }
+        }
+        if (isPrevPos(possibleMoves[0])) {
+            navAssistBtn.onclick = possibleMoves[1].onclick
+            navAssistBtn.removeAttribute("disabled")
+        }
+        else if (isPrevPos(possibleMoves[1])) {
+            navAssistBtn.onclick = possibleMoves[0].onclick
+            navAssistBtn.removeAttribute("disabled")
+        }
+        else {
+            navAssistBtn.setAttribute("disabled", "")
+        }
+    }
+    else {
+        navAssistBtn.setAttribute("disabled", "")
     }
 }
