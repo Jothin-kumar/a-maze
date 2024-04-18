@@ -110,18 +110,45 @@ window.addEventListener("keydown", (e) => {
             break;
         case " ":
             e.preventDefault()  // Prevent spacebar from triggering the "click" event on the focused button
-            document.getElementById("onscreen-nav-assist").focus()
-            document.getElementById("onscreen-nav-assist").click()
+            if (!navAssistBtn.held && !navAssistBtn.disabled) {
+                navAssistBtn.held = true
+                navAssist()
+            }
             break;
+    }
+})
+window.addEventListener("keyup", (e) => {
+    if (window.answerRevealed || window.gameIsOver) {
+        return
+    }
+    if (e.key === " ") {
+        navAssistBtn.held = false
     }
 })
 
 const navAssistBtn = document.getElementById("onscreen-nav-assist")
+navAssistBtn.held = false
+navAssistBtn.addEventListener("touchstart", (e) => {navAssistBtn.held = true})
+navAssistBtn.addEventListener("touchend", (e) => {navAssistBtn.held = false})
+navAssistBtn.addEventListener("mousedown", (e) => {navAssistBtn.held = true})
+navAssistBtn.addEventListener("mouseup", (e) => {navAssistBtn.held = false})
+async function navAssist() {
+    while (navAssistBtn.held) {
+        navAssistBtn.focus()
+        navAssistBtn.func()
+        await new Promise(r => setTimeout(r, 256))
+    }
+}
 function enableNavAssist(func) {
-    navAssistBtn.onclick = func
+    navAssistBtn.func = func
+    navAssistBtn.addEventListener("touchstart", navAssist)
+    navAssistBtn.addEventListener("mousedown", navAssist)
     navAssistBtn.removeAttribute("disabled")
 }
 function disableNavAssist() {
+    navAssistBtn.held = false
+    navAssistBtn.removeEventListener("touchstart", navAssist)
+    navAssistBtn.removeEventListener("mousedown", navAssist)
     navAssistBtn.setAttribute("disabled", "")
 }
 function updateNav() {

@@ -34,6 +34,12 @@ onscreenNav.addEventListener('mousedown', (e) => {
     window.addEventListener('mouseup', () => {
         window.removeEventListener('mousemove', handleMouseMove);
     });
+    window.addEventListener('blur', () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+    });
+    window.addEventListener('click', () => {
+        window.removeEventListener('mousemove', handleMouseMove);
+    });
 });
 function handleMouseMove(e) {
     currentX = e.clientX - initialX;
