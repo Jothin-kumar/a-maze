@@ -55,6 +55,9 @@ function handleMouseMove(e) {
 
 window.addEventListener("contextmenu", (e) => {
     e.preventDefault();
+    if (e.target.id === "onscreen-nav-assist") {
+        return
+    }
     onscreenNav.style.transform = "";
     initialX = 0;
     initialY = 0;
