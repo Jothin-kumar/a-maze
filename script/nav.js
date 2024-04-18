@@ -56,6 +56,7 @@ class Player {
             gameOver(this.steps, this.start)
         }
         updateNav()
+        focusElem(this.pathElems[this.pathElems.length-1])
     }
     moveUp() {this.moveBy(0, -1)}
     moveDown() {this.moveBy(0, 1)}
