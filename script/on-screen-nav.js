@@ -10,6 +10,9 @@ let currentY = 0;
 
 // Function to handle touch start event
 function handleTouchStart(event) {
+    if (event.target.id === "onscreen-nav-assist") {
+        return
+    }
     initialX = event.touches[0].clientX - currentX;
     initialY = event.touches[0].clientY - currentY;
 }
@@ -28,6 +31,9 @@ onscreenNav.addEventListener('touchmove', handleTouchMove, false);
 
 // Add event listeners for mouse events
 onscreenNav.addEventListener('mousedown', (e) => {
+    if (e.target.id === "onscreen-nav-assist") {
+        return
+    }
     initialX = e.clientX - currentX;
     initialY = e.clientY - currentY;
     window.addEventListener('mousemove', handleMouseMove);
