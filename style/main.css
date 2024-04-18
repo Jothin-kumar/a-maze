@@ -10,6 +10,7 @@ body {
 #main {
     max-height: 69vh;
     overflow: scroll;
+    scroll-behavior: smooth;
 }
 @media screen and (orientation: landscape) {
     #main {
@@ -189,4 +190,28 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     display: none;
+}
+
+#locate-animation {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: olive;
+    z-index: 2;
+    display: none;
+}
+#locate-animation.locate-animation {
+    display: block;
+    animation: locate 3s forwards;
+}
+@keyframes locate {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
 }
