@@ -1,0 +1,4 @@
+.wrangler
+build
+build-output
+node_modules
