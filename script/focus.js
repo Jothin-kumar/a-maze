@@ -5,8 +5,8 @@ function elemInViewport(elem, sm) {
     return (
         rect.top >= mainRect.top + sm &&
         rect.left >= mainRect.left + sm &&
-        rect.bottom <= mainRect.bottom + sm &&
-        rect.right <= mainRect.right + sm
+        rect.bottom <= mainRect.bottom - sm &&
+        rect.right <= mainRect.right - sm
     )
 }
 function focusElem(elem) {
