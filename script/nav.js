@@ -129,9 +129,9 @@ window.addEventListener("keyup", (e) => {
 const navAssistBtn = document.getElementById("onscreen-nav-assist")
 navAssistBtn.held = false
 navAssistBtn.addEventListener("touchstart", (e) => {navAssistBtn.held = true})
-navAssistBtn.addEventListener("touchend", (e) => {navAssistBtn.held = false})
+window.addEventListener("touchend", (e) => {navAssistBtn.held = false})
 navAssistBtn.addEventListener("mousedown", (e) => {navAssistBtn.held = true})
-navAssistBtn.addEventListener("mouseup", (e) => {navAssistBtn.held = false})
+window.addEventListener("mouseup", (e) => {navAssistBtn.held = false})
 async function navAssist() {
     while (navAssistBtn.held) {
         navAssistBtn.focus()
