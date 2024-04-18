@@ -6,6 +6,7 @@ body {
     color: white;
     user-select: none;
     overscroll-behavior: none;
+    overflow: hidden;
 }
 * {
     scrollbar-width: none;
