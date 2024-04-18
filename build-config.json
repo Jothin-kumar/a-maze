@@ -2,7 +2,7 @@
     "parent-dir": ".",
     "vars": [],
     "pages": [
-        "/index.html",
+        "2d/index.html",
         "/share.html"
     ],
     "line-end": "\n"
