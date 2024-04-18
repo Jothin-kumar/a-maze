@@ -33,7 +33,9 @@ function unfocusControls() {
         clearTimeout(window.controlsDisplayNoneTimeout)
     }
     window.controlsDisplayNoneTimeout = setTimeout(() => {
-        controls.style.display = "block"
+        if (!window.gameIsOver) {
+            controls.style.display = "block"
+        }
     }, 2500)
 }
 document.getElementById("main").addEventListener("scroll", unfocusControls)
