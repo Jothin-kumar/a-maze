@@ -80,7 +80,7 @@ function shareMaze(button) {
         xhr.send(data);
     }
 
-    const toBeShortenedURL = usp.has("level") ? `https://a-maze.jothin.tech/?maze-data=${data}&level=${usp.get("level")}` : `https://a-maze.jothin.tech/?maze-data=${data}`;
+    const toBeShortenedURL = usp.has("level") ? `https://a-maze.jothin.tech/2d/?maze-data=${data}&level=${usp.get("level")}` : `https://a-maze.jothin.tech/2d/?maze-data=${data}`;
 
     try {
         shortenURL(toBeShortenedURL, (shortURL) => {

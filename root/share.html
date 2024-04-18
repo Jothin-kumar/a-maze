@@ -30,10 +30,8 @@
                 const usp = new URLSearchParams(window.location.search)
                 if (usp.has("s")) {
                     r = await fetch(`https://spoo.me/${usp.get("s")}`)
-                    if (r.url.startsWith("https://a-maze.jothin.tech/?maze-data=")) {
-                        const mazeUSP = new URLSearchParams((new URL(r.url)).search)
-                        mazeUSP.set("share-url", `a-maze.jothin.tech/share?s=${usp.get("s")}`)
-                        window.location.href = `https://a-maze.jothin.tech/?${mazeUSP.toString()}`
+                    if (r.url.startsWith("https://a-maze.jothin.tech/")) {
+                        window.location.href = `${r.url}&share-url=a-maze.jothin.tech%2Fshare%3Fs%3D${usp.get("s")}`
                     }
                 }
             }
