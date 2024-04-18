@@ -97,3 +97,7 @@ if (sp.has("share-url")) {
         document.getElementById("print-msg").innerText = shareURL
     }
 }
+
+function newMaze() {
+    window.location.href = `https://a-maze.jothin.tech/?level=${window.currentLevel}`
+}

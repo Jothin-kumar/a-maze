@@ -30,7 +30,7 @@
         <button onclick="revealAnswer()" id="reveal-answer">Reveal Answer</button>
         <button onclick="window.player.reset()" id="reset-btn">Reset</button>
         <button onclick="helpBtn()" id="help-btn">Help</button>
-        <button onclick="window.location = window.location.pathname">New Maze</button>
+        <button onclick="newMaze()">New Maze</button>
         <button onclick="shareMaze(this)">Share Maze</button>
     </div>
     <div id="main">
@@ -44,7 +44,7 @@
     <div id="game-over-parent">
         <p id="game-over"></p>
         <div id="game-over-maze-parent"></div>
-        <button onclick="window.location = window.location.pathname">Play a new maze</button>
+        <button onclick="newMaze()">Play a new maze</button>
         <button onclick="shareMaze(this)">Share Maze</button>
     </div>
     <div id="help-parent">
