@@ -116,6 +116,14 @@ window.addEventListener("keydown", (e) => {
     }
 })
 
+const navAssistBtn = document.getElementById("onscreen-nav-assist")
+function enableNavAssist(func) {
+    navAssistBtn.onclick = func
+    navAssistBtn.removeAttribute("disabled")
+}
+function disableNavAssist() {
+    navAssistBtn.setAttribute("disabled", "")
+}
 function updateNav() {
     const w = document.getElementById("onscreen-nav-w")
     const s = document.getElementById("onscreen-nav-s")
@@ -156,10 +164,8 @@ function updateNav() {
         possibleMoves.push(d)
     }
 
-    const navAssistBtn = document.getElementById("onscreen-nav-assist")
     if (possibleMoves.length === 1) {
-        navAssistBtn.onclick = possibleMoves[0].onclick
-        navAssistBtn.removeAttribute("disabled")
+        enableNavAssist(possibleMoves[0].onclick)
     }
     else if (possibleMoves.length == 2) {
         function isPrevPos(pm) {
@@ -175,18 +181,16 @@ function updateNav() {
             }
         }
         if (isPrevPos(possibleMoves[0])) {
-            navAssistBtn.onclick = possibleMoves[1].onclick
-            navAssistBtn.removeAttribute("disabled")
+            enableNavAssist(possibleMoves[1].onclick)
         }
         else if (isPrevPos(possibleMoves[1])) {
-            navAssistBtn.onclick = possibleMoves[0].onclick
-            navAssistBtn.removeAttribute("disabled")
+            enableNavAssist(possibleMoves[0].onclick)
         }
         else {
-            navAssistBtn.setAttribute("disabled", "")
+            disableNavAssist()
         }
     }
     else {
-        navAssistBtn.setAttribute("disabled", "")
+        disableNavAssist()
     }
 }
