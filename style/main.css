@@ -7,6 +7,12 @@ body {
     user-select: none;
     overscroll-behavior: none;
 }
+* {
+    scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+    display: none;
+}
 #main {
     max-height: 69vh;
     overflow: scroll;
@@ -14,7 +20,7 @@ body {
 }
 @media screen and (orientation: landscape) {
     #main {
-        position: absolute;
+        position: fixed;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -24,7 +30,7 @@ body {
 #controls {
     width: 100vw;
     max-width: 100vw;
-    position: fixed;
+    position: absolute;
     background-color: black;
     padding: 10px;
     z-index: 1;
@@ -151,7 +157,6 @@ body {
 
     width: fit-content;
     overflow-y: scroll;
-    scrollbar-width: none;
     max-width: 95vw;
     max-height: 95vh;
     min-width: 70vw;
@@ -173,7 +178,6 @@ body {
     transform: translate(-50%, -50%);
     height: 90%;
     overflow-y: scroll;
-    scrollbar-width: none;
 }
 #close-help-btn {
     padding: 10px;
