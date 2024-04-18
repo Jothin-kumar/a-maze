@@ -119,9 +119,6 @@ window.addEventListener("keydown", (e) => {
     }
 })
 window.addEventListener("keyup", (e) => {
-    if (window.answerRevealed || window.gameIsOver) {
-        return
-    }
     if (e.key === " ") {
         navAssistBtn.held = false
     }
@@ -134,7 +131,7 @@ window.addEventListener("touchend", (e) => {navAssistBtn.held = false})
 navAssistBtn.addEventListener("mousedown", (e) => {navAssistBtn.held = true})
 window.addEventListener("mouseup", (e) => {navAssistBtn.held = false})
 async function navAssist() {
-    while (navAssistBtn.held) {
+    while (navAssistBtn.held && !window.answerRevealed && !window.gameIsOver) {
         navAssistBtn.focus()
         navAssistBtn.func()
         await new Promise(r => setTimeout(r, 256))
