@@ -25,3 +25,15 @@ function focusStart() {
         locater.classList.add("locate-animation");
     }, 1000)
 }
+
+function unfocusControls() {
+    const controls = document.getElementById("controls")
+    controls.style.display = "none"
+    if (window.controlsDisplayNoneTimeout) {
+        clearTimeout(window.controlsDisplayNoneTimeout)
+    }
+    window.controlsDisplayNoneTimeout = setTimeout(() => {
+        controls.style.display = "block"
+    }, 2500)
+}
+document.getElementById("main").addEventListener("scroll", unfocusControls)

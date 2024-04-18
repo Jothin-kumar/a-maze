@@ -57,6 +57,7 @@ class Player {
         }
         updateNav()
         focusElem(this.pathElems[this.pathElems.length-1])
+        unfocusControls()
     }
     moveUp() {this.moveBy(0, -1)}
     moveDown() {this.moveBy(0, 1)}
