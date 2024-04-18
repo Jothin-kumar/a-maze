@@ -22,7 +22,7 @@
 
     #print-msg {
         display: block !important;
-        position: fixed;
+        position: absolute;
         bottom: 0;
         width: 100vw;
         text-align: center;

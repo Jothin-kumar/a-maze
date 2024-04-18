@@ -20,7 +20,7 @@ body {
 }
 @media screen and (orientation: landscape) {
     #main {
-        position: fixed;
+        position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
@@ -81,7 +81,7 @@ body {
 
 #game-over-parent {
     display: none;
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

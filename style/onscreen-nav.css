@@ -5,7 +5,7 @@
     border-radius: 50%;
     background-color: rgba(244, 165, 96, .5);
 
-    position: fixed;
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
     top: 10px;
