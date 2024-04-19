@@ -3,7 +3,8 @@
     "vars": [],
     "pages": [
         "2d/index.html",
-        "/share.html"
+        "/share.html",
+        "/index.html"
     ],
     "line-end": "\n"
 }
