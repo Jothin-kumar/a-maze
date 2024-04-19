@@ -112,43 +112,44 @@ window.addEventListener("keydown", (e) => {
             break;
         case " ":
             e.preventDefault()  // Prevent spacebar from triggering the "click" event on the focused button
-            if (!navAssistBtn.held && !navAssistBtn.disabled) {
-                navAssistBtn.held = true
-                navAssist()
-            }
+            navAssistInit()
             break;
     }
 })
 window.addEventListener("keyup", (e) => {
     if (e.key === " ") {
-        navAssistBtn.held = false
+        navAssistStop()
     }
 })
 
 const navAssistBtn = document.getElementById("onscreen-nav-assist")
 navAssistBtn.held = false
-navAssistBtn.addEventListener("touchstart", (e) => {navAssistBtn.held = true})
-window.addEventListener("touchend", (e) => {navAssistBtn.held = false})
-navAssistBtn.addEventListener("mousedown", (e) => {navAssistBtn.held = true})
-window.addEventListener("mouseup", (e) => {navAssistBtn.held = false})
+navAssistBtn.addEventListener("touchstart", navAssistInit)
+window.addEventListener("touchend", (e) => navAssistStop)
+navAssistBtn.addEventListener("mousedown", navAssistInit)
+window.addEventListener("mouseup", (e) => navAssistStop)
 async function navAssist() {
     while (navAssistBtn.held && !window.answerRevealed && !window.gameIsOver) {
-        navAssistBtn.focus()
         navAssistBtn.func()
         await new Promise(r => setTimeout(r, 256))
     }
 }
+function navAssistInit() {
+    if (!navAssistBtn.held) {
+        navAssistBtn.held = true
+        navAssist()
+    }
+}
+function navAssistStop() {
+    navAssistBtn.held = false
+}
 function enableNavAssist(func) {
     navAssistBtn.func = func
-    navAssistBtn.addEventListener("touchstart", navAssist)
-    navAssistBtn.addEventListener("mousedown", navAssist)
     navAssistBtn.removeAttribute("disabled")
 }
 function disableNavAssist() {
-    navAssistBtn.held = false
-    navAssistBtn.removeEventListener("touchstart", navAssist)
-    navAssistBtn.removeEventListener("mousedown", navAssist)
     navAssistBtn.setAttribute("disabled", "")
+    navAssistBtn.func = () => {}
 }
 function updateNav() {
     const w = document.getElementById("onscreen-nav-w")
