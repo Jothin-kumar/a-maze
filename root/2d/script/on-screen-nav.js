@@ -23,6 +23,7 @@ function handleTouchMove(event) {
     currentX = event.touches[0].clientX - initialX;
     currentY = event.touches[0].clientY - initialY;
     onscreenNav.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    unfocusControls()
 }
 
 // Add event listeners for touch events
@@ -51,6 +52,7 @@ function handleMouseMove(e) {
     currentX = e.clientX - initialX;
     currentY = e.clientY - initialY;
     onscreenNav.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    unfocusControls()
 }
 
 window.addEventListener("contextmenu", (e) => {
