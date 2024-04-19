@@ -138,10 +138,12 @@ function navAssistInit() {
     if (!navAssistBtn.held) {
         navAssistBtn.held = true
         navAssist()
+        navAssistBtn.style.backgroundColor = "rgb(0, 169, 69)"
     }
 }
 function navAssistStop() {
     navAssistBtn.held = false
+    navAssistBtn.style.backgroundColor = "rgb(0, 69, 169)"
 }
 function enableNavAssist(func) {
     navAssistBtn.func = func
