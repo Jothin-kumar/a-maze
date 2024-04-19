@@ -124,10 +124,6 @@ window.addEventListener("keyup", (e) => {
 
 const navAssistBtn = document.getElementById("onscreen-nav-assist")
 navAssistBtn.held = false
-navAssistBtn.addEventListener("touchstart", navAssistInit)
-window.addEventListener("touchend", (e) => navAssistStop)
-navAssistBtn.addEventListener("mousedown", navAssistInit)
-window.addEventListener("mouseup", (e) => navAssistStop)
 async function navAssist() {
     while (navAssistBtn.held && !window.answerRevealed && !window.gameIsOver) {
         navAssistBtn.func()
@@ -135,11 +131,9 @@ async function navAssist() {
     }
 }
 function navAssistInit() {
-    if (!navAssistBtn.held) {
-        navAssistBtn.held = true
-        navAssist()
-        navAssistBtn.style.backgroundColor = "rgb(0, 169, 69)"
-    }
+    navAssistBtn.held = true
+    navAssist()
+    navAssistBtn.style.backgroundColor = "rgb(0, 169, 69)"
 }
 function navAssistStop() {
     navAssistBtn.held = false
@@ -147,12 +141,19 @@ function navAssistStop() {
 }
 function enableNavAssist(func) {
     navAssistBtn.func = func
-    navAssistBtn.removeAttribute("disabled")
 }
 function disableNavAssist() {
-    navAssistBtn.setAttribute("disabled", "")
     navAssistBtn.func = () => {}
 }
+function switchNavAssist() {
+    if (navAssistBtn.held) {
+        navAssistStop()
+    }
+    else {
+        navAssistInit()
+    }
+}
+navAssistBtn.addEventListener("click", switchNavAssist)
 function updateNav() {
     const w = document.getElementById("onscreen-nav-w")
     const s = document.getElementById("onscreen-nav-s")
