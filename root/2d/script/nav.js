@@ -41,7 +41,7 @@ class Player {
                 let l = this.pathElems.length
                 if (elem === this.startPos.elem) {}
                 else {
-                    let transperancy = 1 - (l-i)*.05
+                    let transperancy = 1 - (l-i)*.15
                     if (transperancy < 0) {
                         transperancy = 0
                     }
