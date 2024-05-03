@@ -131,9 +131,11 @@ async function navAssist() {
     }
 }
 function navAssistInit() {
-    navAssistBtn.held = true
-    navAssist()
-    navAssistBtn.style.backgroundColor = "rgb(0, 169, 69)"
+    if (!navAssistBtn.held && !navAssistBtn.disabled) {
+        navAssistBtn.held = true
+        navAssist()
+        navAssistBtn.style.backgroundColor = "rgb(0, 169, 69)"
+    }
 }
 function navAssistStop() {
     navAssistBtn.held = false
