@@ -75,6 +75,31 @@
             border: 2px solid olive;
             opacity: 1;
         }
+        #socials {
+            text-align: center;
+            font-family: monospace;
+            margin-top: 10px;
+        }
+        #socials > p {
+            margin: 2px;
+        }
+        #socials > ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        #socials > ul > li {
+            margin: 0 5px;
+            cursor: pointer;
+            transition: color .5s;
+            text-decoration: underline;
+            text-underline-offset: 5px;
+        }
+        #socials > ul > li:hover {
+            color: olive;
+        }
     </style>
 </head>
 <body>
@@ -94,6 +119,13 @@
             <button id="create">Create your own maze &rarr;</button>
             <button id="share">Play 3D version &rarr;</button>
             <button id="print">Support A-Maze &rarr;</button>
+        </div>
+        <div id="socials">
+            <p>Follow A-Maze on</p>
+            <ul>
+            <li>X (formerly Twitter)</li>
+            <li>InstaGram</li>
+            </ul>
         </div>
     </div>
     <noscript>
