@@ -12,15 +12,27 @@
     </script>
     <style>
         body {
-            background-color: black;
+            background: black url('assets/img/bg.png');
             color: white;
             user-select: none;
+            margin: 0;
+        }
+        #overlay {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, .9);
         }
         #main {
             position: absolute;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
+            z-index: 1;
+            background-color: rgba(0, 0, 0, .5);
+            padding: 25px;
+            border-radius: 10px;
+            border: black 3px solid;
         }
         h1 {
             font-size: 3rem;
@@ -111,6 +123,7 @@
     </style>
 </head>
 <body>
+    <div id="overlay"></div>
     <div id="main">
         <h1>A-Maze</h1>
         <div id="desc">
