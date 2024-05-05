@@ -13,3 +13,5 @@ printf "build.py ✅\n\n"
 
 cp root/robots.txt build-output/robots.txt
 printf "robots.txt ✅\n\n"
+cp -r root/assets build-output/assets
+printf "assets ✅\n\n"
