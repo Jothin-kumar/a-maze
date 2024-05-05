@@ -74,20 +74,7 @@ if (sp.has("maze-data")) {
     }, 100)
 }
 else {
-    a = new Date().getTime()
-    for (let i = 0; i < 10000000; i++) {i+1}
-    b = new Date().getTime()
-    if (b - a < 15) {
-        setTimeout(construct, 100)
-    }
-    else {
-        document.getElementById("loading").style.display = "none"
-        document.getElementById("msg").style.display = "block"
-        document.getElementById("msg").innerHTML = "<p>Redirecting to maze collection...</p>"
-        setTimeout(() => {
-            window.location.href = "https://mazes.jothin.tech"
-        }, 3000)
-    }
+    setTimeout(construct, 100)
 }
 
 

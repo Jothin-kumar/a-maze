@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play 2D - A-Maze</title>
+    <script>
+        window.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        });
+    </script>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            user-select: none;
+        }
+        #main {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        #options {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        #options > li {
+            margin: 0 .5rem;
+            cursor: pointer;
+            padding: 10px;
+            border: green 2px solid;
+            transition: border .69s;
+            border-radius: 5px;
+        }
+        #options > li:hover {
+            border: olive 2px solid;
+        }
+        .not-recommended-option {
+            color: gray;
+            scale: .88;
+        }
+        #msg {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h1>Play 2D</h1>
+        <p id="msg">Checking your device...</p>
+        <ul id="options">
+            <li id="opt-1" onclick="window.location.href = 'https://a-maze.jothin.tech/2d'">Generate a New Maze</li>
+            <li id="opt-2" onclick="window.location.href = 'https://mazes.jothin.tech'">Visit the Maze Collection</li>
+        </ul>
+    </div>
+    <noscript>
+        <style>
+            #main {
+                display: none;
+            }
+            p {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+        </style>
+        <p>This app requires JavaScript to run. Enable it and refresh the page</p>
+    </noscript>
+    <script>
+        const msg = document.getElementById('msg')
+        a = new Date().getTime()
+        for (let i = 0; i < 10000000; i++) {i+1}
+        b = new Date().getTime()
+        if (b - a < 15) {
+            msg.innerHTML = 'Your device is fast enough to generate a maze ✅'
+            document.getElementById("opt-2").classList.add('not-recommended-option')
+        }
+        else {
+            msg.innerHTML = 'Your device might take a while to generate a maze ❌. It is strongly recommended to visit the Maze Collection instead.'
+            document.getElementById("opt-1").classList.add('not-recommended-option')
+        }
+    </script>
+</body>
+</html>
