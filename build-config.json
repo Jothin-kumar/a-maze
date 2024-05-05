@@ -4,7 +4,9 @@
     "pages": [
         "2d/index.html",
         "/share.html",
-        "/index.html"
+        "/index.html",
+        "/play-2d.html",
+        "/support.html"
     ],
     "line-end": "\n"
 }
