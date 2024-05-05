@@ -115,8 +115,6 @@ body {
 #game-over-maze-parent > #main {
     transform: unset;
     position: unset;
-    width: 500px;
-    height: 500px;
 }
 
 #loading {
