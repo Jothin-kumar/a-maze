@@ -120,6 +120,37 @@
         #socials > ul > li:hover {
             color: olive;
         }
+        #made-by {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: .8rem;
+            color: gray;
+            margin: 15px;
+            background-color: rgba(0, 0, 0, .69);
+            padding: 10px;
+            border-radius: 50px;
+        }
+        @media screen and (orientation: portrait) {
+            #made-by {
+                width: max-content;
+                left: 50%;
+                transform: translateX(-50%);
+                margin: 5px 0;
+            }
+            
+        }
+        #made-by > img {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            border-radius: 50%;
+            border: olive 2px solid;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -150,6 +181,10 @@
             <li onclick="window.open('https://instagram.com/a_maze_game', '_blank')">InstaGram</li>
             </ul>
         </div>
+    </div>
+    <div id="made-by">
+        <img src="https://Jothin.tech/favicon.webp" alt="Jothin Kumar" onclick="window.open('https://jothin.tech', '_blank')">
+        <p>Made with ❤️ by Jothin Kumar in 🇮🇳</p>
     </div>
     <noscript>
         <style>
