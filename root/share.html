@@ -19,12 +19,19 @@
                 text-decoration: none;
                 cursor: pointer;
                 border: olive 1px solid;
-                padding: 5px;
+                padding: 10px;
                 font-size: small;
                 border-radius: 10px;
                 margin: auto;
             }
         </style>
+    </head>
+    <body>
+        <div>
+            <p id="msg">Loading shared maze...</p>
+            <br>
+            <a href="/play-2d">New Maze</a>
+        </div>
         <script>
             async function main() {
                 const usp = new URLSearchParams(window.location.search)
@@ -34,16 +41,12 @@
                         window.location.href = `${r.url}&share-url=a-maze.jothin.tech%2Fshare%3Fs%3D${usp.get("s")}`
                     }
                 }
+                const msg = document.getElementById("msg")
+                msg.innerText = "Invalid shared maze"
+                msg.style.color = "red"
             }
             main()
         </script>
-    </head>
-    <body>
-        <div>
-            <p>Loading shared maze...</p>
-            <br>
-            <a href="/">New Maze</a>
-        </div>
         <noscript>
             <style>
                 a {
