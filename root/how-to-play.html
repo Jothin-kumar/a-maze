@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How To PLay A-Maze</title>
+    <script>
+        window.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        });
+    </script>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            background: black url('assets/img/bg.png') center;
+            margin: 0;
+            user-select: none;
+        }
+        #overlay {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, .9);
+        }
+        #main {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            background-color: rgba(0, 0, 0, .5);
+            padding: 25px;
+            border-radius: 10px;
+            border: black 3px solid;
+            overflow-y: scroll;
+            max-height: 90vh;
+            width: max-content;
+            max-width: 80vw;
+            scrollbar-width: none;
+        }
+        #main::-webkit-scrollbar {
+            display: none;
+        }
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin: 10px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        h2 {
+            font-size: 2rem;
+            margin: 10px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        ul {
+            list-style-type: square;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        #play-btn-2d {
+            padding: 10px;
+            margin: 5px;
+            font-size: 1rem;
+            background-color: black;
+            color: white;
+            border: 2px solid olive;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: scale .2s;
+        }
+        #play-btn-2d:hover {
+            background-color: olive;
+            color: black;
+            scale: 1.1;
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay"></div>
+    <div id="main">
+        <h1>How To Play?</h1>
+        <h2>Getting started</h2>
+        <ul>
+            <li>Find the <strong>green dot</strong> in the maze. This will be the <strong>starting position</strong></li>
+            <li>Find the <strong>red dot</strong> in the maze. This will be the <strong>final position</strong></li>
+            <li>Start navigating to the final position</li>
+        </ul>
+        <h2>Navigating</h2>
+        <ul>
+            <li><strong>Devices with physical keyboards: </strong>Use arrow keys or WASD</li>
+            <li><strong>Touchscreen devices: </strong>Use onscreen navigation buttons. These buttons can be dragged anywhere in the screen</li>
+        </ul>
+        <h2>Navigation Assist</h2>
+        <ul>
+            <li>In some cases, there is only one possible move other than going back</li>
+            <li>In these cases, you need not manually navigate. Navigation Assist comes in handy here</li>
+            <li>To turn it on, hit the center button in the onscreen navigation. If turned on, the button should become green</li>
+            <li>To temporarily turn on Navigation Assist, press and hold the spacebar. The Navigation Assist will be active only as long as the spacebar is held. Release the spacebar to stop Navigation Assist</li>
+        </ul>
+        <button id="play-btn-2d" onclick="window.location.href = '/play-2d'">Play now in 2D</button>
+    </div>
+</body>
+</html>
