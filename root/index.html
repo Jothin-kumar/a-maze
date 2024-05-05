@@ -5,18 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Maze: Play Maze Game online for free</title>
     <meta name="description" content="Generate / Create, Play, Share and Print mazes online for free. Made with ❤️ by Jothin Kumar in 🇮🇳">
+    <script>
+        window.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        });
+    </script>
     <style>
         body {
             background-color: black;
             color: white;
             user-select: none;
         }
-        #main {}
+        #main {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin: 10px;
+
+            font-family: 'Courier New', Courier, monospace;
+        }
+        #desc {
+            color: gray;
+            text-align: center;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        #desc > ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        #desc > ul > li {
+            margin: 0 .5rem;
+        }
+        #desc > p {
+            margin: 1px;
+            opacity: .69;
+        }
+        #buttons {
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-template-rows: auto auto;
+            margin-top: 10px;
+        }
+        @media screen and (orientation: portrait) {
+            #buttons {
+                grid-template-columns: auto;
+            }
+        }
+        #buttons > button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 1rem;
+            background-color: black;
+            color: white;
+            border: 2px solid green;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: border 1s;
+            opacity: .8;
+        }
+        #buttons > button:hover {
+            border: 2px solid olive;
+            opacity: 1;
+        }
     </style>
-    <script>window.location.href = window.location.href.replace("https://a-maze.jothin.tech", "https://a-maze.jothin.tech/2d")</script>
 </head>
 <body>
-    <div id="main"></div>
+    <div id="main">
+        <h1>A-Maze</h1>
+        <div id="desc">
+            <ul>
+                <li>Create,</li>
+                <li>Play,</li>
+                <li>Share,</li>
+                <li>Print</li>
+            </ul>
+            <p>mazes online for free</p>
+        </div>
+        <div id="buttons">
+            <button id="play">Play 2D Version &rarr;</button>
+            <button id="create">Create your own maze &rarr;</button>
+            <button id="share">Play 3D version &rarr;</button>
+            <button id="print">Support A-Maze &rarr;</button>
+        </div>
+    </div>
     <noscript>
         <style>
             #main {
