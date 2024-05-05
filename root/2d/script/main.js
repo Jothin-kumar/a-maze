@@ -85,6 +85,21 @@ if (sp.has("share-url")) {
     }
 }
 
+a = new Date().getTime()
+for (let i = 0; i < 10000000; i++) {i+1}
+b = new Date().getTime()
+const deviceIsFast = b - a < 1
+
+if (!deviceIsFast) {
+    document.getElementById("controls-new-maze-btn").innerText = "Maze Collection"
+    document.getElementById("game-over-new-maze-btn").innerText = "Go to the Maze Collection"
+}
+
 function newMaze() {
-    window.location.href = `https://a-maze.jothin.tech/?level=${window.currentLevel}`
+    if (deviceIsFast) {
+        window.location.href = `https://a-maze.jothin.tech/2d/?level=${window.currentLevel}`
+    }
+    else {
+        window.location.href = "https://mazes.jothin.tech"
+    }
 }
