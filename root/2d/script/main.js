@@ -88,7 +88,7 @@ if (sp.has("share-url")) {
 a = new Date().getTime()
 for (let i = 0; i < 10000000; i++) {i+1}
 b = new Date().getTime()
-const deviceIsFast = b - a < 1
+const deviceIsFast = b - a < 15
 
 if (!deviceIsFast) {
     document.getElementById("controls-new-maze-btn").innerText = "Maze Collection"
