@@ -44,6 +44,7 @@
                     r = await fetch(`https://spoo.me/${usp.get("s")}`)
                     if (r.url.startsWith("https://a-maze.jothin.tech/")) {
                         window.location.href = `${r.url}&share-url=a-maze.jothin.tech%2Fshare%3Fs%3D${usp.get("s")}`
+                        return
                     }
                 }
                 const msg = document.getElementById("msg")
