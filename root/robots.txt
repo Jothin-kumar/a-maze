@@ -1,2 +1,5 @@
 User-agent: *
-Disallow: /
+Disallow: /2d
+Disallow: /share
+
+Sitemap: https://a-maze.jothin.tech/sitemap.txt
