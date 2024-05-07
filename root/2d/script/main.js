@@ -84,7 +84,7 @@ function newMaze() {
         window.location.href = `https://a-maze.jothin.tech/2d/?level=${window.currentLevel}`
     }
     else {
-        window.location.href = "https://mazes.jothin.tech"
+        window.location.href = `https://mazes.jothin.tech/?level=${window.currentLevel}`
     }
 }
 
