@@ -20,22 +20,6 @@ if (sp.has("level")) {
             break
     }
 }
-function toLevel(lvl) {
-    if (lvl === window.currentLevel) return
-    const usp = new URLSearchParams("")
-    switch (lvl) {
-        case easy:
-            usp.set("level", easy)
-            break
-        case medium:
-            usp.set("level", medium)
-            break
-        case hard:
-            usp.set("level", hard)
-            break
-    }
-    window.location.search = usp.toString()
-}
 function setCurrentLevel(lvl) {
     window.currentLevel = lvl
     document.querySelectorAll("#levels-control > button").forEach(e => e.classList.remove("current-lvl"))
@@ -102,4 +86,24 @@ function newMaze() {
     else {
         window.location.href = "https://mazes.jothin.tech"
     }
+}
+
+function toLevel(lvl) {
+    if (!deviceIsFast) {
+        window.location.href = `https://mazes.jothin.tech/?level=${lvl}`
+        return
+    }
+    const usp = new URLSearchParams("")
+    switch (lvl) {
+        case easy:
+            usp.set("level", easy)
+            break
+        case medium:
+            usp.set("level", medium)
+            break
+        case hard:
+            usp.set("level", hard)
+            break
+    }
+    window.location.search = usp.toString()
 }
