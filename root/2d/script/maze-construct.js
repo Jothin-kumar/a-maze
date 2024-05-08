@@ -127,7 +127,6 @@ function construct() {
         69: [200, 256, 69, 200, 88]
     }
     const val = vals[window.gridSize]
-    console.log(val);
     window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares)), randRange(val[0], val[1])); // Main path
     while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 10000) {
         pathLine(constructPath(pickRandomElement(mp.path), randRange(val[2], val[3]), (dot) => !dot.used).path)
