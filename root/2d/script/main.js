@@ -53,7 +53,7 @@ if (sp.has("maze-data")) {
             console.error(e)
             document.getElementById("loading").style.display = "none"
             document.getElementById("msg").style.display = "block"
-            document.getElementById("msg").innerHTML = "<p style='color: red'>Invalid maze data</p><button style='width: 100%; background-color: black; color: white; padding: 5px; border: olive 1px solid; cursor: pointer' onclick='window.location = window.location.pathname'>New Maze</button>"
+            document.getElementById("msg").innerHTML = "<p style='color: red'>Invalid maze data</p><button style='width: 100%; background-color: black; color: white; padding: 5px; border: olive 1px solid; cursor: pointer' onclick='newMaze()'>New Maze</button>"
         }
     }, 100)
 }
