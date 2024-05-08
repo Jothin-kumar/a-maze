@@ -38,3 +38,7 @@ function pathLine(path) {
         clearLine(path[i].x, path[i].y, path[i+1].x, path[i+1].y);
     }
 }
+
+function checkIfLineNotHidden(x1, y1, x2, y2) {
+    return !window.lines[`${x1+x2},${y1+y2}`].hidden;
+}

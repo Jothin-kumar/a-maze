@@ -137,6 +137,36 @@ function construct() {
     postConstruct();
 }
 function postConstruct() {
+    const toClear = Object.values(window.mazeSquares).filter((d) => {
+        function checkUsageWithRespectToLine(x1, y1, x2, y2) {
+            try {
+                return checkIfLineNotHidden(x1, y1, x2, y2);
+            }
+            catch {
+                return true;
+            }
+        }
+        if (
+            checkUsageWithRespectToLine(d.x, d.y, d.x+1, d.y) &&
+            checkUsageWithRespectToLine(d.x, d.y, d.x, d.y+1) &&
+            checkUsageWithRespectToLine(d.x, d.y, d.x-1, d.y) &&
+            checkUsageWithRespectToLine(d.x, d.y, d.x, d.y-1)
+        ) {
+            return true;
+        }
+    })
+    toClear.forEach((d) => {
+        function handler (x, y) {
+            if (toClear.includes(window.mazeSquares[`${d.x+x},${d.y+y}`])) {
+                clearLine(d.x, d.y, d.x+x, d.y+y);
+            }
+        }
+        handler(1, 0);
+        handler(0, 1);
+        handler(-1, 0);
+        handler(0, -1);
+    });
+
     mp.start.setColor("green");
     mp.end.setColor("red");
     document.getElementById("main").style.display = "block"
