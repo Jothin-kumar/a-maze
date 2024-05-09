@@ -38,7 +38,7 @@ function loadMazeFromShared(data) {
     
     // Validation
     for (let i = 0; i < mp.path.length-1; i++) {
-        if (Math.abs(mp.path[i].x - mp.path[i+1].x + mp.path[i].y - mp.path[i+1].y) != 1) {
+        if (Math.abs(mp.path[i].x - mp.path[i+1].x) + Math.abs(mp.path[i].y - mp.path[i+1].y) != 1) {
             throw "Invalid path"
         }
     }
