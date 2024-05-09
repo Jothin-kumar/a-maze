@@ -5,8 +5,26 @@ const onscreenNav = document.querySelector('#onscreen-nav');
 // Initialize variables for tracking touch positions
 let initialX = 0;
 let initialY = 0;
-let currentX = 0;
-let currentY = 0;
+window.currentX = 0;
+window.currentY = 0;
+
+function toXY(x, y) {
+    if (x < 0) {
+        x = 0;
+    }
+    if (y < 0) {
+        y = 0;
+    }
+    if (x > window.innerWidth - onscreenNav.offsetWidth) {
+        x = window.innerWidth - onscreenNav.offsetWidth;
+    }
+    if (y > window.innerHeight - onscreenNav.offsetHeight) {
+        y = window.innerHeight - onscreenNav.offsetHeight;
+    }
+    onscreenNav.style.transform = `translate(${x}px, ${y}px)`;
+    window.currentX = x;
+    window.currentY = y;
+}
 
 // Function to handle touch start event
 function handleTouchStart(event) {
@@ -20,9 +38,7 @@ function handleTouchStart(event) {
 // Function to handle touch move event
 function handleTouchMove(event) {
     event.preventDefault();
-    currentX = event.touches[0].clientX - initialX;
-    currentY = event.touches[0].clientY - initialY;
-    onscreenNav.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    toXY(event.touches[0].clientX - initialX, event.touches[0].clientY - initialY);
     unfocusControls()
 }
 
@@ -49,9 +65,7 @@ onscreenNav.addEventListener('mousedown', (e) => {
     });
 });
 function handleMouseMove(e) {
-    currentX = e.clientX - initialX;
-    currentY = e.clientY - initialY;
-    onscreenNav.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    toXY(e.clientX - initialX, e.clientY - initialY);
     unfocusControls()
 }
 
@@ -63,6 +77,13 @@ window.addEventListener("contextmenu", (e) => {
     onscreenNav.style.transform = "";
     initialX = 0;
     initialY = 0;
-    currentX = 0;
-    currentY = 0;
+    window.currentX = 0;
+    window.currentY = 0;
 })
+
+function adjustOnscreenNav() {
+    const mainBC = document.getElementById("main").getBoundingClientRect();
+    while (elemsColliding(onscreenNav, startPos.elem, 15)) {
+        toXY(randRange(0, mainBC.width), randRange(0, mainBC.height));
+    }
+}
