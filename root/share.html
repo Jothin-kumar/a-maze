@@ -42,8 +42,8 @@
                 const usp = new URLSearchParams(window.location.search)
                 if (usp.has("s")) {
                     r = await fetch(`https://spoo.me/${usp.get("s")}`)
-                    if (r.url.startsWith("https://a-maze.jothin.tech/")) {
-                        window.location.href = `${r.url}&share-url=a-maze.jothin.tech%2Fshare%3Fs%3D${usp.get("s")}`
+                    if (r.url.startsWith(`https://${window.location.host}`)) {
+                        window.location.href = `${r.url}&share-url=${window.location.host}%2Fshare%3Fs%3D${usp.get("s")}`
                         return
                     }
                 }

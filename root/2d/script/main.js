@@ -64,7 +64,7 @@ else {
 
 if (sp.has("share-url")) {
     const shareURL = sp.get("share-url");
-    if (shareURL.startsWith("a-maze.jothin.tech/share?s=") || shareURL.startsWith("mazes.jothin.tech/")) {
+    if (shareURL.startsWith(`${window.location.host}/share?s=`) || shareURL.startsWith("mazes.jothin.tech/")) {
         document.getElementById("print-msg").innerText = shareURL
     }
 }
@@ -81,7 +81,7 @@ if (!deviceIsFast) {
 
 function newMaze() {
     if (deviceIsFast) {
-        window.location.href = `https://a-maze.jothin.tech/2d/?level=${window.currentLevel}`
+        window.location.href = `/2d/?level=${window.currentLevel}`
     }
     else {
         window.location.href = `https://mazes.jothin.tech/?level=${window.currentLevel}`

@@ -59,7 +59,7 @@ function shareMaze(button) {
     const usp = new URLSearchParams(window.location.search);
     if (usp.has("share-url")) {
         const shareURL = usp.get("share-url");
-        if (shareURL.startsWith("a-maze.jothin.tech/share?s=") || shareURL.startsWith("mazes.jothin.tech/")) {
+        if (shareURL.startsWith(`${window.location.host}/share?s=`) || shareURL.startsWith("mazes.jothin.tech/")) {
             finish("https://" + shareURL);
             return
         }
@@ -87,7 +87,7 @@ function shareMaze(button) {
         xhr.send(data);
     }
 
-    const toBeShortenedURL = usp.has("level") ? `https://a-maze.jothin.tech/2d/?maze-data=${data}&level=${usp.get("level")}` : `https://a-maze.jothin.tech/2d/?maze-data=${data}`;
+    const toBeShortenedURL = usp.has("level") ? `https://${window.location.host}/2d/?maze-data=${data}&level=${usp.get("level")}` : `https://${window.location.host}/2d/?maze-data=${data}`;
 
     try {
         shortenURL(toBeShortenedURL, (shortURL) => {
