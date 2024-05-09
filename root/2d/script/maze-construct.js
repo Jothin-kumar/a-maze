@@ -14,9 +14,23 @@ class MazeSquare {
         this.elem.setAttribute('fill', 'black');
         window.mg.appendChild(this.elem);
         window.mazeSquares[`${x},${y}`] = this;
+        this.blink = false;
     }
     setColor(color) {
         this.elem.setAttribute('fill', color);
+    }
+    async startBlink () {
+        this.blink = true;
+        while (this.blink) {
+            this.elem.style.opacity = 1;
+            await new Promise(r => setTimeout(r, 500));
+            if (this.blink) {this.elem.style.opacity = 0;}
+            await new Promise(r => setTimeout(r, 200));
+        }
+    }
+    stopBlink () {
+        this.blink = false;
+        this.elem.style.opacity = 1;
     }
 }
 
