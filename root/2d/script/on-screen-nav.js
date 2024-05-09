@@ -5,8 +5,8 @@ const onscreenNav = document.querySelector('#onscreen-nav');
 // Initialize variables for tracking touch positions
 let initialX = 0;
 let initialY = 0;
-let currentX = 0;
-let currentY = 0;
+window.currentX = 0;
+window.currentY = 0;
 
 function toXY(x, y) {
     if (x < 0) {
@@ -22,6 +22,8 @@ function toXY(x, y) {
         y = window.innerHeight - onscreenNav.offsetHeight;
     }
     onscreenNav.style.transform = `translate(${x}px, ${y}px)`;
+    window.currentX = x;
+    window.currentY = y;
 }
 
 // Function to handle touch start event
@@ -36,9 +38,7 @@ function handleTouchStart(event) {
 // Function to handle touch move event
 function handleTouchMove(event) {
     event.preventDefault();
-    currentX = event.touches[0].clientX - initialX;
-    currentY = event.touches[0].clientY - initialY;
-    toXY(currentX, currentY);
+    toXY(event.touches[0].clientX - initialX, event.touches[0].clientY - initialY);
     unfocusControls()
 }
 
@@ -65,9 +65,7 @@ onscreenNav.addEventListener('mousedown', (e) => {
     });
 });
 function handleMouseMove(e) {
-    currentX = e.clientX - initialX;
-    currentY = e.clientY - initialY;
-    toXY(currentX, currentY);
+    toXY(e.clientX - initialX, e.clientY - initialY);
     unfocusControls()
 }
 
@@ -79,8 +77,8 @@ window.addEventListener("contextmenu", (e) => {
     onscreenNav.style.transform = "";
     initialX = 0;
     initialY = 0;
-    currentX = 0;
-    currentY = 0;
+    window.currentX = 0;
+    window.currentY = 0;
 })
 
 function adjustOnscreenNav() {
