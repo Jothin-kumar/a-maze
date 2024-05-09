@@ -192,4 +192,7 @@ function postConstruct() {
     endPos = window.mp.end;
     window.player = new Player(startPos.x, startPos.y, startPos, endPos);
     updateNav()
+    setTimeout(() => {
+        adjustOnscreenNav()
+    }, 500)
 }

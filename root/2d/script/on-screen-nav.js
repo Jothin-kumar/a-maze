@@ -82,3 +82,10 @@ window.addEventListener("contextmenu", (e) => {
     currentX = 0;
     currentY = 0;
 })
+
+function adjustOnscreenNav() {
+    const mainBC = document.getElementById("main").getBoundingClientRect();
+    while (elemsColliding(onscreenNav, startPos.elem, 15)) {
+        toXY(randRange(0, mainBC.width), randRange(0, mainBC.height));
+    }
+}
