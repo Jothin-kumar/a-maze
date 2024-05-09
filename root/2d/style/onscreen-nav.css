@@ -6,9 +6,6 @@
     background-color: rgba(244, 165, 96, .5);
 
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 10px;
     z-index: 2;
     display: none;
 }

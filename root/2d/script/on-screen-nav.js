@@ -8,6 +8,22 @@ let initialY = 0;
 let currentX = 0;
 let currentY = 0;
 
+function toXY(x, y) {
+    if (x < 0) {
+        x = 0;
+    }
+    if (y < 0) {
+        y = 0;
+    }
+    if (x > window.innerWidth - onscreenNav.offsetWidth) {
+        x = window.innerWidth - onscreenNav.offsetWidth;
+    }
+    if (y > window.innerHeight - onscreenNav.offsetHeight) {
+        y = window.innerHeight - onscreenNav.offsetHeight;
+    }
+    onscreenNav.style.transform = `translate(${x}px, ${y}px)`;
+}
+
 // Function to handle touch start event
 function handleTouchStart(event) {
     if (event.target.id === "onscreen-nav-assist") {
@@ -22,7 +38,7 @@ function handleTouchMove(event) {
     event.preventDefault();
     currentX = event.touches[0].clientX - initialX;
     currentY = event.touches[0].clientY - initialY;
-    onscreenNav.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    toXY(currentX, currentY);
     unfocusControls()
 }
 
@@ -51,7 +67,7 @@ onscreenNav.addEventListener('mousedown', (e) => {
 function handleMouseMove(e) {
     currentX = e.clientX - initialX;
     currentY = e.clientY - initialY;
-    onscreenNav.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    toXY(currentX, currentY);
     unfocusControls()
 }
 
