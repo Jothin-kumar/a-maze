@@ -15,8 +15,9 @@ class Player {
         this.endPos = endPos;
         this.steps = 0
         this.pathElems = []
-        this.prevX = null
-        this.prevY = null
+        this.prevX = startPos.x
+        this.prevY = startPos.y
+        this.startPos.startBlink()
     }
     moveBy(x, y) {
         if (canMove(this.x, this.y, this.x+x, this.y+y)) {
@@ -48,6 +49,11 @@ class Player {
                     elem.setAttribute("fill", `rgba(200, 200, 255, ${transperancy})`)
                 }
             })
+            
+            if (this.prevX !== null && this.prevY !== null) {
+                window.mazeSquares[`${this.prevX},${this.prevY}`].stopBlink()
+            }
+            window.mazeSquares[`${this.x},${this.y}`].startBlink()
         }
         if (this.steps === 1) {
             this.start = new Date().getTime()
