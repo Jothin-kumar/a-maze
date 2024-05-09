@@ -35,6 +35,13 @@ function loadMazeFromShared(data) {
         mp.path.push(window.mazeSquares[decodeToCoords(data[0].slice(i, i+2)).join(",")]);
     }
     mp.path.push(mp.end);
+    
+    // Validation
+    for (let i = 0; i < mp.path.length-1; i++) {
+        if (Math.abs(mp.path[i].x - mp.path[i+1].x + mp.path[i].y - mp.path[i+1].y) != 1) {
+            throw "Invalid path"
+        }
+    }
 
     for (let i = 0; i < data[1].length; i += 2) {
         window.lines[`${2*decodeToNum(data[1][i])+1},${2*decodeToNum(data[1][i+1])}`].hide();
