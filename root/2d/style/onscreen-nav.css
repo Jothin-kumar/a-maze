@@ -8,6 +8,8 @@
     position: absolute;
     z-index: 2;
     display: none;
+
+    resize: both;
 }
 #onscreen-nav.show-onscreen-nav {
     display: grid;
