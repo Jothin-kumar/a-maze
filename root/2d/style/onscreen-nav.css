@@ -17,8 +17,8 @@
     border: olive solid 2px;
     font-size: large;
     font-weight: bolder;
-    width: 3em;
-    height: 3em;
+    width: 4em;
+    height: 4em;
     color: white;
     border-radius: 10%;
     padding: 10px;
@@ -31,7 +31,7 @@
 }
 #onscreen-nav-assist {
     border-radius: 50% !important;
-    width: 2.5rem !important;
-    height: 2.5rem !important;
+    width: 3.5rem !important;
+    height: 3.5rem !important;
     margin: auto;
 }
