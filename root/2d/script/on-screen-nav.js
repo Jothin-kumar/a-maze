@@ -85,7 +85,8 @@ function adjustOnscreenNav() {
     const mainBC = main.getBoundingClientRect();
     const onscreenNavBC = onscreenNav.getBoundingClientRect();
     const controlsBC = document.getElementById("controls").getBoundingClientRect();
-    if(screen.availHeight > screen.availWidth){ // Portrait
+    if(screen.height > screen.width){ // Portrait
+        console.log("...");
         toXY((mainBC.left + mainBC.right - onscreenNavBC.left - onscreenNavBC.right) / 2, (mainBC.bottom + controlsBC.top - onscreenNavBC.top - onscreenNavBC.bottom) / 2);
     }
     else { // Landscape
