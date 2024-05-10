@@ -86,14 +86,15 @@ function adjustOnscreenNav() {
     const onscreenNavBC = onscreenNav.getBoundingClientRect();
     const controlsBC = document.getElementById("controls").getBoundingClientRect();
     if(screen.height > screen.width){ // Portrait
-        console.log("...");
         toXY((mainBC.left + mainBC.right - onscreenNavBC.left - onscreenNavBC.right) / 2, (mainBC.bottom + controlsBC.top - onscreenNavBC.top - onscreenNavBC.bottom) / 2);
     }
     else { // Landscape
         toXY((mainBC.right + screen.width - onscreenNavBC.left - onscreenNavBC.right) / 2, (mainBC.top + mainBC.bottom - onscreenNavBC.top - onscreenNavBC.bottom) / 2);
     }
-    while (elemsColliding(onscreenNav, startPos.elem, 15) || elemsColliding(onscreenNav, document.getElementById("controls"))) {
-        toXY(randRange(0, mainBC.width), randRange(0, mainBC.height));
+    var attempts = 0;
+    while (attempts < 100 && (elemsColliding(onscreenNav, startPos.elem, 15) || elemsColliding(onscreenNav, document.getElementById("controls")))) {
+        toXY(randRange(0, screen.width), randRange(0, screen.height));
+        attempts++;
     }
 }
 
