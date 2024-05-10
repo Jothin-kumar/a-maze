@@ -93,7 +93,7 @@ function adjustOnscreenNav() {
     }
     var attempts = 0;
     while (attempts < 100 && (elemsColliding(onscreenNav, startPos.elem, 15) || elemsColliding(onscreenNav, document.getElementById("controls")))) {
-        toXY(randRange(0, screen.width), randRange(0, screen.height));
+        toXY(randRange(0, mainBC.width), randRange(0, mainBC.height));
         attempts++;
     }
 }
