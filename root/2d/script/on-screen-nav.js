@@ -82,8 +82,24 @@ window.addEventListener("contextmenu", (e) => {
 })
 
 function adjustOnscreenNav() {
-    const mainBC = document.getElementById("main").getBoundingClientRect();
-    while (elemsColliding(onscreenNav, startPos.elem, 15)) {
+    const mainBC = main.getBoundingClientRect();
+    const onscreenNavBC = onscreenNav.getBoundingClientRect();
+    const controlsBC = document.getElementById("controls").getBoundingClientRect();
+    if(screen.height > screen.width){ // Portrait
+        toXY((mainBC.left + mainBC.right - onscreenNavBC.left - onscreenNavBC.right) / 2, (mainBC.bottom + controlsBC.top - onscreenNavBC.top - onscreenNavBC.bottom) / 2);
+    }
+    else { // Landscape
+        toXY((mainBC.right + screen.width - onscreenNavBC.left - onscreenNavBC.right) / 2, (mainBC.top + mainBC.bottom - onscreenNavBC.top - onscreenNavBC.bottom) / 2);
+    }
+    var attempts = 0;
+    while (attempts < 100 && (elemsColliding(onscreenNav, startPos.elem, 15) || elemsColliding(onscreenNav, document.getElementById("controls")))) {
         toXY(randRange(0, mainBC.width), randRange(0, mainBC.height));
+        attempts++;
     }
 }
+
+var adjustOnscreenNavTimeout;
+window.addEventListener("resize", () => {
+    clearTimeout(adjustOnscreenNavTimeout);
+    adjustOnscreenNavTimeout = setTimeout(adjustOnscreenNav, 500);
+});

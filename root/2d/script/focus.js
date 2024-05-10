@@ -21,13 +21,13 @@ function focusStart() {
 
 function unfocusControls() {
     const controls = document.getElementById("controls")
-    controls.style.display = "none"
+    controls.style.opacity = 0
     if (window.controlsDisplayNoneTimeout) {
         clearTimeout(window.controlsDisplayNoneTimeout)
     }
     window.controlsDisplayNoneTimeout = setTimeout(() => {
         if (!window.gameIsOver) {
-            controls.style.display = "block"
+            controls.style.opacity = 1
         }
     }, 2500)
 }
