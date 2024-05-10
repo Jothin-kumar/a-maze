@@ -95,3 +95,9 @@ function adjustOnscreenNav() {
         toXY(randRange(0, mainBC.width), randRange(0, mainBC.height));
     }
 }
+
+var adjustOnscreenNavTimeout;
+window.addEventListener("resize", () => {
+    clearTimeout(adjustOnscreenNavTimeout);
+    adjustOnscreenNavTimeout = setTimeout(adjustOnscreenNav, 1000);
+});
