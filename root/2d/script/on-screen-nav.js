@@ -39,7 +39,9 @@ function handleTouchStart(event) {
 function handleTouchMove(event) {
     event.preventDefault();
     toXY(event.touches[0].clientX - initialX, event.touches[0].clientY - initialY);
-    unfocusControls()
+    if (!elemsColliding(onscreenNav, document.getElementById("controls"), 100)) {
+        unfocusControls()
+    }
 }
 
 // Add event listeners for touch events
@@ -66,7 +68,9 @@ onscreenNav.addEventListener('mousedown', (e) => {
 });
 function handleMouseMove(e) {
     toXY(e.clientX - initialX, e.clientY - initialY);
-    unfocusControls()
+    if (!elemsColliding(onscreenNav, document.getElementById("controls"), 100)) {
+        unfocusControls()
+    }
 }
 
 window.addEventListener("contextmenu", (e) => {
