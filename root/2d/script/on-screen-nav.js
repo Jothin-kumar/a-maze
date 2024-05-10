@@ -99,5 +99,5 @@ function adjustOnscreenNav() {
 var adjustOnscreenNavTimeout;
 window.addEventListener("resize", () => {
     clearTimeout(adjustOnscreenNavTimeout);
-    adjustOnscreenNavTimeout = setTimeout(adjustOnscreenNav, 1000);
+    adjustOnscreenNavTimeout = setTimeout(adjustOnscreenNav, 500);
 });
