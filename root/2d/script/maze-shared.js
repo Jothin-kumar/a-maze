@@ -42,6 +42,9 @@ function loadMazeFromShared(data) {
             throw "Invalid path"
         }
     }
+    if (mp.path.length != new Set(mp.path).size) {
+        throw "Repeated squares in path"
+    }
 
     for (let i = 0; i < data[1].length; i += 2) {
         window.lines[`${2*decodeToNum(data[1][i])+1},${2*decodeToNum(data[1][i+1])}`].hide();
