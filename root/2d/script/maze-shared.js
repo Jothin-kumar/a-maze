@@ -12,7 +12,7 @@ decodeToCoords = (alpha) => [decodeToNum(alpha[0]), decodeToNum(alpha[1])];
 
 function exportMaze() {
     const correctPathElems = mp.path.filter(sq => ![mp.start, mp.end].includes(sq));
-    const hiddenLines = (Object.keys(window.lines).filter(k => window.lines[k].hidden).map(k => k.split(",").map(n => parseInt(n))));
+    const hiddenLines = (Object.keys(window.lines).filter(k => window.lines[k].hidden && !window.lines[k].ignore).map(k => k.split(",").map(n => parseInt(n))));
     const hiddenLinesXExcess = hiddenLines.filter(l => l[0] % 2 == 1);
     const hiddenLinesYExcess = hiddenLines.filter(l => l[1] % 2 == 1);
 

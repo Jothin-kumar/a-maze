@@ -18,6 +18,6 @@ function getDifficulty() {
         difficulty += neighbors.length - 2;
     }
     
-    difficulty *= Object.values(lines).filter(l => l.hidden).length / Object.values(lines).length;
+    difficulty *= Object.values(lines).filter(l => l.hidden && !l.ignore).length / Object.values(lines).length;
     return difficulty;
 }
