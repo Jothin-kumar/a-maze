@@ -23,8 +23,11 @@ function exportMaze() {
     return compressedData;
 }
 
-function loadMazeFromShared(data) {
+async function loadMazeFromShared(data) {
+    update("Loading shared maze...")
     preConstruct();
+    document.getElementById("main").style.display = "block"
+    document.getElementById("loading").style.display = "none"
     window.mp = new Path(window.mazeSquares[decodeToCoords(data.slice(0, 2)).join(",")]);
     mp.end = window.mazeSquares[decodeToCoords(data.slice(2, 4)).join(",")];
 
@@ -48,12 +51,17 @@ function loadMazeFromShared(data) {
 
     for (let i = 0; i < data[1].length; i += 2) {
         window.lines[`${2*decodeToNum(data[1][i])+1},${2*decodeToNum(data[1][i+1])}`].hide();
+        await new Promise(r => setTimeout(r, 1));
     }
     for (let i = 0; i < data[2].length; i += 2) {
         window.lines[`${2*decodeToNum(data[2][i])},${2*decodeToNum(data[2][i+1])+1}`].hide();
+        await new Promise(r => setTimeout(r, 1));
     }
+    await new Promise(r => setTimeout(r, 500));
 
-    postConstruct()
+    update("Shared maze loaded<br>Removing unused squares...")
+    await postConstruct();
+    update(`Done ✅<br>Difficulty Rating: ${getDifficulty().toFixed(2)}`)
 }
 
 function shareMaze(button) {
