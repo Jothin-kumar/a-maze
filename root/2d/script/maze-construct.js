@@ -134,7 +134,7 @@ function preConstruct() {
     }
 }
 function update(msg) {
-    document.getElementById("caption").innerText = msg;
+    document.getElementById("caption").innerHTML = msg;
 
 }
 async function construct() {
@@ -152,16 +152,16 @@ async function construct() {
     mp.start.setColor("green");
     mp.end.setColor("red");
     await new Promise(r => setTimeout(r, 1000));
-    update("Correct path constructed. Constructing other paths...")
+    update("Correct path constructed<br>Constructing other paths...")
     while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 10000) {
         await pathLine(constructPath(pickRandomElement(mp.path), randRange(val[2], val[3]), (dot) => !dot.used).path)
         await pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => !d.used)), randRange(val[2], val[4]), (dot) => !dot.used).path);
         c++;
     }
     await new Promise(r => setTimeout(r, 500));
-    update("All paths constructed. Removing unused squares...")
+    update("All paths constructed<br>Removing unused squares...")
     await postConstruct();
-    update("Done ✅")
+    update(`Done ✅<br>Difficulty Rating: ${getDifficulty().toFixed(2)}`)
 }
 async function postConstruct() {
     const toClear = Object.values(window.mazeSquares).filter((d) => {
