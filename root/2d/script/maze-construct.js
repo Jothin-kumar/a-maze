@@ -173,6 +173,7 @@ function postConstruct() {
         function handler (x, y) {
             if (toClear.includes(window.mazeSquares[`${d.x+x},${d.y+y}`])) {
                 clearLine(d.x, d.y, d.x+x, d.y+y);
+                window.lines[`${d.x*2+x},${d.y*2+y}`].ignore = true;
             }
         }
         handler(1, 0);
