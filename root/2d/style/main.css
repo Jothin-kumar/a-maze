@@ -194,3 +194,13 @@ body {
     transform: translate(-50%, -50%);
     display: none;
 }
+
+#caption {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: xx-large;
+    margin-bottom: 5vh;
+    font-family: monospace;
+}

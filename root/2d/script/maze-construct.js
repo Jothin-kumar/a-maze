@@ -133,8 +133,14 @@ function preConstruct() {
         }
     }
 }
-function construct() {
+function update(msg) {
+    document.getElementById("caption").innerText = msg;
+
+}
+async function construct() {
     preConstruct();
+    document.getElementById("main").style.display = "block"
+    document.getElementById("loading").style.display = "none"
     const vals = {
         25: [69, 88, 10, 34, 20],
         49: [169, 175, 50, 169, 25],
@@ -142,15 +148,22 @@ function construct() {
     }
     const val = vals[window.gridSize]
     window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares)), randRange(val[0], val[1])); // Main path
+    await pathLine(mp.path);
+    mp.start.setColor("green");
+    mp.end.setColor("red");
+    await new Promise(r => setTimeout(r, 1000));
+    update("Correct path constructed. Constructing other paths...")
     while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 10000) {
-        pathLine(constructPath(pickRandomElement(mp.path), randRange(val[2], val[3]), (dot) => !dot.used).path)
-        pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => !d.used)), randRange(val[2], val[4]), (dot) => !dot.used).path);
+        await pathLine(constructPath(pickRandomElement(mp.path), randRange(val[2], val[3]), (dot) => !dot.used).path)
+        await pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => !d.used)), randRange(val[2], val[4]), (dot) => !dot.used).path);
         c++;
     }
-    pathLine(mp.path);
-    postConstruct();
+    await new Promise(r => setTimeout(r, 500));
+    update("All paths constructed. Removing unused squares...")
+    await postConstruct();
+    update("Done ✅")
 }
-function postConstruct() {
+async function postConstruct() {
     const toClear = Object.values(window.mazeSquares).filter((d) => {
         function checkUsageWithRespectToLine(x1, y1, x2, y2) {
             try {
@@ -169,25 +182,27 @@ function postConstruct() {
             return true;
         }
     })
-    toClear.forEach((d) => {
-        function handler (x, y) {
+    for (let i = 0; i < toClear.length; i++) {
+        d = toClear[i];
+        async function handler (x, y) {
             if (toClear.includes(window.mazeSquares[`${d.x+x},${d.y+y}`])) {
                 clearLine(d.x, d.y, d.x+x, d.y+y);
                 window.lines[`${d.x*2+x},${d.y*2+y}`].ignore = true;
+                await new Promise(r => setTimeout(r, 1));
             }
         }
-        handler(1, 0);
-        handler(0, 1);
-        handler(-1, 0);
-        handler(0, -1);
-    });
+        await handler(1, 0);
+        await handler(0, 1);
+        await handler(-1, 0);
+        await handler(0, -1);
+    };
 
     mp.start.setColor("green");
     mp.end.setColor("red");
     document.getElementById("main").style.display = "block"
-    document.getElementById("controls").style.display = "block"
+    // document.getElementById("controls").style.display = "block"
     document.getElementById("loading").style.display = "none"
-    document.getElementById("onscreen-nav").classList.add("show-onscreen-nav")
+    // document.getElementById("onscreen-nav").classList.add("show-onscreen-nav")
     focusStart()
     startPos = window.mp.start;
     endPos = window.mp.end;

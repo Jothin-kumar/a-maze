@@ -33,9 +33,10 @@ function clearLine(x1, y1, x2, y2) {
     window.lines[`${x1+x2},${y1+y2}`].hide();
 }
 
-function pathLine(path) {
+async function pathLine(path) {
     for (let i = 0; i < path.length-1; i++) {
         clearLine(path[i].x, path[i].y, path[i+1].x, path[i+1].y);
+        await new Promise(r => setTimeout(r, 1));
     }
 }
 
