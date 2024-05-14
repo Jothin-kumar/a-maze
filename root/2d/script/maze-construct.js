@@ -153,9 +153,8 @@ async function construct() {
     mp.end.setColor("red");
     await new Promise(r => setTimeout(r, 1000));
     update("Correct path constructed<br>Constructing other paths...")
-    while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 1000) {
-        await pathLine(constructPath(pickRandomElement(mp.path), randRange(val[2], val[3]), (dot) => !dot.used).path)
-        await pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => !d.used)), randRange(val[2], val[4]), (dot) => !dot.used).path);
+    while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 10000) {
+        await pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => d.used)), randRange(val[2], val[4]), (dot) => !dot.used).path);
         c++;
     }
     await new Promise(r => setTimeout(r, 500));
