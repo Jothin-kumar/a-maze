@@ -42,24 +42,20 @@ class Path {
         this.path = [start];
     }
     addDot(dot) {
-        if (this.path.includes(dot)) {
+        if (this.path.includes(dot) || dot.used) {
             throw new DotAlreadyInUseError(`Dot already in use with type ${dot.type}`);
         }
         if (dot.type === "prohibited") {
             return false;
         }
         this.path.push(dot);
-        dot.used = true;
         dot.type = "path";
         return true;
     }
     finish() {
-        if (this.path.length < 10) {
-            throw new PathInvalidError("Path too short");
-        }
-        if (this.path.length > 256) {
-            throw new PathInvalidError("Path too long");
-        }
+        this.path.forEach((d) => {
+            d.used = true
+        })
         this.end = this.path[this.path.length-1];
         this.end.type = "end";
     }
@@ -96,6 +92,10 @@ function constructPath(start, pathLength = 169, condition = (dot) => true){
             else {
                 choosen = pickRandomElement(Object.values(neighbors));
                 if (!condition(choosen)) {
+                    path.finish()
+                    Object.values(window.mazeSquares).filter(dot => dot.type === "prohibited").forEach(dot => {  // Dots prohibited only for current path
+                        dot.type = "";
+                    })
                     return path;
                 }
                 path.addDot(choosen);
