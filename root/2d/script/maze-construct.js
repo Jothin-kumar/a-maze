@@ -42,24 +42,20 @@ class Path {
         this.path = [start];
     }
     addDot(dot) {
-        if (this.path.includes(dot)) {
+        if (this.path.includes(dot) || dot.used) {
             throw new DotAlreadyInUseError(`Dot already in use with type ${dot.type}`);
         }
         if (dot.type === "prohibited") {
             return false;
         }
         this.path.push(dot);
-        dot.used = true;
         dot.type = "path";
         return true;
     }
     finish() {
-        if (this.path.length < 10) {
-            throw new PathInvalidError("Path too short");
-        }
-        if (this.path.length > 256) {
-            throw new PathInvalidError("Path too long");
-        }
+        this.path.forEach((d) => {
+            d.used = true
+        })
         this.end = this.path[this.path.length-1];
         this.end.type = "end";
     }
@@ -96,6 +92,10 @@ function constructPath(start, pathLength = 169, condition = (dot) => true){
             else {
                 choosen = pickRandomElement(Object.values(neighbors));
                 if (!condition(choosen)) {
+                    path.finish()
+                    Object.values(window.mazeSquares).filter(dot => dot.type === "prohibited").forEach(dot => {  // Dots prohibited only for current path
+                        dot.type = "";
+                    })
                     return path;
                 }
                 path.addDot(choosen);
@@ -142,7 +142,7 @@ function construct() {
     }
     const val = vals[window.gridSize]
     window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares)), randRange(val[0], val[1])); // Main path
-    while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 10000) {
+    while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 1000) {
         pathLine(constructPath(pickRandomElement(mp.path), randRange(val[2], val[3]), (dot) => !dot.used).path)
         pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => !d.used)), randRange(val[2], val[4]), (dot) => !dot.used).path);
         c++;
