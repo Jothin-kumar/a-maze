@@ -7,6 +7,7 @@ body {
 }
 * {
     scrollbar-width: none;
+    transition: .31s;
 }
 *::-webkit-scrollbar {
     display: none;
