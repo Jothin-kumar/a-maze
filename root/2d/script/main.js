@@ -42,7 +42,6 @@ function configForGridSize(size) { // Example: size = 49 for 49x49 grid
     document.getElementById("maze-grid-line-4").setAttribute("x1", b*zoom)
     document.getElementById("maze-grid-line-4").setAttribute("y2", b*zoom)
     document.getElementById("maze-grid-line-4").setAttribute("x2", b*zoom)
-
 }
 
 
@@ -109,3 +108,16 @@ function toLevel(lvl) {
     }
     window.location.search = usp.toString()
 }
+
+function alignMaze() {
+    const mgbc = mg.getBoundingClientRect()
+    const mbc = document.getElementById("main").getBoundingClientRect()
+    mg.style.transform = `translateY(${Math.abs(mbc.height - mgbc.height)/2}px)`
+}
+window.alignMazeTimeout = null;
+window.addEventListener("resize", () => {
+    if (window.alignMazeTimeout) {
+        clearTimeout(window.alignMazeTimeout)
+    }
+    window.alignMazeTimeout = setTimeout(alignMaze, 500)
+})
