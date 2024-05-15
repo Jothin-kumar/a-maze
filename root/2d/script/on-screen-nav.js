@@ -24,6 +24,7 @@ function toXY(x, y) {
     onscreenNav.style.transform = `translate(${x}px, ${y}px)`;
     window.currentX = x;
     window.currentY = y;
+    setTimeout(() => {onscreenNav.style.transition = "transform 0s"}, 690);
 }
 
 // Function to handle touch start event
@@ -84,6 +85,7 @@ window.addEventListener("contextmenu", (e) => {
 })
 
 function adjustOnscreenNav() {
+    onscreenNav.style.transition = ""
     const mainBC = main.getBoundingClientRect();
     const onscreenNavBC = onscreenNav.getBoundingClientRect();
     const controlsBC = document.getElementById("controls").getBoundingClientRect();
@@ -100,6 +102,7 @@ function adjustOnscreenNav() {
     }
     document.getElementById("onscreen-nav").classList.add("show-onscreen-nav")
     window.onScreenNavInitParams = [window.currentX, window.currentY, onscreenNav.style.transform]
+    setTimeout(() => {onscreenNav.style.transition = "transform 0s"}, 690);
 }
 
 var adjustOnscreenNavTimeout;
