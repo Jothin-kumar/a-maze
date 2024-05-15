@@ -4,22 +4,24 @@ const medium = "medium"
 const hard = "hard"
 window.currentLevel = medium
 window.gridSize = 49
+window.zoom = 1.5
 
 if (sp.has("level")) {
     const level = sp.get("level")
     setCurrentLevel(level)
     switch (level) {
         case easy:
-            configForGridSize(25)
+            window.gridSize = 25
             break
         case medium:
-            configForGridSize(49)
+            window.gridSize = 49
             break
         case hard:
-            configForGridSize(69)
+            window.gridSize = 69
             break
     }
 }
+configForGridSize(window.gridSize)
 function setCurrentLevel(lvl) {
     window.currentLevel = lvl
     document.querySelectorAll("#levels-control > button").forEach(e => e.classList.remove("current-lvl"))
@@ -29,18 +31,17 @@ function configForGridSize(size) { // Example: size = 49 for 49x49 grid
     window.gridSize = size
     const mg = document.getElementById("maze-grid")
     const a = size*10 + 10
-    mg.setAttribute("height", a)
-    mg.setAttribute("width", a)
+    mg.setAttribute("height", a*zoom)
+    mg.setAttribute("width", a*zoom)
     const b = a - 5
-    document.getElementById("maze-grid-line-1").setAttribute("x2", b)
-    document.getElementById("maze-grid-line-2").setAttribute("y1", b)
-    document.getElementById("maze-grid-line-2").setAttribute("x2", b)
-    document.getElementById("maze-grid-line-2").setAttribute("y2", b)
-    document.getElementById("maze-grid-line-3").setAttribute("y2", b)
-    document.getElementById("maze-grid-line-4").setAttribute("x1", b)
-    document.getElementById("maze-grid-line-4").setAttribute("y2", b)
-    document.getElementById("maze-grid-line-4").setAttribute("x2", b)
-
+    document.getElementById("maze-grid-line-1").setAttribute("x2", b*zoom)
+    document.getElementById("maze-grid-line-2").setAttribute("y1", b*zoom)
+    document.getElementById("maze-grid-line-2").setAttribute("x2", b*zoom)
+    document.getElementById("maze-grid-line-2").setAttribute("y2", b*zoom)
+    document.getElementById("maze-grid-line-3").setAttribute("y2", b*zoom)
+    document.getElementById("maze-grid-line-4").setAttribute("x1", b*zoom)
+    document.getElementById("maze-grid-line-4").setAttribute("y2", b*zoom)
+    document.getElementById("maze-grid-line-4").setAttribute("x2", b*zoom)
 }
 
 
@@ -107,3 +108,17 @@ function toLevel(lvl) {
     }
     window.location.search = usp.toString()
 }
+
+function alignMaze() {
+    const mgbc = mg.getBoundingClientRect()
+    const mbc = document.getElementById("main").getBoundingClientRect()
+    mg.style.transform = `translateY(${Math.abs(mbc.height - mgbc.height)/2}px)`
+}
+window.alignMazeTimeout = null;
+window.alignMazeHandler = () => {
+    if (window.alignMazeTimeout) {
+        clearTimeout(window.alignMazeTimeout)
+    }
+    window.alignMazeTimeout = setTimeout(alignMaze, 500)
+}
+window.addEventListener("resize", window.alignMazeHandler)

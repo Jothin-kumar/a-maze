@@ -24,6 +24,7 @@ function toXY(x, y) {
     onscreenNav.style.transform = `translate(${x}px, ${y}px)`;
     window.currentX = x;
     window.currentY = y;
+    setTimeout(() => {onscreenNav.style.transition = "transform 0s"}, 690);
 }
 
 // Function to handle touch start event
@@ -83,7 +84,8 @@ window.addEventListener("contextmenu", (e) => {
     initialY = window.currentY;
 })
 
-function adjustOnscreenNav() {
+async function adjustOnscreenNav() {
+    onscreenNav.style.transition = ""
     const mainBC = main.getBoundingClientRect();
     const onscreenNavBC = onscreenNav.getBoundingClientRect();
     const controlsBC = document.getElementById("controls").getBoundingClientRect();
@@ -94,16 +96,23 @@ function adjustOnscreenNav() {
         toXY((mainBC.right + screen.width - onscreenNavBC.left - onscreenNavBC.right) / 2, (mainBC.top + mainBC.bottom - onscreenNavBC.top - onscreenNavBC.bottom) / 2);
     }
     var attempts = 0;
+    var x = window.currentX
+    var y = window.currentY
+    await new Promise(r => setTimeout(r, 1000));
     while (attempts < 100 && (elemsColliding(onscreenNav, startPos.elem, 15) || elemsColliding(onscreenNav, document.getElementById("controls")))) {
-        toXY(randRange(0, mainBC.width), randRange(0, mainBC.height));
+        y -= 10
+        toXY(x, y);
         attempts++;
+        await new Promise(r => setTimeout(r, 10));
     }
     document.getElementById("onscreen-nav").classList.add("show-onscreen-nav")
     window.onScreenNavInitParams = [window.currentX, window.currentY, onscreenNav.style.transform]
+    setTimeout(() => {onscreenNav.style.transition = "transform 0s"}, 690);
 }
 
 var adjustOnscreenNavTimeout;
-window.addEventListener("resize", () => {
+window.adjustOnscreenNavHandler = () => {
     clearTimeout(adjustOnscreenNavTimeout);
     adjustOnscreenNavTimeout = setTimeout(adjustOnscreenNav, 500);
-});
+}
+window.addEventListener("resize", adjustOnscreenNavHandler);
