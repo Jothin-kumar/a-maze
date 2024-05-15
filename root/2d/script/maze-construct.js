@@ -133,8 +133,9 @@ function preConstruct() {
         }
     }
 }
-function construct() {
+async function construct() {
     preConstruct();
+    const loader = document.getElementById("loader-msg")
     const vals = {
         25: [69, 88, 10, 20],
         49: [169, 175, 50, 25],
@@ -142,11 +143,18 @@ function construct() {
     }
     const val = vals[window.gridSize]
     window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares)), randRange(val[0], val[1])); // Main path
-    while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < 10000) {
+    pathLine(mp.path);
+    const maxIter = 10000
+    const fp = 100/maxIter
+    const fp_ = maxIter/100
+    while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < maxIter) {
         pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => d.used)), randRange(val[2], val[3]), (dot) => !dot.used).path);
+        if (c % fp_ === 0) {
+            loader.innerHTML = `&ge; ${(c*fp).toString().padStart(2, "0")}%`
+            await new Promise(r => setTimeout(r, 0));
+        }
         c++;
     }
-    pathLine(mp.path);
     postConstruct();
 }
 function postConstruct() {
