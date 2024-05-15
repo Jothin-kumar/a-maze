@@ -84,7 +84,7 @@ window.addEventListener("contextmenu", (e) => {
     initialY = window.currentY;
 })
 
-function adjustOnscreenNav() {
+async function adjustOnscreenNav() {
     onscreenNav.style.transition = ""
     const mainBC = main.getBoundingClientRect();
     const onscreenNavBC = onscreenNav.getBoundingClientRect();
@@ -96,9 +96,14 @@ function adjustOnscreenNav() {
         toXY((mainBC.right + screen.width - onscreenNavBC.left - onscreenNavBC.right) / 2, (mainBC.top + mainBC.bottom - onscreenNavBC.top - onscreenNavBC.bottom) / 2);
     }
     var attempts = 0;
+    var x = window.currentX
+    var y = window.currentY
+    await new Promise(r => setTimeout(r, 1000));
     while (attempts < 100 && (elemsColliding(onscreenNav, startPos.elem, 15) || elemsColliding(onscreenNav, document.getElementById("controls")))) {
-        toXY(randRange(0, mainBC.width), randRange(0, mainBC.height));
+        y -= 10
+        toXY(x, y);
         attempts++;
+        await new Promise(r => setTimeout(r, 10));
     }
     document.getElementById("onscreen-nav").classList.add("show-onscreen-nav")
     window.onScreenNavInitParams = [window.currentX, window.currentY, onscreenNav.style.transform]

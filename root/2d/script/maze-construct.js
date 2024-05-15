@@ -193,6 +193,8 @@ function postConstruct() {
     alignMaze()
     setTimeout(() => {
         focusStart()
+    }, 100)
+    setTimeout(() => {
         adjustOnscreenNav()
-    }, 500)
+    }, 1000)
 }
