@@ -123,6 +123,7 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    font-family: 'Courier New', Courier, monospace;
 }
 #loading > h1 {
     animation: loading 1.5s infinite;
