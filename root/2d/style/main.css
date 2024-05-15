@@ -15,7 +15,7 @@ body {
     display: none;
 }
 #main {
-    max-height: 69vh;
+    max-height: 90vh;
     overflow: scroll;
     scroll-behavior: smooth;
 }
@@ -23,8 +23,8 @@ body {
     #main {
         position: absolute;
         left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+        top: 1%;
+        transform: translate(-50%, 0);
     }
 }
 
@@ -201,6 +201,9 @@ body {
     left: 50%;
     transform: translateX(-50%);
     font-size: xx-large;
-    margin-bottom: 5vh;
+    height: 5vh;
+    margin-bottom: 10px;
     font-family: monospace;
+    max-width: 90dvw;
+    width: max-content;
 }
