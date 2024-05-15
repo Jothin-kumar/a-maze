@@ -6,6 +6,17 @@ canMove = (x1, y1, x2, y2) => {
         return false
     }
 }
+function movableNeighbours(dot) {
+    const neighbors = [];
+    function handler(x, y) {
+        let potentialMovableNeighbor = window.mazeSquares[`${dot.x+x},${dot.y+y}`];
+        if (potentialMovableNeighbor && canMove(dot.x, dot.y, dot.x + x, dot.y + y)) {
+            neighbors.push(potentialMovableNeighbor);
+        }
+    }
+    [[1, 0], [-1, 0] ,[0, 1], [0, -1]].forEach(([x, y]) => handler(x, y));
+    return neighbors;
+}
 
 class Player {
     constructor(x, y, startPos, endPos) {

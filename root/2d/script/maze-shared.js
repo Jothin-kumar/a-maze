@@ -53,7 +53,32 @@ function loadMazeFromShared(data) {
         window.lines[`${2*decodeToNum(data[2][i])},${2*decodeToNum(data[2][i+1])+1}`].hide();
     }
 
+
+    // Corruption detection
+    window.acceptedSquares = mp.path;
+    function ConnectAllConnectableNeighbours() {
+        let neighbours = [];
+        for (let i = 0; i < acceptedSquares.length-1; i++) {
+            neighbours.push(...movableNeighbours(acceptedSquares[i]));
+        }
+        neighbours = neighbours.filter(n => !acceptedSquares.includes(n));
+        if (neighbours.length != 0) {
+            window.acceptedSquares = [...acceptedSquares, ...neighbours];
+            ConnectAllConnectableNeighbours();
+        }
+    }
+    ConnectAllConnectableNeighbours();
+    const allSquares = Object.values(window.mazeSquares);
+    allSquares.forEach(sq => {
+        [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(([x, y]) => {
+            if (canMove(sq.x, sq.y, sq.x + x, sq.y + y) && !acceptedSquares.includes(sq)) {
+                throw "Unconnected squares"
+            }
+        })
+    })
+
     postConstruct()
+
 }
 
 function shareMaze(button) {
