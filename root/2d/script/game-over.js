@@ -14,6 +14,7 @@ function gameOver(steps, startTime) {
     document.getElementById("onscreen-nav").classList.remove("show-onscreen-nav")
     document.getElementById("maze-grid").style.transform = "";
     window.removeEventListener("resize", window.alignMazeHandler)
-    document.getElementById("main").style.height = "69vh"
+    document.getElementById("main").style.height = "auto";
+    document.getElementById("main").style.maxHeight = "69vh"
     window.removeEventListener("resize", adjustOnscreenNavHandler);
 }
