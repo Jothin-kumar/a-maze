@@ -186,6 +186,7 @@ function postConstruct() {
     document.getElementById("main").style.display = "block"
     document.getElementById("controls").style.display = "block"
     document.getElementById("loading").style.display = "none"
+    window.navNotAllowed = true
     startPos = window.mp.start;
     endPos = window.mp.end;
     window.player = new Player(startPos.x, startPos.y, startPos, endPos);
@@ -196,5 +197,6 @@ function postConstruct() {
     }, 100)
     setTimeout(() => {
         adjustOnscreenNav()
+        window.navNotAllowed = false
     }, 1000)
 }

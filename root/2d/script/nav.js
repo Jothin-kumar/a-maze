@@ -84,7 +84,7 @@ class Player {
 }
 
 window.addEventListener("keydown", (e) => {
-    if (window.answerRevealed || window.gameIsOver) {
+    if (window.answerRevealed || window.gameIsOver || window.navNotAllowed) {
         return
     }
     const w = document.getElementById("onscreen-nav-w")
