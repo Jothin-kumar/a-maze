@@ -68,12 +68,12 @@ function loadMazeFromShared(data) {
         }
     }
     ConnectAllConnectableNeighbours();
-    const allSquares = Object.values(window.mazeSquares);
-    allSquares.forEach(sq => {
+    Object.values(window.mazeSquares).filter(sq => !acceptedSquares.includes(sq))
+    .forEach(sq => {
         if ([[1, 0], [-1, 0], [0, 1], [0, -1]]
-        .map(([x, y]) => canMove(sq.x, sq.y, sq.x + x, sq.y + y) && !acceptedSquares.includes(sq))
-        .every(b => b)) {
-            throw "Unreachable square"
+        .map(([x, y]) => canMove(sq.x, sq.y, sq.x + x, sq.y + y))
+        .every(b => !b)) {
+            throw "Unreachable square", sq
         }
     })
 
