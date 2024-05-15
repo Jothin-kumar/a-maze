@@ -13,7 +13,7 @@ body {
     display: none;
 }
 #main {
-    height: 85vh;
+    height: 85dvh;
     overflow: scroll;
     scroll-behavior: smooth;
 
@@ -28,8 +28,8 @@ body {
 }
 
 #controls {
-    width: 100vw;
-    height: calc(15vh - 20px);
+    width: 100dvw !important;
+    height: calc(15dvh - 20px);
     overflow-y: scroll;
     position: absolute;
     background-color: black;
@@ -93,8 +93,8 @@ body {
     border: 2px solid olive;
     border-radius: 5px;
     text-align: center;
-    min-width: 20vw;
-    min-height: 20vh;
+    min-width: 20dvw;
+    min-height: 20dvh;
 }
 #game-over-parent > button {
     background-color: black;
@@ -109,7 +109,7 @@ body {
     border-color: darkgoldenrod;
 }
 #game-over-maze-parent {
-    max-width: 95vw;
+    max-width: 95dvw;
     overflow: scroll;
     margin: 10px;
 }
@@ -158,10 +158,10 @@ body {
 
     width: fit-content;
     overflow-y: scroll;
-    max-width: 95vw;
-    max-height: 95vh;
-    min-width: 70vw;
-    min-height: 70vh;
+    max-width: 95dvw;
+    max-height: 95dvh;
+    min-width: 70dvw;
+    min-height: 70dvh;
     overflow: scroll;
     padding: 10px;
 
