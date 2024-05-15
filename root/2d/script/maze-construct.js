@@ -186,7 +186,6 @@ function postConstruct() {
     document.getElementById("main").style.display = "block"
     document.getElementById("controls").style.display = "block"
     document.getElementById("loading").style.display = "none"
-    document.getElementById("onscreen-nav").classList.add("show-onscreen-nav")
     focusStart()
     startPos = window.mp.start;
     endPos = window.mp.end;

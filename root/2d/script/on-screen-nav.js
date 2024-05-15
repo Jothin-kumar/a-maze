@@ -78,11 +78,9 @@ window.addEventListener("contextmenu", (e) => {
     if (e.target.id === "onscreen-nav-assist") {
         return
     }
-    onscreenNav.style.transform = "";
-    initialX = 0;
-    initialY = 0;
-    window.currentX = 0;
-    window.currentY = 0;
+    [window.currentX, window.currentY, onscreenNav.style.transform] = window.onScreenNavInitParams;
+    initialX = window.currentX;
+    initialY = window.currentY;
 })
 
 function adjustOnscreenNav() {
@@ -100,6 +98,8 @@ function adjustOnscreenNav() {
         toXY(randRange(0, mainBC.width), randRange(0, mainBC.height));
         attempts++;
     }
+    document.getElementById("onscreen-nav").classList.add("show-onscreen-nav")
+    window.onScreenNavInitParams = [window.currentX, window.currentY, onscreenNav.style.transform]
 }
 
 var adjustOnscreenNavTimeout;

@@ -7,10 +7,11 @@
 
     position: absolute;
     z-index: 2;
-    display: none;
+    opacity: 0;
+    display: grid;
 }
 #onscreen-nav.show-onscreen-nav {
-    display: grid;
+    opacity: 1;
 }
 #onscreen-nav > button {
     background-color: rgb(0, 0, 169, .9);
