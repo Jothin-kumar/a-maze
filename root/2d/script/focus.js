@@ -19,9 +19,9 @@ function focusStart() {
     focusElem(window.mp.start.elem);
 }
 
+const controls = document.getElementById("controls")
 function unfocusControls() {
-    const controls = document.getElementById("controls")
-    controls.style.opacity = 0
+    controls.style.opacity = .5
     if (window.controlsDisplayNoneTimeout) {
         clearTimeout(window.controlsDisplayNoneTimeout)
     }
@@ -31,4 +31,16 @@ function unfocusControls() {
         }
     }, 2500)
 }
+controls.addEventListener("mouseover", () => {
+    controls.style.opacity = 1
+    if (window.controlsDisplayNoneTimeout) {
+        clearTimeout(window.controlsDisplayNoneTimeout)
+    }
+})
+controls.addEventListener("touchstart", () => {
+    controls.style.opacity = 1
+    if (window.controlsDisplayNoneTimeout) {
+        clearTimeout(window.controlsDisplayNoneTimeout)
+    }
+})
 document.getElementById("main").addEventListener("scroll", unfocusControls)
