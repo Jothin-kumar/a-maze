@@ -24,6 +24,13 @@ body {
     top: 0;
     transform: translateX(-50%);
 }
+@media screen and (orientation: landscape) {
+    #maze-grid {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%)
+    }
+}
 
 #controls {
     width: 100vw;
