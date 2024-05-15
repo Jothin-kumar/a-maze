@@ -106,7 +106,8 @@ function adjustOnscreenNav() {
 }
 
 var adjustOnscreenNavTimeout;
-window.addEventListener("resize", () => {
+window.adjustOnscreenNavHandler = () => {
     clearTimeout(adjustOnscreenNavTimeout);
     adjustOnscreenNavTimeout = setTimeout(adjustOnscreenNav, 500);
-});
+}
+window.addEventListener("resize", adjustOnscreenNavHandler);
