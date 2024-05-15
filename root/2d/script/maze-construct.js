@@ -7,10 +7,10 @@ class MazeSquare {
         this.type = "";
         this.used = false;
         this.elem = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
-        this.elem.setAttribute('width', 10);
-        this.elem.setAttribute('height', 10);
-        this.elem.setAttribute('x', x*10-5);
-        this.elem.setAttribute('y', y*10-5);
+        this.elem.setAttribute('width', 10*zoom);
+        this.elem.setAttribute('height', 10*zoom);
+        this.elem.setAttribute('x', (x*10-5)*zoom);
+        this.elem.setAttribute('y', (y*10-5)*zoom);
         this.elem.setAttribute('fill', 'black');
         window.mg.appendChild(this.elem);
         window.mazeSquares[`${x},${y}`] = this;
