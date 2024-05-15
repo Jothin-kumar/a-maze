@@ -70,11 +70,11 @@ function loadMazeFromShared(data) {
     ConnectAllConnectableNeighbours();
     const allSquares = Object.values(window.mazeSquares);
     allSquares.forEach(sq => {
-        [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(([x, y]) => {
-            if (canMove(sq.x, sq.y, sq.x + x, sq.y + y) && !acceptedSquares.includes(sq)) {
-                throw "Unconnected squares"
-            }
-        })
+        if ([[1, 0], [-1, 0], [0, 1], [0, -1]]
+        .map(([x, y]) => canMove(sq.x, sq.y, sq.x + x, sq.y + y) && !acceptedSquares.includes(sq))
+        .every(b => b)) {
+            throw "Unreachable square"
+        }
     })
 
     postConstruct()
