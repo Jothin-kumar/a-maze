@@ -115,9 +115,10 @@ function alignMaze() {
     mg.style.transform = `translateY(${Math.abs(mbc.height - mgbc.height)/2}px)`
 }
 window.alignMazeTimeout = null;
-window.addEventListener("resize", () => {
+window.alignMazeHandler = () => {
     if (window.alignMazeTimeout) {
         clearTimeout(window.alignMazeTimeout)
     }
     window.alignMazeTimeout = setTimeout(alignMaze, 500)
-})
+}
+window.addEventListener("resize", window.alignMazeHandler)
