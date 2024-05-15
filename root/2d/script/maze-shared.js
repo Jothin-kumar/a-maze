@@ -68,12 +68,18 @@ function loadMazeFromShared(data) {
         }
     }
     ConnectAllConnectableNeighbours();
+    const suspectedCorruptedSquares = [];
     Object.values(window.mazeSquares).filter(sq => !acceptedSquares.includes(sq))
     .forEach(sq => {
         if ([[1, 0], [-1, 0], [0, 1], [0, -1]]
         .map(([x, y]) => canMove(sq.x, sq.y, sq.x + x, sq.y + y))
         .every(b => !b)) {
-            throw "Unreachable square", sq
+            suspectedCorruptedSquares.push([sq.x, sq.y]);
+            [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(([x_, y_]) => {
+                if ([sq.x + x_, sq.y + y_] in suspectedCorruptedSquares) {
+                    throw "Corrupted maze"
+                }
+            })
         }
     })
 
