@@ -123,7 +123,7 @@ window.addEventListener("keydown", (e) => {
     }
 })
 window.addEventListener("keyup", (e) => {
-    if (e.key === " ") {
+    if (e.key === " " && window.navAssistUsed) {
         navAssistStop()
     }
 })
@@ -142,13 +142,20 @@ function navAssistInit() {
         navAssist()
         navAssistBtn.style.backgroundColor = "rgb(0, 169, 69)"
     }
+    else {
+        window.navAssistUsed = true
+    }
 }
 function navAssistStop() {
+    window.navAssistUsed = false
     navAssistBtn.held = false
     navAssistBtn.style.backgroundColor = "rgb(0, 69, 169)"
 }
 function enableNavAssist(func) {
-    navAssistBtn.func = func
+    navAssistBtn.func = () => {
+        func()
+        window.navAssistUsed = true
+    }
 }
 function disableNavAssist() {
     navAssistBtn.func = () => {}
