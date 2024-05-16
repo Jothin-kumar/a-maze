@@ -62,6 +62,7 @@ function shareMaze(button) {
 
     if (window.shareURL) {
         finish(window.shareURL);
+        return
     }
     const usp = new URLSearchParams(window.location.search);
     if (usp.has("share-url")) {
