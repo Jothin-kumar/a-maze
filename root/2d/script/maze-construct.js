@@ -134,6 +134,7 @@ function preConstruct() {
             new Line(x, y, x, y+1);
         }
     }
+    setTimeout(alignMaze, 500)
 }
 function update(msg) {
     document.getElementById("caption").innerHTML = msg;
@@ -141,7 +142,6 @@ function update(msg) {
 }
 async function construct() {
     preConstruct();
-    setTimeout(alignMaze, 500)
     document.getElementById("main").style.display = "block"
     document.getElementById("loading").style.display = "none"
     const vals = {
