@@ -75,7 +75,7 @@ function shareMaze(button) {
     async function uploadMaze(callback) {
 
         const r = await fetch("https://share-maze.jothin.tech/new", {
-            method: "POST",
+            method: "GET",
             headers: {
                 "Content-Type": "application/json",
                 "maze-data": data,
