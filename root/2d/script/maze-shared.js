@@ -60,6 +60,9 @@ function loadMazeFromShared(data) {
 function shareMaze(button) {
     const originalText = button.innerText;
 
+    if (window.shareURL) {
+        finish(window.shareURL);
+    }
     const usp = new URLSearchParams(window.location.search);
     if (usp.has("share-url")) {
         const shareURL = usp.get("share-url");
@@ -96,6 +99,7 @@ function shareMaze(button) {
         finish(usp.has("level") ? `https://${window.location.host}/2d/?maze-data=${data}&level=${usp.get("level")}` : `https://${window.location.host}/2d/?maze-data=${data}`)
     }
     function finish(url) {
+        window.shareURL = url;
         document.getElementById("print-msg").innerText = url
         navigator.clipboard.writeText(url);
         button.innerText = "Copied!";
