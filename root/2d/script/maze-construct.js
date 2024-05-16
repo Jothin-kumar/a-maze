@@ -24,9 +24,9 @@ class MazeSquare {
     async startBlink () {
         this.blink = true;
         while (this.blink) {
-            this.elem.style.opacity = 1;
+            this.elem.setAttribute("fill-opacity", 1);
             await new Promise(r => setTimeout(r, 500));
-            if (this.blink) {this.elem.style.opacity = 0;}
+            if (this.blink) {this.elem.setAttribute("fill-opacity", 0);}
             await new Promise(r => setTimeout(r, 200));
         }
     }
