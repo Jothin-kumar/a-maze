@@ -46,6 +46,7 @@ function loadMazeFromShared(data) {
         throw "Repeated squares in path"
     }
 
+    pathLine(mp.path);
     for (let i = 0; i < data[1].length; i += 2) {
         window.lines[`${2*decodeToNum(data[1][i])+1},${2*decodeToNum(data[1][i+1])}`].hide();
     }
