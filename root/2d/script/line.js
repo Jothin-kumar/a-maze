@@ -15,12 +15,14 @@ class Line {
             y2 += .5
             x1 = x2 = x1+.5
         }
-        this.elem.setAttribute("x1", x1*10*zoom);
-        this.elem.setAttribute("y1", y1*10*zoom);
-        this.elem.setAttribute("x2", x2*10*zoom);
-        this.elem.setAttribute("y2", y2*10*zoom);
+        window.addEventListener("zoomChange", () => {
+            this.elem.setAttribute("x1", x1*10*zoom);
+            this.elem.setAttribute("y1", y1*10*zoom);
+            this.elem.setAttribute("x2", x2*10*zoom);
+            this.elem.setAttribute("y2", y2*10*zoom);
+            this.elem.setAttribute("stroke-width", zoom);
+        })
         this.elem.setAttribute("stroke", "white");
-        this.elem.setAttribute("stroke-width", zoom);
         window.mg.appendChild(this.elem);
     }
     hide() {
@@ -37,6 +39,7 @@ async function pathLine(path) {
     for (let i = 0; i < path.length-1; i++) {
         clearLine(path[i].x, path[i].y, path[i+1].x, path[i+1].y);
         await new Promise(r => setTimeout(r, 1));
+        window.dispatchEvent(zoomChangeEvt)
     }
 }
 
