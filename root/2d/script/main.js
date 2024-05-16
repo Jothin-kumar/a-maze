@@ -128,24 +128,23 @@ window.alignMazeHandler = () => {
 }
 window.addEventListener("resize", window.alignMazeHandler)
 
+function changeZoomBy(z) {
+    stopAllTransition()
+    window.zoom += z
+    window.dispatchEvent(zoomChangeEvt)
+    alignMaze()
+    setTimeout(resumeAllTransition, 1000)
+}
 window.addEventListener("keypress", (e) => {
     if (e.ctrlKey || e.altKey || e.metaKey) return
     switch (e.key) {
         case "+":
             if (window.zoom >= 2) return
-            stopAllTransition()
-            window.zoom += .05
-            window.dispatchEvent(zoomChangeEvt)
-            alignMaze()
-            setTimeout(resumeAllTransition, 1000)
+            changeZoomBy(+.05)
             break
         case "-":
             if (window.zoom <= 1) return
-            stopAllTransition()
-            window.zoom -= .05
-            window.dispatchEvent(zoomChangeEvt)
-            alignMaze()
-            setTimeout(resumeAllTransition, 1000)
+            changeZoomBy(-.05)
             break
     }
 })
