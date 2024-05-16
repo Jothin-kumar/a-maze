@@ -57,7 +57,7 @@ function loadMazeFromShared(data) {
     postConstruct()
 }
 
-function shareMaze(button) {
+async function shareMaze(button) {
     const originalText = button.innerText;
 
     if (window.shareURL) {
@@ -76,8 +76,7 @@ function shareMaze(button) {
     const data = exportMaze();
     button.innerText = "Exporting...";
 
-    async function uploadMaze(callback) {
-
+    try {
         const r = await fetch("https://share-maze.jothin.tech/new", {
             method: "GET",
             headers: {
@@ -86,15 +85,9 @@ function shareMaze(button) {
                 "level": usp.get("level") || "medium"
             }
         });
-        const resp = await r.text();
-        callback(resp);
-    }
-
-    try {
-        uploadMaze((mazeID) => {
-            const url = `https://joth.in/maze?id=${mazeID}`;
-            finish(url)
-        });
+        const mazeID = await r.text();
+        const url = `https://joth.in/maze?id=${mazeID}`;
+        finish(url)
     }
     catch (e) {
         finish(usp.has("level") ? `https://${window.location.host}/2d/?maze-data=${data}&level=${usp.get("level")}` : `https://${window.location.host}/2d/?maze-data=${data}`)
