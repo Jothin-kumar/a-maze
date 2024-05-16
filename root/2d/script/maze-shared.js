@@ -72,37 +72,28 @@ function shareMaze(button) {
     const data = exportMaze();
     button.innerText = "Exporting...";
 
-    function shortenURL(url, callback) {
-        const data = new URLSearchParams();
-        data.append('url', url);
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://spoo.me/', true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.setRequestHeader('Accept', 'application/json');
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-                if (xhr.status == 200) {
-                    callback(JSON.parse(xhr.responseText)["short_url"].replace("spoo.me/", `${window.location.host}/share?s=`));
-                } else {
-                    callback(false);
-                }
-            }
-        };
-        xhr.send(data);
-    }
+    async function uploadMaze(callback) {
 
-    const toBeShortenedURL = usp.has("level") ? `https://${window.location.host}/2d/?maze-data=${data}&level=${usp.get("level")}` : `https://${window.location.host}/2d/?maze-data=${data}`;
+        const r = await fetch("https://share-maze.jothin.tech/new", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "maze-data": data,
+                "level": usp.get("level") || "medium"
+            }
+        });
+        const resp = await r.text();
+        callback(resp);
+    }
 
     try {
-        shortenURL(toBeShortenedURL, (shortURL) => {
-            if (!shortURL) {
-                window.shortURL = toBeShortenedURL
-            }
-            finish(window.shortURL || shortURL)
+        uploadMaze((mazeID) => {
+            const url = `https://joth.in/maze?id=${mazeID}`;
+            finish(url)
         });
     }
-    catch {
-        finish(toBeShortenedURL)
+    catch (e) {
+        finish(usp.has("level") ? `https://${window.location.host}/2d/?maze-data=${data}&level=${usp.get("level")}` : `https://${window.location.host}/2d/?maze-data=${data}`)
     }
     function finish(url) {
         document.getElementById("print-msg").innerText = url

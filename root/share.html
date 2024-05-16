@@ -38,18 +38,41 @@
             <a href="/play-2d">New Maze</a>
         </div>
         <script>
-            async function main() {
-                const usp = new URLSearchParams(window.location.search)
-                if (usp.has("s")) {
-                    r = await fetch(`https://spoo.me/${usp.get("s")}`)
-                    if (r.url.startsWith(`https://${window.location.host}`)) {
-                        window.location.href = `${r.url}&share-url=${window.location.host}%2Fshare%3Fs%3D${usp.get("s")}`
-                        return
-                    }
-                }
+            function declareInvalid() {
                 const msg = document.getElementById("msg")
                 msg.innerText = "Invalid shared maze"
                 msg.style.color = "red"
+            }
+
+            async function main() {
+                const usp = new URLSearchParams(window.location.search)
+                if (usp.has("id")) {
+                    try {
+                        const r = await fetch(`https://share-maze.jothin.tech/get?maze-id=${usp.get("id")}`)
+                        let mazeData = (await r.json())["output"]
+                        if (!mazeData) {
+                            declareInvalid()
+                            return
+                        }
+                        const lvl = {
+                            "e": "easy",
+                            "m": "medium",
+                            "h": "hard"
+                        }[mazeData[0]]
+                        if (!lvl) {
+                            declareInvalid()
+                            return
+                        }
+                        mazeData = mazeData.slice(1)
+                        window.location.href = `https://a-maze.jothin.tech/2d?maze-data=${mazeData}&level=${lvl}&share-url=joth.in%2Fmaze%3Fid%3D${usp.get("id")}`
+                    }
+                    catch (e) {
+                        declareInvalid()
+                    }
+                }
+                else {
+                    declareInvalid()
+                }
             }
             main()
         </script>
