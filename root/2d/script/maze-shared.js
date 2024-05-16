@@ -49,7 +49,10 @@ async function loadMazeFromShared(data) {
         throw "Repeated squares in path"
     }
 
-    pathLine(mp.path);
+    await pathLine(mp.path);
+    mp.start.setColor("green");
+    mp.end.setColor("red");
+    await new Promise(r => setTimeout(r, 1000));
     for (let i = 0; i < data[1].length; i += 2) {
         window.lines[`${2*decodeToNum(data[1][i])+1},${2*decodeToNum(data[1][i+1])}`].hide();
         await new Promise(r => setTimeout(r, 1));

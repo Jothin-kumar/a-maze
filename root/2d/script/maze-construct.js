@@ -134,7 +134,7 @@ function preConstruct() {
             new Line(x, y, x, y+1);
         }
     }
-    setTimeout(alignMaze, 500)
+    setTimeout(alignMaze, 100)
 }
 function update(msg) {
     document.getElementById("caption").innerHTML = msg;
