@@ -1,6 +1,3 @@
-#maze-grid {
-    background-color: black;
-}
 body {
     background-color: black;
     color: white;
@@ -19,22 +16,24 @@ body {
     display: none;
 }
 #main {
-    max-height: 90vh;
+    height: 85vh;
     overflow: scroll;
     scroll-behavior: smooth;
+
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
 }
-@media screen and (orientation: landscape) {
-    #main {
-        position: absolute;
-        left: 50%;
-        top: 1%;
-        transform: translate(-50%, 0);
-    }
+#maze-grid {
+    background-color: black;
+    position: relative;
 }
 
 #controls {
     width: 100vw;
-    max-width: 100vw;
+    height: calc(15vh - 20px);
+    overflow-y: scroll;
     position: absolute;
     background-color: black;
     padding: 10px;

@@ -141,6 +141,7 @@ function update(msg) {
 }
 async function construct() {
     preConstruct();
+    setTimeout(alignMaze, 500)
     document.getElementById("main").style.display = "block"
     document.getElementById("loading").style.display = "none"
     const vals = {

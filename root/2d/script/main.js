@@ -114,10 +114,25 @@ function toLevel(lvl) {
     window.location.search = usp.toString()
 }
 
+function alignMaze() {
+    const mgbc = mg.getBoundingClientRect()
+    const mbc = document.getElementById("main").getBoundingClientRect()
+    mg.style.transform = `translateY(${Math.abs(mbc.height - mgbc.height)/2}px)`
+}
+window.alignMazeTimeout = null;
+window.alignMazeHandler = () => {
+    if (window.alignMazeTimeout) {
+        clearTimeout(window.alignMazeTimeout)
+    }
+    window.alignMazeTimeout = setTimeout(alignMaze, 500)
+}
+window.addEventListener("resize", window.alignMazeHandler)
+
 function changeZoomBy(z) {
     stopAllTransition()
     window.zoom += z
     window.dispatchEvent(zoomChangeEvt)
+    setTimeout(alignMaze, 500)
     setTimeout(resumeAllTransition, 1000)
 }
 window.addEventListener("keypress", (e) => {
