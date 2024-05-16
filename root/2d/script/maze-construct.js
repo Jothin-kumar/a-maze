@@ -7,10 +7,12 @@ class MazeSquare {
         this.type = "";
         this.used = false;
         this.elem = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
-        this.elem.setAttribute('width', 10*zoom);
-        this.elem.setAttribute('height', 10*zoom);
-        this.elem.setAttribute('x', (x*10-5)*zoom);
-        this.elem.setAttribute('y', (y*10-5)*zoom);
+        window.addEventListener("zoomChange", () => {
+            this.elem.setAttribute('width', 10*zoom);
+            this.elem.setAttribute('height', 10*zoom);
+            this.elem.setAttribute('x', (x*10-5)*zoom);
+            this.elem.setAttribute('y', (y*10-5)*zoom);
+        })
         this.elem.setAttribute('fill', 'black');
         window.mg.appendChild(this.elem);
         window.mazeSquares[`${x},${y}`] = this;
@@ -197,6 +199,7 @@ function postConstruct() {
     window.navNotAllowed = true
     startPos = window.mp.start;
     endPos = window.mp.end;
+    window.dispatchEvent(zoomChangeEvt)
     window.player = new Player(startPos.x, startPos.y, startPos, endPos);
     updateNav()
     alignMaze()

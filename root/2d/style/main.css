@@ -9,6 +9,9 @@ body {
     scrollbar-width: none;
     transition: .31s;
 }
+.donotanimate * {
+    transition: none !important;
+}
 *::-webkit-scrollbar {
     display: none;
 }

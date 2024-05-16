@@ -5,6 +5,7 @@ const hard = "hard"
 window.currentLevel = medium
 window.gridSize = 49
 window.zoom = 1.5
+window.zoomChangeEvt = new Event("zoomChange")
 
 if (sp.has("level")) {
     const level = sp.get("level")
@@ -31,17 +32,21 @@ function configForGridSize(size) { // Example: size = 49 for 49x49 grid
     window.gridSize = size
     const mg = document.getElementById("maze-grid")
     const a = size*10 + 10
-    mg.setAttribute("height", a*zoom)
-    mg.setAttribute("width", a*zoom)
     const b = a - 5
-    document.getElementById("maze-grid-line-1").setAttribute("x2", b*zoom)
-    document.getElementById("maze-grid-line-2").setAttribute("y1", b*zoom)
-    document.getElementById("maze-grid-line-2").setAttribute("x2", b*zoom)
-    document.getElementById("maze-grid-line-2").setAttribute("y2", b*zoom)
-    document.getElementById("maze-grid-line-3").setAttribute("y2", b*zoom)
-    document.getElementById("maze-grid-line-4").setAttribute("x1", b*zoom)
-    document.getElementById("maze-grid-line-4").setAttribute("y2", b*zoom)
-    document.getElementById("maze-grid-line-4").setAttribute("x2", b*zoom)
+    
+    window.addEventListener("zoomChange", () => {
+        mg.setAttribute("height", a*zoom)
+        mg.setAttribute("width", a*zoom)
+
+        document.getElementById("maze-grid-line-1").setAttribute("x2", b*zoom)
+        document.getElementById("maze-grid-line-2").setAttribute("y1", b*zoom)
+        document.getElementById("maze-grid-line-2").setAttribute("x2", b*zoom)
+        document.getElementById("maze-grid-line-2").setAttribute("y2", b*zoom)
+        document.getElementById("maze-grid-line-3").setAttribute("y2", b*zoom)
+        document.getElementById("maze-grid-line-4").setAttribute("x1", b*zoom)
+        document.getElementById("maze-grid-line-4").setAttribute("y2", b*zoom)
+        document.getElementById("maze-grid-line-4").setAttribute("x2", b*zoom)
+    })
 }
 
 
@@ -122,3 +127,25 @@ window.alignMazeHandler = () => {
     window.alignMazeTimeout = setTimeout(alignMaze, 500)
 }
 window.addEventListener("resize", window.alignMazeHandler)
+
+window.addEventListener("keypress", (e) => {
+    if (e.ctrlKey || e.altKey || e.metaKey) return
+    switch (e.key) {
+        case "+":
+            if (window.zoom >= 2) return
+            stopAllTransition()
+            window.zoom += .05
+            window.dispatchEvent(zoomChangeEvt)
+            alignMaze()
+            setTimeout(resumeAllTransition, 1000)
+            break
+        case "-":
+            if (window.zoom <= 1) return
+            stopAllTransition()
+            window.zoom -= .05
+            window.dispatchEvent(zoomChangeEvt)
+            alignMaze()
+            setTimeout(resumeAllTransition, 1000)
+            break
+    }
+})
