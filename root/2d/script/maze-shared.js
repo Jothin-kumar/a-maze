@@ -63,7 +63,7 @@ function shareMaze(button) {
     const usp = new URLSearchParams(window.location.search);
     if (usp.has("share-url")) {
         const shareURL = usp.get("share-url");
-        if (shareURL.startsWith(`${window.location.host}/share?s=`) || shareURL.startsWith("mazes.jothin.tech/")) {
+        if (shareURL.startsWith(`joth.in/maze`) || shareURL.startsWith("mazes.jothin.tech/")) {
             finish("https://" + shareURL);
             return
         }
