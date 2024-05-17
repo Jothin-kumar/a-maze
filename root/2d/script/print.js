@@ -1,6 +1,6 @@
 window.afterPrintEvtListener = () => {}
 window.prePrintZoom = window.zoom
-window.addEventListener("beforeprint", function() {
+window.addEventListener("beforeprint", async function() {
     window.prePrintZoom = window.zoom
     window.removeEventListener("afterprint", window.afterPrintEvtListener)
     switch (window.currentLevel) {
@@ -16,4 +16,8 @@ window.addEventListener("beforeprint", function() {
     }
     window.afterPrintEvtListener = () => setZoom(window.prePrintZoom)
     window.addEventListener("afterprint", window.afterPrintEvtListener)
+
+    const mazeID = await getMazeID(exportMaze(), window.currentLevel);
+    window.shareURL = url;
+    document.getElementById("print-msg").innerText = url
 })

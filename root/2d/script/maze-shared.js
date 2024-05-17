@@ -57,6 +57,21 @@ function loadMazeFromShared(data) {
     postConstruct()
 }
 
+async function getMazeID(data, lvl) {  // Get maze ID from server
+    const r = await fetch("https://share-maze.jothin.tech/new", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "maze-data": data,
+                "level": lvl
+            })
+        });
+    const mazeID = await r.text();
+    return mazeID;
+}
+
 async function shareMaze(button) {
     const originalText = button.innerText;
 
@@ -73,7 +88,6 @@ async function shareMaze(button) {
         }
     }
 
-    const data = exportMaze();
     button.innerText = "Exporting...";
     setTimeout(async () => {
         while (["Exporting.","Exporting..","Exporting..."].includes(button.innerText)) {
@@ -95,17 +109,7 @@ async function shareMaze(button) {
     }, 0);
 
     try {
-        const r = await fetch("https://share-maze.jothin.tech/new", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                "maze-data": data,
-                "level": usp.get("level") || "medium"
-            })
-        });
-        const mazeID = await r.text();
+        const mazeID = await getMazeID(exportMaze(), usp.get("level") || "medium");
         const url = `https://joth.in/maze?id=${mazeID}`;
         finish(url)
     }
