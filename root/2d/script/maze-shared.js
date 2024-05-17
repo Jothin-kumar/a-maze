@@ -98,10 +98,12 @@ async function shareMaze(button) {
         const r = await fetch("https://share-maze.jothin.tech/new", {
             method: "GET",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
                 "maze-data": data,
                 "level": usp.get("level") || "medium"
-            }
+            })
         });
         const mazeID = await r.text();
         const url = `https://joth.in/maze?id=${mazeID}`;
