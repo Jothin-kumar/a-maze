@@ -128,13 +128,14 @@ window.alignMazeHandler = () => {
 }
 window.addEventListener("resize", window.alignMazeHandler)
 
-function changeZoomBy(z) {
+function setZoom(z) {
     stopAllTransition()
-    window.zoom += z
+    window.zoom = z
     window.dispatchEvent(zoomChangeEvt)
     alignMaze()
     setTimeout(resumeAllTransition, 1000)
 }
+const changeZoomBy = (z) => setZoom(window.zoom + z)
 window.addEventListener("keypress", (e) => {
     if (e.ctrlKey || e.altKey || e.metaKey) return
     switch (e.key) {
