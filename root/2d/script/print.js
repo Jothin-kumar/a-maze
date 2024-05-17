@@ -16,10 +16,4 @@ window.addEventListener("beforeprint", async function() {
     }
     window.afterPrintEvtListener = () => setZoom(window.prePrintZoom)
     window.addEventListener("afterprint", window.afterPrintEvtListener)
-
-    const mazeID = await getMazeID(exportMaze(), window.currentLevel);
-    const url = `https://joth.in/maze?id=${mazeID}`;
-    window.shareURL = url;
-    document.getElementById("print-msg").innerText = url
-    window.alert("Please exit print preview and print again, to include the shared maze url.")
 })
