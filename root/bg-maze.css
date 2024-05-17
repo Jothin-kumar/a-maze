@@ -1,0 +1,31 @@
+body {
+    background: black url('assets/img/bg.png');
+    background-size: 1500px;
+    animation: bg-maze 100s infinite linear;
+}
+@keyframes bg-maze {
+    0% {
+        background-position: center center;
+    }
+    12.5% {
+        background-position: right top;
+    }
+    37.5% {
+        background-position: right bottom;
+    }
+    62.5% {
+        background-position: left top;
+    }
+    87.5% {
+        background-position: left bottom;
+    }
+    100% {
+        background-position: center center;
+    }
+}
+
+@media (prefers-reduced-motion) {
+    body {
+        animation-duration: 1000s !important;
+    }
+}
