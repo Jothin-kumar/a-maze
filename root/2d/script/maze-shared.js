@@ -68,13 +68,17 @@ async function loadMazeFromShared(data) {
     update(`Done ✅<br>Difficulty Rating: ${getDifficulty().toFixed(2)}`)
 }
 
-function shareMaze(button) {
+async function shareMaze(button) {
     const originalText = button.innerText;
 
+    if (window.shareURL) {
+        finish(window.shareURL);
+        return
+    }
     const usp = new URLSearchParams(window.location.search);
     if (usp.has("share-url")) {
         const shareURL = usp.get("share-url");
-        if (shareURL.startsWith(`${window.location.host}/share?s=`) || shareURL.startsWith("mazes.jothin.tech/")) {
+        if (shareURL.startsWith(`joth.in/maze`) || shareURL.startsWith("mazes.jothin.tech/")) {
             finish("https://" + shareURL);
             return
         }
@@ -83,39 +87,24 @@ function shareMaze(button) {
     const data = exportMaze();
     button.innerText = "Exporting...";
 
-    function shortenURL(url, callback) {
-        const data = new URLSearchParams();
-        data.append('url', url);
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://spoo.me/', true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.setRequestHeader('Accept', 'application/json');
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-                if (xhr.status == 200) {
-                    callback(JSON.parse(xhr.responseText)["short_url"].replace("spoo.me/", `${window.location.host}/share?s=`));
-                } else {
-                    callback(false);
-                }
-            }
-        };
-        xhr.send(data);
-    }
-
-    const toBeShortenedURL = usp.has("level") ? `https://${window.location.host}/2d/?maze-data=${data}&level=${usp.get("level")}` : `https://${window.location.host}/2d/?maze-data=${data}`;
-
     try {
-        shortenURL(toBeShortenedURL, (shortURL) => {
-            if (!shortURL) {
-                window.shortURL = toBeShortenedURL
+        const r = await fetch("https://share-maze.jothin.tech/new", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "maze-data": data,
+                "level": usp.get("level") || "medium"
             }
-            finish(window.shortURL || shortURL)
         });
+        const mazeID = await r.text();
+        const url = `https://joth.in/maze?id=${mazeID}`;
+        finish(url)
     }
-    catch {
-        finish(toBeShortenedURL)
+    catch (e) {
+        finish(usp.has("level") ? `https://${window.location.host}/2d/?maze-data=${data}&level=${usp.get("level")}` : `https://${window.location.host}/2d/?maze-data=${data}`)
     }
     function finish(url) {
+        window.shareURL = url
         document.getElementById("print-msg").innerText = url
         navigator.clipboard.writeText(url);
         button.innerText = "Copied!";
