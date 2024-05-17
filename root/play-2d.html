@@ -42,18 +42,13 @@
             border: olive 2px solid;
         }
         .not-recommended-option {
-            color: rgba(255, 255, 255, .8);
-            scale: .88;
-        }
-        #msg {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            opacity: .69;
         }
     </style>
 </head>
 <body>
     <div id="main">
-        <h1>Play 2D</h1>
-        <p id="msg">Checking your device...</p>
+        <h1>Play A-Maze 2D</h1>
         <ul id="options">
             <li id="opt-1" onclick="window.location.href = '/2d'">Generate a New Maze</li>
             <li id="opt-2" onclick="window.location.href = 'https://mazes.jothin.tech'">Visit the Maze Collection</li>
@@ -75,16 +70,10 @@
         <p>This app requires JavaScript to run. Enable it and refresh the page</p>
     </noscript>
     <script>
-        const msg = document.getElementById('msg')
         a = new Date().getTime()
         for (let i = 0; i < 10000000; i++) {i+1}
         b = new Date().getTime()
-        if (b - a < 15) {
-            msg.innerHTML = 'Your device is fast enough to generate a maze ✅'
-            document.getElementById("opt-2").classList.add('not-recommended-option')
-        }
-        else {
-            msg.innerHTML = 'Your device might take a while to generate a maze ❌. It is strongly recommended to visit the Maze Collection instead.'
+        if (b - a > 15) {
             document.getElementById("opt-1").classList.add('not-recommended-option')
         }
     </script>
