@@ -21,4 +21,5 @@ window.addEventListener("beforeprint", async function() {
     const url = `https://joth.in/maze?id=${mazeID}`;
     window.shareURL = url;
     document.getElementById("print-msg").innerText = url
+    window.print()
 })
