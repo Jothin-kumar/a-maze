@@ -130,11 +130,13 @@
         window.addEventListener("mousemove", resetAR)
         window.addEventListener("touchmove", resetAR)
 
-        window.addEventListener("click", () => {
+        function handleClick() {
             window.removeEventListener("mousemove", resetAR)
             window.removeEventListener("touchmove", resetAR)
             autoRedirectCancel()
-        })
+        }
+        window.addEventListener("click", handleClick)
+        window.addEventListener("contextmenu", handleClick)
     </script>
 </body>
 </html>
