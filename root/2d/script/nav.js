@@ -19,6 +19,7 @@ class Player {
         this.prevY = startPos.y
         this.startPos.startBlink()
         this.startPos.elem.classList.add("current-player")
+        this.wayBackCorrectPath = [this.startPos]
     }
     moveBy(x, y) {
         if (canMove(this.x, this.y, this.x+x, this.y+y)) {
@@ -29,9 +30,17 @@ class Player {
             this.x += x;
             this.y += y;
             this.steps += 1
-            this.currentElem = window.mazeSquares[`${this.x},${this.y}`].elem
+            const currentPos = window.mazeSquares[`${this.x},${this.y}`]
+            this.currentElem = currentPos.elem
             this.currentElem.classList.add("current-player")
-            window.mazeSquares[`${this.x},${this.y}`].startBlink()
+            currentPos.startBlink()
+
+            if (window.mp.path.includes(currentPos)) {
+                this.wayBackCorrectPath = [currentPos]
+            }
+            else {
+                this.wayBackCorrectPath = [currentPos, ...this.wayBackCorrectPath]
+            }
         }
         if (this.steps === 1) {
             this.start = new Date().getTime()
