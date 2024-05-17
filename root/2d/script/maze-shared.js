@@ -96,7 +96,7 @@ async function shareMaze(button) {
 
     try {
         const r = await fetch("https://share-maze.jothin.tech/new", {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
