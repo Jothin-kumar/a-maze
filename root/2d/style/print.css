@@ -9,7 +9,7 @@
     #maze-grid > rect {
         fill: black;
     }
-    #maze-grid > rect[fill="red"], #maze-grid > rect[fill="green"] {
+    #maze-grid > rect[fill="red"], #maze-grid > rect.current-player {
         filter: invert(100%) !important;
         fill: black !important;
     }
