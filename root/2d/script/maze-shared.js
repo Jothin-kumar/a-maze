@@ -75,6 +75,24 @@ async function shareMaze(button) {
 
     const data = exportMaze();
     button.innerText = "Exporting...";
+    setTimeout(async () => {
+        while (["Exporting.","Exporting..","Exporting..."].includes(button.innerText)) {
+            switch (button.innerText) {
+                case "Exporting...":
+                    button.innerText = "Exporting..";
+                    break;
+                case "Exporting..":
+                    button.innerText = "Exporting.";
+                    break;
+                case "Exporting.":
+                    button.innerText = "Exporting...";
+                    break;
+                default:
+                    break;
+            }
+            await new Promise(r => setTimeout(r, 1000));
+        }
+    }, 0);
 
     try {
         const r = await fetch("https://share-maze.jothin.tech/new", {
