@@ -10,9 +10,10 @@
             e.preventDefault();
         });
     </script>
+    <link rel="stylesheet" href="bg-maze.css">
     <style>
         body {
-            background: black url('assets/img/bg.png');
+            background-color: black;
             color: white;
             user-select: none;
             margin: 0;
@@ -29,7 +30,7 @@
             top: 50%;
             transform: translate(-50%, -50%);
             z-index: 1;
-            background-color: rgba(0, 0, 0, .5);
+            background-color: rgba(0, 0, 0, .69);
             padding: 25px;
             border-radius: 10px;
             border: black 3px solid;
@@ -80,7 +81,7 @@
             border: 2px solid green;
             border-radius: 5px;
             cursor: pointer;
-            transition: border 1s;
+            transition: border 1s, background-color 1s, opacity 1s;
             opacity: .8;
         }
         #buttons > button:hover {
@@ -91,7 +92,7 @@
             background-color: green !important;
         }
         .spotlight-btn:hover {
-            border: 2px solid darkgreen !important;
+            background-color: olive !important;
         }
         #socials {
             text-align: center;
@@ -156,6 +157,16 @@
             border-radius: 50%;
             border: olive 2px solid;
             cursor: pointer;
+            transition: border .5s;
+
+            font-size: 0;
+        }
+        #made-by > img:hover {
+            border: orange 2px solid;
+        }
+        #made-by > p {
+            margin: 5px;
+            display: none;
         }
     </style>
 </head>
@@ -189,9 +200,17 @@
         </div>
     </div>
     <div id="made-by">
-        <img src="https://jothin.tech/favicon.webp" alt="Jothin Kumar" onclick="window.open('https://jothin.tech', '_blank')">
+        <img src="https://jothin.tech/favicon.webp" alt="Jothin Kumar">
         <p>Made with ❤️ by Jothin Kumar in 🇮🇳</p>
     </div>
+    <script>
+        window.madeByShown = false
+        document.querySelector("#made-by").addEventListener("click", function() {
+            document.querySelector("#made-by > p").style.display = window.madeByShown ? "none" : "block";
+            document.querySelector("#made-by > p").style.opacity = window.madeByShown ? 0 : 1;
+            window.madeByShown = !window.madeByShown
+        });
+    </script>
     <noscript>
         <style>
             #main {

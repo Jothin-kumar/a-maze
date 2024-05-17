@@ -22,6 +22,8 @@
             transform: translate(-50%, -50%);
             text-align: center;
             font-family: 'Courier New', Courier, monospace;
+            max-width: 90vw;
+            width: max-content;
         }
         #options {
             list-style-type: none;
@@ -35,30 +37,50 @@
             cursor: pointer;
             padding: 10px;
             border: green 2px solid;
-            transition: border .69s;
+            transition: border .69s, background-color .69s;
             border-radius: 5px;
         }
         #options > li:hover {
             border: olive 2px solid;
         }
         .not-recommended-option {
-            color: rgba(255, 255, 255, .8);
-            scale: .88;
+            opacity: .69;
+        }
+        .recommended-option {
+            background-color: green;
+        }
+        .recommended-option:hover {
+            background-color: olive;
+        }
+        @media screen and (orientation: portrait) {
+            #options {
+                flex-direction: column;
+            }
+            #options > li {
+                margin: .5rem 0 !important;
+            }
         }
         #msg {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
+            position: fixed;
+            bottom: 1vh;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 90vw;
+            width: max-content;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div id="main">
-        <h1>Play 2D</h1>
-        <p id="msg">Checking your device...</p>
+        <h1>Play A-Maze 2D</h1>
         <ul id="options">
             <li id="opt-1" onclick="window.location.href = '/2d'">Generate a New Maze</li>
             <li id="opt-2" onclick="window.location.href = 'https://mazes.jothin.tech'">Visit the Maze Collection</li>
         </ul>
     </div>
+    <p id="msg"></p>
     <noscript>
         <style>
             #main {
@@ -75,18 +97,54 @@
         <p>This app requires JavaScript to run. Enable it and refresh the page</p>
     </noscript>
     <script>
-        const msg = document.getElementById('msg')
         a = new Date().getTime()
         for (let i = 0; i < 10000000; i++) {i+1}
         b = new Date().getTime()
-        if (b - a < 15) {
-            msg.innerHTML = 'Your device is fast enough to generate a maze ✅'
-            document.getElementById("opt-2").classList.add('not-recommended-option')
+        const deviceIsSlow = b - a > 15
+        if (deviceIsSlow) document.getElementById("opt-1").classList.add('not-recommended-option')
+        if (deviceIsSlow) document.getElementById("opt-2").classList.add('recommended-option')
+        if (!deviceIsSlow) document.getElementById("opt-1").classList.add('recommended-option')
+
+        const choice = deviceIsSlow ? "The Maze Collection" : "New Maze"
+        const url = deviceIsSlow ? "https://mazes.jothin.tech" : "/2d"
+        const msg = document.getElementById("msg")
+
+        window.AR = false
+        const update_msg = (s) => msg.innerHTML =  `Redirecting to ${choice} in ${s.toString().padStart(2, "0")} seconds...`
+        async function autoRedirectInit() {
+            window.AR = true
+            let remainingTime = 10
+            while (window.AR) {
+                if (remainingTime === 0) {
+                    window.location.href = url
+                    break
+                }
+                update_msg(remainingTime)
+                remainingTime--
+                await new Promise(r => setTimeout(r, 1000))
+            }
         }
-        else {
-            msg.innerHTML = 'Your device might take a while to generate a maze ❌. It is strongly recommended to visit the Maze Collection instead.'
-            document.getElementById("opt-1").classList.add('not-recommended-option')
+        function autoRedirectCancel() {
+            window.AR = false
+            msg.innerHTML = ""
         }
+
+        window.ARtimeout = setTimeout(autoRedirectInit, 1000)
+        function resetAR() {
+            autoRedirectCancel()
+            clearTimeout(window.ARtimeout)
+            window.ARtimeout = setTimeout(autoRedirectInit, 1000)
+        }
+        window.addEventListener("mousemove", resetAR)
+        window.addEventListener("touchmove", resetAR)
+
+        function handleClick() {
+            window.removeEventListener("mousemove", resetAR)
+            window.removeEventListener("touchmove", resetAR)
+            autoRedirectCancel()
+        }
+        window.addEventListener("click", handleClick)
+        window.addEventListener("contextmenu", handleClick)
     </script>
 </body>
 </html>

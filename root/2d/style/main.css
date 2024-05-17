@@ -7,7 +7,7 @@ body {
 }
 * {
     scrollbar-width: none;
-    transition: .31s;
+    transition: .1s;
 }
 .donotanimate * {
     transition: none !important;
