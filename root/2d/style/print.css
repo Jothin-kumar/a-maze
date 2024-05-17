@@ -4,6 +4,7 @@
     }
 
     #maze-grid {
+        transform: unset !important;
         filter: invert(100%);
     }
     #maze-grid > rect {
