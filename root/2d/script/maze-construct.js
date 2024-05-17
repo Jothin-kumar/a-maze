@@ -33,6 +33,7 @@ class MazeSquare {
     stopBlink () {
         this.blink = false;
         this.elem.style.opacity = 1;
+        this.elem.setAttribute("fill-opacity", 1);
     }
 }
 
