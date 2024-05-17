@@ -156,6 +156,16 @@
             border-radius: 50%;
             border: olive 2px solid;
             cursor: pointer;
+            transition: border .5s;
+
+            font-size: 0;
+        }
+        #made-by > img:hover {
+            border: orange 2px solid;
+        }
+        #made-by > p {
+            margin: 5px;
+            display: none;
         }
     </style>
 </head>
@@ -189,9 +199,17 @@
         </div>
     </div>
     <div id="made-by">
-        <img src="https://jothin.tech/favicon.webp" alt="Jothin Kumar" onclick="window.open('https://jothin.tech', '_blank')">
+        <img src="https://jothin.tech/favicon.webp" alt="Jothin Kumar">
         <p>Made with ❤️ by Jothin Kumar in 🇮🇳</p>
     </div>
+    <script>
+        window.madeByShown = false
+        document.querySelector("#made-by").addEventListener("click", function() {
+            document.querySelector("#made-by > p").style.display = window.madeByShown ? "none" : "block";
+            document.querySelector("#made-by > p").style.opacity = window.madeByShown ? 0 : 1;
+            window.madeByShown = !window.madeByShown
+        });
+    </script>
     <noscript>
         <style>
             #main {
