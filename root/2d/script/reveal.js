@@ -10,10 +10,8 @@ async function revealAnswer() {
     ]
     for (let i = 0 ; i < pathFromLocation.length ; i++) {
         dot = pathFromLocation[i]
-        if (![mp.start, mp.end].includes(dot)) {
-            window.player.moveBy(dot.x - player.x, dot.y - player.y)
-            await new Promise(r => setTimeout(r, 100))
-        }
+        window.player.moveBy(dot.x - player.x, dot.y - player.y)
+        await new Promise(r => setTimeout(r, 100))
     }
     await new Promise(r => setTimeout(r, 200))
     window.player.currentElem.classList.remove("current-player")

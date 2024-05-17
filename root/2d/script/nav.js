@@ -39,7 +39,12 @@ class Player {
                 this.wayBackCorrectPath = [currentPos]
             }
             else {
-                this.wayBackCorrectPath = [currentPos, ...this.wayBackCorrectPath]
+                if (this.wayBackCorrectPath.includes(currentPos)) {
+                    this.wayBackCorrectPath = this.wayBackCorrectPath.slice(this.wayBackCorrectPath.indexOf(currentPos))
+                }
+                else {
+                    this.wayBackCorrectPath = [currentPos, ...this.wayBackCorrectPath]
+                }
             }
         }
         if (this.steps === 1) {
