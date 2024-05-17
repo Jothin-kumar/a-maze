@@ -44,6 +44,13 @@
         .not-recommended-option {
             opacity: .69;
         }
+        #msg {
+            font-family: 'Courier New', Courier, monospace;
+            position: fixed;
+            bottom: 1vh;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     </style>
 </head>
 <body>
@@ -54,6 +61,7 @@
             <li id="opt-2" onclick="window.location.href = 'https://mazes.jothin.tech'">Visit the Maze Collection</li>
         </ul>
     </div>
+    <p id="msg"></p>
     <noscript>
         <style>
             #main {
@@ -73,9 +81,47 @@
         a = new Date().getTime()
         for (let i = 0; i < 10000000; i++) {i+1}
         b = new Date().getTime()
-        if (b - a > 15) {
-            document.getElementById("opt-1").classList.add('not-recommended-option')
+        const deviceIsSlow = b - a > 15
+        if (deviceIsSlow) document.getElementById("opt-1").classList.add('not-recommended-option')
+
+        const choice = deviceIsSlow ? "The Maze Collection" : "New Maze"
+        const url = deviceIsSlow ? "https://mazes.jothin.tech" : "/2d"
+        const msg = document.getElementById("msg")
+
+        window.AR = false
+        const update_msg = (s) => msg.innerHTML =  `Redirecting to ${choice} in ${s.toString().padStart(2, "0")} seconds...`
+        async function autoRedirectInit() {
+            window.AR = true
+            let remainingTime = 10
+            while (window.AR) {
+                if (remainingTime === 0) {
+                    window.location.href = url
+                    break
+                }
+                update_msg(remainingTime)
+                remainingTime--
+                await new Promise(r => setTimeout(r, 1000))
+            }
         }
+        function autoRedirectCancel() {
+            window.AR = false
+            msg.innerHTML = ""
+        }
+
+        window.ARtimeout = setTimeout(autoRedirectInit, 1000)
+        function resetAR() {
+            autoRedirectCancel()
+            clearTimeout(window.ARtimeout)
+            window.ARtimeout = setTimeout(autoRedirectInit, 1000)
+        }
+        window.addEventListener("mousemove", resetAR)
+        window.addEventListener("touchmove", resetAR)
+
+        window.addEventListener("click", () => {
+            window.removeEventListener("mousemove", resetAR)
+            window.removeEventListener("touchmove", resetAR)
+            autoRedirectCancel()
+        })
     </script>
 </body>
 </html>
