@@ -104,10 +104,16 @@ async function shareMaze(button) {
         finish(usp.has("level") ? `https://${window.location.host}/2d/?maze-data=${data}&level=${usp.get("level")}` : `https://${window.location.host}/2d/?maze-data=${data}`)
     }
     function finish(url) {
-        window.shareURL = url
-        document.getElementById("print-msg").innerText = url
-        navigator.clipboard.writeText(url);
-        button.innerText = "Copied!";
-        setTimeout(() => button.innerText = originalText, 2500);
+        try {
+            window.shareURL = url
+            document.getElementById("print-msg").innerText = url
+            navigator.clipboard.writeText(url);
+            button.innerText = "Copied!";
+            setTimeout(() => button.innerText = originalText, 2500);
+        }
+        catch (e) {
+            button.innerText = "Copy failed";
+            alert(url)
+        }
     }
 }
