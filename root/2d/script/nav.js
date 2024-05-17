@@ -72,26 +72,22 @@ window.addEventListener("keydown", (e) => {
         case "w":
         case "W":
         case "ArrowUp":
-            w.focus()
-            w.click()
+            window.player.moveUp()
             break;
         case "s":
         case "S":
         case "ArrowDown":
-            s.focus()
-            s.click()
+            window.player.moveDown()
             break;
         case "a":
         case "A":
         case "ArrowLeft":
-            a.focus()
-            a.click()
+            window.player.moveLeft()
             break;
         case "d":
         case "D":
         case "ArrowRight":
-            d.focus()
-            d.click()
+            window.player.moveRight()
             break;
         case " ":
             e.preventDefault()  // Prevent spacebar from triggering the "click" event on the focused button
