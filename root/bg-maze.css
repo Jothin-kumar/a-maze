@@ -1,7 +1,7 @@
 body {
     background: black url('assets/img/bg.png');
     background-size: 1500px;
-    animation: bg-maze 100s infinite linear;
+    animation: bg-maze 169s infinite linear;
 }
 @keyframes bg-maze {
     0% {
