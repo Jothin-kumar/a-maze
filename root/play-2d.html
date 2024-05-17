@@ -37,7 +37,7 @@
             cursor: pointer;
             padding: 10px;
             border: green 2px solid;
-            transition: border .69s;
+            transition: border .69s, background-color .69s;
             border-radius: 5px;
         }
         #options > li:hover {
@@ -45,6 +45,12 @@
         }
         .not-recommended-option {
             opacity: .69;
+        }
+        .recommended-option {
+            background-color: green;
+        }
+        .recommended-option:hover {
+            background-color: olive;
         }
         @media screen and (orientation: portrait) {
             #options {
@@ -96,6 +102,8 @@
         b = new Date().getTime()
         const deviceIsSlow = b - a > 15
         if (deviceIsSlow) document.getElementById("opt-1").classList.add('not-recommended-option')
+        if (deviceIsSlow) document.getElementById("opt-2").classList.add('recommended-option')
+        if (!deviceIsSlow) document.getElementById("opt-1").classList.add('recommended-option')
 
         const choice = deviceIsSlow ? "The Maze Collection" : "New Maze"
         const url = deviceIsSlow ? "https://mazes.jothin.tech" : "/2d"
