@@ -118,19 +118,16 @@ async function shareMaze(button) {
         setTimeout(() => button.innerText = originalText, 2500);
     }
     function finish(url) {
-        try {
-            window.shareURL = url;
-            document.getElementById("print-msg").innerText = url
-            navigator.clipboard.writeText(url);
-            button.innerText = "Copied!";
-            setTimeout(() => button.innerText = originalText, 2500);
-        }
-        catch {
+        window.shareURL = url;
+        document.getElementById("print-msg").innerText = url
+        navigator.clipboard.writeText(url).catch(() => {
             document.getElementById("share-url-a").innerText = url;
             document.getElementById("share-url-a").setAttribute("href", url);
             document.getElementById("share-url").style.display = "block";
             setTimeout(() => button.innerText = originalText, 2500);
-        }
+        });
+        button.innerText = "Copied!";
+        setTimeout(() => button.innerText = originalText, 2500);
     }
 }
 document.addEventListener("click", (e) => {
