@@ -48,6 +48,8 @@ class Player {
     moveLeft() {this.moveBy(-1, 0)}
     moveRight() {this.moveBy(1, 0)}
     reset() {
+        this.currentElem.classList.remove("current-player")
+        window.mazeSquares[`${this.prevX},${this.prevY}`].stopBlink()
         this.x = this.startPos.x
         this.y = this.startPos.y
         this.currentElem = startPos.elem
@@ -56,6 +58,8 @@ class Player {
         }
         this.endPos.elem.setAttribute("fill", "red");
         this.steps = 0
+        this.startPos.startBlink()
+        this.startPos.elem.classList.add("current-player")
         updateNav()
     }
 }
