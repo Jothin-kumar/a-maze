@@ -79,13 +79,13 @@ async function shareMaze(button) {
         while (["Exporting.","Exporting..","Exporting..."].includes(button.innerText)) {
             switch (button.innerText) {
                 case "Exporting...":
-                    button.innerText = "Exporting..";
-                    break;
-                case "Exporting..":
                     button.innerText = "Exporting.";
                     break;
-                case "Exporting.":
+                case "Exporting..":
                     button.innerText = "Exporting...";
+                    break;
+                case "Exporting.":
+                    button.innerText = "Exporting..";
                     break;
                 default:
                     break;
