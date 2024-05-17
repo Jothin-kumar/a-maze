@@ -75,6 +75,9 @@ function handleMouseMove(e) {
 }
 
 window.addEventListener("contextmenu", (e) => {
+    if (e.target.id === "share-url-a") {
+        return
+    }
     e.preventDefault();
     if (e.target.id === "onscreen-nav-assist") {
         return

@@ -203,3 +203,27 @@ body {
     transform: translate(-50%, -50%);
     display: none;
 }
+
+#share-url {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    background-color: black;
+    border: olive 2px solid;
+    padding: 20px;
+    border-radius: 5px;
+    min-width: 40vw;
+    text-align: center;
+    user-select: text;
+}
+#share-url > h3 {
+    user-select: none;
+}
+#share-url > a {
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    user-select: text;
+}

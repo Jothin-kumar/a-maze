@@ -90,13 +90,33 @@ async function shareMaze(button) {
         finish(url)
     }
     catch (e) {
-        finish(usp.has("level") ? `https://${window.location.host}/2d/?maze-data=${data}&level=${usp.get("level")}` : `https://${window.location.host}/2d/?maze-data=${data}`)
-    }
-    function finish(url) {
-        window.shareURL = url;
-        document.getElementById("print-msg").innerText = url
-        navigator.clipboard.writeText(url);
-        button.innerText = "Copied!";
+        button.innerText = "Error. Try again Later";
         setTimeout(() => button.innerText = originalText, 2500);
     }
+    function finish(url) {
+        try {
+            window.shareURL = url;
+            document.getElementById("print-msg").innerText = url
+            navigator.clipboard.writeText(url);
+            button.innerText = "Copied!";
+            setTimeout(() => button.innerText = originalText, 2500);
+        }
+        catch {
+            document.getElementById("share-url-a").innerText = url;
+            document.getElementById("share-url-a").setAttribute("href", url);
+            document.getElementById("share-url").style.display = "block";
+            setTimeout(() => button.innerText = originalText, 2500);
+        }
+    }
 }
+document.addEventListener("click", (e) => {
+    if (e.target.id === "share-url" || e.target.id === "share-url-a" || e.target.id === "share-url-h3") {
+        return
+    }
+    document.getElementById("share-url").style.display = "none";
+})
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+        document.getElementById("share-url").style.display = "none";
+    }
+})
