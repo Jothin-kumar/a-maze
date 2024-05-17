@@ -118,6 +118,10 @@ body {
 #game-over-maze-parent > #main {
     transform: unset;
     position: unset;
+    height: auto;
+}
+#game-over-maze-parent > #main > #maze-grid {
+    transform: unset !important;
 }
 
 #loading {
