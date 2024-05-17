@@ -29,6 +29,10 @@ body {
     background-color: black;
     position: relative;
 }
+#maze-grid > rect.current-player {
+    fill: green;
+    transition: none;
+}
 
 #controls {
     width: 100dvw !important;

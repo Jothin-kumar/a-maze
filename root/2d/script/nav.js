@@ -14,45 +14,23 @@ class Player {
         this.startPos = startPos
         this.endPos = endPos;
         this.steps = 0
-        this.pathElems = []
+        this.currentElem = startPos.elem
         this.prevX = startPos.x
         this.prevY = startPos.y
         this.startPos.startBlink()
+        this.startPos.elem.classList.add("current-player")
     }
     moveBy(x, y) {
         if (canMove(this.x, this.y, this.x+x, this.y+y)) {
             this.prevX = this.x
             this.prevY = this.y
+            this.currentElem.classList.remove("current-player")
+            window.mazeSquares[`${this.prevX},${this.prevY}`].stopBlink()
             this.x += x;
             this.y += y;
             this.steps += 1
-            let currentElem = window.mazeSquares[`${this.x},${this.y}`].elem
-            if (this.pathElems.includes(currentElem)) {
-                this.pathElems.forEach((elem) => {
-                    elem.setAttribute("fill", "black")
-                })
-                this.pathElems = [currentElem]
-            }
-            else {
-                this.pathElems.push(currentElem)
-            }
-            this.pathElems.push()
-            this.pathElems.forEach((elem) => {
-                let i = this.pathElems.indexOf(elem)
-                let l = this.pathElems.length
-                if (elem === this.startPos.elem) {}
-                else {
-                    let transperancy = 1 - (l-i)*.15
-                    if (transperancy < 0) {
-                        transperancy = 0
-                    }
-                    elem.setAttribute("fill", `rgba(200, 200, 255, ${transperancy})`)
-                }
-            })
-            
-            if (this.prevX !== null && this.prevY !== null) {
-                window.mazeSquares[`${this.prevX},${this.prevY}`].stopBlink()
-            }
+            this.currentElem = window.mazeSquares[`${this.x},${this.y}`].elem
+            this.currentElem.classList.add("current-player")
             window.mazeSquares[`${this.x},${this.y}`].startBlink()
         }
         if (this.steps === 1) {
@@ -62,7 +40,7 @@ class Player {
             gameOver(this.steps, this.start)
         }
         updateNav()
-        focusElem(this.pathElems[this.pathElems.length-1])
+        focusElem(this.currentElem)
         unfocusControls()
     }
     moveUp() {this.moveBy(0, -1)}
@@ -72,11 +50,10 @@ class Player {
     reset() {
         this.x = this.startPos.x
         this.y = this.startPos.y
-        this.pathElems = []
+        this.currentElem = startPos.elem
         for (let key in window.mazeSquares) {
             window.mazeSquares[key].elem.setAttribute("fill", "black");
         }
-        this.startPos.elem.setAttribute("fill", "green");
         this.endPos.elem.setAttribute("fill", "red");
         this.steps = 0
         updateNav()

@@ -191,7 +191,6 @@ function postConstruct() {
         handler(0, -1);
     });
 
-    mp.start.setColor("green");
     mp.end.setColor("red");
     document.getElementById("main").style.display = "block"
     document.getElementById("controls").style.display = "block"
