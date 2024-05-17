@@ -22,6 +22,8 @@
             transform: translate(-50%, -50%);
             text-align: center;
             font-family: 'Courier New', Courier, monospace;
+            max-width: 90vw;
+            width: max-content;
         }
         #options {
             list-style-type: none;
@@ -44,12 +46,23 @@
         .not-recommended-option {
             opacity: .69;
         }
+        @media screen and (orientation: portrait) {
+            #options {
+                flex-direction: column;
+            }
+            #options > li {
+                margin: .5rem 0 !important;
+            }
+        }
         #msg {
             font-family: 'Courier New', Courier, monospace;
             position: fixed;
             bottom: 1vh;
             left: 50%;
             transform: translateX(-50%);
+            max-width: 90vw;
+            width: max-content;
+            text-align: center;
         }
     </style>
 </head>
