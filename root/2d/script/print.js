@@ -1,6 +1,6 @@
 window.afterPrintEvtListener = () => {}
 window.prePrintZoom = window.zoom
-window.addEventListener("beforeprint", async function() {
+window.addEventListener("beforeprint", function() {
     window.prePrintZoom = window.zoom
     window.removeEventListener("afterprint", window.afterPrintEvtListener)
     switch (window.currentLevel) {
