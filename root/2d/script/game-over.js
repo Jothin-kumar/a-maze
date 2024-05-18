@@ -1,8 +1,5 @@
 function gameOver(steps, startTime) {
-    let score = mp.path.length / steps;
-    if (score > 1) {
-        score = 1;
-    }
+    let score = mp.path.length / (steps+1);
     score = (score*getDifficulty()).toFixed(2);
     window.gameIsOver = true;
     const main = document.getElementById("main");
