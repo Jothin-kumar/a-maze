@@ -20,6 +20,12 @@ class Player {
         this.startPos.startBlink()
         this.startPos.elem.classList.add("current-player")
         this.wayBackCorrectPath = [this.startPos]
+        this.endPositions = [
+            this.endPos,
+            ...[[1, 0], [0, 1], [-1, 0], [0, -1]]
+            .filter(([dx, dy]) => canMove(this.endPos.x, this.endPos.y, this.endPos.x+dx, this.endPos.y+dy))
+            .map(([dx, dy]) => window.mazeSquares[`${this.endPos.x+dx},${this.endPos.y+dy}`])
+        ]
     }
     moveBy(x, y) {
         if (canMove(this.x, this.y, this.x+x, this.y+y)) {
@@ -50,7 +56,7 @@ class Player {
         if (this.steps === 1) {
             this.start = new Date().getTime()
         }
-        if (this.x == this.endPos.x && this.y == this.endPos.y && !window.answerRevealed) {
+        if (this.endPositions.includes(window.mazeSquares[`${this.x},${this.y}`])) {
             gameOver(this.steps, this.start)
         }
         updateNav()
