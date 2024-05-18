@@ -36,7 +36,7 @@ function getDifficulty() {
         r = ConnectConnectableSquares()
     }
 
-    console.log(acceptedSquares.length / (gridSize**2));
     difficulty *= acceptedSquares.length / (gridSize**2)
+    difficulty *= 1000
     return difficulty;
 }
