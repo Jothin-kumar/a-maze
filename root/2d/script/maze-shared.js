@@ -54,6 +54,42 @@ function loadMazeFromShared(data) {
         window.lines[`${2*decodeToNum(data[2][i])},${2*decodeToNum(data[2][i+1])+1}`].hide();
     }
 
+    // Check for corruption
+    window.acceptedSquares = [...mp.path]
+    function ConnectConnectableSquares() {
+        connetables = []
+        window.acceptedSquares.forEach((sq) => {
+            movableNeighbours(sq).forEach((sq) => {
+                if (!window.acceptedSquares.includes(sq) && !connetables.includes(sq)) {
+                    connetables.push(sq)
+                }
+            })
+        })
+        window.acceptedSquares.push(...connetables)
+        return connetables.length > 0
+    }
+    let r = ConnectConnectableSquares()
+    while (r) {
+        r = ConnectConnectableSquares()
+    }
+    window.acceptedSquaresCoords = window.acceptedSquares.map(sq => `${sq.x},${sq.y}`).join(" ")
+    for (let i = 0; i < data[1].length; i += 2) {
+        if (!(
+            window.acceptedSquaresCoords.includes([decodeToNum(data[1][i])+1, decodeToNum(data[1][i+1])].join(",")) ||
+            window.acceptedSquaresCoords.includes([decodeToNum(data[1][i]), decodeToNum(data[1][i+1])].join(","))
+        )) {
+            throw "Corrupted maze data"
+        }
+    }
+    for (let i = 0; i < data[2].length; i += 2) {
+        if (!(
+            window.acceptedSquaresCoords.includes([decodeToNum(data[2][i]), decodeToNum(data[2][i+1])+1].join(",")) ||
+            window.acceptedSquaresCoords.includes([decodeToNum(data[2][i]), decodeToNum(data[2][i+1])].join(","))
+        )) {
+            throw "Corrupted maze data"
+        }
+    }
+
     postConstruct()
 }
 
