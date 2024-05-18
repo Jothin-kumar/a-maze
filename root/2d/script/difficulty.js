@@ -18,6 +18,25 @@ function getDifficulty() {
         difficulty += neighbors.length - 2;
     }
     
-    difficulty *= Object.values(lines).filter(l => l.hidden && !l.ignore).length / Object.values(lines).length;
+    let acceptedSquares = [...mp.path]
+    function ConnectConnectableSquares() {
+        connetables = []
+        acceptedSquares.forEach((sq) => {
+            movableNeighbours(sq).forEach((sq) => {
+                if (!acceptedSquares.includes(sq) && !connetables.includes(sq)) {
+                    connetables.push(sq)
+                }
+            })
+        })
+        acceptedSquares.push(...connetables)
+        return connetables.length > 0
+    }
+    let r = ConnectConnectableSquares()
+    while (r) {
+        r = ConnectConnectableSquares()
+    }
+
+    difficulty *= acceptedSquares.length / (gridSize**2)
+    difficulty *= 1000
     return difficulty;
 }
