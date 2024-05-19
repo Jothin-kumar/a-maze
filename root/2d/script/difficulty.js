@@ -19,9 +19,10 @@ function getDifficulty() {
     }
     
     let acceptedSquares = [...mp.path]
+    window.prevConnectables = [...acceptedSquares]
     function ConnectConnectableSquares() {
         connetables = []
-        acceptedSquares.forEach((sq) => {
+        prevConnectables.forEach((sq) => {
             movableNeighbours(sq).forEach((sq) => {
                 if (!acceptedSquares.includes(sq) && !connetables.includes(sq)) {
                     connetables.push(sq)
@@ -29,6 +30,7 @@ function getDifficulty() {
             })
         })
         acceptedSquares.push(...connetables)
+        window.prevConnectables = connetables
         return connetables.length > 0
     }
     let r = ConnectConnectableSquares()
