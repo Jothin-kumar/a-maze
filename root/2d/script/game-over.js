@@ -3,7 +3,7 @@ function gameOver(steps, startTime) {
     if (score > 1) {
         score = 1;
     }
-    score = (score*getDifficulty()).toFixed(2);
+    score = (score*getDifficulty()).toFixed(0);
     window.gameIsOver = true;
     const main = document.getElementById("main");
     document.getElementById("game-over-maze-parent").appendChild(main);

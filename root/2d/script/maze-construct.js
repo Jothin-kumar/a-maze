@@ -163,7 +163,7 @@ async function construct() {
     await new Promise(r => setTimeout(r, 500));
     update("All paths constructed<br>Removing unused squares...")
     await postConstruct();
-    update(`Done ✅<br>Difficulty Rating: ${getDifficulty().toFixed(2)}`)
+    update(`Done ✅<br>Difficulty Rating: ${getDifficulty().toFixed(0)}`)
 }
 async function postConstruct() {
     const toClear = Object.values(window.mazeSquares).filter((d) => {

@@ -65,7 +65,7 @@ async function loadMazeFromShared(data) {
 
     update("Shared maze loaded<br>Removing unused squares...")
     await postConstruct();
-    update(`Done ✅<br>Difficulty Rating: ${getDifficulty().toFixed(2)}`)
+    update(`Done ✅<br>Difficulty Rating: ${getDifficulty().toFixed(0)}`)
 }
 
 async function shareMaze(button) {
