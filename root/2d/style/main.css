@@ -40,8 +40,8 @@ body {
 
 #controls {
     width: 100dvw !important;
-    height: calc(15dvh - 20px);
-    height: max-content;
+    max-height: calc(15dvh - 20px);
+    height: min-content;
     overflow-y: hidden;
     position: absolute;
     transform: translateY(-25%);
