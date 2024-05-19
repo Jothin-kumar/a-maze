@@ -6,7 +6,7 @@ function gameOver(steps, startTime) {
     document.getElementById("game-over-maze-parent").appendChild(main);
     player.reset()
     document.getElementById("controls").style.display = "none";
-    document.getElementById("game-over").innerHTML = `<strong style="font-size: x-large">Game Over</strong><br>Score: ${score}<br>Time taken: ${((new Date().getTime() - startTime)/1000).toFixed(2)}s`;
+    document.getElementById("game-over").innerHTML = `<strong style="font-size: x-large">Game Over</strong><br><br>Score: ${score}<br>Time taken: ${((new Date().getTime() - startTime)/1000).toFixed(2)}s`;
     document.getElementById("game-over-parent").style.display = "block";
     document.getElementById("onscreen-nav").classList.remove("show-onscreen-nav")
     document.getElementById("maze-grid").style.transform = "";
