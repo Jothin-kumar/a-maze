@@ -118,4 +118,4 @@ window.adjustOnscreenNavHandler = () => {
     clearTimeout(adjustOnscreenNavTimeout);
     adjustOnscreenNavTimeout = setTimeout(adjustOnscreenNav, 500);
 }
-window.addEventListener("resize", adjustOnscreenNavHandler);
+window.addEventListener("orientationchange", adjustOnscreenNavHandler);
