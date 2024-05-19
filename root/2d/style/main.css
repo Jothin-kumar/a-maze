@@ -9,6 +9,10 @@ body {
     scrollbar-width: none;
     transition: .1s;
 }
+:root {
+    touch-action: pan-x pan-y;
+    height: 100%;
+}
 .donotanimate * {
     transition: none !important;
 }
