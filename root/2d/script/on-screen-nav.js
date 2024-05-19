@@ -92,22 +92,18 @@ async function adjustOnscreenNav() {
     const mainBC = main.getBoundingClientRect();
     const onscreenNavBC = onscreenNav.getBoundingClientRect();
     const controlsBC = document.getElementById("controls").getBoundingClientRect();
-    if(screen.height > screen.width){ // Portrait
+    const overlaping = () => elemsColliding(onscreenNav, startPos.elem, 15);
+
+    toXY((mainBC.right + screen.width - onscreenNavBC.left - onscreenNavBC.right) / 2, (mainBC.top + mainBC.bottom - onscreenNavBC.top - onscreenNavBC.bottom) / 2);
+    await new Promise(r => setTimeout(r, 100));
+    if (overlaping()){
         toXY((mainBC.left + mainBC.right - onscreenNavBC.left - onscreenNavBC.right) / 2, (mainBC.bottom + controlsBC.top - onscreenNavBC.top - onscreenNavBC.bottom) / 2);
     }
-    else { // Landscape
-        toXY((mainBC.right + screen.width - onscreenNavBC.left - onscreenNavBC.right) / 2, (mainBC.top + mainBC.bottom - onscreenNavBC.top - onscreenNavBC.bottom) / 2);
+    await new Promise(r => setTimeout(r, 100));
+    if (overlaping()){
+        toXY(0, 0);
     }
-    var attempts = 0;
-    var x = window.currentX
-    var y = window.currentY
-    await new Promise(r => setTimeout(r, 1000));
-    while (attempts < 100 && (elemsColliding(onscreenNav, startPos.elem, 15) || elemsColliding(onscreenNav, document.getElementById("controls")))) {
-        y -= 10
-        toXY(x, y);
-        attempts++;
-        await new Promise(r => setTimeout(r, 10));
-    }
+
     document.getElementById("onscreen-nav").classList.add("show-onscreen-nav")
     window.onScreenNavInitParams = [window.currentX, window.currentY, onscreenNav.style.transform]
     setTimeout(() => {onscreenNav.style.transition = "transform 0s"}, 690);
