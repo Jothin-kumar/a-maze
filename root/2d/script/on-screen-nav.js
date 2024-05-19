@@ -92,7 +92,7 @@ async function adjustOnscreenNav() {
     const mainBC = main.getBoundingClientRect();
     const onscreenNavBC = onscreenNav.getBoundingClientRect();
     const controlsBC = document.getElementById("controls").getBoundingClientRect();
-    const overlaping = () => elemsColliding(onscreenNav, startPos.elem, 15);
+    const overlaping = () => elemsColliding(onscreenNav, startPos.elem, 15) || elemsColliding(onscreenNav, document.getElementById("controls"));
 
     await new Promise(r => setTimeout(r, 100));
     toXY((mainBC.right + screen.width - onscreenNavBC.left - onscreenNavBC.right) / 2, (mainBC.top + mainBC.bottom - onscreenNavBC.top - onscreenNavBC.bottom) / 2);
