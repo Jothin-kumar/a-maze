@@ -205,7 +205,7 @@ function postConstruct() {
     alignMaze()
     setTimeout(() => {
         focusStart()
-    }, 100)
+    }, 500)
     setTimeout(() => {
         adjustOnscreenNav()
         window.navNotAllowed = false
