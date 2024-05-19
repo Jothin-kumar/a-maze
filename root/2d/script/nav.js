@@ -56,7 +56,7 @@ class Player {
         if (this.steps === 1) {
             this.start = new Date().getTime()
         }
-        if (this.endPositions.includes(window.mazeSquares[`${this.x},${this.y}`])) {
+        if (this.endPositions.includes(window.mazeSquares[`${this.x},${this.y}`]) && !window.answerRevealed) {
             gameOver(this.steps, this.start)
         }
         updateNav()
