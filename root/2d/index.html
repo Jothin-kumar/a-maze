@@ -21,27 +21,29 @@
         <button id="onscreen-nav-d" onclick="window.player.moveRight()">D</button>
         <div></div><button id="onscreen-nav-s" onclick="window.player.moveDown()">S</button>
     </div>
-    <div id="controls">
-        <div id="levels-control">
-            <button onclick="toLevel('easy')" id="easy">Easy</button>
-            <button onclick="toLevel('medium')" id="medium" class="current-lvl">Medium</button>
-            <button onclick="toLevel('hard')" id="hard">Hard</but>
+    <div id="main-and-controls-parent">
+        <div id="main">
+            <svg id="maze-grid" xmlns="http://www.w3.org/2000/svg">
+                <line id="maze-grid-line-1" stroke="white" stroke-width="5"/>
+                <line id="maze-grid-line-2" stroke="white" stroke-width="5"/>
+                <line id="maze-grid-line-3" stroke="white" stroke-width="5"/>
+                <line id="maze-grid-line-4" stroke="white" stroke-width="5"/>
+            </svg>
         </div>
-        <div id="other-options">
-            <button onclick="revealAnswer()" id="reveal-answer">Reveal Answer</button>
-            <button onclick="window.player.reset()" id="reset-btn">Reset</button>
-            <button onclick="helpBtn()" id="help-btn">Help</button>
-            <button onclick="newMaze()" id="controls-new-maze-btn">New Maze</button>
-            <button onclick="shareMaze(this)">Share Maze</button>
+        <div id="controls">
+            <div id="levels-control">
+                <button onclick="toLevel('easy')" id="easy">Easy</button>
+                <button onclick="toLevel('medium')" id="medium" class="current-lvl">Medium</button>
+                <button onclick="toLevel('hard')" id="hard">Hard</but>
+            </div>
+            <div id="other-options">
+                <button onclick="revealAnswer()" id="reveal-answer">Reveal Answer</button>
+                <button onclick="window.player.reset()" id="reset-btn">Reset</button>
+                <button onclick="helpBtn()" id="help-btn">Help</button>
+                <button onclick="newMaze()" id="controls-new-maze-btn">New Maze</button>
+                <button onclick="shareMaze(this)">Share Maze</button>
+            </div>
         </div>
-    </div>
-    <div id="main">
-        <svg id="maze-grid" xmlns="http://www.w3.org/2000/svg">
-            <line id="maze-grid-line-1" stroke="white" stroke-width="5"/>
-            <line id="maze-grid-line-2" stroke="white" stroke-width="5"/>
-            <line id="maze-grid-line-3" stroke="white" stroke-width="5"/>
-            <line id="maze-grid-line-4" stroke="white" stroke-width="5"/>
-        </svg>
     </div>
     <div id="game-over-parent">
         <p id="game-over"></p>

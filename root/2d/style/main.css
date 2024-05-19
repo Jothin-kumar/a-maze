@@ -19,15 +19,17 @@ body {
 *::-webkit-scrollbar {
     display: none;
 }
+#main-and-controls-parent {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+}
 #main {
-    height: 85dvh;
     overflow: scroll;
     scroll-behavior: smooth;
 
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
+    flex-grow: 1;
+    margin: 10px auto;
 }
 #maze-grid {
     background-color: black;
@@ -39,18 +41,15 @@ body {
 }
 
 #controls {
-    width: 100dvw !important;
-    max-height: calc(15dvh - 20px);
-    height: min-content;
-    overflow-y: hidden;
-    position: absolute;
-    transform: translateY(-25%);
+    height: fit-content;
     background-color: black;
-    padding: 0;
+    padding: 10px 0;
     z-index: 1;
-    text-align: center;
+    margin: 0 auto;
     bottom: 0;
     transition: opacity .5s;
+
+    display: none;
 }
 #controls > #other-options > button {
     background-color: black;
@@ -91,7 +90,6 @@ body {
 }
 @media screen and (orientation: landscape) {
     #controls {
-        display: flex !important;
         flex-direction: row;
         justify-content: center;
         align-items: center;

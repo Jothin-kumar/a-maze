@@ -194,7 +194,7 @@ function postConstruct() {
 
     mp.end.setColor("red");
     document.getElementById("main").style.display = "block"
-    document.getElementById("controls").style.display = "block"
+    document.getElementById("controls").style.display = "flex"
     document.getElementById("loading").style.display = "none"
     window.navNotAllowed = true
     startPos = window.mp.start;
