@@ -27,11 +27,13 @@
             <button onclick="toLevel('medium')" id="medium" class="current-lvl">Medium</button>
             <button onclick="toLevel('hard')" id="hard">Hard</but>
         </div>
-        <button onclick="revealAnswer()" id="reveal-answer">Reveal Answer</button>
-        <button onclick="window.player.reset()" id="reset-btn">Reset</button>
-        <button onclick="helpBtn()" id="help-btn">Help</button>
-        <button onclick="newMaze()" id="controls-new-maze-btn">New Maze</button>
-        <button onclick="shareMaze(this)">Share Maze</button>
+        <div id="other-options">
+            <button onclick="revealAnswer()" id="reveal-answer">Reveal Answer</button>
+            <button onclick="window.player.reset()" id="reset-btn">Reset</button>
+            <button onclick="helpBtn()" id="help-btn">Help</button>
+            <button onclick="newMaze()" id="controls-new-maze-btn">New Maze</button>
+            <button onclick="shareMaze(this)">Share Maze</button>
+        </div>
     </div>
     <div id="main">
         <svg id="maze-grid" xmlns="http://www.w3.org/2000/svg">

@@ -16,7 +16,7 @@ body {
     display: none;
 }
 #main {
-    min-height: 85dvh;
+    height: 85dvh;
     overflow: scroll;
     scroll-behavior: smooth;
 
@@ -36,17 +36,19 @@ body {
 
 #controls {
     width: 100dvw !important;
-    max-height: calc(15dvh - 20px);
-    overflow-y: scroll;
+    height: calc(15dvh - 20px);
+    height: max-content;
+    overflow-y: hidden;
     position: absolute;
+    transform: translateY(-25%);
     background-color: black;
-    padding-top: 10px;
+    padding: 0;
     z-index: 1;
     text-align: center;
     bottom: 0;
     transition: opacity .5s;
 }
-#controls > button {
+#controls > #other-options > button {
     background-color: black;
     border: olive 2px solid;
     color: white;
@@ -56,7 +58,7 @@ body {
     display: inline-block;
     margin: 2px;
 }
-#controls > button:hover {
+#controls > #other-options > button:hover {
     background-color: rgba(100, 200, 100, .1);
     border-color: darkgoldenrod;
 }
@@ -82,6 +84,18 @@ body {
 #levels-control > button.current-lvl {
     background-color: darkgreen;
 
+}
+@media screen and (orientation: landscape) {
+    #controls {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;            
+    }
+    #levels-control {
+        margin: 0 10px;
+    }
 }
 
 #main, #controls {
