@@ -11,20 +11,20 @@ function getDifficulty() {
         [[1, 0], [-1, 0] ,[0, 1], [0, -1]].forEach(([x, y]) => handler(x, y));
         return neighbors;
     }
-    const correctPathList = Object.values(window.mp.path)
+    const correctPathList = [...mp.path.filter((sq) => sq !== mp.end)]
     for (let i = 0; i < correctPathList.length; i++) {
         let dot = correctPathList[i];
         let neighbors = movableNeighbours(dot);
         difficulty += neighbors.length - 2;
     }
     
-    let acceptedSquares = [...mp.path]
+    let acceptedSquares = [...correctPathList]
     window.prevConnectables = [...acceptedSquares]
     function ConnectConnectableSquares() {
         connetables = []
         prevConnectables.forEach((sq) => {
             movableNeighbours(sq).forEach((sq) => {
-                if (!acceptedSquares.includes(sq) && !connetables.includes(sq)) {
+                if (!acceptedSquares.includes(sq) && !connetables.includes(sq) && sq !== mp.end) {
                     connetables.push(sq)
                 }
             })
