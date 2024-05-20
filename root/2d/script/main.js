@@ -150,4 +150,5 @@ window.addEventListener("keypress", (e) => {
             zoomOut()
             break
     }
+    document.getElementById("zoom-percent").innerText = `${Math.round(window.zoom*100/1.5)}%`
 })

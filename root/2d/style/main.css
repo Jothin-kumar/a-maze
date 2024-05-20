@@ -114,6 +114,10 @@ body {
 #zoom-controls > button:hover {
     background-color: #69696922;
 }
+#zoom-percent {
+    font-size: small;
+    color: #696969;
+}
 
 #main, #controls {
     display: none;
