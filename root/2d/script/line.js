@@ -38,7 +38,7 @@ function clearLine(x1, y1, x2, y2) {
 async function pathLine(path) {
     for (let i = 0; i < path.length-1; i++) {
         clearLine(path[i].x, path[i].y, path[i+1].x, path[i+1].y);
-        await new Promise(r => setTimeout(r, 1));
+        if (i % 2 === 0) await new Promise(r => setTimeout(r, 1));
         window.dispatchEvent(zoomChangeEvt)
     }
 }
