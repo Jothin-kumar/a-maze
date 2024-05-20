@@ -18,6 +18,7 @@ function focusElem(elem) {
 function focusStart() {
     focusElem(window.mp.start.elem);
 }
+window.addEventListener("zoomChange", focusStart)
 
 const controls = document.getElementById("controls")
 function unfocusControls() {
