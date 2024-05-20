@@ -136,16 +136,18 @@ function setZoom(z) {
     setTimeout(resumeAllTransition, 1000)
 }
 const changeZoomBy = (z) => setZoom(window.zoom + z)
+zoomIn = () => changeZoomBy(+.05)
+zoomOut = () => changeZoomBy(-.05)
 window.addEventListener("keypress", (e) => {
     if (e.ctrlKey || e.altKey || e.metaKey) return
     switch (e.key) {
         case "+":
             if (window.zoom >= 2) return
-            changeZoomBy(+.05)
+            zoomIn()
             break
         case "-":
             if (window.zoom <= 1) return
-            changeZoomBy(-.05)
+            zoomOut()
             break
     }
 })

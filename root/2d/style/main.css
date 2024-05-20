@@ -89,6 +89,33 @@ body {
     background-color: darkgreen;
 
 }
+#zoom-controls {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px auto;
+}
+#zoom-controls > button {
+    margin: 0 5px;
+    background-color: black;
+    color: olive;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    justify-items: center;
+    border: 0;
+    background-color: #69696911;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 50%;
+    cursor: pointer;
+}
+#zoom-controls > button:hover {
+    background-color: #69696922;
+}
+
+#main, #controls {
+    display: none;
+}
 @media screen and (orientation: landscape) {
     #controls {
         flex-direction: row;
@@ -99,10 +126,9 @@ body {
     #levels-control {
         margin: 0 10px;
     }
-}
-
-#main, #controls {
-    display: none;
+    #zoom-controls {
+        margin: 0 10px !important;
+    }
 }
 
 #game-over-parent {
