@@ -133,7 +133,7 @@ function setZoom(z) {
     window.zoom = z
     window.dispatchEvent(zoomChangeEvt)
     alignMaze()
-    document.getElementById("zoom-percent").innerText = `${Math.round(window.zoom*100/1.5)}%`
+    document.getElementById("zoom-percent").innerText = `${Math.round(window.zoom*100/1.5).toString().padStart(3, "0")}%`
     setTimeout(resumeAllTransition, 1000)
 }
 const changeZoomBy = (z) => setZoom(window.zoom + z)
