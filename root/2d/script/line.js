@@ -2,6 +2,8 @@ window.lines = {};
 
 class Line {
     constructor(x1, y1, x2, y2) {
+        this.x = x1+x2
+        this.y = y1+y2
         this.hidden = false
         this.elem = document.createElementNS("http://www.w3.org/2000/svg", "line");
         window.lines[`${x1+x2},${y1+y2}`] = this;
