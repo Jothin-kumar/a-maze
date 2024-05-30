@@ -36,7 +36,7 @@ function loadMazeFromShared(data) {
     }
     mp.path.push(mp.end);
     
-    // Validation
+    // Validation - 1
     for (let i = 0; i < mp.path.length-1; i++) {
         if (Math.abs(mp.path[i].x - mp.path[i+1].x) + Math.abs(mp.path[i].y - mp.path[i+1].y) != 1) {
             throw "Invalid path"
@@ -53,6 +53,64 @@ function loadMazeFromShared(data) {
     for (let i = 0; i < data[2].length; i += 2) {
         window.lines[`${2*decodeToNum(data[2][i])},${2*decodeToNum(data[2][i+1])+1}`].hide();
     }
+
+    // Validation - 2
+    function getNeighbouringLines(lineX, lineY) {
+        if (lineX % 2 == 1 && lineY % 2 == 0) { // Vertical
+            neighbours = [
+                [lineX, lineY+2],
+                [lineX, lineY-2],
+            ]
+        }
+        else if (lineX % 2 == 0 && lineY % 2 == 1) { // Horizontal
+            neighbours = [
+                [lineX+2, lineY],
+                [lineX-2, lineY],
+            ]
+        }
+        else {
+            throw `Invalid line: ${lineX},${lineY}`
+        }
+        neighbours.push(
+            [lineX+1, lineY+1],
+            [lineX+1, lineY-1],
+            [lineX-1, lineY+1],
+            [lineX-1, lineY-1],
+        )
+
+        return neighbours.map(n => window.lines[`${n[0]},${n[1]}`]).filter(n => n);
+    }
+    let connectedLines = []
+    for (let i = 3; i < gridSize*2; i += 2) {
+        connectedLines.push(
+            [i, 2],
+            [2, i],
+            [i, gridSize*2],
+            [gridSize*2, i],
+        )
+    }
+    connectedLines = connectedLines.map(c => lines[c.join(",")]).filter(l => !l.hidden)
+    function connectConnectableLines() {
+        c = 0
+        connectedLines.forEach(l => {
+            getNeighbouringLines(l.x, l.y).forEach(nl => {
+                if (nl.hidden) return
+                if (connectedLines.includes(nl)) return
+                connectedLines.push(nl)
+                c++
+            })
+        })
+        return c
+    }
+    c = 1
+    while (c > 0) {
+        c = connectConnectableLines()
+    }
+    Object.values(lines).filter(l => !l.hidden).forEach(l => {
+        if (!connectedLines.includes(l)) {
+            throw `Unconnected line: ${l.x},${l.y}`
+        }
+    })
 
     postConstruct()
 }
