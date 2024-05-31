@@ -1,5 +1,6 @@
 # A-Maze
-An interactive maze game on a 49x49 grid.
+`Create, Play, Share & Print mazes`
+<br>
 ![A-Maze preview](https://cdn.jothin.tech/img/a-maze.png)
 <br>
 (C) 2024 Jothin Kumar
