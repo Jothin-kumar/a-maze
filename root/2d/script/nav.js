@@ -59,7 +59,6 @@ class Player {
         if (this.endPositions.includes(window.mazeSquares[`${this.x},${this.y}`]) && !window.answerRevealed) {
             gameOver(this.steps, this.start)
         }
-        updateNav()
         focusElem(this.currentElem)
         unfocusControls()
     }
@@ -80,7 +79,6 @@ class Player {
         this.steps = 0
         this.startPos.startBlink()
         this.startPos.elem.classList.add("current-player")
-        updateNav()
     }
 }
 
@@ -88,10 +86,6 @@ window.addEventListener("keydown", (e) => {
     if (window.answerRevealed || window.gameIsOver || window.navNotAllowed) {
         return
     }
-    const w = document.getElementById("onscreen-nav-w")
-    const s = document.getElementById("onscreen-nav-s")
-    const a = document.getElementById("onscreen-nav-a")
-    const d = document.getElementById("onscreen-nav-d")
     switch (e.key) {
         case "w":
         case "W":
@@ -113,126 +107,5 @@ window.addEventListener("keydown", (e) => {
         case "ArrowRight":
             window.player.moveRight()
             break;
-        case " ":
-            e.preventDefault()  // Prevent spacebar from triggering the "click" event on the focused button
-            navAssistInit()
-            break;
     }
 })
-window.addEventListener("keyup", (e) => {
-    if (e.key === " " && window.navAssistUsed) {
-        navAssistStop()
-    }
-})
-
-const navAssistBtn = document.getElementById("onscreen-nav-assist")
-navAssistBtn.held = false
-async function navAssist() {
-    while (navAssistBtn.held && !window.answerRevealed && !window.gameIsOver) {
-        navAssistBtn.func()
-        await new Promise(r => setTimeout(r, 256))
-    }
-}
-function navAssistInit() {
-    if (!navAssistBtn.held && !navAssistBtn.disabled) {
-        navAssistBtn.held = true
-        navAssist()
-        navAssistBtn.style.backgroundColor = "rgb(0, 169, 69)"
-    }
-    else {
-        window.navAssistUsed = true
-    }
-}
-function navAssistStop() {
-    window.navAssistUsed = false
-    navAssistBtn.held = false
-    navAssistBtn.style.backgroundColor = "rgb(0, 69, 169)"
-}
-function enableNavAssist(func) {
-    navAssistBtn.func = () => {
-        func()
-        window.navAssistUsed = true
-    }
-}
-function disableNavAssist() {
-    navAssistBtn.func = () => {}
-}
-function switchNavAssist() {
-    if (navAssistBtn.held) {
-        navAssistStop()
-    }
-    else {
-        navAssistInit()
-    }
-}
-navAssistBtn.addEventListener("click", switchNavAssist)
-function updateNav() {
-    const w = document.getElementById("onscreen-nav-w")
-    const s = document.getElementById("onscreen-nav-s")
-    const a = document.getElementById("onscreen-nav-a")
-    const d = document.getElementById("onscreen-nav-d")
-
-    const x = window.player.x
-    const y = window.player.y
-
-    const possibleMoves = []
-    
-    if (!canMove(x, y, x, y-1)) {
-        w.setAttribute("disabled", "")
-    }
-    else {
-        w.removeAttribute("disabled")
-        possibleMoves.push(w)
-    }
-    if (!canMove(x, y, x, y+1)) {
-        s.setAttribute("disabled", "")
-    }
-    else {
-        s.removeAttribute("disabled")
-        possibleMoves.push(s)
-    }
-    if (!canMove(x, y, x-1, y)) {
-        a.setAttribute("disabled", "")
-    }
-    else {
-        a.removeAttribute("disabled")
-        possibleMoves.push(a)
-    }
-    if (!canMove(x, y, x+1, y)) {
-        d.setAttribute("disabled", "")
-    }
-    else {
-        d.removeAttribute("disabled")
-        possibleMoves.push(d)
-    }
-
-    if (possibleMoves.length === 1) {
-        enableNavAssist(possibleMoves[0].onclick)
-    }
-    else if (possibleMoves.length == 2) {
-        function isPrevPos(pm) {
-            switch (pm) {
-                case w:
-                    return (player.prevX === player.x &&player.prevY === player.y-1)
-                case s:
-                    return (player.prevX === player.x &&player.prevY === player.y+1)
-                case a:
-                    return (player.prevX === player.x-1 &&player.prevY === player.y)
-                case d:
-                    return (player.prevX === player.x+1 &&player.prevY === player.y)
-            }
-        }
-        if (isPrevPos(possibleMoves[0])) {
-            enableNavAssist(possibleMoves[1].onclick)
-        }
-        else if (isPrevPos(possibleMoves[1])) {
-            enableNavAssist(possibleMoves[0].onclick)
-        }
-        else {
-            disableNavAssist()
-        }
-    }
-    else {
-        disableNavAssist()
-    }
-}

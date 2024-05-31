@@ -201,13 +201,11 @@ function postConstruct() {
     endPos = window.mp.end;
     window.dispatchEvent(zoomChangeEvt)
     window.player = new Player(startPos.x, startPos.y, startPos, endPos);
-    updateNav()
     alignMaze()
     setTimeout(() => {
         focusStart()
     }, 500)
     setTimeout(() => {
-        adjustOnscreenNav()
         window.navNotAllowed = false
     }, 1000)
 }

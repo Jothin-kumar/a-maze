@@ -2,7 +2,6 @@ async function revealAnswer() {
     window.answerRevealed = true;
     document.getElementById("reset-btn").style.display = "none"
     document.getElementById("reveal-answer").style.display = "none"
-    document.getElementById("onscreen-nav").classList.remove("show-onscreen-nav")
 
     const pathFromLocation = [
         ...player.wayBackCorrectPath,
