@@ -5,10 +5,6 @@ function configureScreenInteractionsMazeOverlay() {
     overlay.style.height = mainBCR.height + "px";
     overlay.style.top = mainBCR.top + "px";
     overlay.style.left = mainBCR.left + "px";
-
-    const mgBCR = document.getElementById("maze-grid").getBoundingClientRect();
-    window.wRatio = mgBCR.width / mainBCR.width;
-    window.hRatio = mgBCR.height / mainBCR.height;
 }
 addEventListener("resize", configureScreenInteractionsMazeOverlay);
 var isMoving = false;
@@ -40,7 +36,7 @@ addEventListener("click", (e) => {
 addEventListener("mousemove", (e) => {
     if (recentlyClicked && isMoving) {
         const main = document.getElementById("main");
-        main.scrollBy(-e.movementX*wRatio, -e.movementY*hRatio);
+        main.scrollBy(-e.movementX, -e.movementY);
     }
     resetRecentlyClickedTimeout();
 })
@@ -48,7 +44,7 @@ addEventListener("touchmove", (e) => {
     if (recentlyClicked && isMoving) {
         const main = document.getElementById("main");
         if (lastTouchX && lastTouchY) {
-            main.scrollBy((lastTouchX - e.touches[0].clientX)*wRatio, (lastTouchY - e.touches[0].clientY)*hRatio);
+            main.scrollBy((lastTouchX - e.touches[0].clientX), (lastTouchY - e.touches[0].clientY));
         }
         lastTouchX = e.touches[0].clientX;
         lastTouchY = e.touches[0].clientY;
