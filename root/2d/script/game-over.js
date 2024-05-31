@@ -1,4 +1,5 @@
 function gameOver(steps, startTime) {
+    document.getElementById("maze-overlay").style.display = "none";
     let score = mp.path.length / (steps+1);
     score = (score*getDifficulty()).toFixed(0);
     window.gameIsOver = true;
