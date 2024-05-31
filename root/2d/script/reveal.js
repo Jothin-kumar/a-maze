@@ -1,8 +1,8 @@
 async function revealAnswer() {
+    document.getElementById("maze-overlay").style.display = "none";
     window.answerRevealed = true;
     document.getElementById("reset-btn").style.display = "none"
     document.getElementById("reveal-answer").style.display = "none"
-    document.getElementById("onscreen-nav").classList.remove("show-onscreen-nav")
 
     const pathFromLocation = [
         ...player.wayBackCorrectPath,
@@ -11,7 +11,7 @@ async function revealAnswer() {
     for (let i = 0 ; i < pathFromLocation.length ; i++) {
         dot = pathFromLocation[i]
         window.player.moveBy(dot.x - player.x, dot.y - player.y)
-        await new Promise(r => setTimeout(r, 100))
+        await new Promise(r => setTimeout(r, 250))
     }
     await new Promise(r => setTimeout(r, 200))
     window.player.currentElem.classList.remove("current-player")

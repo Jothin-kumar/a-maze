@@ -12,7 +12,7 @@ function elemInViewport(elem, sm) {
 function focusElem(elem) {
     if (!elemInViewport(elem, 100)) {
         elem.style.scrollMargin = "100px";
-        elem.scrollIntoView();
+        elem.scrollIntoView({ behavior: "smooth"});
     }
 }
 function focusStart() {

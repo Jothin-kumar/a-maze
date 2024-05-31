@@ -16,12 +16,15 @@ Play now at [a-maze.jothin.tech](https://a-maze.jothin.tech)
 </ul>
 <h2>Navigation</h2>
 <ul>
-    <li><strong>Devices with physical keyboard: </strong>Use arrow keys or WASD</li>
-    <li><strong>Touch screen devices: </strong>Use onscreen navigation buttons (these buttons can be dragged to anywhere in the screen). If the maze is not fully visible, it can be scrolled</li>
+    <li><strong>Devices with physical keyboard: </strong>Use arrow keys or WASD to move. For Navigation Assist, press and hold space bar</li>
+    <li><strong>Touch screen devices: </strong>Drag anywhere on the maze, in the direction you intend to move. To scroll, tap anywhere on the maze and drag immediately. For Navigation Assist, press and hold anywhere on the maze (or perform any other action that might trigger contextmenu)</li>
+</ul>
+<h2>Navigation Assist</h2>
+<ul>
+    <li>In some cases, there is only one possible move other than going back</li>
+    <li>In these cases, you need not manually navigate. Navigation Assist comes in handy here</li>
 </ul>
 <h2>Common problems & solutions</h2>
 <ul>
-    <li><strong>On screen navigation not present: </strong>Not available in landscape mode. Use portrait mode instead</li>
-    <li><strong>On screen navigation accidentally dragged out of view: </strong>Press and hold the screen (or any other action which triggers contextmenu). The on screen navigation will return to its initial position</li>
     <li><strong>Visibility issues: </strong>Disable any browser extensions that might interfere with color of the website. (eg: dark reader)</li>
 </ul>

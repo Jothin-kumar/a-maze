@@ -6,7 +6,6 @@
     <title>A-Maze : Create a random maze and play online</title>
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/portrait.css">
-    <link rel="stylesheet" href="style/onscreen-nav.css">
     <link rel="stylesheet" href="style/print.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
@@ -14,13 +13,6 @@
     <div id="loading">
         <h1 id="loader-msg">Loading...</h1>
         <p id="loading-might-take-a-while">Please wait :-&rpar;</p>
-    </div>
-    <div id="onscreen-nav">
-        <div></div><button id="onscreen-nav-w" onclick="window.player.moveUp()">W</button>
-        <div></div><button id="onscreen-nav-a" onclick="window.player.moveLeft()">A</button>
-        <button id="onscreen-nav-assist"></button>
-        <button id="onscreen-nav-d" onclick="window.player.moveRight()">D</button>
-        <div></div><button id="onscreen-nav-s" onclick="window.player.moveDown()">S</button>
     </div>
     <div id="main-and-controls-parent">
         <div id="main">
@@ -30,6 +22,7 @@
                 <line id="maze-grid-line-3" stroke="white" stroke-width="5"/>
                 <line id="maze-grid-line-4" stroke="white" stroke-width="5"/>
             </svg>
+            <div id="maze-overlay"></div>
         </div>
         <div id="controls">
             <div id="levels-control">
@@ -68,19 +61,16 @@
             </ul>
             <h2>Navigation</h2>
             <ul>
-                <li><strong>Devices with physical keyboard: </strong>Use arrow keys or WASD</li>
-                <li><strong>Touch screen devices: </strong>Use onscreen navigation buttons (these buttons can be dragged to anywhere in the screen). If the maze is not fully visible, it can be scrolled</li>
+                <li><strong>Devices with physical keyboard: </strong>Use arrow keys or WASD to move. For Navigation Assist, press and hold space bar</li>
+                <li><strong>Touch screen devices: </strong>Drag anywhere on the maze, in the direction you intend to move. To scroll, tap anywhere on the maze and drag immediately. For Navigation Assist, press and hold anywhere on the maze (or perform any other action that might trigger contextmenu)</li>
             </ul>
             <h2>Navigation Assist</h2>
             <ul>
                 <li>In some cases, there is only one possible move other than going back</li>
                 <li>In these cases, you need not manually navigate. Navigation Assist comes in handy here</li>
-                <li>To turn it on, hit the center button in the onscreen navigation. If turned on, the button should become green</li>
-                <li>To temporarily turn on Navigation Assist, press and hold the spacebar. The Navigation Assist will be active only as long as the spacebar is held. Release the spacebar to stop Navigation Assist</li>
             </ul>
             <h2>Common problems & solutions</h2>
             <ul>
-                <li><strong>On screen navigation accidentally dragged out of view: </strong>Press and hold the screen on touch devices; right click on devices with cursor. The on screen navigation will return to its initial position</li>
                 <li><strong>Visibility issues: </strong>Disable any browser extensions that might interfere with color of the website. (eg: dark reader)</li>
             </ul>
             <br><p>Press "Esc" or "q" to quit help screen. You can also use the button at the top</p>
@@ -115,8 +105,8 @@
     <script src="script/reveal.js"></script>
     <script src="script/game-over.js"></script>
     <script src="script/focus.js"></script>
+    <script src="script/screen-interactions.js"></script>
     <script src="script/nav.js"></script>
-    <script src="script/on-screen-nav.js"></script>
     <script src="script/help.js"></script>
     <script src="script/difficulty.js"></script>
     <script src="script/print.js"></script>

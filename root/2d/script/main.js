@@ -117,7 +117,7 @@ function toLevel(lvl) {
 function alignMaze() {
     const mgbc = mg.getBoundingClientRect()
     const mbc = document.getElementById("main").getBoundingClientRect()
-    mg.style.transform = `translateY(${Math.abs(mbc.height - mgbc.height)/2}px)`
+    if (mbc.height > mgbc.height) mg.style.transform = `translateY(${Math.abs(mbc.height - mgbc.height)/2}px)`
 }
 window.alignMazeTimeout = null;
 window.alignMazeHandler = () => {
