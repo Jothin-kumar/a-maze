@@ -9,14 +9,17 @@ function configureScreenInteractionsMazeOverlay() {
 overlay.addEventListener("resize", configureScreenInteractionsMazeOverlay);
 var isMoving = false;
 var lastTouchX, lastTouchY;
+window.touchNavAssistTimeout = null;
 ["mousedown", "touchstart"].forEach(evt => overlay.addEventListener(evt, (e) => {
     isMoving = true
     lastTouchX = e.touches ? e.touches[0].clientX : undefined;
     lastTouchY = e.touches ? e.touches[0].clientY : undefined;
-    setTimeout(navAssistInit, 500)
+    clearTimeout(window.touchNavAssistTimeout)
+    window.touchNavAssistTimeout = setTimeout(navAssistInit, 500)
 }));
 ["mouseup", "touchend"].forEach(evt => addEventListener(evt, () => {
     isMoving = false
+    clearTimeout(window.touchNavAssistTimeout)
     navAssistStop()
 }));
 
