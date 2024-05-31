@@ -42,7 +42,7 @@ addEventListener("mousemove", (e) => {
 addEventListener("touchmove", (e) => {
     if (recentlyClicked && isMoving) {
         const main = document.getElementById("main");
-        main.scrollTo(e.touches[0].clientX*wRatio, e.touches[0].clientY*hRatio);
+        main.scrollBy(e.touches[0].clientX*wRatio, e.touches[0].clientY*hRatio);
     }
     resetRecentlyClickedTimeout();
 })
