@@ -7,8 +7,8 @@ function configureScreenInteractionsMazeOverlay() {
     overlay.style.left = mainBCR.left + "px";
 
     const mgBCR = document.getElementById("maze-grid").getBoundingClientRect();
-    window.wRatio = mgBCR.width / mainBCR.width;
-    window.hRatio = mgBCR.height / mainBCR.height;
+    window.wRatio = 2*mgBCR.width / mainBCR.width;
+    window.hRatio = 2*mgBCR.height / mainBCR.height;
 }
 addEventListener("resize", configureScreenInteractionsMazeOverlay);
 var isMoving = false;
@@ -21,7 +21,7 @@ var isMoving = false;
 // click and drag to scroll
 var recentlyClicked = false;
 var recentlyClickedTimeout;
-function resetRecentlyClickedTimeout(t=250) {
+function resetRecentlyClickedTimeout(t=1000) {
     clearTimeout(recentlyClickedTimeout);
     recentlyClickedTimeout = setTimeout(() => {
         recentlyClicked = false;
@@ -37,12 +37,12 @@ addEventListener("mousemove", (e) => {
         const main = document.getElementById("main");
         main.scrollBy(-e.movementX*wRatio, -e.movementY*hRatio);
     }
-    resetRecentlyClickedTimeout(1000);
+    resetRecentlyClickedTimeout();
 })
 addEventListener("touchmove", (e) => {
     if (recentlyClicked && isMoving) {
         const main = document.getElementById("main");
         main.scrollTo(e.touches[0].clientX*wRatio, e.touches[0].clientY*hRatio);
     }
-    resetRecentlyClickedTimeout(1000);
+    resetRecentlyClickedTimeout();
 })
