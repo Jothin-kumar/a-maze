@@ -132,7 +132,7 @@ async function navAssist() {
                 window.player.moveBy(dx, dy)
             }
         }
-        await new Promise(r => setTimeout(r, 256))
+        await new Promise(r => setTimeout(r, 500))
     }
 }
 setTimeout(navAssist, 0)
