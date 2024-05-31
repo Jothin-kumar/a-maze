@@ -41,6 +41,7 @@ overlay.addEventListener("mousemove", (e) => {
     resetRecentlyClickedTimeout(100);
 })
 overlay.addEventListener("touchmove", (e) => {
+    if (e.touches.length != 1) return;
     if (recentlyClicked && isMoving) {
         const main = document.getElementById("main");
         if (lastTouchX && lastTouchY) {
@@ -88,6 +89,7 @@ overlay.addEventListener("mousemove", (e) => {
     }
 })
 overlay.addEventListener("touchmove", (e) => {
+    if (e.touches.length != 1) return;
     if (!recentlyClicked && isMoving) {
         moveHandler(e.touches[0].clientX - lastTouchX, e.touches[0].clientY - lastTouchY);
         lastTouchX = e.touches[0].clientX;
