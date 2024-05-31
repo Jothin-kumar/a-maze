@@ -38,7 +38,7 @@ addEventListener("mousemove", (e) => {
         const main = document.getElementById("main");
         main.scrollBy(-e.movementX, -e.movementY);
     }
-    resetRecentlyClickedTimeout();
+    resetRecentlyClickedTimeout(100);
 })
 addEventListener("touchmove", (e) => {
     if (recentlyClicked && isMoving) {
@@ -49,5 +49,5 @@ addEventListener("touchmove", (e) => {
         lastTouchX = e.touches[0].clientX;
         lastTouchY = e.touches[0].clientY;
     }
-    resetRecentlyClickedTimeout();
+    resetRecentlyClickedTimeout(100);
 })
