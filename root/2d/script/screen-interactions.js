@@ -14,10 +14,10 @@ var lastTouchX, lastTouchY;
     lastTouchX = e.touches ? e.touches[0].clientX : undefined;
     lastTouchY = e.touches ? e.touches[0].clientY : undefined
 }));
-["mouseup", "touchend"].forEach(evt => overlay.addEventListener(evt, () => isMoving = false));
+["mouseup", "touchend"].forEach(evt => addEventListener(evt, () => isMoving = false));
 
 overlay.addEventListener("mousedown", () => overlay.style.cursor = "grabbing");
-overlay.addEventListener("mouseup", () => overlay.style.cursor = "grab");
+addEventListener("mouseup", () => overlay.style.cursor = "grab");
 
 // click and drag to scroll
 var recentlyClicked = false;
