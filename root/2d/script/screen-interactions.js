@@ -39,10 +39,15 @@ addEventListener("mousemove", (e) => {
     }
     resetRecentlyClickedTimeout();
 })
+var lastTouchX, lastTouchY;
 addEventListener("touchmove", (e) => {
     if (recentlyClicked && isMoving) {
         const main = document.getElementById("main");
-        main.scrollBy(e.touches[0].clientX*wRatio, e.touches[0].clientY*hRatio);
+        if (lastTouchX && lastTouchY) {
+            main.scrollBy((lastTouchX - e.touches[0].clientX)*wRatio, (lastTouchY - e.touches[0].clientY)*hRatio);
+        }
+        lastTouchX = e.touches[0].clientX;
+        lastTouchY = e.touches[0].clientY;
     }
     resetRecentlyClickedTimeout();
 })
