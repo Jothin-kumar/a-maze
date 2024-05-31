@@ -8,6 +8,10 @@
 [MIT Licence](https://github.com/Jothin-kumar/a-maze/blob/main/LICENSE)
 <br>
 Play now at [a-maze.jothin.tech](https://a-maze.jothin.tech)
+# Maze Generation Demo
+ 1. Easy Level: [joth.in/8e](https://joth.in/8e)
+ 2. Medium Level: [joth.in/8m](https://joth.in/8m)
+ 3. Hard Level: [joth.in/8h](https://joth.in/8h)
 # Help
 <h2>How to play?</h2>
 <ul>
