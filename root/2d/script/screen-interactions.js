@@ -26,6 +26,7 @@ function resetRecentlyClickedTimeout(t=1000) {
     clearTimeout(recentlyClickedTimeout);
     recentlyClickedTimeout = setTimeout(() => {
         recentlyClicked = false;
+        isMoving = false
     }, t);
 }
 overlay.addEventListener("click", (e) => {
