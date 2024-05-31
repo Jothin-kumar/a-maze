@@ -1,12 +1,14 @@
 const overlay = document.getElementById("maze-overlay");
 function configureScreenInteractionsMazeOverlay() {
+    console.log("...");
     const mainBCR = document.getElementById("main").getBoundingClientRect();
     overlay.style.width = mainBCR.width + "px";
     overlay.style.height = mainBCR.height + "px";
     overlay.style.top = mainBCR.top + "px";
     overlay.style.left = mainBCR.left + "px";
 }
-overlay.addEventListener("resize", configureScreenInteractionsMazeOverlay);
+addEventListener("resize", configureScreenInteractionsMazeOverlay);
+addEventListener("zoomChange", configureScreenInteractionsMazeOverlay);
 var isMoving = false;
 var lastTouchX, lastTouchY;
 window.touchNavAssistTimeout = null;
