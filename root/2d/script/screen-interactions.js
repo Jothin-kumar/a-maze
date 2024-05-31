@@ -16,6 +16,9 @@ var lastTouchX, lastTouchY;
 }));
 ["mouseup", "touchend"].forEach(evt => overlay.addEventListener(evt, () => isMoving = false));
 
+overlay.addEventListener("mousedown", () => overlay.style.cursor = "grabbing");
+overlay.addEventListener("mouseup", () => overlay.style.cursor = "grab");
+
 // click and drag to scroll
 var recentlyClicked = false;
 var recentlyClickedTimeout;

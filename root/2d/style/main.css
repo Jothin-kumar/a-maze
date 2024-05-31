@@ -43,6 +43,7 @@ body {
 #maze-overlay {
     position: absolute;
     z-index: 1;
+    cursor: grab;
 }
 
 #controls {
