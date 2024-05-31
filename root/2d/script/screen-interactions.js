@@ -7,8 +7,8 @@ function configureScreenInteractionsMazeOverlay() {
     overlay.style.left = mainBCR.left + "px";
 
     const mgBCR = document.getElementById("maze-grid").getBoundingClientRect();
-    window.wRatio = 2*mgBCR.width / mainBCR.width;
-    window.hRatio = 2*mgBCR.height / mainBCR.height;
+    window.wRatio = mgBCR.width / mainBCR.width;
+    window.hRatio = mgBCR.height / mainBCR.height;
 }
 addEventListener("resize", configureScreenInteractionsMazeOverlay);
 var isMoving = false;
