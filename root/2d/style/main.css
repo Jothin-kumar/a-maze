@@ -26,7 +26,6 @@ body {
 }
 #main {
     overflow: scroll;
-    scroll-behavior: smooth;
 
     flex-grow: 1;
     margin: 10px auto;
