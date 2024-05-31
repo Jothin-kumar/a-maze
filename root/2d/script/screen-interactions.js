@@ -12,7 +12,12 @@ function configureScreenInteractionsMazeOverlay() {
 }
 addEventListener("resize", configureScreenInteractionsMazeOverlay);
 var isMoving = false;
-["mousedown", "touchstart"].forEach(evt => addEventListener(evt, () => isMoving = true));
+var lastTouchX, lastTouchY;
+["mousedown", "touchstart"].forEach(evt => addEventListener(evt, (e) => {
+    isMoving = true
+    lastTouchX = e.touches ? e.touches[0].clientX : undefined;
+    lastTouchY = e.touches ? e.touches[0].clientY : undefined
+}));
 ["mouseup", "touchend"].forEach(evt => addEventListener(evt, () => isMoving = false));
 
 // drag to move
@@ -39,7 +44,6 @@ addEventListener("mousemove", (e) => {
     }
     resetRecentlyClickedTimeout();
 })
-var lastTouchX, lastTouchY;
 addEventListener("touchmove", (e) => {
     if (recentlyClicked && isMoving) {
         const main = document.getElementById("main");
