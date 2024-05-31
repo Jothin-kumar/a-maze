@@ -202,6 +202,7 @@ function postConstruct() {
     window.dispatchEvent(zoomChangeEvt)
     window.player = new Player(startPos.x, startPos.y, startPos, endPos);
     alignMaze()
+    configureScreenInteractionsMazeOverlay()
     setTimeout(() => {
         focusStart()
     }, 500)
