@@ -85,8 +85,13 @@ body {
     border: yellowgreen 1px solid;
     border-radius: 10px;
     color: white;
-    padding: 5px;
+    padding: 10px;
     cursor: pointer;
+}
+@media screen and (orientation: landscape) {
+    #levels-control > button {
+        margin: 5px 0;
+    }
 }
 #levels-control > button:hover {
     background-color: rgba(100, 255, 100, .25);
