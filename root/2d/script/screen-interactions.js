@@ -12,9 +12,13 @@ var lastTouchX, lastTouchY;
 ["mousedown", "touchstart"].forEach(evt => overlay.addEventListener(evt, (e) => {
     isMoving = true
     lastTouchX = e.touches ? e.touches[0].clientX : undefined;
-    lastTouchY = e.touches ? e.touches[0].clientY : undefined
+    lastTouchY = e.touches ? e.touches[0].clientY : undefined;
+    setTimeout(navAssistInit, 500)
 }));
-["mouseup", "touchend"].forEach(evt => addEventListener(evt, () => isMoving = false));
+["mouseup", "touchend"].forEach(evt => addEventListener(evt, () => {
+    isMoving = false
+    navAssistStop()
+}));
 
 overlay.addEventListener("mousedown", () => overlay.style.cursor = "grabbing");
 addEventListener("mouseup", () => overlay.style.cursor = "grab");
@@ -114,15 +118,5 @@ overlay.addEventListener("touchmove", (e) => {
         }
         lastPinchDistance = newPinchDistance;
         lastZoomTime = Date.now();
-    }
-})
-
-// NavAssist
-overlay.addEventListener("touchstart", (e) => {
-    if (e.touches.length == 3) {
-        navAssistInit()
-    }
-    else {
-        navAssistStop()
     }
 })
