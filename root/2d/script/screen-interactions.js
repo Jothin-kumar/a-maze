@@ -16,9 +16,6 @@ var lastTouchX, lastTouchY;
 }));
 ["mouseup", "touchend"].forEach(evt => addEventListener(evt, () => isMoving = false));
 
-// drag to move
-
-
 // click and drag to scroll
 var recentlyClicked = false;
 var recentlyClickedTimeout;
@@ -50,4 +47,43 @@ addEventListener("touchmove", (e) => {
         lastTouchY = e.touches[0].clientY;
     }
     resetRecentlyClickedTimeout(100);
+})
+
+// drag to move
+const moveThrottleTime = 250
+var lastMoveTime = Date.now();
+function moveHandler(moveX, moveY) {
+    if (Date.now() - lastMoveTime < moveThrottleTime) return;
+    const absMoveX = Math.abs(moveX);
+    const absMoveY = Math.abs(moveY);
+    if (absMoveX > absMoveY) { // horizontal (left or right)
+        if (moveX > 0) {
+            window.player.moveRight();
+        }
+        else {
+            window.player.moveLeft();
+        }
+        lastMoveTime = Date.now();
+    }
+    else if (absMoveY > absMoveX) { // vertical (up or down)
+        if (moveY > 0) {
+            window.player.moveDown();
+        }
+        else {
+            window.player.moveUp();
+        }
+        lastMoveTime = Date.now();
+    }
+}
+addEventListener("mousemove", (e) => {
+    if (!recentlyClicked && isMoving) {
+        moveHandler(e.movementX, e.movementY);
+    }
+})
+addEventListener("touchmove", (e) => {
+    if (!recentlyClicked && isMoving) {
+        moveHandler(e.touches[0].clientX - lastTouchX, e.touches[0].clientY - lastTouchY);
+        lastTouchX = e.touches[0].clientX;
+        lastTouchY = e.touches[0].clientY;
+    }
 })
