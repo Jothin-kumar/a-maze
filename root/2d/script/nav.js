@@ -143,7 +143,6 @@ function navAssistStop() {
     window.navAssistInUse = false
 }
 function updateNavAssist() {
-    console.info("updateNavAssist")
     const possibleMoves = [];
     [[0, +1], [0, -1], [+1, 0], [-1, 0]].forEach(([dx, dy]) => {
         if (canMove(player.x, player.y, player.x+dx, player.y+dy)) {
@@ -169,5 +168,4 @@ function updateNavAssist() {
     else {
         window.navAssistCoordBy = null
     }
-    console.info(window.navAssistCoordBy)
 }
