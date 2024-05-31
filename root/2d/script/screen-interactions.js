@@ -116,3 +116,13 @@ overlay.addEventListener("touchmove", (e) => {
         lastZoomTime = Date.now();
     }
 })
+
+// NavAssist
+overlay.addEventListener("touchstart", (e) => {
+    if (e.touches.length == 3) {
+        navAssistInit()
+    }
+    else {
+        navAssistStop()
+    }
+})

@@ -59,6 +59,7 @@ class Player {
         if (this.endPositions.includes(window.mazeSquares[`${this.x},${this.y}`]) && !window.answerRevealed) {
             gameOver(this.steps, this.start)
         }
+        updateNavAssist()
         focusElem(this.currentElem)
         unfocusControls()
     }
@@ -107,5 +108,66 @@ window.addEventListener("keydown", (e) => {
         case "ArrowRight":
             window.player.moveRight()
             break;
+        case " ":
+            navAssistInit()
+            break;
     }
 })
+window.addEventListener("keyup", (e) => {
+    switch (e.key) {
+        case " ":
+            navAssistStop()
+            break;
+    }
+})
+
+
+window.navAssistInUse = false
+window.navAssistCoordBy = null
+async function navAssist() {
+    while (true) {
+        if (window.navAssistInUse && !window.answerRevealed && !window.gameIsOver && !window.navNotAllowed) {
+            if (window.navAssistCoordBy) {
+                const [dx, dy] = window.navAssistCoordBy
+                window.player.moveBy(dx, dy)
+            }
+        }
+        await new Promise(r => setTimeout(r, 256))
+    }
+}
+setTimeout(navAssist, 0)
+function navAssistInit() {
+    window.navAssistInUse = true
+}
+function navAssistStop() {
+    window.navAssistInUse = false
+}
+function updateNavAssist() {
+    console.info("updateNavAssist")
+    const possibleMoves = [];
+    [[0, +1], [0, -1], [+1, 0], [-1, 0]].forEach(([dx, dy]) => {
+        if (canMove(player.x, player.y, player.x+dx, player.y+dy)) {
+            possibleMoves.push([dx, dy])
+        }
+    })
+
+    if (possibleMoves.length === 1) {
+        window.navAssistCoordBy = possibleMoves[0]
+    }
+    else if (possibleMoves.length == 2) {
+        function isPrevPos(coordBy) {
+            const [dx, dy] = coordBy
+            return player.prevX == player.x+dx && player.prevY == player.y+dy
+        }
+        if (isPrevPos(possibleMoves[0])) {
+            window.navAssistCoordBy = possibleMoves[1]
+        }
+        else if (isPrevPos(possibleMoves[1])) {
+            window.navAssistCoordBy = possibleMoves[0]
+        }
+    }
+    else {
+        window.navAssistCoordBy = null
+    }
+    console.info(window.navAssistCoordBy)
+}
