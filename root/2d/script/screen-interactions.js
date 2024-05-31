@@ -10,6 +10,7 @@ function configureScreenInteractionsMazeOverlay() {
     window.wRatio = mgBCR.width / mainBCR.width;
     window.hRatio = mgBCR.height / mainBCR.height;
 }
+addEventListener("resize", configureScreenInteractionsMazeOverlay);
 var isMoving = false;
 ["mousedown", "touchstart"].forEach(evt => addEventListener(evt, () => isMoving = true));
 ["mouseup", "touchend"].forEach(evt => addEventListener(evt, () => isMoving = false));
