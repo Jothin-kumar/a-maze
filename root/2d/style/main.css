@@ -60,7 +60,7 @@ body {
 }
 #controls > #other-options > button {
     background-color: black;
-    border: olive 2px solid;
+    border: olive 1px solid;
     color: white;
     padding: 5px;
     border-radius: 5px;
@@ -82,10 +82,10 @@ body {
 }
 #levels-control > button {
     background-color: black;
-    border: yellowgreen 2px solid;
+    border: yellowgreen 1px solid;
     border-radius: 10px;
     color: white;
-    padding: 10px;
+    padding: 5px;
     cursor: pointer;
 }
 #levels-control > button:hover {
@@ -103,6 +103,7 @@ body {
 }
 #zoom-controls > button {
     margin: 0 5px;
+    padding: 5px;
     background-color: black;
     color: olive;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
