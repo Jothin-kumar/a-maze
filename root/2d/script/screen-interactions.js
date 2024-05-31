@@ -90,3 +90,22 @@ overlay.addEventListener("touchmove", (e) => {
         lastTouchY = e.touches[0].clientY;
     }
 })
+
+// Pinch to zoom
+const zoomThrottleTime = 100;
+const lastZoomTime = Date.now();
+var lastPinchDistance = 0;
+overlay.addEventListener("touchmove", (e) => {
+    if (Date.now() - lastZoomTime < zoomThrottleTime) return;
+    if (e.touches.length == 2) {
+        const newPinchDistance = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+        if (newPinchDistance > lastPinchDistance) {
+            zoomIn();
+        }
+        else if (newPinchDistance < lastPinchDistance) {
+            zoomOut();
+        }
+        lastPinchDistance = newPinchDistance;
+        lastZoomTime = Date.now();
+    }
+})
