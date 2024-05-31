@@ -51,6 +51,10 @@ overlay.addEventListener("touchmove", (e) => {
     }
     resetRecentlyClickedTimeout(100);
 })
+window.addEventListener("contextmenu", (e) => {
+    e.preventDefault()
+    focusElem(player.currentElem)
+});
 
 // drag to move
 const moveThrottleTime = 250
