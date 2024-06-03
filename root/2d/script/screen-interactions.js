@@ -1,6 +1,5 @@
 const overlay = document.getElementById("maze-overlay");
 function configureScreenInteractionsMazeOverlay() {
-    console.log("...");
     const mainBCR = document.getElementById("main").getBoundingClientRect();
     overlay.style.width = mainBCR.width + "px";
     overlay.style.height = mainBCR.height + "px";
