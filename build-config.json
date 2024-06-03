@@ -4,10 +4,19 @@
     "pages": [
         "2d/index.html",
         "/share.html",
-        "/index.html",
+        {
+            "path": "/index.html",
+            "prefetches": "https://a-maze.jothin.tech/assets/img/bg.png"
+        },
         "/play-2d.html",
-        "/support.html",
-        "/how-to-play.html"
+        {
+            "path": "/support.html",
+            "prefetches": "https://a-maze.jothin.tech/assets/img/bg.png"
+        },
+        {
+            "path": "/how-to-play.html",
+            "prefetches": "https://a-maze.jothin.tech/assets/img/bg.png"
+        }
     ],
     "line-end": "\n"
 }
