@@ -112,7 +112,7 @@ const lastZoomTime = Date.now();
 var lastPinchDistance = 0;
 overlay.addEventListener("touchmove", (e) => {
     if (Date.now() - lastZoomTime < zoomThrottleTime) return;
-    if (e.touches.length == 2) {
+    if (e.touches.length == 2 && !navAssistInUse) {
         const newPinchDistance = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
         if (newPinchDistance > lastPinchDistance) {
             zoomIn();
