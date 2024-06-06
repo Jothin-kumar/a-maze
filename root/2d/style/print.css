@@ -7,12 +7,14 @@
         transform: unset !important;
         filter: invert(100%);
     }
+    #maze-grid > *[stroke=olivedrab], #maze-grid > *[stroke=olive] {
+        stroke: white;
+    }
     #maze-grid > rect {
         fill: black;
     }
     #maze-grid > rect[fill="red"], #maze-grid > rect.current-player, #maze-grid > rect[fill="rgba(200, 0, 0, .5)"], #maze-grid > rect[fill="rgba(0, 200, 0, .5)"] {
-        filter: invert(100%) !important;
-        fill: goldenrod !important;
+        fill: rgba(200, 200, 200, .5) !important;
     }
 
     #controls {

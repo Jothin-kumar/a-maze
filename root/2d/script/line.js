@@ -24,7 +24,7 @@ class Line {
             this.elem.setAttribute("y2", y2*10*zoom);
             this.elem.setAttribute("stroke-width", zoom);
         })
-        this.elem.setAttribute("stroke", "white");
+        this.elem.setAttribute("stroke", "olive");
         window.mg.appendChild(this.elem);
     }
     hide() {
