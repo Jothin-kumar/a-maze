@@ -31,21 +31,11 @@ function setCurrentLevel(lvl) {
 function configForGridSize(size) { // Example: size = 49 for 49x49 grid
     window.gridSize = size
     const mg = document.getElementById("maze-grid")
-    const a = size*10 + 10
-    const b = a - 5
+    const a = (size-.5)*10 + 10
     
     window.addEventListener("zoomChange", () => {
         mg.setAttribute("height", a*zoom)
         mg.setAttribute("width", a*zoom)
-
-        document.getElementById("maze-grid-line-1").setAttribute("x2", b*zoom)
-        document.getElementById("maze-grid-line-2").setAttribute("y1", b*zoom)
-        document.getElementById("maze-grid-line-2").setAttribute("x2", b*zoom)
-        document.getElementById("maze-grid-line-2").setAttribute("y2", b*zoom)
-        document.getElementById("maze-grid-line-3").setAttribute("y2", b*zoom)
-        document.getElementById("maze-grid-line-4").setAttribute("x1", b*zoom)
-        document.getElementById("maze-grid-line-4").setAttribute("y2", b*zoom)
-        document.getElementById("maze-grid-line-4").setAttribute("x2", b*zoom)
     })
 }
 

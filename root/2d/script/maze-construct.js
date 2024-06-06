@@ -10,8 +10,8 @@ class MazeSquare {
         window.addEventListener("zoomChange", () => {
             this.elem.setAttribute('width', 10*zoom);
             this.elem.setAttribute('height', 10*zoom);
-            this.elem.setAttribute('x', (x*10-5)*zoom);
-            this.elem.setAttribute('y', (y*10-5)*zoom);
+            this.elem.setAttribute('x', ((x-.25)*10-5)*zoom);
+            this.elem.setAttribute('y', ((y-.25)*10-5)*zoom);
         })
         this.elem.setAttribute('fill', 'black');
         window.mg.appendChild(this.elem);
@@ -129,8 +129,8 @@ function preConstruct() {
             new MazeSquare(x, y);
         }
     }
-    for (let x = 1; x < window.gridSize + 1; x++) {
-        for (let y = 1; y < window.gridSize + 1; y++) {
+    for (let x = 0; x < window.gridSize + 2; x++) {
+        for (let y = 0; y < window.gridSize + 2; y++) {
             new Line(x, y, x+1, y);
             new Line(x, y, x, y+1);
         }

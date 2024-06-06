@@ -18,14 +18,14 @@ class Line {
             x1 = x2 = x1+.5
         }
         window.addEventListener("zoomChange", () => {
-            this.elem.setAttribute("x1", x1*10*zoom);
-            this.elem.setAttribute("y1", y1*10*zoom);
-            this.elem.setAttribute("x2", x2*10*zoom);
-            this.elem.setAttribute("y2", y2*10*zoom);
+            this.elem.setAttribute("x1", (x1-.25)*10*zoom);
+            this.elem.setAttribute("y1", (y1-.25)*10*zoom);
+            this.elem.setAttribute("x2", (x2-.25)*10*zoom);
+            this.elem.setAttribute("y2", (y2-.25)*10*zoom);
             this.elem.setAttribute("stroke-width", zoom);
         })
         this.elem.setAttribute("stroke", "olive");
-        window.mg.appendChild(this.elem);
+        window.mg.appendChild(this.elem)
     }
     hide() {
         this.elem.setAttribute("stroke", "black");
