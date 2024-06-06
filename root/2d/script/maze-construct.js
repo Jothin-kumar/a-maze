@@ -86,33 +86,27 @@ function constructPath(start, pathLength = 169, condition = (dot) => true){
     start.type = "start";
     const path = new Path(start);
     while (path.path.length < pathLength) {
-        try {
-            let neighbors = getUnusedNeighbors(path.path[path.path.length-1]);
-            if (Object.keys(neighbors).length === 0) {
-                path.path[path.path.length-1].type = "prohibited";
-                path.path.pop();
-            }
-            else {
-                choosen = pickRandomElement(Object.values(neighbors));
-                if (!condition(choosen)) {
-                    path.finish()
-                    Object.values(window.mazeSquares).filter(dot => dot.type === "prohibited").forEach(dot => {  // Dots prohibited only for current path
-                        dot.type = "";
-                    })
-                    return path;
-                }
-                path.addDot(choosen);
-                Object.values(neighbors).forEach(dot => {
-                    if (dot !== choosen) {
-                        dot.type = "prohibited";
-                    }
-                });
-            }
+        if (path.path.length === 0) path.reset()
+        let neighbors = getUnusedNeighbors(path.path[path.path.length-1]);
+        if (Object.keys(neighbors).length === 0) {
+            path.path[path.path.length-1].type = "prohibited";
+            path.path.pop();
         }
-        catch (e) {
-            console.warn(e);
-            console.log("resetting...");
-            path.reset();
+        else {
+            choosen = pickRandomElement(Object.values(neighbors));
+            if (!condition(choosen)) {
+                path.finish()
+                Object.values(window.mazeSquares).filter(dot => dot.type === "prohibited").forEach(dot => {  // Dots prohibited only for current path
+                    dot.type = "";
+                })
+                return path;
+            }
+            path.addDot(choosen);
+            Object.values(neighbors).forEach(dot => {
+                if (dot !== choosen) {
+                    dot.type = "prohibited";
+                }
+            });
         }
     }
     path.finish();
