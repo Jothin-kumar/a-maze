@@ -2,6 +2,7 @@
     "parent-dir": "root/",
     "vars": [],
     "pages": [
+        "3d/index.html",
         "2d/index.html",
         "/share.html",
         {
