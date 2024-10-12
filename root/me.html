@@ -49,17 +49,27 @@
             font-family: 'Courier New', Courier, monospace;
             color: rgba(255, 255, 255, .5);
         }
+        #buttons {
+            display: flex;
+            flex-direction: row;
+            margin-top: 30px;
+        }
         button {
+            flex-grow: 1;
             padding: 10px;
-            margin: 5px auto;
+            margin: 5px;
             font-size: 1rem;
             background-color: black;
             color: white;
-            border: 2px solid rgb(63, 67, 35);
+            border: 1px solid rgb(63, 67, 35);
             border-radius: 5px;
             cursor: pointer;
             transition: 1s;
             opacity: .8;
+        }
+        button:hover {
+            border: 2px solid olive;
+            opacity: 1;
         }
         button.login:hover {
             border: 2px solid green;
@@ -101,8 +111,11 @@
             <img src="assets/img/unknown.png" id="pfp">
             <h1 id="name">Anonymous Player</h1>
             <p id="details"></p>
-            <button onclick="login()" id="login-btn" class="login">Sign Up / Log In</button>
-            <button onclick="logout()" id="logout-btn" class="logout" style="display: none;">Logout</button>
+            <div id="buttons">
+                <button onclick="window.localStorage.href='/'">Home</button>
+                <button onclick="login()" id="login-btn" class="login">Sign Up / Log In</button>
+                <button onclick="logout()" id="logout-btn" class="logout" style="display: none;">Logout</button>
+            </div>
         </div>
     </div>
     <script type="module" src="script/connect.js"></script>
