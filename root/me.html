@@ -102,6 +102,18 @@
                 opacity: 1;
             }
         }
+
+        #discord-server {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .5);
+            width: max-content;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -118,6 +130,9 @@
             </div>
         </div>
     </div>
+    <a href="https://joth.in/dc" target="_blank" id="discord-server">
+        <p>Join our Discord server</p>
+    </a>
     <script type="module" src="script/connect.js"></script>
     <script>
         window.addEventListener('login', function(e) {
