@@ -17,7 +17,8 @@
         {
             "path": "/how-to-play.html",
             "prefetches": ["https://a-maze.jothin.tech/assets/img/bg.png"]
-        }
+        },
+        "/me.html"
     ],
     "line-end": "\n"
 }

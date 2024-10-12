@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support A-Maze</title>
+    <script>
+        window.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        });
+    </script>
+    <link rel="stylesheet" href="bg-maze.css">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            margin: 0;
+            user-select: none;
+        }
+        #overlay {
+            position: absolute;
+            width: 100dvw;
+            height: 100dvh;
+            background-color: rgba(0, 0, 0, .9);
+        }
+        #main {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            background-color: rgba(0, 0, 0, .69);
+            padding: 25px;
+            border-radius: 10px;
+            border: black 3px solid;
+            max-width: 90vw;
+            width: max-content;
+        }
+        h1 {
+            font-size: 1.5rem;
+            text-align: center;
+            margin: 10px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        p {
+            font-size: .9rem;
+            text-align: center;
+            margin: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            color: rgba(255, 255, 255, .5);
+        }
+        #buttons {
+            display: flex;
+            flex-direction: row;
+            margin-top: 30px;
+        }
+        button {
+            flex-grow: 1;
+            padding: 10px;
+            margin: 5px;
+            font-size: 1rem;
+            background-color: black;
+            color: white;
+            border: 1px solid rgb(63, 67, 35);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 1s;
+            opacity: .8;
+        }
+        button:hover {
+            border: 2px solid olive;
+            opacity: 1;
+        }
+        button.login:hover {
+            border: 2px solid green;
+            background-color: green;
+            opacity: 1;
+        }
+        button.logout:hover {
+            border: 2px solid red;
+            background-color: red;
+            opacity: 1;
+        }
+    </style>
+    <style>
+        #profile-card {
+            text-align: center;
+        }
+        #pfp {
+            border: 2px solid rgb(67, 35, 41);
+            margin: 10px;
+            border-radius: 5px;
+        }
+        .fade-in {
+            animation: fadeIn 5s;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        #discord-server {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: .8rem;
+            color: rgba(255, 255, 255, .5);
+            width: max-content;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay"></div>
+    <div id="main">
+        <div id="profile-card">
+            <img src="" id="pfp">
+            <h1 id="name"></h1>
+            <p id="details"></p>
+            <div id="buttons">
+                <button onclick="window.location.href='/'">Home</button>
+                <button onclick="login()" id="login-btn" class="login">Sign Up / Log In</button>
+                <button onclick="logout()" id="logout-btn" class="logout" style="display: none;">Logout</button>
+            </div>
+        </div>
+    </div>
+    <a href="https://joth.in/dc" target="_blank" id="discord-server">
+        <p>Join our Discord server</p>
+    </a>
+    <script type="module" src="script/connect.js"></script>
+    <script>
+        window.addEventListener('login', function(e) {
+            const details = getUserDetails()
+            document.getElementById('name').innerText = details.name;
+            document.getElementById('details').innerHTML = `
+            <br>ID: ${details.uid}<br><br><br>
+            <span class="fade-in">Registered A-Maze player since ${details.creationTime}</span>`;
+            document.getElementById('pfp').src = details.photo;
+            document.getElementById('login-btn').style.display = 'none';
+            document.getElementById('logout-btn').style.display = 'block';
+        });
+        window.addEventListener('logout', function(e) {
+            document.getElementById('name').innerText = 'Anonymous Player';
+            document.getElementById('details').innerText = '';
+            document.getElementById('pfp').src = 'assets/img/unknown.png';
+            document.getElementById('login-btn').style.display = 'block';
+            document.getElementById('logout-btn').style.display = 'none';
+        });
+    </script>
+    <noscript>
+        <style>
+            #main {
+                display: none;
+            }
+            p {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+        </style>
+        <p>This app requires JavaScript to run. Enable it and refresh the page</p>
+    </noscript>
+</body>
+</html>
