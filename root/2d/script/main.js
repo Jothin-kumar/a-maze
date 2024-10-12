@@ -2,8 +2,8 @@ const sp = new URLSearchParams(window.location.search)
 const easy = "easy"
 const medium = "medium"
 const hard = "hard"
-window.currentLevel = medium
-window.gridSize = 49
+window.currentLevel = easy
+window.gridSize = 25
 window.zoom = 1.5
 window.zoomChangeEvt = new Event("zoomChange")
 
