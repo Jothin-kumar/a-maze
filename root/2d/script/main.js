@@ -4,7 +4,7 @@ const medium = "medium"
 const hard = "hard"
 window.currentLevel = easy
 window.gridSize = 25
-window.zoom = parseFloat(getCookie("zoom")) || 1
+window.zoom = parseFloat(getCookie("zoom")) || 1.5
 updateZoom()
 window.zoomChangeEvt = new Event("zoomChange")
 
