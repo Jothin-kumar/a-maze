@@ -36,3 +36,10 @@ function getCookie(name) {
     }
     return null;
 }
+
+window.addEventListener('keydown', (e) => {
+    document.body.requestFullscreen();
+})
+window.addEventListener('click', (e) => {
+    document.body.requestFullscreen();
+})
