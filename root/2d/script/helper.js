@@ -28,3 +28,11 @@ function stopAllTransition() {
 function resumeAllTransition() {
     document.body.classList.remove("donotanimate");
 }
+
+function getCookie(name) {
+    const cookie = document.cookie.split("; ").find(cookie => cookie.startsWith(name));
+    if (cookie) {
+        return cookie.split("=")[1];
+    }
+    return null;
+}

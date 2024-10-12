@@ -4,7 +4,8 @@ const medium = "medium"
 const hard = "hard"
 window.currentLevel = easy
 window.gridSize = 25
-window.zoom = 1.5
+window.zoom = parseFloat(getCookie("zoom")) || 1
+updateZoom()
 window.zoomChangeEvt = new Event("zoomChange")
 
 if (sp.has("level")) {
@@ -118,13 +119,17 @@ window.alignMazeHandler = () => {
 }
 window.addEventListener("resize", window.alignMazeHandler)
 
+function updateZoom() {
+    document.getElementById("zoom-percent").innerText = `${Math.round(window.zoom*100/1.5).toString().padStart(3, "0")}%`
+}
 function setZoom(z) {
     stopAllTransition()
     window.zoom = z
     window.dispatchEvent(zoomChangeEvt)
     alignMaze()
-    document.getElementById("zoom-percent").innerText = `${Math.round(window.zoom*100/1.5).toString().padStart(3, "0")}%`
+    updateZoom()
     setTimeout(resumeAllTransition, 1000)
+    document.cookie = `zoom=${window.zoom}`
 }
 const changeZoomBy = (z) => setZoom(window.zoom + z)
 zoomIn = () => {
