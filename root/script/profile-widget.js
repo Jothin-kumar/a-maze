@@ -9,6 +9,7 @@ pfp.style.right = '10px';
 pfp.style.scale = '0.5';
 pfp.style.cursor = "pointer";
 pfp.style.zIndex = '1000';
+pfp.style.opacity = '0.9';
 document.body.appendChild(pfp);
 pfp.onclick = function() {
     window.open('/me', '_blank');
