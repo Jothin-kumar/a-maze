@@ -15,10 +15,17 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
+auth.onAuthStateChanged((user) => {
+    window.user = user;
+    if (user) {
+        window.dispatchEvent(new Event('login'));
+    }
+    else {
+        window.dispatchEvent(new Event('logout'));
+    }
+})
 window.login = () => {
     if (auth.currentUser) {
-        window.user = auth.currentUser;
-        window.dispatchEvent(new Event('login'));
         return
     }
     signInWithPopup(auth, provider)
