@@ -39,6 +39,26 @@ function getCookie(name) {
     }
     return null;
 }
+class CookieManager {
+    constructor() {
+        document.cookie.split("; ").forEach(cookie => {
+            const [name, value] = cookie.split("=");
+        });
+    }
+    set(name, value) {
+        document.cookie = `${name}=${value}`;
+    }
+    get(name) {
+        const cookie = document.cookie.split("; ").find(cookie => cookie.startsWith(name));
+        if (cookie) {
+            return cookie.split("=")[1];
+        }
+        return null;
+    }
+    has(name) {
+        return document.cookie.split("; ").some(cookie => cookie.startsWith(name));
+    }
+}
 
 function goFullscreen() {
     /* Try going fullscreen once. If user exits fullscreen, don't go fullscreen again. */

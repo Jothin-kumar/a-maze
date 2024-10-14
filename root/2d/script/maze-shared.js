@@ -137,7 +137,7 @@ async function shareMaze(button) {
         finish(window.shareURL);
         return
     }
-    const usp = new URLSearchParams(window.location.search);
+    const usp = new CookieManager();
     if (usp.has("share-url")) {
         const shareURL = usp.get("share-url");
         if (shareURL.startsWith(`joth.in/maze`) || shareURL.startsWith("mazes.jothin.tech/")) {

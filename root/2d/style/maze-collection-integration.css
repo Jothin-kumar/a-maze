@@ -1,0 +1,28 @@
+#random-maze-btn {
+    background-color: olive;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+}
+#random-maze-btn:hover {
+    background-color: yellow;
+    color: black;
+    cursor: pointer;
+}
+
+#maze-collection-integration {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    text-align: center;
+    overflow: scroll;
+    height: 95vh;
+}
+#a-maze {
+    opacity: 0;
+}
+#profile-widget {
+    display: none;
+}

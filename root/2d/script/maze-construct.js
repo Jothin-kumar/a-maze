@@ -1,5 +1,3 @@
-window.mazeSquares = {}
-
 class MazeSquare {
     constructor(x, y) {
         this.x = x;
@@ -118,6 +116,18 @@ function constructPath(start, pathLength = 169, condition = (dot) => true){
 
 var c = 0
 function preConstruct() {
+    if (window.mazeSquares) {
+        Object.values(window.mazeSquares).forEach((d) => {
+            d.elem.remove();
+        })
+    }
+    if (window.lines) {
+        Object.values(window.lines).forEach((d) => {
+            d.elem.remove();
+        })
+    }
+    window.mazeSquares = {}
+    window.lines = {};
     for (let x = 1; x < window.gridSize + 1; x++) {
         for (let y = 1; y < window.gridSize + 1; y++) {
             new MazeSquare(x, y);
@@ -144,6 +154,7 @@ async function construct() {
     const maxIter = 10000
     const fp = 100/maxIter
     const fp_ = maxIter/100
+    c = 0
     while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < maxIter) {
         pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => d.used)), randRange(val[2], val[3]), (dot) => !dot.used).path);
         if (c % fp_ === 0) {

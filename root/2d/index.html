@@ -4,12 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>A-Maze : Create a random maze and play online</title>
+    <link rel="stylesheet" href="style/maze-collection-integration.css">
     <link rel="stylesheet" href="style/main.css">
     <link rel="stylesheet" href="style/portrait.css">
     <link rel="stylesheet" href="style/print.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://mazes.jothin.tech/style.css">
 </head>
 <body>
+    <div id="maze-collection-integration">
+        <ul id="lvl-chooser">
+            <li onclick="toLevel(this); setCookie('level', 'easy')" id="lvl-easy">Easy</li>
+            <li onclick="toLevel(this); setCookie('level', 'medium')" id="lvl-medium">Medium</li>
+            <li onclick="toLevel(this); setCookie('level', 'hard')" id="lvl-hard">Hard</li>
+        </ul>
+        <div id="main-maze-collections">
+            <p id="main-msg">Loading... Please Wait</p>
+            <p id="no-script-msg" style="display: none;">Enable JavaScript and reload the page</p>
+            <div id="mazes-list"></div>
+            <noscript>
+                <style>
+                    #main-msg {
+                        display: none;
+                    }
+                    #no-script-msg {
+                        display: block !important;
+                        color: red;
+                        font-family: 'Courier New', Courier, monospace;
+                    }
+                    #lvl-chooser, #references {
+                        opacity: .1;
+                    }
+                </style>
+            </noscript>
+        </div>
+        <a id="random-maze-btn" onclick="playNewMaze()">
+            Generate a random maze &gt;
+        </a>
+    </div>
+    <div id="a-maze">
     <div id="loading">
         <h1 id="loader-msg">Loading...</h1>
         <p id="loading-might-take-a-while">Please wait :-&rpar;</p>
@@ -20,16 +53,11 @@
             <div id="maze-overlay"></div>
         </div>
         <div id="controls">
-            <div id="levels-control">
-                <button onclick="toLevel('easy')" id="easy" class="current-lvl">Easy</button>
-                <button onclick="toLevel('medium')" id="medium">Medium</button>
-                <button onclick="toLevel('hard')" id="hard">Hard</but>
-            </div>
             <div id="other-options">
                 <button onclick="revealAnswer()" id="reveal-answer">Reveal Answer</button>
                 <button onclick="window.player.reset()" id="reset-btn">Reset</button>
                 <button onclick="helpBtn()" id="help-btn">Help</button>
-                <button onclick="newMaze()" id="controls-new-maze-btn">New Maze</button>
+                <button onclick="playNewMaze()" id="controls-new-maze-btn">New Maze</button>
                 <button onclick="shareMaze(this)">Share Maze</button>
             </div>
             <div id="zoom-controls">
@@ -42,7 +70,7 @@
     <div id="game-over-parent">
         <p id="game-over"></p>
         <div id="game-over-maze-parent"></div>
-        <button onclick="newMaze()" id="game-over-new-maze-btn">Play a new maze</button>
+        <button onclick="playNewMaze()" id="game-over-new-maze-btn">Play a new maze</button>
         <button onclick="shareMaze(this)">Share Maze</button>
     </div>
     <div id="help-parent">
@@ -77,6 +105,7 @@
         <h3 id="share-url-h3">Please Copy share URL manually</h3>
         <a href="https://joth.in/maze" target="_blank" id="share-url-a">https://joth.in/maze</a>
     </div>
+    </div>
     <noscript>
         <style>
             #no-js-msg {
@@ -92,6 +121,9 @@
         <p id="no-js-msg">This application requires JavaScript. Enable it and refresh the page.</p>
     </noscript>
     
+    <script src="https://mazes.jothin.tech/index.js"></script>
+    <script>bodyReload()</script>
+    <script src="script/maze-collection-integration.js"></script>
     <script src="script/helper.js"></script>
     <script src="script/maze-construct.js"></script>
     <script src="script/line.js"></script>
@@ -105,6 +137,7 @@
     <script src="script/help.js"></script>
     <script src="script/difficulty.js"></script>
     <script src="script/print.js"></script>
+    <script src="script/maze-collection-integration.js"></script>
 
     <script src="../script/connect.js" type="module"></script>
     <script src="../script/profile-widget.js"></script>
