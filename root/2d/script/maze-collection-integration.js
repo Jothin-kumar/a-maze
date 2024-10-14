@@ -37,7 +37,8 @@ configureMazeClickCallback((level, id) => {
 })
 
 function playRandomlyGeneratedMaze() {
-    deleteCookie("maze-data")
+    deleteCookie("shared-maze-id")
+    deleteCookie("maze-collection-id")
     deleteCookie("share-url")
     playNewMaze()
 }
