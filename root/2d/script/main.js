@@ -4,8 +4,6 @@ const medium = "medium"
 const hard = "hard"
 window.currentLevel = easy
 window.gridSize = 25
-window.zoom = parseFloat(getCookie("zoom")) || 1.5
-updateZoom()
 window.zoomChangeEvt = new Event("zoomChange")
 
 if (sp.has("level")) {
@@ -24,6 +22,8 @@ if (sp.has("level")) {
     }
 }
 configForGridSize(window.gridSize)
+optimizeZoom()
+window.addEventListener("resize", optimizeZoom)
 function setCurrentLevel(lvl) {
     window.currentLevel = lvl
     document.querySelectorAll("#levels-control > button").forEach(e => e.classList.remove("current-lvl"))
@@ -39,7 +39,20 @@ function configForGridSize(size) { // Example: size = 49 for 49x49 grid
         mg.setAttribute("width", a*zoom)
     })
 }
-
+function optimizeZoom() {
+    const m = document.body.getBoundingClientRect()
+    const h = m.height
+    const w = m.width
+    if (h > w) { // Portrait
+        window.suggestedZoom = h/((window.gridSize-.5)*10 + 10)
+    }
+    else { // Landscape
+        window.suggestedZoom = w/((window.gridSize-.5)*10 + 10)
+    }
+    window.zoom = parseFloat(getCookie(`zoom-${window.currentLevel}`)) || window.suggestedZoom
+    setZoom(window.zoom, cookie=false)
+    updateZoom()
+}
 
 if (sp.has("maze-data")) {
     setTimeout(() => {
@@ -122,21 +135,21 @@ window.addEventListener("resize", window.alignMazeHandler)
 function updateZoom() {
     document.getElementById("zoom-percent").innerText = `${Math.round(window.zoom*100/1.5).toString().padStart(3, "0")}%`
 }
-function setZoom(z) {
+function setZoom(z, cookie=true) {
     stopAllTransition()
     window.zoom = z
     window.dispatchEvent(zoomChangeEvt)
     alignMaze()
     updateZoom()
     setTimeout(resumeAllTransition, 1000)
-    document.cookie = `zoom=${window.zoom}`
+    if (cookie) setCookie(`zoom-${window.currentLevel}`, window.zoom)
 }
 const changeZoomBy = (z) => setZoom(window.zoom + z)
 zoomIn = () => {
-    if (window.zoom < 2) changeZoomBy(+.05)
+    if (window.zoom < window.suggestedZoom*1.5) changeZoomBy(+.05)
 }
 zoomOut = () => {
-    if (window.zoom > 1) changeZoomBy(-.05)
+    if (window.zoom > window.suggestedZoom*.5) changeZoomBy(-.05)
 }
 window.addEventListener("keypress", (e) => {
     if (e.ctrlKey || e.altKey || e.metaKey) return
