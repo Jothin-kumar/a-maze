@@ -35,7 +35,6 @@
         <div>
             <p id="msg">Loading shared maze...</p>
             <br>
-            <a href="/play-2d">New Maze</a>
         </div>
         <script>
             function declareInvalid() {
@@ -64,6 +63,7 @@
                             return
                         }
                         mazeData = mazeData.slice(1)
+                        document.cookie = `level=${lvl}; maze-data=${mazeData}; share-url=joth.in/maze?id=${usp.get("id")}`
                         window.location.href = `/2d`
                     }
                     catch (e) {
