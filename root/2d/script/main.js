@@ -4,8 +4,6 @@ const medium = "medium"
 const hard = "hard"
 window.currentLevel = easy
 window.gridSize = 25
-window.zoom = parseFloat(getCookie("zoom")) || 1.5
-updateZoom()
 window.zoomChangeEvt = new Event("zoomChange")
 
 if (sp.has("level")) {
@@ -28,6 +26,8 @@ function setCurrentLevel(lvl) {
     window.currentLevel = lvl
     document.querySelectorAll("#levels-control > button").forEach(e => e.classList.remove("current-lvl"))
     document.getElementById(lvl).classList.add("current-lvl")
+    window.zoom = parseFloat(getCookie(`zoom-${window.currentLevel}`)) || 1.5
+    updateZoom()
 }
 function configForGridSize(size) { // Example: size = 49 for 49x49 grid
     window.gridSize = size
@@ -129,7 +129,7 @@ function setZoom(z) {
     alignMaze()
     updateZoom()
     setTimeout(resumeAllTransition, 1000)
-    document.cookie = `zoom=${window.zoom}`
+    setCookie(`zoom-${window.currentLevel}`, window.zoom)
 }
 const changeZoomBy = (z) => setZoom(window.zoom + z)
 zoomIn = () => {

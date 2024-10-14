@@ -29,6 +29,9 @@ function resumeAllTransition() {
     document.body.classList.remove("donotanimate");
 }
 
+function setCookie(name, value) {
+    document.cookie = `${name}=${value}`;
+}
 function getCookie(name) {
     const cookie = document.cookie.split("; ").find(cookie => cookie.startsWith(name));
     if (cookie) {
