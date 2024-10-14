@@ -4,6 +4,10 @@
     padding: 10px;
     border-radius: 5px;
     margin: 10px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 #random-maze-btn:hover {
     background-color: yellow;
@@ -18,11 +22,11 @@
     z-index: 2;
     text-align: center;
     overflow: scroll;
-    height: 95vh;
 }
 #a-maze {
     opacity: 0;
 }
-#profile-widget {
-    display: none;
+body {
+    margin: 0;
+    padding: 0;
 }
