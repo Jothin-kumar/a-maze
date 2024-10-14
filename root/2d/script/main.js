@@ -40,20 +40,16 @@ function configForGridSize(size) { // Example: size = 49 for 49x49 grid
     })
 }
 function optimizeZoom() {
-    window.zoom = parseFloat(getCookie(`zoom-${window.currentLevel}`))
-    if (!window.zoom) {
-        const m = document.body.getBoundingClientRect()
-        const h = m.height
-        const w = m.width
-        if (h > w) { // Portrait
-            window.zoom = h/((window.gridSize-.5)*10 + 10)
-        }
-        else { // Landscape
-            window.zoom = w/((window.gridSize-.5)*10 + 10)
-            console.log(gridSize);
-        }
+    const m = document.body.getBoundingClientRect()
+    const h = m.height
+    const w = m.width
+    if (h > w) { // Portrait
+        window.suggestedZoom = h/((window.gridSize-.5)*10 + 10)
     }
-    console.log(window.zoom);
+    else { // Landscape
+        window.suggestedZoom = w/((window.gridSize-.5)*10 + 10)
+    }
+    window.zoom = parseFloat(getCookie(`zoom-${window.currentLevel}`)) || window.suggestedZoom
     setZoom(window.zoom, cookie=false)
     updateZoom()
 }
@@ -150,10 +146,10 @@ function setZoom(z, cookie=true) {
 }
 const changeZoomBy = (z) => setZoom(window.zoom + z)
 zoomIn = () => {
-    if (window.zoom < 2) changeZoomBy(+.05)
+    if (window.zoom < window.suggestedZoom*1.5) changeZoomBy(+.05)
 }
 zoomOut = () => {
-    if (window.zoom > 1) changeZoomBy(-.05)
+    if (window.zoom > window.suggestedZoom*.5) changeZoomBy(-.05)
 }
 window.addEventListener("keypress", (e) => {
     if (e.ctrlKey || e.altKey || e.metaKey) return
