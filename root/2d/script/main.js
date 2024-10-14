@@ -22,12 +22,12 @@ if (sp.has("level")) {
     }
 }
 configForGridSize(window.gridSize)
+optimizeZoom()
+window.addEventListener("resize", optimizeZoom)
 function setCurrentLevel(lvl) {
     window.currentLevel = lvl
     document.querySelectorAll("#levels-control > button").forEach(e => e.classList.remove("current-lvl"))
     document.getElementById(lvl).classList.add("current-lvl")
-    window.zoom = parseFloat(getCookie(`zoom-${window.currentLevel}`)) || 1.5
-    updateZoom()
 }
 function configForGridSize(size) { // Example: size = 49 for 49x49 grid
     window.gridSize = size
@@ -39,7 +39,24 @@ function configForGridSize(size) { // Example: size = 49 for 49x49 grid
         mg.setAttribute("width", a*zoom)
     })
 }
-
+function optimizeZoom() {
+    window.zoom = parseFloat(getCookie(`zoom-${window.currentLevel}`))
+    if (!window.zoom) {
+        const m = document.body.getBoundingClientRect()
+        const h = m.height
+        const w = m.width
+        if (h > w) { // Portrait
+            window.zoom = h/((window.gridSize-.5)*10 + 10)
+        }
+        else { // Landscape
+            window.zoom = w/((window.gridSize-.5)*10 + 10)
+            console.log(gridSize);
+        }
+    }
+    console.log(window.zoom);
+    setZoom(window.zoom, cookie=false)
+    updateZoom()
+}
 
 if (sp.has("maze-data")) {
     setTimeout(() => {
@@ -122,14 +139,14 @@ window.addEventListener("resize", window.alignMazeHandler)
 function updateZoom() {
     document.getElementById("zoom-percent").innerText = `${Math.round(window.zoom*100/1.5).toString().padStart(3, "0")}%`
 }
-function setZoom(z) {
+function setZoom(z, cookie=true) {
     stopAllTransition()
     window.zoom = z
     window.dispatchEvent(zoomChangeEvt)
     alignMaze()
     updateZoom()
     setTimeout(resumeAllTransition, 1000)
-    setCookie(`zoom-${window.currentLevel}`, window.zoom)
+    if (cookie) setCookie(`zoom-${window.currentLevel}`, window.zoom)
 }
 const changeZoomBy = (z) => setZoom(window.zoom + z)
 zoomIn = () => {
