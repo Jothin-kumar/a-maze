@@ -9,144 +9,50 @@
             e.preventDefault();
         });
     </script>
+    <script src="https://mazes.jothin.tech/index.js"></script>
+    <link rel="stylesheet" href="https://mazes.jothin.tech/style.css">
     <style>
-        body {
-            background-color: black;
-            color: white;
-            user-select: none;
-        }
-        #main {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            font-family: 'Courier New', Courier, monospace;
-            max-width: 90vw;
-            width: max-content;
-        }
-        #options {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-        #options > li {
-            margin: 0 .5rem;
-            cursor: pointer;
-            padding: 10px;
-            border: green 2px solid;
-            transition: border .69s, background-color .69s;
-            border-radius: 5px;
-        }
-        #options > li:hover {
-            border: olive 2px solid;
-        }
-        .not-recommended-option {
-            opacity: .69;
-        }
-        .recommended-option {
-            background-color: green;
-        }
-        .recommended-option:hover {
+        #random-maze-btn {
             background-color: olive;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
         }
-        @media screen and (orientation: portrait) {
-            #options {
-                flex-direction: column;
-            }
-            #options > li {
-                margin: .5rem 0 !important;
-            }
-        }
-        #msg {
-            font-family: 'Courier New', Courier, monospace;
-            position: fixed;
-            bottom: 1vh;
-            left: 50%;
-            transform: translateX(-50%);
-            max-width: 90vw;
-            width: max-content;
-            text-align: center;
+        #random-maze-btn:hover {
+            background-color: yellow;
+            color: black;
+            cursor: pointer;
         }
     </style>
 </head>
-<body>
+<body onload="bodyLoaded()"></body>
+    <ul id="lvl-chooser">
+        <li onclick="toLevel(this)" id="lvl-easy">Easy</li>
+        <li onclick="toLevel(this)" id="lvl-medium">Medium</li>
+        <li onclick="toLevel(this)" id="lvl-hard">Hard</li>
+    </ul>
     <div id="main">
-        <h1>Play A-Maze 2D</h1>
-        <ul id="options">
-            <li id="opt-1" onclick="window.location.href = '/2d'">Generate a New Maze</li>
-            <li id="opt-2" onclick="window.location.href = 'https://mazes.jothin.tech'">Visit the Maze Collection</li>
-        </ul>
-    </div>
-    <p id="msg"></p>
-    <noscript>
-        <style>
-            #main {
-                display: none;
-            }
-            p {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-            }
-        </style>
-        <p>This app requires JavaScript to run. Enable it and refresh the page</p>
-    </noscript>
-    <script>
-        a = new Date().getTime()
-        for (let i = 0; i < 10000000; i++) {i+1}
-        b = new Date().getTime()
-        const deviceIsSlow = b - a > 15
-        if (deviceIsSlow) document.getElementById("opt-1").classList.add('not-recommended-option')
-        if (deviceIsSlow) document.getElementById("opt-2").classList.add('recommended-option')
-        if (!deviceIsSlow) document.getElementById("opt-1").classList.add('recommended-option')
-
-        const choice = deviceIsSlow ? "The Maze Collection" : "New Maze"
-        const url = deviceIsSlow ? "https://mazes.jothin.tech" : "/2d"
-        const msg = document.getElementById("msg")
-
-        window.AR = false
-        const update_msg = (s) => msg.innerHTML =  `Redirecting to ${choice} in ${s.toString().padStart(2, "0")} seconds...`
-        async function autoRedirectInit() {
-            window.AR = true
-            let remainingTime = 10
-            while (window.AR) {
-                if (remainingTime === 0) {
-                    window.location.href = url
-                    break
+        <p id="main-msg">Loading... Please Wait</p>
+        <p id="no-script-msg" style="display: none;">Enable JavaScript and reload the page</p>
+        <noscript>
+            <style>
+                #main-msg {
+                    display: none;
                 }
-                update_msg(remainingTime)
-                remainingTime--
-                await new Promise(r => setTimeout(r, 1000))
-            }
-        }
-        function autoRedirectCancel() {
-            window.AR = false
-            msg.innerHTML = ""
-        }
-
-        window.ARtimeout = setTimeout(autoRedirectInit, 1000)
-        function resetAR() {
-            autoRedirectCancel()
-            clearTimeout(window.ARtimeout)
-            window.ARtimeout = setTimeout(autoRedirectInit, 1000)
-        }
-        window.addEventListener("mousemove", resetAR)
-        window.addEventListener("touchmove", resetAR)
-
-        function handleClick() {
-            window.removeEventListener("mousemove", resetAR)
-            window.removeEventListener("touchmove", resetAR)
-            autoRedirectCancel()
-        }
-        window.addEventListener("click", handleClick)
-        window.addEventListener("contextmenu", handleClick)
-    </script>
-    <script src="script/connect.js" type="module"></script>
-    <script src="script/profile-widget.js"></script>
+                #no-script-msg {
+                    display: block !important;
+                    color: red;
+                    font-family: 'Courier New', Courier, monospace;
+                }
+                #lvl-chooser, #references {
+                    opacity: .1;
+                }
+            </style>
+        </noscript>
+    </div>
+    <a id="random-maze-btn">
+        Generate a random maze &gt;
+    </a>
 </body>
 </html>
