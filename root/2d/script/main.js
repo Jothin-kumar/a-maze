@@ -58,10 +58,31 @@ function A_Maze_main() {
     document.getElementById("msg").style.display = "none"
     document.getElementById("main").style.display = "none"
     document.getElementById("controls").style.display = "none"
-    if (sp.has("maze-data")) {
-        setTimeout(() => {
+    if (sp.has("maze-collection-id") || sp.has("shared-maze-id")) {
+        setTimeout(async () => {
             try {
-                loadMazeFromShared(sp.get("maze-data"))
+                if (sp.has("maze-collection-id")) {
+                    lvl = sp.get("level")
+                    data = await getMazeDataFromCollection(lvl, sp.get("maze-collection-id"))
+                }
+                else if (sp.has("shared-maze-id")) {
+                    lvl, data = await getMazeData(sp.get("shared-maze-id"))
+                }
+                setCurrentLevel(lvl)
+                switch (level) {
+                    case easy:
+                        window.gridSize = 25
+                        break
+                    case medium:
+                        window.gridSize = 49
+                        break
+                    case hard:
+                        window.gridSize = 69
+                        break
+                }
+                configForGridSize(window.gridSize)
+                optimizeZoom()
+                loadMazeFromShared(data)
             }
             catch (e) {
                 console.error(e)

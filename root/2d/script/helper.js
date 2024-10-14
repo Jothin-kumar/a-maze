@@ -39,6 +39,9 @@ function getCookie(name) {
     }
     return null;
 }
+function deleteCookie(name) {
+    setCookie(name, "");
+}
 class CookieManager {
     constructor() {
         document.cookie.split("; ").forEach(cookie => {
@@ -56,7 +59,7 @@ class CookieManager {
         return null;
     }
     has(name) {
-        return document.cookie.split("; ").some(cookie => cookie.startsWith(name));
+        return Boolean(this.get(name));
     }
 }
 
