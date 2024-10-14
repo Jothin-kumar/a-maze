@@ -30,7 +30,7 @@ function resumeAllTransition() {
 }
 
 function setCookie(name, value) {
-    document.cookie = `${name}=${value}`;
+    document.cookie = `${name}=${value}; path=/`;
 }
 function getCookie(name) {
     const cookie = document.cookie.split("; ").find(cookie => cookie.startsWith(name));
@@ -49,7 +49,7 @@ class CookieManager {
         });
     }
     set(name, value) {
-        document.cookie = `${name}=${value}`;
+        document.cookie = `${name}=${value}; path=/`;
     }
     get(name) {
         const cookie = document.cookie.split("; ").find(cookie => cookie.startsWith(name));

@@ -36,6 +36,9 @@ function optimizeZoom() {
 }
 
 window.gameCount = 0
+if (sp.has("shared-maze-id")) {
+    playNewMaze()
+}
 function A_Maze_main() {
     if (sp.has("level")) {
         const level = sp.get("level")
@@ -66,7 +69,9 @@ function A_Maze_main() {
                     data = await getMazeDataFromCollection(lvl, sp.get("maze-collection-id"))
                 }
                 else if (sp.has("shared-maze-id")) {
-                    lvl, data = await getMazeData(sp.get("shared-maze-id"))
+                    r = await getMazeData(sp.get("shared-maze-id"))
+                    lvl = r.lvl
+                    data = r.data
                 }
                 setCurrentLevel(lvl)
                 switch (level) {

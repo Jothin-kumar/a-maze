@@ -129,8 +129,8 @@ async function getMazeID(data, lvl) {  // Get maze ID from server
     const mazeID = await r.text();
     return mazeID;
 }
-async function loadMazeFromID(id) {  // Load maze from server
-    const r = await fetch(`https://share-maze.jothin.tech/get?maze-id=${usp.get("id")}`)
+async function getMazeData(id) {  // Load maze from server  
+    const r = await fetch(`https://share-maze.jothin.tech/get?maze-id=${id}`)
     let mazeData = (await r.json())["output"]
     if (!mazeData) {
         declareInvalid()
@@ -146,7 +146,10 @@ async function loadMazeFromID(id) {  // Load maze from server
         return
     }
     mazeData = mazeData.slice(1)
-    return lvl, mazeData
+    return {
+        lvl: lvl,
+        data: mazeData
+    }
 }
 
 async function shareMaze(button) {
@@ -158,9 +161,7 @@ async function shareMaze(button) {
     }
     const usp = new CookieManager();
     if (usp.has("share-url")) {
-        const shareURL = usp.get("share-url");
-        console.log(shareURL);
-        
+        const shareURL = usp.get("share-url").replace("equal_to", "=");
         finish("https://" + shareURL);
         return
     }
