@@ -78,13 +78,6 @@ function A_Maze_main() {
 }
 
 
-if (sp.has("share-url")) {
-    const shareURL = sp.get("share-url");
-    if (shareURL.startsWith(`${window.location.host}/share?s=`) || shareURL.startsWith("mazes.jothin.tech/")) {
-        document.getElementById("print-msg").innerText = shareURL
-    }
-}
-
 function alignMaze() {
     const mgbc = mg.getBoundingClientRect()
     const mbc = document.getElementById("main").getBoundingClientRect()

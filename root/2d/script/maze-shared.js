@@ -177,7 +177,6 @@ async function shareMaze(button) {
     }
     function finish(url) {
         window.shareURL = url;
-        document.getElementById("print-msg").innerText = url
         navigator.clipboard.writeText(url).catch(() => {
             document.getElementById("share-url-a").innerText = url;
             document.getElementById("share-url-a").setAttribute("href", url);
