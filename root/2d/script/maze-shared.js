@@ -167,7 +167,7 @@ async function shareMaze(button) {
     }, 0);
 
     try {
-        const mazeID = await getMazeID(exportMaze(), usp.get("level") || "medium");
+        const mazeID = await getMazeID(exportMaze(), usp.get("level") || "easy");
         const url = `https://joth.in/maze?id=${mazeID}`;
         finish(url)
     }
