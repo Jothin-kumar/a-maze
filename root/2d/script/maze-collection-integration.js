@@ -10,6 +10,7 @@ function playNewMaze() {
     document.getElementById("game-over-parent").style.display = "none";
     window.gameIsOver = false;
     window.shareURL = null;
+    window.answerRevealed = false;
     A_Maze_main()
 }
 function summonMazeCollectionAgain() {
