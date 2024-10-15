@@ -12,7 +12,7 @@ style.innerHTML = `
     right: 10px;
     cursor: pointer;
     z-index: 1000;
-    opacity: 0.9;
+    opacity: 0.69;
     scale: 0.5;
     transition: 0.5s;
 }
