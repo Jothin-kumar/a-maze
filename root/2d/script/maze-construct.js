@@ -163,6 +163,7 @@ async function construct() {
         }
         c++;
     }
+    loader.innerHTML = "Loading..."
     postConstruct();
 }
 function postConstruct() {
