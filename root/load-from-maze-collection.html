@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <style>
+            body {
+                background-color: black;
+                color: white;
+                user-select: none;
+            }
+            div {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+            a {
+                background-color: black;
+                color: white;
+                text-decoration: none;
+                cursor: pointer;
+                border: olive 1px solid;
+                padding: 10px;
+                font-size: small;
+                border-radius: 10px;
+                margin: auto;
+            }
+        </style>
+        <script>
+            window.addEventListener("contextmenu", function(e) {
+                e.preventDefault();
+            });
+        </script>
+    </head>
+    <body>
+        <div>
+            <p id="msg">Loading shared maze...</p>
+            <br>
+        </div>
+        <script src="2d/script/helper.js"></script>
+        <script>
+            function declareInvalid() {
+                const msg = document.getElementById("msg")
+                msg.innerText = "Invalid shared maze"
+                msg.style.color = "red"
+            }
+
+            async function main() {
+                const usp = new URLSearchParams(window.location.search)
+                if (usp.has("id") && usp.has("level")) {
+                    try {
+                        deleteCookie("shared-maze-id")
+                        setCookie("maze-collection-id", usp.get("id"))
+                        setCookie("level", usp.get("level"))
+                        const shareSlug = level === "easy" ? `@${id}`: `${level}/@${id}`;
+                        setCookie("share-url", `mazes.jothin.tech/${shareSlug}`)
+                        window.location.href = `/2d`
+                    }
+                    catch (e) {
+                        declareInvalid()
+                    }
+                }
+                else {
+                    declareInvalid()
+                }
+            }
+            main()
+        </script>
+        <noscript>
+            <style>
+                a {
+                    display: none;
+                }
+                p {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            </style>
+            <p>This application requires JavaScript. Enable it and refresh the page</p>
+        </noscript>
+    </body>
+</html>
