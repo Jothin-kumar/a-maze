@@ -8,6 +8,8 @@
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
+    width: max-content;
+    max-width: 90vw;
 }
 #random-maze-btn:hover {
     background-color: yellow;
