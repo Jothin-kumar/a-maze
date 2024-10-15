@@ -5,3 +5,8 @@ fullscreenBtn.addEventListener("click", function() {
         fullscreenBtn.style.display = "none"
     })
 })
+document.addEventListener("fullscreenchange", function() {
+    if (!document.fullscreenElement) {
+        fullscreenBtn.style.display = "block"
+    }
+})
