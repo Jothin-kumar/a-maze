@@ -30,7 +30,7 @@ function resumeAllTransition() {
 }
 
 function setCookie(name, value) {
-    document.cookie = `${name}=${value}; path=/; maz-age=31536000`;
+    document.cookie = `${name}=${value}; path=/; max-age=31536000`;
 }
 function getCookie(name) {
     const cookie = document.cookie.split("; ").find(cookie => cookie.startsWith(name));
