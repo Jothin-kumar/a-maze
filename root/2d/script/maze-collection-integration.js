@@ -1,7 +1,6 @@
 function playNewMaze() {
     document.getElementById("a-maze").style.opacity = "1"
     document.getElementById("maze-collection-integration").style.display = "none"
-    try {document.getElementById("profile-widget").style.display = "block"} catch {}
     document.getElementById("maze-overlay").style.display = "inline-block"
     document.getElementById("reset-btn").style.display = "inline-block"
     document.getElementById("reveal-answer").style.display = "inline-block"
@@ -20,7 +19,6 @@ function playNewMaze() {
 function summonMazeCollectionAgain() {
     document.getElementById("a-maze").style.opacity = "0"
     document.getElementById("maze-collection-integration").style.display = "block"
-    document.getElementById("profile-widget").style.display = "none"
     document.getElementById("maze-overlay").style.display = "none"
     document.getElementById("reset-btn").style.display = "none"
     document.getElementById("reveal-answer").style.display = "none"
