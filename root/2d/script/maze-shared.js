@@ -129,6 +129,28 @@ async function getMazeID(data, lvl) {  // Get maze ID from server
     const mazeID = await r.text();
     return mazeID;
 }
+async function getMazeData(id) {  // Load maze from server  
+    const r = await fetch(`https://share-maze.jothin.tech/get?maze-id=${id}`)
+    let mazeData = (await r.json())["output"]
+    if (!mazeData) {
+        declareInvalid()
+        return
+    }
+    const lvl = {
+        "e": "easy",
+        "m": "medium",
+        "h": "hard"
+    }[mazeData[0]]
+    if (!lvl) {
+        declareInvalid()
+        return
+    }
+    mazeData = mazeData.slice(1)
+    return {
+        lvl: lvl,
+        data: mazeData
+    }
+}
 
 async function shareMaze(button) {
     const originalText = button.innerText;
@@ -137,13 +159,11 @@ async function shareMaze(button) {
         finish(window.shareURL);
         return
     }
-    const usp = new URLSearchParams(window.location.search);
+    const usp = new CookieManager();
     if (usp.has("share-url")) {
-        const shareURL = usp.get("share-url");
-        if (shareURL.startsWith(`joth.in/maze`) || shareURL.startsWith("mazes.jothin.tech/")) {
-            finish("https://" + shareURL);
-            return
-        }
+        const shareURL = usp.get("share-url").replace("equal_to", "=");
+        finish("https://" + shareURL);
+        return
     }
 
     button.innerText = "Exporting...";
@@ -177,7 +197,6 @@ async function shareMaze(button) {
     }
     function finish(url) {
         window.shareURL = url;
-        document.getElementById("print-msg").innerText = url
         navigator.clipboard.writeText(url).catch(() => {
             document.getElementById("share-url-a").innerText = url;
             document.getElementById("share-url-a").setAttribute("href", url);

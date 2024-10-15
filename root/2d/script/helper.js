@@ -30,7 +30,7 @@ function resumeAllTransition() {
 }
 
 function setCookie(name, value) {
-    document.cookie = `${name}=${value}`;
+    document.cookie = `${name}=${value}; path=/`;
 }
 function getCookie(name) {
     const cookie = document.cookie.split("; ").find(cookie => cookie.startsWith(name));
@@ -38,6 +38,29 @@ function getCookie(name) {
         return cookie.split("=")[1];
     }
     return null;
+}
+function deleteCookie(name) {
+    setCookie(name, "");
+}
+class CookieManager {
+    constructor() {
+        document.cookie.split("; ").forEach(cookie => {
+            const [name, value] = cookie.split("=");
+        });
+    }
+    set(name, value) {
+        document.cookie = `${name}=${value}; path=/`;
+    }
+    get(name) {
+        const cookie = document.cookie.split("; ").find(cookie => cookie.startsWith(name));
+        if (cookie) {
+            return cookie.split("=")[1];
+        }
+        return null;
+    }
+    has(name) {
+        return Boolean(this.get(name));
+    }
 }
 
 function goFullscreen() {

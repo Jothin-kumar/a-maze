@@ -35,8 +35,8 @@
         <div>
             <p id="msg">Loading shared maze...</p>
             <br>
-            <a href="/play-2d">New Maze</a>
         </div>
+        <script src="2d/script/helper.js"></script>
         <script>
             function declareInvalid() {
                 const msg = document.getElementById("msg")
@@ -49,22 +49,11 @@
                 if (usp.has("id")) {
                     try {
                         const r = await fetch(`https://share-maze.jothin.tech/get?maze-id=${usp.get("id")}`)
-                        let mazeData = (await r.json())["output"]
-                        if (!mazeData) {
-                            declareInvalid()
-                            return
-                        }
-                        const lvl = {
-                            "e": "easy",
-                            "m": "medium",
-                            "h": "hard"
-                        }[mazeData[0]]
-                        if (!lvl) {
-                            declareInvalid()
-                            return
-                        }
-                        mazeData = mazeData.slice(1)
-                        window.location.href = `https://a-maze.jothin.tech/2d?maze-data=${mazeData}&level=${lvl}&share-url=joth.in%2Fmaze%3Fid%3D${usp.get("id")}`
+                        setCookie("shared-maze-id", usp.get("id"))
+                        deleteCookie("maze-collection-id")
+                        deleteCookie("level")
+                        setCookie("share-url", `joth.in/maze?idequal_to${usp.get("id")}`)
+                        window.location.href = `/2d`
                     }
                     catch (e) {
                         declareInvalid()

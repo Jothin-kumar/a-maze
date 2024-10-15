@@ -1,5 +1,5 @@
 # A-Maze
-`Create, Play, Share & Print mazes`
+`Create, Play and Share mazes online`
 <br>
 ![A-Maze preview](https://cdn.jothin.tech/img/a-maze.png)
 <br>

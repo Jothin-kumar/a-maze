@@ -6,7 +6,7 @@ function hideHelp() {
     help.style.display = "none"
 }
 window.addEventListener("keydown", (e) => {
-    if (["Escape", "q", "Q"].includes(e.key)) {
+    if (["q", "Q"].includes(e.key)) {
         hideHelp()
     }
 })

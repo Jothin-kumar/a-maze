@@ -72,34 +72,6 @@ body {
     background-color: rgba(100, 200, 100, .1);
     border-color: darkgoldenrod;
 }
-#levels-control {
-    width: fit-content;
-    margin: 10px auto;
-    background-color: black;
-    border: rgba(255, 255, 255, .5) 1px solid;
-    padding: 10px;
-    border-radius: 20px;
-}
-#levels-control > button {
-    background-color: black;
-    border: yellowgreen 1px solid;
-    border-radius: 10px;
-    color: white;
-    padding: 10px;
-    cursor: pointer;
-}
-@media screen and (orientation: landscape) {
-    #levels-control > button {
-        margin: 5px 0;
-    }
-}
-#levels-control > button:hover {
-    background-color: rgba(100, 255, 100, .25);
-}
-#levels-control > button.current-lvl {
-    background-color: darkgreen;
-
-}
 #zoom-controls {
     display: flex;
     flex-direction: row;
@@ -138,9 +110,6 @@ body {
         justify-content: center;
         align-items: center;
         width: 100vw;            
-    }
-    #levels-control {
-        margin: 0 10px;
     }
     #zoom-controls {
         margin: 0 10px !important;

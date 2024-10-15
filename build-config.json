@@ -9,7 +9,6 @@
             "path": "/index.html",
             "prefetches": ["https://a-maze.jothin.tech/assets/img/bg.png"]
         },
-        "/play-2d.html",
         {
             "path": "/support.html",
             "prefetches": ["https://a-maze.jothin.tech/assets/img/bg.png"]

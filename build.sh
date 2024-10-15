@@ -1,3 +1,5 @@
+set -e
+
 if [ -d "build" ]
 then
     cd build
