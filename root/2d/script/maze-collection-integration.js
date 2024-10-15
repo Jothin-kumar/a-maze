@@ -17,7 +17,6 @@ function playNewMaze() {
     A_Maze_main()
 }
 function summonMazeCollectionAgain() {
-    deleteCookie("level")
     deleteCookie("maze-collection-id")
     deleteCookie("share-url")
     deleteCookie("shared-maze-id")
