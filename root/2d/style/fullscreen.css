@@ -1,0 +1,12 @@
+#fullscreen-btn {
+    position: absolute;
+    z-index: 1000;
+    left: 10px;
+    top: 10px;
+}
+#fullscreen-btn:hover {
+    scale: 1.1;
+    rotate: -45deg;
+    transition: 2s;
+    cursor: pointer;
+}
