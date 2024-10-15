@@ -9,4 +9,7 @@ function gameOver(steps, startTime) {
     document.getElementById("controls").style.display = "none";
     document.getElementById("game-over").innerHTML = `<strong style="font-size: x-large">Game Over</strong><br><br>Score: ${score}<br>Time taken: ${((new Date().getTime() - startTime)/1000).toFixed(2)}s`;
     document.getElementById("game-over-parent").style.display = "block";
+    deleteCookie("shared-maze-id");
+    deleteCookie("maze-collection-id");
+    deleteCookie("share-url");
 }
