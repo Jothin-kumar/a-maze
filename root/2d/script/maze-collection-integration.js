@@ -17,6 +17,10 @@ function playNewMaze() {
     A_Maze_main()
 }
 function summonMazeCollectionAgain() {
+    deleteCookie("level")
+    deleteCookie("maze-collection-id")
+    deleteCookie("share-url")
+    deleteCookie("shared-maze-id")
     document.getElementById("a-maze").style.opacity = "0"
     document.getElementById("maze-collection-integration").style.display = "block"
     document.getElementById("maze-overlay").style.display = "none"
