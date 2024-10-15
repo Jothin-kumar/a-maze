@@ -36,7 +36,7 @@ function optimizeZoom() {
 }
 
 window.gameCount = 0
-if (sp.has("shared-maze-id")) {
+if (sp.has("maze-collection-id") || sp.has("shared-maze-id")) {
     playNewMaze()
 }
 function A_Maze_main() {
