@@ -62,14 +62,3 @@ class CookieManager {
         return Boolean(this.get(name));
     }
 }
-
-function goFullscreen() {
-    /* Try going fullscreen once. If user exits fullscreen, don't go fullscreen again. */
-    if (window.isFullScreen) return;
-    document.body.requestFullscreen()
-    .then(() => {
-        window.isFullScreen = true;
-    });
-}
-window.addEventListener('keydown', goFullscreen)
-window.addEventListener('click', goFullscreen)
