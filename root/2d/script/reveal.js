@@ -1,4 +1,7 @@
 async function revealAnswer() {
+    deleteCookie("shared-maze-id");
+    deleteCookie("maze-collection-id");
+    deleteCookie("share-url");
     const gc = window.gameCount
     document.getElementById("maze-overlay").style.display = "none";
     window.answerRevealed = true;
