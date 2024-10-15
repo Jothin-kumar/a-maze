@@ -160,11 +160,6 @@ async function shareMaze(button) {
         return
     }
     const usp = new CookieManager();
-    if (usp.has("share-url")) {
-        const shareURL = usp.get("share-url").replace("equal_to", "=");
-        finish("https://" + shareURL);
-        return
-    }
 
     button.innerText = "Exporting...";
     setTimeout(async () => {
