@@ -1,8 +1,8 @@
 #fullscreen-btn {
-    position: absolute;
+    position: fixed;
     z-index: 1000;
-    left: 10px;
-    top: 10px;
+    left: calc(5px + 100vw - 100dvw);
+    top: calc(5px + 100vh - 100dvh);
 }
 #fullscreen-btn:hover {
     scale: 1.1;

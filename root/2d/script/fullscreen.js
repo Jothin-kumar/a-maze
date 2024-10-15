@@ -1,21 +1,20 @@
 const fullscreenBtn = document.getElementById("fullscreen-btn")
-fullscreenBtn.addEventListener("click", function() {
+
+function toFullscreen() {
     document.body.requestFullscreen()
     .then(() => {
-        fullscreenBtn.style.display = "none"
+        fullscreenBtn.innerHTML = '<span id="fullscreen-toggle" class="material-symbols-outlined">fullscreen_exit</span>'
     })
-})
+    fullscreenBtn.removeEventListener("click", toFullscreen)
+    fullscreenBtn.addEventListener("click", toNormal)
+}
+function toNormal() {
+    document.exitFullscreen()
+    .then(() => {
+        fullscreenBtn.innerHTML = '<span id="fullscreen-toggle" class="material-symbols-outlined">fullscreen</span>'
+    })
+    fullscreenBtn.removeEventListener("click", toNormal)
+    fullscreenBtn.addEventListener("click", toFullscreen)
+}
 
-window.addEventListener("resize", function() { // https://stackoverflow.com/a/22662650/15923012
-    var maxHeight = window.screen.height,
-        maxWidth = window.screen.width,
-        curHeight = window.innerHeight,
-        curWidth = window.innerWidth;
-
-    if (maxWidth == curWidth && maxHeight == curHeight) {
-        fullscreenBtn.style.display = "none"
-    }
-    else {
-        fullscreenBtn.style.display = "block"
-    }
-})
+window.fslistener = fullscreenBtn.addEventListener("click", toFullscreen)
