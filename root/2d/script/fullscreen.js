@@ -9,4 +9,7 @@ document.addEventListener("fullscreenchange", function() {
     if (!document.fullscreenElement) {
         fullscreenBtn.style.display = "block"
     }
+    else {
+        fullscreenBtn.style.display = "none"
+    }
 })
