@@ -74,7 +74,7 @@ function A_Maze_main() {
                     data = r.data
                 }
                 setCurrentLevel(lvl)
-                switch (level) {
+                switch (lvl) {
                     case easy:
                         window.gridSize = 25
                         break

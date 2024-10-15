@@ -14,7 +14,6 @@ function playNewMaze() {
     const usp = new CookieManager();
     if (usp.has("share-url")) {
         window.shareURL = "https://" + usp.get("share-url").replace("equal_to", "=")
-        console.log(window.shareURL);
     }
     A_Maze_main()
 }
