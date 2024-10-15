@@ -1,0 +1,7 @@
+const fullscreenBtn = document.getElementById("fullscreen-btn")
+fullscreenBtn.addEventListener("click", function() {
+    document.body.requestFullscreen()
+    .then(() => {
+        fullscreenBtn.style.display = "none"
+    })
+})
