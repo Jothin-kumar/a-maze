@@ -16,7 +16,7 @@ async function revealAnswer() {
     for (let i = 0 ; i < pathFromLocation.length ; i++) {
         dot = pathFromLocation[i]
         window.player.moveBy(dot.x - player.x, dot.y - player.y)
-        // await new Promise(r => setTimeout(r, 250))
+        await new Promise(r => setTimeout(r, 250))
         dot.displayIndicator()
         if (gc !== window.gameCount) return
     }
