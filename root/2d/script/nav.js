@@ -140,9 +140,11 @@ async function navAssist() {
 setTimeout(navAssist, 0)
 function navAssistInit() {
     window.navAssistInUse = true
+    navAssistBtn.classList.add('active')
 }
 function navAssistStop() {
     window.navAssistInUse = false
+    navAssistBtn.classList.remove('active')
 }
 
 function getMovableNeighbours(dot) {
