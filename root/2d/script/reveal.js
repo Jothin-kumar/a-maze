@@ -24,16 +24,6 @@ async function revealAnswer() {
     if (gc !== window.gameCount) return
     window.player.currentElem.classList.remove("current-player")
     window.mazeSquares[`${window.player.x},${window.player.y}`].stopBlink()
-    for (let i = 0 ; i < mp.path.length ; i++) {
-        dot = mp.path[i]
-        dot.setColor("rgba(0, 50, 200, .5)");
-        if (pathFromLocation.includes(dot)) {
-            break;
-        }
-    };
     mp.start.setColor("rgba(0, 200, 0, .5)");
     mp.end.setColor("rgba(200, 0, 0, .5)");
-    [mp.start, mp.end].forEach((dot) => {
-        dot.hideIndicator()
-    })
 }
