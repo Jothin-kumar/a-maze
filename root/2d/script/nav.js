@@ -192,9 +192,9 @@ function updateNavAssist() {
 function updateNavIndicators() {
     if (window.prevIndicators) {
         window.prevIndicators.forEach(sq => sq.hideIndicator())
-        window.prevIndicators = []
     }
     window.prevIndicators = []
+    if (window.navIndicatorsDisabled) return
     getMovableNeighbours(player).forEach(([dx, dy]) => {
         const sq = window.mazeSquares[`${player.x+dx},${player.y+dy}`]
         if (isPrevPos([dx, dy])) {
