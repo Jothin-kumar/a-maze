@@ -143,6 +143,12 @@ function navAssistStop() {
     window.navAssistInUse = false
 }
 function updateNavAssist() {
+    if (window.prevIndicators) {
+        window.prevIndicators.forEach(sq => {
+            sq.setColor("black")
+        })
+        window.prevIndicators = []
+    }
     function getMovableNeighbours(dot) {
         const possibleMoves = [];
         [[0, +1], [0, -1], [+1, 0], [-1, 0]].forEach(([dx, dy]) => {
@@ -170,7 +176,6 @@ function updateNavAssist() {
         }
     }
     else {
-        window.navAssistCoordBy = null
         const pm2 = possibleMoves.filter(([dx, dy]) => getMovableNeighbours({x: player.x+dx, y: player.y+dy}).length > 1)
         if (pm2.length === 1) {
             window.navAssistCoordBy = pm2[0]
@@ -182,6 +187,15 @@ function updateNavAssist() {
             else if (isPrevPos(pm2[1])) {
                 window.navAssistCoordBy = pm2[0]
             }
+        }
+        else {
+            window.navAssistCoordBy = null
+            window.prevIndicators = []
+            possibleMoves.forEach(([dx, dy]) => {
+                const sq = window.mazeSquares[`${player.x+dx},${player.y+dy}`]
+                sq.setColor("blue")
+                window.prevIndicators.push(sq)
+            })
         }
     }
 }
