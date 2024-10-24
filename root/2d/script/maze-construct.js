@@ -40,6 +40,13 @@ class MazeSquare {
         this.elem.style.opacity = 1;
         this.elem.setAttribute("fill-opacity", 1);
     }
+    displayIndicator(opacity=1) {
+        this.indicator.style.display = "block";
+        this.indicator.style.opacity = opacity;
+    }
+    hideIndicator() {
+        this.indicator.style.display = "none";
+    }
 }
 
 const mg = window.mg = document.getElementById('maze-grid');

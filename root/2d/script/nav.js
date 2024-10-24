@@ -143,6 +143,7 @@ function navAssistInit() {
 function navAssistStop() {
     window.navAssistInUse = false
 }
+
 function getMovableNeighbours(dot) {
     const possibleMoves = [];
     [[0, +1], [0, -1], [+1, 0], [-1, 0]].forEach(([dx, dy]) => {
@@ -152,13 +153,13 @@ function getMovableNeighbours(dot) {
     })
     return possibleMoves
 }
+function isPrevPos(coordBy) {
+    const [dx, dy] = coordBy
+    return player.prevX == player.x+dx && player.prevY == player.y+dy
+}
 function updateNavAssist() {
     const possibleMoves = getMovableNeighbours(player)
 
-    function isPrevPos(coordBy) {
-        const [dx, dy] = coordBy
-        return player.prevX == player.x+dx && player.prevY == player.y+dy
-    }
     if (possibleMoves.length === 1) {
         window.navAssistCoordBy = possibleMoves[0]
     }
@@ -190,15 +191,21 @@ function updateNavAssist() {
 }
 function updateNavIndicators() {
     if (window.prevIndicators) {
-        window.prevIndicators.forEach(sq => {
-            sq.indicator.style.display = "none"
-        })
+        window.prevIndicators.forEach(sq => sq.hideIndicator())
         window.prevIndicators = []
     }
     window.prevIndicators = []
     getMovableNeighbours(player).forEach(([dx, dy]) => {
         const sq = window.mazeSquares[`${player.x+dx},${player.y+dy}`]
-        sq.indicator.style.display = "block"
+        if (isPrevPos([dx, dy])) {
+            sq.displayIndicator(.5)
+        }
+        else if (getMovableNeighbours(sq).length > 1) {
+            sq.displayIndicator()
+        }
+        else {
+            sq.displayIndicator(.1)
+        }
         window.prevIndicators.push(sq)
     })
 }
