@@ -143,21 +143,25 @@ function navAssistStop() {
     window.navAssistInUse = false
 }
 function updateNavAssist() {
-    const possibleMoves = [];
-    [[0, +1], [0, -1], [+1, 0], [-1, 0]].forEach(([dx, dy]) => {
-        if (canMove(player.x, player.y, player.x+dx, player.y+dy)) {
-            possibleMoves.push([dx, dy])
-        }
-    })
+    function getMovableNeighbours(dot) {
+        const possibleMoves = [];
+        [[0, +1], [0, -1], [+1, 0], [-1, 0]].forEach(([dx, dy]) => {
+            if (canMove(dot.x, dot.y, dot.x+dx, dot.y+dy)) {
+                possibleMoves.push([dx, dy])
+            }
+        })
+        return possibleMoves
+    }
+    const possibleMoves = getMovableNeighbours(player)
 
+    function isPrevPos(coordBy) {
+        const [dx, dy] = coordBy
+        return player.prevX == player.x+dx && player.prevY == player.y+dy
+    }
     if (possibleMoves.length === 1) {
         window.navAssistCoordBy = possibleMoves[0]
     }
     else if (possibleMoves.length == 2) {
-        function isPrevPos(coordBy) {
-            const [dx, dy] = coordBy
-            return player.prevX == player.x+dx && player.prevY == player.y+dy
-        }
         if (isPrevPos(possibleMoves[0])) {
             window.navAssistCoordBy = possibleMoves[1]
         }
@@ -167,5 +171,17 @@ function updateNavAssist() {
     }
     else {
         window.navAssistCoordBy = null
+        const pm2 = possibleMoves.filter(([dx, dy]) => getMovableNeighbours({x: player.x+dx, y: player.y+dy}).length > 1)
+        if (pm2.length === 1) {
+            window.navAssistCoordBy = pm2[0]
+        }
+        else if (pm2.length == 2) {
+            if (isPrevPos(pm2[0])) {
+                window.navAssistCoordBy = pm2[1]
+            }
+            else if (isPrevPos(pm2[1])) {
+                window.navAssistCoordBy = pm2[0]
+            }
+        }
     }
 }
