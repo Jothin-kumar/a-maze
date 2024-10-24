@@ -41,6 +41,7 @@ class MazeSquare {
         this.elem.setAttribute("fill-opacity", 1);
     }
     displayIndicator(opacity=1) {
+        if (this.elem.getAttribute("fill") !== "black") return;
         this.indicator.style.display = "block";
         this.indicator.style.opacity = opacity;
     }
