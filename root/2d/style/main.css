@@ -40,6 +40,24 @@ body {
     fill: green;
     transition: none;
 }
+#nav-assist-btn {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    padding: 25px;
+    cursor: pointer;
+    background-color: white;
+    opacity: .25;
+    z-index: 11;
+    border-radius: 50%;
+}
+#nav-assist-btn.active {
+    opacity: .5;
+}
+#nav-assist-btn:hover {
+    box-shadow: 0 0 10px 10px rgba(255, 255, 255, .25);
+}
 
 #controls {
     height: fit-content;

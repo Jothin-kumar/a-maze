@@ -225,7 +225,6 @@ function postConstruct() {
     alignMaze()
     updateNavAssist()
     updateNavIndicators()
-    configureScreenInteractionsMazeOverlay()
     setTimeout(() => {
         focusStart()
     }, 500)
