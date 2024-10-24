@@ -60,6 +60,7 @@ class Player {
             gameOver(this.steps, this.start)
         }
         updateNavAssist()
+        updateNavIndicators()
         focusElem(this.currentElem)
         unfocusControls()
     }
@@ -142,22 +143,16 @@ function navAssistInit() {
 function navAssistStop() {
     window.navAssistInUse = false
 }
+function getMovableNeighbours(dot) {
+    const possibleMoves = [];
+    [[0, +1], [0, -1], [+1, 0], [-1, 0]].forEach(([dx, dy]) => {
+        if (canMove(dot.x, dot.y, dot.x+dx, dot.y+dy)) {
+            possibleMoves.push([dx, dy])
+        }
+    })
+    return possibleMoves
+}
 function updateNavAssist() {
-    if (window.prevIndicators) {
-        window.prevIndicators.forEach(sq => {
-            sq.indicator.style.display = "none"
-        })
-        window.prevIndicators = []
-    }
-    function getMovableNeighbours(dot) {
-        const possibleMoves = [];
-        [[0, +1], [0, -1], [+1, 0], [-1, 0]].forEach(([dx, dy]) => {
-            if (canMove(dot.x, dot.y, dot.x+dx, dot.y+dy)) {
-                possibleMoves.push([dx, dy])
-            }
-        })
-        return possibleMoves
-    }
     const possibleMoves = getMovableNeighbours(player)
 
     function isPrevPos(coordBy) {
@@ -190,12 +185,20 @@ function updateNavAssist() {
         }
         else {
             window.navAssistCoordBy = null
-            window.prevIndicators = []
-            possibleMoves.forEach(([dx, dy]) => {
-                const sq = window.mazeSquares[`${player.x+dx},${player.y+dy}`]
-                sq.indicator.style.display = "block"
-                window.prevIndicators.push(sq)
-            })
         }
     }
+}
+function updateNavIndicators() {
+    if (window.prevIndicators) {
+        window.prevIndicators.forEach(sq => {
+            sq.indicator.style.display = "none"
+        })
+        window.prevIndicators = []
+    }
+    window.prevIndicators = []
+    getMovableNeighbours(player).forEach(([dx, dy]) => {
+        const sq = window.mazeSquares[`${player.x+dx},${player.y+dy}`]
+        sq.indicator.style.display = "block"
+        window.prevIndicators.push(sq)
+    })
 }

@@ -216,6 +216,7 @@ function postConstruct() {
     window.player = new Player(startPos.x, startPos.y, startPos, endPos);
     alignMaze()
     updateNavAssist()
+    updateNavIndicators()
     configureScreenInteractionsMazeOverlay()
     setTimeout(() => {
         focusStart()
