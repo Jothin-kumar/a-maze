@@ -55,28 +55,28 @@
         </div>
         <div id="controls">
             <div id="other-options">
-                <button onclick="revealAnswer()" id="reveal-answer">Reveal Answer</button>
-                <button onclick="window.player.reset()" id="reset-btn">Reset</button>
-                <button onclick="helpBtn()" id="help-btn">Help</button>
-                <button onclick="summonMazeCollectionAgain()" id="controls-new-maze-btn">New Game</button>
-                <button onclick="shareMaze(this)">Share Maze</button>
+                <button onclick="this.blur(); revealAnswer()" id="reveal-answer">Reveal Answer</button>
+                <button onclick="this.blur(); window.player.reset()" id="reset-btn">Reset</button>
+                <button onclick="this.blur(); helpBtn()" id="help-btn">Help</button>
+                <button onclick="this.blur(); summonMazeCollectionAgain()" id="controls-new-maze-btn">New Game</button>
+                <button onclick="this.blur(); shareMaze(this)">Share Maze</button>
             </div>
             <div id="zoom-controls">
-                <button onclick="zoomOut()"><span class="material-symbols-outlined">remove</span></button>
+                <button onclick="this.blur(); zoomOut()"><span class="material-symbols-outlined">remove</span></button>
                 <p id="zoom-percent">100%</p>
-                <button onclick="zoomIn()"><span class="material-symbols-outlined">add</span></button>
+                <button onclick="this.blur(); zoomIn()"><span class="material-symbols-outlined">add</span></button>
             </div>
         </div>
     </div>
     <div id="game-over-parent">
         <p id="game-over"></p>
         <div id="game-over-maze-parent"></div>
-        <button onclick="summonMazeCollectionAgain()" id="game-over-new-maze-btn">New Game</button>
-        <button onclick="shareMaze(this)">Share Maze</button>
+        <button onclick="this.blur(); summonMazeCollectionAgain()" id="game-over-new-maze-btn">New Game</button>
+        <button onclick="this.blur(); shareMaze(this)">Share Maze</button>
     </div>
     <div id="help-parent">
         <div id="help">
-            <button onclick="hideHelp()" id="close-help-btn">Close help</button>
+            <button onclick="this.blur(); hideHelp()" id="close-help-btn">Close help</button>
             <h2>How to play?</h2>
             <ul>
                 <li>Find the <strong>green dot</strong> in the maze. This will be the <strong>starting position</strong></li>
