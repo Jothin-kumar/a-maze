@@ -145,7 +145,7 @@ function navAssistStop() {
 function updateNavAssist() {
     if (window.prevIndicators) {
         window.prevIndicators.forEach(sq => {
-            sq.setColor("black")
+            sq.indicator.style.display = "none"
         })
         window.prevIndicators = []
     }
@@ -193,7 +193,7 @@ function updateNavAssist() {
             window.prevIndicators = []
             possibleMoves.forEach(([dx, dy]) => {
                 const sq = window.mazeSquares[`${player.x+dx},${player.y+dy}`]
-                sq.setColor("blue")
+                sq.indicator.style.display = "block"
                 window.prevIndicators.push(sq)
             })
         }

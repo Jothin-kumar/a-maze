@@ -5,14 +5,21 @@ class MazeSquare {
         this.type = "";
         this.used = false;
         this.elem = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
+        this.indicator = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+        this.indicator.setAttribute('fill', 'white');
+        this.indicator.style.display = "none";
         window.addEventListener("zoomChange", () => {
             this.elem.setAttribute('width', 10*zoom);
             this.elem.setAttribute('height', 10*zoom);
             this.elem.setAttribute('x', ((x-.25)*10-5)*zoom);
             this.elem.setAttribute('y', ((y-.25)*10-5)*zoom);
+            this.indicator.setAttribute('cx', ((x-.25)*10)*zoom);
+            this.indicator.setAttribute('cy', ((y-.25)*10)*zoom);
+            this.indicator.setAttribute('r', 1*zoom);
         })
         this.elem.setAttribute('fill', 'black');
         window.mg.appendChild(this.elem);
+        window.mg.appendChild(this.indicator);
         window.mazeSquares[`${x},${y}`] = this;
         this.blink = false;
     }
