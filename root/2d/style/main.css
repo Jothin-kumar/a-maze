@@ -40,11 +40,6 @@ body {
     fill: green;
     transition: none;
 }
-#maze-overlay {
-    position: absolute;
-    z-index: 1;
-    cursor: grab;
-}
 
 #controls {
     height: fit-content;
