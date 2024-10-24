@@ -15,7 +15,7 @@ class MazeSquare {
             this.elem.setAttribute('y', ((y-.25)*10-5)*zoom);
             this.indicator.setAttribute('cx', ((x-.25)*10)*zoom);
             this.indicator.setAttribute('cy', ((y-.25)*10)*zoom);
-            this.indicator.setAttribute('r', 1*zoom);
+            this.indicator.setAttribute('r', .5*zoom);
         })
         this.elem.setAttribute('fill', 'black');
         window.mg.appendChild(this.elem);
