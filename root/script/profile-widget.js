@@ -8,8 +8,8 @@ style.innerHTML = `
     border: 2px solid rgb(67, 35, 41);
     border-radius: 5px;
     position: fixed;
-    top: calc(5px + 100vh - 100dvh);
-    right: calc(5px + 100dvw - 100vw);
+    top: calc(5px + 100dvh - 100dvh);
+    right: calc(5px + 100dvw - 100dvw);
     cursor: pointer;
     z-index: 1000;
     opacity: 0.69;

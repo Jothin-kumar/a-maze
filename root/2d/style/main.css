@@ -3,7 +3,6 @@ body {
     color: white;
     user-select: none;
     overscroll-behavior: none;
-    overflow: hidden;
 }
 * {
     scrollbar-width: none;
@@ -22,7 +21,7 @@ body {
 #main-and-controls-parent {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100dvh;
 }
 #main {
     overflow: scroll;
@@ -61,7 +60,7 @@ body {
 
 #controls {
     height: fit-content;
-    width: 100vw;
+    width: 100dvw;
     background-color: rgb(6, 9, 0);
     padding: 5px;
     z-index: 1;
@@ -255,7 +254,7 @@ body {
     border: olive 2px solid;
     padding: 20px;
     border-radius: 5px;
-    min-width: 40vw;
+    min-width: 40dvw;
     text-align: center;
     user-select: text;
 }
