@@ -82,6 +82,8 @@ class Player {
         this.startPos.startBlink()
         this.startPos.elem.classList.add("current-player")
         updateNavIndicators()
+        navAssistStop()
+        updateNavAssist()
     }
 }
 
