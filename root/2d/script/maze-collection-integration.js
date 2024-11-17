@@ -14,6 +14,7 @@ function playNewMaze() {
         window.shareURL = "https://" + usp.get("share-url").replace("equal_to", "=")
     }
     A_Maze_main()
+    displayNavAssist()
 }
 function summonMazeCollectionAgain() {
     deleteCookie("maze-collection-id")
@@ -26,6 +27,7 @@ function summonMazeCollectionAgain() {
     document.getElementById("controls").style.display = "none"
     document.getElementById("game-over-parent").style.display = "none"
     navAssistStop()
+    hideNavAssist()
 }
 
 async function getMazeDataFromCollection(level, id) {

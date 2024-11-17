@@ -148,6 +148,16 @@ function navAssistStop() {
     window.navAssistInUse = false
     navAssistBtn.classList.remove('active')
 }
+function displayNavAssist() {
+    navAssistBtn.style.display = "block"
+}
+function hideNavAssist(by="") {
+    window.navAssistHiddenBy = by
+    navAssistBtn.style.display = "none"
+}
+function isNavAssistHidden() {
+    return navAssistBtn.style.display === "none"
+}
 
 function getMovableNeighbours(dot) {
     const possibleMoves = [];
