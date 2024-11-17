@@ -42,9 +42,8 @@ body {
 }
 #nav-assist-btn {
     position: absolute;
-    top: 50%;
-    right: 50%;
-    transform: translate(50%, -50%);
+    top: 0;
+    left: 0;
     padding: 25px;
     cursor: pointer;
     background-color: white;

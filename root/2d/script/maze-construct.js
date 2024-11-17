@@ -225,6 +225,7 @@ function postConstruct() {
     alignMaze()
     updateNavAssist()
     updateNavIndicators()
+    adjustNavAssistPosition()
     setTimeout(() => {
         focusStart()
     }, 500)
