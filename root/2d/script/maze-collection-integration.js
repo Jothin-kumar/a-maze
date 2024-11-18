@@ -1,10 +1,8 @@
 function playNewMaze() {
     document.getElementById("a-maze").style.opacity = "1"
     document.getElementById("maze-collection-integration").style.display = "none"
-    document.getElementById("maze-overlay").style.display = "inline-block"
     document.getElementById("reset-btn").style.display = "inline-block"
     document.getElementById("reveal-answer").style.display = "inline-block"
-    document.getElementById("maze-overlay").style.display = "block";
     document.getElementById("controls").style.display = "block";
     document.getElementById("game-over-parent").style.display = "none";
     window.gameIsOver = false;
@@ -16,6 +14,7 @@ function playNewMaze() {
         window.shareURL = "https://" + usp.get("share-url").replace("equal_to", "=")
     }
     A_Maze_main()
+    displayNavAssist()
 }
 function summonMazeCollectionAgain() {
     deleteCookie("maze-collection-id")
@@ -23,11 +22,12 @@ function summonMazeCollectionAgain() {
     deleteCookie("shared-maze-id")
     document.getElementById("a-maze").style.opacity = "0"
     document.getElementById("maze-collection-integration").style.display = "block"
-    document.getElementById("maze-overlay").style.display = "none"
     document.getElementById("reset-btn").style.display = "none"
     document.getElementById("reveal-answer").style.display = "none"
     document.getElementById("controls").style.display = "none"
     document.getElementById("game-over-parent").style.display = "none"
+    navAssistStop()
+    hideNavAssist()
 }
 
 async function getMazeDataFromCollection(level, id) {

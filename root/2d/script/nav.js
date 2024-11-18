@@ -82,6 +82,8 @@ class Player {
         this.startPos.startBlink()
         this.startPos.elem.classList.add("current-player")
         updateNavIndicators()
+        navAssistStop()
+        updateNavAssist()
     }
 }
 
@@ -140,9 +142,21 @@ async function navAssist() {
 setTimeout(navAssist, 0)
 function navAssistInit() {
     window.navAssistInUse = true
+    navAssistBtn.classList.add('active')
 }
 function navAssistStop() {
     window.navAssistInUse = false
+    navAssistBtn.classList.remove('active')
+}
+function displayNavAssist() {
+    navAssistBtn.style.display = "block"
+}
+function hideNavAssist(by="") {
+    window.navAssistHiddenBy = by
+    navAssistBtn.style.display = "none"
+}
+function isNavAssistHidden() {
+    return navAssistBtn.style.display === "none"
 }
 
 function getMovableNeighbours(dot) {

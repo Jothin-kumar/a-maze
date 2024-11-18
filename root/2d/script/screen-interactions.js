@@ -1,126 +1,99 @@
-const overlay = document.getElementById("maze-overlay");
-function configureScreenInteractionsMazeOverlay() {
-    const mainBCR = document.getElementById("main").getBoundingClientRect();
-    overlay.style.width = mainBCR.width + "px";
-    overlay.style.height = mainBCR.height + "px";
-    overlay.style.top = mainBCR.top + "px";
-    overlay.style.left = mainBCR.left + "px";
-}
-addEventListener("resize", configureScreenInteractionsMazeOverlay);
-addEventListener("zoomChange", configureScreenInteractionsMazeOverlay);
-var isMoving = false;
-var lastTouchX, lastTouchY;
-window.touchNavAssistTimeout = null;
-["mousedown", "touchstart"].forEach(evt => overlay.addEventListener(evt, (e) => {
-    isMoving = true
-    lastTouchX = e.touches ? e.touches[0].clientX : undefined;
-    lastTouchY = e.touches ? e.touches[0].clientY : undefined;
-    clearTimeout(window.touchNavAssistTimeout)
-    window.touchNavAssistTimeout = setTimeout(navAssistInit, 500)
-}));
-["mouseup", "touchend"].forEach(evt => addEventListener(evt, () => {
-    isMoving = false
-    clearTimeout(window.touchNavAssistTimeout)
-    navAssistStop()
-}));
-
-overlay.addEventListener("mousedown", () => overlay.style.cursor = "grabbing");
-addEventListener("mouseup", () => overlay.style.cursor = "grab");
-
-// click and drag to scroll
-var recentlyClicked = false;
-var recentlyClickedTimeout;
-function resetRecentlyClickedTimeout(t=1000) {
-    clearTimeout(recentlyClickedTimeout);
-    recentlyClickedTimeout = setTimeout(() => {
-        recentlyClicked = false;
-        isMoving = false
-    }, t);
-}
-overlay.addEventListener("click", (e) => {
-    recentlyClicked = true;
-    resetRecentlyClickedTimeout();
-})
-
-overlay.addEventListener("mousemove", (e) => {
-    if (recentlyClicked && isMoving) {
-        const main = document.getElementById("main");
-        main.scrollBy(-e.movementX, -e.movementY);
+window.navAssistBtn = document.getElementById('nav-assist-btn');
+navAssistBtn.addEventListener('click', function() {
+    if (navAssistInUse) {
+        navAssistStop()
     }
-    resetRecentlyClickedTimeout(100);
-})
-overlay.addEventListener("touchmove", (e) => {
-    if (e.touches.length != 1) return;
-    if (recentlyClicked && isMoving) {
-        const main = document.getElementById("main");
-        if (lastTouchX && lastTouchY) {
-            main.scrollBy((lastTouchX - e.touches[0].clientX), (lastTouchY - e.touches[0].clientY));
-        }
-        lastTouchX = e.touches[0].clientX;
-        lastTouchY = e.touches[0].clientY;
+    else {
+        navAssistInit()
     }
-    resetRecentlyClickedTimeout(100);
-})
-window.addEventListener("contextmenu", (e) => {
-    e.preventDefault()
-    focusElem(player.currentElem)
 });
+// Code for handling navAssist drag is stolen from a file from the past (on-screen-nav.js)
+function dragHandler() { // Writing it in a function cuz I'm too lazy to change the variable names...
+    // Initialize variables for tracking touch positions
+    let initialX = 0;
+    let initialY = 0;
+    window.currentX = 0;
+    window.currentY = 0;
 
-// drag to move
-const moveThrottleTime = 250
-var lastMoveTime = Date.now();
-function moveHandler(moveX, moveY) {
-    if (Date.now() - lastMoveTime < moveThrottleTime) return;
-    const absMoveX = Math.abs(moveX);
-    const absMoveY = Math.abs(moveY);
-    if (absMoveX > absMoveY) { // horizontal (left or right)
-        if (moveX > 0) {
-            window.player.moveRight();
+    function toXY(x, y) {
+        if (x < 100) {
+            x = 100;
         }
-        else {
-            window.player.moveLeft();
+        if (y < 100) {
+            y = 100;
         }
-        lastMoveTime = Date.now();
+        if (x > window.innerWidth - navAssistBtn.offsetWidth - 100) {
+            x = window.innerWidth - navAssistBtn.offsetWidth - 100;
+        }
+        if (y > controls.getBoundingClientRect().top - navAssistBtn.offsetHeight - 100) {
+            y = controls.getBoundingClientRect().top - navAssistBtn.offsetHeight - 100;
+        }
+        navAssistBtn.style.transform = `translate(${x}px, ${y}px)`;
+        window.currentX = x;
+        window.currentY = y;
     }
-    else if (absMoveY > absMoveX) { // vertical (up or down)
-        if (moveY > 0) {
-            window.player.moveDown();
-        }
-        else {
-            window.player.moveUp();
-        }
-        lastMoveTime = Date.now();
+
+    // Function to handle touch start event
+    function handleTouchStart(event) {
+        initialX = event.touches[0].clientX - currentX;
+        initialY = event.touches[0].clientY - currentY;
     }
+
+    // Function to handle touch move event
+    function handleTouchMove(event) {
+        event.preventDefault();
+        toXY(event.touches[0].clientX - initialX, event.touches[0].clientY - initialY);
+    }
+
+    // Add event listeners for touch events
+    navAssistBtn.addEventListener('touchstart', handleTouchStart, false);
+    navAssistBtn.addEventListener('touchmove', handleTouchMove, false);
+
+    // Add event listeners for mouse events
+    navAssistBtn.addEventListener('mousedown', (e) => {
+        initialX = e.clientX - currentX;
+        initialY = e.clientY - currentY;
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseup', () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+        });
+        window.addEventListener('blur', () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+        });
+        window.addEventListener('click', () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+        });
+    });
+    function handleMouseMove(e) {
+        toXY(e.clientX - initialX, e.clientY - initialY);
+        unfocusControls()
+    }
+    window.adjustNavAssistPosition = () => {
+        const mainBC = main.getBoundingClientRect();
+        toXY(mainBC.width/2 - navAssistBtn.offsetWidth/2, mainBC.height/2 - navAssistBtn.offsetHeight/2);
+    }
+    window.addEventListener('resize', adjustNavAssistPosition);
 }
-overlay.addEventListener("mousemove", (e) => {
-    if (!recentlyClicked && isMoving) {
-        moveHandler(e.movementX, e.movementY);
-    }
-})
-overlay.addEventListener("touchmove", (e) => {
-    if (e.touches.length != 1) return;
-    if (!recentlyClicked && isMoving) {
-        moveHandler(e.touches[0].clientX - lastTouchX, e.touches[0].clientY - lastTouchY);
-        lastTouchX = e.touches[0].clientX;
-        lastTouchY = e.touches[0].clientY;
-    }
-})
+dragHandler();
 
-// Pinch to zoom
-const zoomThrottleTime = 100;
-const lastZoomTime = Date.now();
-var lastPinchDistance = 0;
-overlay.addEventListener("touchmove", (e) => {
-    if (Date.now() - lastZoomTime < zoomThrottleTime) return;
-    if (e.touches.length == 2 && !navAssistInUse) {
-        const newPinchDistance = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
-        if (newPinchDistance > lastPinchDistance) {
-            zoomIn();
+document.getElementById("maze-grid").addEventListener('click', function(e) {
+    const navAssistBCR = navAssistBtn.getBoundingClientRect();  
+    const x = e.clientX - ((navAssistBCR.left + navAssistBCR.right)/2);
+    const y = e.clientY - ((navAssistBCR.top + navAssistBCR.bottom)/2);
+    if (Math.abs(x/y) > 2) {
+        if (x > 0) {
+            player.moveBy(1, 0)
         }
-        else if (newPinchDistance < lastPinchDistance) {
-            zoomOut();
+        else {
+            player.moveBy(-1, 0)
         }
-        lastPinchDistance = newPinchDistance;
-        lastZoomTime = Date.now();
+    }
+    else if (Math.abs(y/x) > 2) {
+        if (y > 0) {
+            player.moveBy(0, 1)
+        }
+        else {
+            player.moveBy(0, -1)
+        }
     }
 })

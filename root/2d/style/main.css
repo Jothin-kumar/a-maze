@@ -3,7 +3,6 @@ body {
     color: white;
     user-select: none;
     overscroll-behavior: none;
-    overflow: hidden;
 }
 * {
     scrollbar-width: none;
@@ -22,7 +21,7 @@ body {
 #main-and-controls-parent {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100dvh;
 }
 #main {
     overflow: scroll;
@@ -32,25 +31,38 @@ body {
 
     text-align: center;
 }
-#maze-grid {
+#maze-grid-parent {
     background-color: black;
     position: relative;
+    width: 100dvw;
 }
-#maze-grid > rect.current-player {
+#maze-grid > circle.current-player {
     fill: green;
     transition: none;
 }
-#maze-overlay {
+#nav-assist-btn {
     position: absolute;
-    z-index: 1;
-    cursor: grab;
+    top: 0;
+    left: 0;
+    padding: 25px;
+    cursor: pointer;
+    background-color: white;
+    opacity: .25;
+    z-index: 11;
+    border-radius: 50%;
+}
+#nav-assist-btn.active {
+    opacity: .5;
+}
+#nav-assist-btn:hover {
+    box-shadow: 0 0 10px 10px rgba(255, 255, 255, .25);
 }
 
 #controls {
     height: fit-content;
-    width: 100vw;
+    width: 100dvw;
     background-color: rgb(6, 9, 0);
-    padding: 5px;
+    padding: 5px 0;
     z-index: 1;
     margin: 0 auto;
     bottom: 0;
@@ -242,7 +254,7 @@ body {
     border: olive 2px solid;
     padding: 20px;
     border-radius: 5px;
-    min-width: 40vw;
+    min-width: 40dvw;
     text-align: center;
     user-select: text;
 }

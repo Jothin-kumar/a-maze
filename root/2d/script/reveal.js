@@ -3,11 +3,11 @@ async function revealAnswer() {
     deleteCookie("maze-collection-id");
     deleteCookie("share-url");
     const gc = window.gameCount
-    document.getElementById("maze-overlay").style.display = "none";
     window.answerRevealed = true;
     document.getElementById("reset-btn").style.display = "none"
     document.getElementById("reveal-answer").style.display = "none"
     window.navIndicatorsDisabled = true
+    hideNavAssist()
 
     const pathFromLocation = [
         ...player.wayBackCorrectPath,

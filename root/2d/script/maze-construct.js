@@ -4,15 +4,14 @@ class MazeSquare {
         this.y = y;
         this.type = "";
         this.used = false;
-        this.elem = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
+        this.elem = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
         this.indicator = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
         this.indicator.setAttribute('fill', 'white');
         this.indicator.style.display = "none";
         window.addEventListener("zoomChange", () => {
-            this.elem.setAttribute('width', 10*zoom);
-            this.elem.setAttribute('height', 10*zoom);
-            this.elem.setAttribute('x', ((x-.25)*10-5)*zoom);
-            this.elem.setAttribute('y', ((y-.25)*10-5)*zoom);
+            this.elem.setAttribute('cx', ((x-.25)*10)*zoom);
+            this.elem.setAttribute('cy', ((y-.25)*10)*zoom);
+            this.elem.setAttribute('r', zoom*2);
             this.indicator.setAttribute('cx', ((x-.25)*10)*zoom);
             this.indicator.setAttribute('cy', ((y-.25)*10)*zoom);
             this.indicator.setAttribute('r', .5*zoom);
@@ -225,7 +224,7 @@ function postConstruct() {
     alignMaze()
     updateNavAssist()
     updateNavIndicators()
-    configureScreenInteractionsMazeOverlay()
+    adjustNavAssistPosition()
     setTimeout(() => {
         focusStart()
     }, 500)
