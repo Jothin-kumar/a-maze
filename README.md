@@ -22,11 +22,11 @@ Play now at [a-maze.jothin.tech](https://a-maze.jothin.tech)
 <h2>Navigation</h2>
 <ul>
     <li><strong>Devices with physical keyboard: </strong>Use arrow keys or WASD to move. For Navigation Assist, press and hold space bar</li>
-    <li><strong>Touch screen devices: </strong>Drag anywhere on the maze, in the direction you intend to move. To scroll, tap anywhere on the maze and drag immediately. For Navigation Assist, press and hold anywhere on the maze (or perform any other action that might trigger contextmenu)</li>
+    <li><strong>Touch screen devices: </strong>The white circle is navassist. Touch it to activate. Touch above, below, left, or right of navassist button to navigate. You can move the button.</li>
 </ul>
 <h2>Navigation Assist</h2>
 <ul>
-    <li>In some cases, there is only one possible move other than going back</li>
+    <li>In some cases, there is only one practical move other than going back</li>
     <li>In these cases, you need not manually navigate. Navigation Assist comes in handy here</li>
 </ul>
 <h2>Common problems & solutions</h2>
