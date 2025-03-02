@@ -28,6 +28,9 @@ class Player {
         ]
     }
     moveBy(x, y) {
+        if (window.answerRevealed || window.gameIsOver || window.navNotAllowed) {
+            return
+        }
         if (canMove(this.x, this.y, this.x+x, this.y+y)) {
             this.prevX = this.x
             this.prevY = this.y
@@ -88,9 +91,6 @@ class Player {
 }
 
 window.addEventListener("keydown", (e) => {
-    if (window.answerRevealed || window.gameIsOver || window.navNotAllowed) {
-        return
-    }
     switch (e.key) {
         case "w":
         case "W":
