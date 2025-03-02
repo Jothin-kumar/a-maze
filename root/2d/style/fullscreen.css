@@ -10,3 +10,13 @@
     transition: 2s;
     cursor: pointer;
 }
+#fullscreen-notice {
+    position: fixed;
+    z-index: 1000;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: small;
+}
+#fullscreen-notice:hover {
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}
