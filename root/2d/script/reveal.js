@@ -27,5 +27,5 @@ async function revealAnswer() {
     mp.start.setColor("rgba(0, 200, 0, .5)");
     mp.end.setColor("rgba(200, 0, 0, .5)");
 
-    gameOver(0, 0, `<strong>Answer Revealed</strong><br><br>Your Score: 0 (obviously)<br>Maze rating: ${getDifficulty()}`)
+    gameOver(0, 0, `<strong>Answer Revealed</strong><br><br>Your Score: 0 (obviously)<br>Maze rating: ${Math.floor(getDifficulty())}`)
 }
