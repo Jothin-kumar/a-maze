@@ -27,8 +27,8 @@ class Player {
             .map(([dx, dy]) => window.mazeSquares[`${this.endPos.x+dx},${this.endPos.y+dy}`])
         ]
     }
-    moveBy(x, y) {
-        if (window.answerRevealed || window.gameIsOver || window.navNotAllowed) {
+    moveBy(x, y, by='player') {
+        if (by !== 'reveal-answer' &&(window.answerRevealed || window.gameIsOver || window.navNotAllowed)) {
             return
         }
         if (canMove(this.x, this.y, this.x+x, this.y+y)) {
