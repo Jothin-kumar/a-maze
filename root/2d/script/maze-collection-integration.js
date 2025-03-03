@@ -26,6 +26,7 @@ function summonMazeCollectionAgain() {
     document.getElementById("reveal-answer").style.display = "none"
     document.getElementById("controls").style.display = "none"
     document.getElementById("game-over-parent").style.display = "none"
+    document.getElementById("main").style.opacity = "1"
     navAssistStop()
     hideNavAssist()
 }

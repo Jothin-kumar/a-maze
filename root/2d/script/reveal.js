@@ -15,7 +15,7 @@ async function revealAnswer() {
     ]
     for (let i = 0 ; i < pathFromLocation.length ; i++) {
         dot = pathFromLocation[i]
-        window.player.moveBy(dot.x - player.x, dot.y - player.y)
+        window.player.moveBy(dot.x - player.x, dot.y - player.y, by='reveal-answer')
         await new Promise(r => setTimeout(r, 250))
         dot.displayIndicator()
         if (gc !== window.gameCount) return
@@ -26,4 +26,6 @@ async function revealAnswer() {
     window.mazeSquares[`${window.player.x},${window.player.y}`].stopBlink()
     mp.start.setColor("rgba(0, 200, 0, .5)");
     mp.end.setColor("rgba(200, 0, 0, .5)");
+
+    gameOver(0, 0, `<strong>Answer Revealed</strong><br><br>Your Score: 0 (obviously)<br>Maze rating: ${Math.floor(getDifficulty())}`)
 }
