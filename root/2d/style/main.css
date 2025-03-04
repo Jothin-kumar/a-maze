@@ -238,20 +238,39 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     display: none;
-    background-color: black;
+    background-color: rgba(10, 10, 10, .9);
     border: olive 2px solid;
     padding: 20px;
     border-radius: 5px;
-    min-width: 40dvw;
+    min-width: 60dvw;
+    min-height: 60dvh;
     text-align: center;
     user-select: text;
+    z-index: 20;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow-y: scroll;
+    gap: 20px;
 }
-#share-url > h3 {
+#share-url > h3, #share-url-info {
     user-select: none;
 }
-#share-url > a {
+#share-url > h3 {
+    font-size: medium;
+}
+#share-url-info {
+    font-size: small;
+}
+#share-url-copy-link {
     color: white;
-    padding: 10px;
-    cursor: pointer;
+    background-color: black;
+    border-radius: 20px;
+    padding: 15px;
+    cursor: text;
     user-select: text;
+    font-size: large;
+}
+#share-url-copy-link::selection {
+    background-color: green;
 }
