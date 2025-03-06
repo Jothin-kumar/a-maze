@@ -26,7 +26,7 @@ function helpBtn() {
     }
 }
 document.addEventListener("click", (e) => {
-    if (isHelpOpen() && e.target !== help && !help.contains(e.target) && e.target.id !== "help-btn") {
+    if (isHelpOpen() && ["maze-grid", "main-and-controls-parent"].includes(e.target.id)) {
         hideHelp()
     }
 })
