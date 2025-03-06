@@ -1,10 +1,12 @@
 const help = document.getElementById("help-parent")
 function showHelp() {
     help.style.display = "block"
+    window.navNotAllowed = true
     if (!isNavAssistHidden()) hideNavAssist("help")
 }
 function hideHelp() {
     help.style.display = "none"
+    window.navNotAllowed = false
     if (window.navAssistHiddenBy === "help") displayNavAssist()
 }
 const isHelpOpen = () => help.style.display === "block"
