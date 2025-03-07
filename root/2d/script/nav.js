@@ -115,6 +115,10 @@ window.addEventListener("keydown", (e) => {
         case " ":
             navAssistInit()
             break;
+        case "f":
+        case "F":
+            toFullscreen()
+            break;
     }
 })
 window.addEventListener("keyup", (e) => {
