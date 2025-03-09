@@ -73,6 +73,10 @@ body {
     z-index: 1;
     margin: 10px;
     color: rgba(255, 255, 255, .5);
+    cursor: pointer;
+}
+#hide-controls-btn:hover {
+    color: rgba(255, 255, 255, .75);
 }
 #controls > #other-options > button {
     background-color: black;
