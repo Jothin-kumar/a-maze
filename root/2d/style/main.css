@@ -59,17 +59,24 @@ body {
 }
 
 #controls {
-    height: fit-content;
-    width: 100dvw;
-    background-color: rgb(6, 9, 0);
     padding: 5px 0;
+    width: 100dvw;
     z-index: 1;
-    margin: 0 auto;
-    bottom: 0;
     transition: opacity .5s;
-    text-align: center;
 
     display: none;
+}
+#hide-controls-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    margin: 10px;
+    color: rgba(255, 255, 255, .5);
+    cursor: pointer;
+}
+#hide-controls-btn:hover {
+    color: rgba(255, 255, 255, .75);
 }
 #controls > #other-options > button {
     background-color: black;

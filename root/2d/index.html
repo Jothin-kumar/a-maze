@@ -71,6 +71,7 @@
             </div>
         </div>
     </div>
+    <div id="hide-controls-btn" tooltip="Close controls"><span class="material-symbols-outlined">expand_circle_down</span></div>
     <div id="game-over-parent">
         <p id="game-over"></p>
         <button onclick="this.blur(); summonMazeCollectionAgain()" id="game-over-new-maze-btn">New Game</button>
@@ -94,6 +95,14 @@
             <ul>
                 <li>In some cases, there is only one practical move other than going back</li>
                 <li>In these cases, you need not manually navigate. Navigation Assist comes in handy here</li>
+            </ul>
+            <h2>Controls</h2>
+            <ul>
+                <li>If you can't solve the maze, use "Reveal Answer"</li>
+                <li>If you wanna try again, use "Reset"</li>
+                <li>To play a different maze instead, use "New Game"</li>
+                <li>To share this maze, use "Share Maze"</li>
+                <li>To hide the controls, use the button at the bottom left corner. To show the controls, press the button again. Alternatively, you could also use the "c" key</li>
             </ul>
             <h2>Common problems & solutions</h2>
             <ul>
@@ -145,6 +154,7 @@
     <script src="script/difficulty.js"></script>
     <script src="script/maze-collection-integration.js"></script>
     <script src="script/fullscreen.js"></script>
+    <script src="script/controls.js"></script>
 
     <script src="../script/connect.js" type="module"></script>
     <script src="../script/profile-widget.js"></script>
