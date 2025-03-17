@@ -57,16 +57,15 @@
             <div id="nav-assist-btn"></div>
         </div>
         <div id="controls">
-            <div id="controls-options">
-                <button onclick="this.blur(); revealAnswer()" id="reveal-answer">Reveal Answer</button>
-                <button onclick="this.blur(); window.player.reset()" id="reset-btn">Reset</button>
-                <button onclick="this.blur(); helpBtn()" id="help-btn">Help</button>
-                <button onclick="this.blur(); summonMazeCollectionAgain()" id="controls-new-maze-btn">New Game</button>
-                <button onclick="this.blur(); shareMaze(this)">Share Maze</button>
-            </div>
+            <div id="hide-controls-btn"><span class="material-symbols-outlined">expand_circle_down</span></div>
+            <button onclick="this.blur(); revealAnswer()" id="reveal-answer">Reveal Answer</button>
+            <button onclick="this.blur(); window.player.reset()" id="reset-btn">Reset</button>
+            <button onclick="this.blur(); helpBtn()" id="help-btn">Help</button>
+            <button onclick="this.blur(); summonMazeCollectionAgain()" id="controls-new-maze-btn">New Game</button>
+            <button onclick="this.blur(); shareMaze(this)">Share Maze</button>
         </div>
     </div>
-    <div id="hide-controls-btn" tooltip="Close controls"><span class="material-symbols-outlined">expand_circle_down</span></div>
+    <div id="show-controls-btn"><span class="material-symbols-outlined">expand_circle_up</span></div>
     <div id="game-over-parent">
         <p id="game-over"></p>
         <button onclick="this.blur(); summonMazeCollectionAgain()" id="game-over-new-maze-btn">New Game</button>

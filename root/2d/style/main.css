@@ -30,6 +30,8 @@ body {
     margin: auto;
 
     text-align: center;
+
+    display: none;
 }
 #maze-grid-parent {
     background-color: black;
@@ -64,22 +66,12 @@ body {
     z-index: 1;
     transition: opacity .5s;
     text-align: center;
+    align-items: center;
+    font-size: .01rem;
 
     display: none;
 }
-#hide-controls-btn {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    margin: 10px;
-    color: rgba(255, 255, 255, .5);
-    cursor: pointer;
-}
-#hide-controls-btn:hover {
-    color: rgba(255, 255, 255, .75);
-}
-#controls > #controls-options > button {
+#controls > button {
     background-color: black;
     border: olive 1px solid;
     color: white;
@@ -89,19 +81,26 @@ body {
     display: inline-block;
     margin: 2px;
 }
-#controls > #controls-options > button:hover {
+#controls > button:hover {
     background-color: rgba(100, 200, 100, .1);
     border-color: darkgoldenrod;
 }
-#main, #controls {
-    display: none;
+#hide-controls-btn, #show-controls-btn {
+    color: rgba(255, 255, 255, .5);
 }
-@media screen and (orientation: landscape) {
-    #controls {
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
+#hide-controls-btn:hover, #show-controls-btn:hover {
+    color: rgba(255, 255, 255, .75);
+}
+#hide-controls-btn {
+    display: inline-block;
+    transform: translateY(25%);
+}
+#show-controls-btn {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 10px;
+    z-index: 10;
 }
 
 #game-over-parent {
