@@ -25,13 +25,12 @@ function optimizeZoom() {
     const h = m.height
     const w = m.width
     if (h > w) { // Portrait
-        window.suggestedZoom = h/((window.gridSize-.5)*10 + 10)
+        window.zoom = h/((window.gridSize-.5)*10 + 10)
     }
     else { // Landscape
-        window.suggestedZoom = w/((window.gridSize-.5)*10 + 10)
+        window.zoom = w/((window.gridSize-.5)*10 + 10)
     }
-    window.zoom = parseFloat(getCookie(`zoom-${window.currentLevel}`)) || window.suggestedZoom
-    setZoom(window.zoom, cookie=false)
+    setZoom(window.zoom)
 }
 
 window.gameCount = 0
@@ -117,11 +116,10 @@ window.alignMazeHandler = () => {
 }
 window.addEventListener("resize", window.alignMazeHandler)
 
-function setZoom(z, cookie=true) {
+function setZoom(z) {
     stopAllTransition()
     window.zoom = z
     window.dispatchEvent(zoomChangeEvt)
     alignMaze()
     setTimeout(resumeAllTransition, 1000)
-    if (cookie) setCookie(`zoom-${window.currentLevel}`, window.zoom)
 }
