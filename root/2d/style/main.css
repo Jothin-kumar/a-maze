@@ -79,7 +79,7 @@ body {
 #hide-controls-btn:hover {
     color: rgba(255, 255, 255, .75);
 }
-#controls > #other-options > button {
+#controls > #controls-options > button {
     background-color: black;
     border: olive 1px solid;
     color: white;
@@ -89,39 +89,10 @@ body {
     display: inline-block;
     margin: 2px;
 }
-#controls > #other-options > button:hover {
+#controls > #controls-options > button:hover {
     background-color: rgba(100, 200, 100, .1);
     border-color: darkgoldenrod;
 }
-#zoom-controls {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 10px auto;
-}
-#zoom-controls > button {
-    margin: 0 5px;
-    padding: 5px;
-    background-color: black;
-    color: olive;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    display: flex;
-    justify-items: center;
-    border: 0;
-    background-color: #69696911;
-    width: fit-content;
-    height: fit-content;
-    border-radius: 50%;
-    cursor: pointer;
-}
-#zoom-controls > button:hover {
-    background-color: #69696922;
-}
-#zoom-percent {
-    font-size: small;
-    color: #696969;
-}
-
 #main, #controls {
     display: none;
 }
@@ -130,9 +101,6 @@ body {
         flex-direction: row;
         justify-content: center;
         align-items: center;
-    }
-    #zoom-controls {
-        margin: 0 10px !important;
     }
 }
 
