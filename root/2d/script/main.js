@@ -25,14 +25,12 @@ function optimizeZoom() {
     const h = m.height
     const w = m.width
     if (h > w) { // Portrait
-        window.suggestedZoom = h/((window.gridSize-.5)*10 + 10)
+        window.zoom = h/((window.gridSize-.5)*10 + 10)
     }
     else { // Landscape
-        window.suggestedZoom = w/((window.gridSize-.5)*10 + 10)
+        window.zoom = w/((window.gridSize-.5)*10 + 10)
     }
-    window.zoom = parseFloat(getCookie(`zoom-${window.currentLevel}`)) || window.suggestedZoom
-    setZoom(window.zoom, cookie=false)
-    updateZoom()
+    setZoom(window.zoom)
 }
 
 window.gameCount = 0
@@ -118,33 +116,10 @@ window.alignMazeHandler = () => {
 }
 window.addEventListener("resize", window.alignMazeHandler)
 
-function updateZoom() {
-    document.getElementById("zoom-percent").innerText = `${Math.round(window.zoom*100/1.5).toString().padStart(3, "0")}%`
-}
-function setZoom(z, cookie=true) {
+function setZoom(z) {
     stopAllTransition()
     window.zoom = z
     window.dispatchEvent(zoomChangeEvt)
     alignMaze()
-    updateZoom()
     setTimeout(resumeAllTransition, 1000)
-    if (cookie) setCookie(`zoom-${window.currentLevel}`, window.zoom)
 }
-const changeZoomBy = (z) => setZoom(window.zoom + z)
-zoomIn = () => {
-    if (window.zoom < window.suggestedZoom*1.5) changeZoomBy(+.05)
-}
-zoomOut = () => {
-    if (window.zoom > window.suggestedZoom*.5) changeZoomBy(-.05)
-}
-window.addEventListener("keypress", (e) => {
-    if (e.ctrlKey || e.altKey || e.metaKey) return
-    switch (e.key) {
-        case "+":
-            zoomIn()
-            break
-        case "-":
-            zoomOut()
-            break
-    }
-})
