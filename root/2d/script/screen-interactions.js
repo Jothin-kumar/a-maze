@@ -25,8 +25,10 @@ function dragHandler() { // Writing it in a function cuz I'm too lazy to change 
         if (x > window.innerWidth - navAssistBtn.offsetWidth - 100) {
             x = window.innerWidth - navAssistBtn.offsetWidth - 100;
         }
-        if (y > controls.getBoundingClientRect().top - navAssistBtn.offsetHeight - 100) {
-            y = controls.getBoundingClientRect().top - navAssistBtn.offsetHeight - 100;
+        ycomp = controls.getBoundingClientRect().top
+        if (!ycomp) ycomp = window.innerHeight
+        if (y > ycomp - navAssistBtn.offsetHeight - 100) {
+            y = ycomp - navAssistBtn.offsetHeight - 100;
         }
         navAssistBtn.style.transform = `translate(${x}px, ${y}px)`;
         window.currentX = x;

@@ -36,4 +36,5 @@ window.addEventListener("fullscreenchange", () => {
         fullscreenBtn.addEventListener("click", toFullscreen)
         fullscreenNotice.style.display = "block"
     }
+    adjustNavAssistPosition()
 })

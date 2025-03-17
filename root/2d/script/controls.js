@@ -18,6 +18,7 @@ function switchControlVisibility() {
         profileWidget.style.display = "none"
     }
     window.controlsHidden = !window.controlsHidden
+    adjustNavAssistPosition()
 }
 hideControlsBtn.addEventListener("click", switchControlVisibility)
 document.addEventListener("keydown", (e) => {
