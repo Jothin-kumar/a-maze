@@ -3,7 +3,6 @@ function playNewMaze() {
     document.getElementById("maze-collection-integration").style.display = "none"
     document.getElementById("reset-btn").style.display = "inline-block"
     document.getElementById("reveal-answer").style.display = "inline-block"
-    document.getElementById("controls").style.display = "block";
     document.getElementById("game-over-parent").style.display = "none";
     window.gameIsOver = false;
     window.shareURL = null;

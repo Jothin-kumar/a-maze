@@ -60,7 +60,7 @@ function A_Maze_main() {
     document.getElementById("loading").style.display = "block"
     document.getElementById("msg").style.display = "none"
     document.getElementById("main").style.display = "none"
-    document.getElementById("controls").style.display = "none"
+    if (!window.controlsHidden) switchControlVisibility()
     if (sp.has("maze-collection-id") || sp.has("shared-maze-id")) {
         setTimeout(async () => {
             try {

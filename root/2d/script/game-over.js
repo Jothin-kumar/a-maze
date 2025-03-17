@@ -6,7 +6,7 @@ function gameOver(steps, startTime, custommsg="") {
     main.style.opacity = "0.1";
     hideNavAssist("game-over");
     player.reset()
-    document.getElementById("controls").style.display = "none";
+    if (!window.controlsHidden) switchControlVisibility();
     document.getElementById("game-over").innerHTML = custommsg || `<strong style="font-size: x-large">Game Over</strong><br><br>Your Score: ${score}<br>Time taken: ${((new Date().getTime() - startTime)/1000).toFixed(2)}s`;
     document.getElementById("game-over-parent").style.display = "block";
     deleteCookie("shared-maze-id");
