@@ -10,6 +10,7 @@ function toFullscreen() {
     fullscreenBtn.removeEventListener("click", toFullscreen)
     fullscreenBtn.addEventListener("click", toNormal)
     fullscreenNotice.style.display = "none"
+    if (!window.controlsHidden) switchControlVisibility()
 }
 function toNormal() {
     document.exitFullscreen()
@@ -35,4 +36,5 @@ window.addEventListener("fullscreenchange", () => {
         fullscreenBtn.addEventListener("click", toFullscreen)
         fullscreenNotice.style.display = "block"
     }
+    adjustNavAssistPosition()
 })
