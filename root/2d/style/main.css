@@ -103,7 +103,7 @@ body {
     z-index: 10;
 }
 
-#game-over-parent {
+#game-over {
     display: none;
     position: absolute;
     top: 50%;
@@ -114,18 +114,6 @@ body {
     text-align: center;
     width: max-content;
     font-size: 1.5rem;
-}
-#game-over-parent > button {
-    background-color: black;
-    border: orange 2px solid;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-#game-over-parent > button:hover {
-    background-color: rgba(100, 200, 100, .1);
-    border-color: darkgoldenrod;
 }
 
 #loading {
