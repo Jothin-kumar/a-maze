@@ -10,7 +10,7 @@ function toFullscreen() {
     fullscreenBtn.removeEventListener("click", toFullscreen)
     fullscreenBtn.addEventListener("click", toNormal)
     fullscreenNotice.style.display = "none"
-    if (!window.controlsHidden) switchControlVisibility()
+    if (!window.controlsHidden & !window.gameIsOver) switchControlVisibility()
 }
 function toNormal() {
     document.exitFullscreen()
