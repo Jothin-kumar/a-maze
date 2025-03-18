@@ -19,6 +19,7 @@ function switchControlVisibility() {
     }
     window.controlsHidden = !window.controlsHidden
     adjustNavAssistPosition()
+    optimizeZoom()
 }
 hideControlsBtn.addEventListener("click", switchControlVisibility)
 showControlsBtn.addEventListener("click", switchControlVisibility)
