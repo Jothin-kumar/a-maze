@@ -13,6 +13,7 @@ function hideHelp() {
 }
 const isHelpOpen = () => help.style.display === "block"
 window.addEventListener("keydown", (e) => {
+    if (e.ctrlKey || e.altKey || e.shiftKey) return
     if (e.key === "Escape" && isHelpOpen()) {
         hideHelp()
     }

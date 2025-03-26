@@ -208,6 +208,7 @@ document.addEventListener("click", (e) => {
     document.getElementById("share-url").style.display = "none";
 })
 document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey || e.altKey || e.shiftKey) return
     if (e.key === "Escape") {
         document.getElementById("share-url").style.display = "none";
     }

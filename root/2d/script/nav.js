@@ -91,6 +91,7 @@ class Player {
 }
 
 window.addEventListener("keydown", (e) => {
+    if (e.ctrlKey || e.altKey || e.shiftKey) return
     switch (e.key) {
         case "w":
         case "W":
@@ -122,6 +123,7 @@ window.addEventListener("keydown", (e) => {
     }
 })
 window.addEventListener("keyup", (e) => {
+    if (e.ctrlKey || e.altKey || e.shiftKey) return
     switch (e.key) {
         case " ":
             navAssistStop()

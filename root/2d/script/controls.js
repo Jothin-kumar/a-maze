@@ -24,6 +24,7 @@ function switchControlVisibility() {
 hideControlsBtn.addEventListener("click", switchControlVisibility)
 showControlsBtn.addEventListener("click", switchControlVisibility)
 document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey || e.altKey || e.shiftKey) return
     if (["c", "C"].includes(e.key)) {
         console.log("Switching control visibility");
         
