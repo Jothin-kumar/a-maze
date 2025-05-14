@@ -1,12 +1,4 @@
 window.navAssistBtn = document.getElementById('nav-assist-btn');
-navAssistBtn.addEventListener('click', function() {
-    if (navAssistInUse) {
-        navAssistStop()
-    }
-    else {
-        navAssistInit()
-    }
-});
 // Code for handling navAssist drag is stolen from a file from the past (on-screen-nav.js)
 function dragHandler() { // Writing it in a function cuz I'm too lazy to change the variable names...
     // Initialize variables for tracking touch positions

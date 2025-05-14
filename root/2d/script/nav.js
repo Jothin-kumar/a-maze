@@ -26,6 +26,7 @@ class Player {
             .filter(([dx, dy]) => canMove(this.endPos.x, this.endPos.y, this.endPos.x+dx, this.endPos.y+dy))
             .map(([dx, dy]) => window.mazeSquares[`${this.endPos.x+dx},${this.endPos.y+dy}`])
         ]
+        navAssistInit()
     }
     moveBy(x, y, by='player') {
         if (by !== 'reveal-answer' &&(window.answerRevealed || window.gameIsOver || window.navNotAllowed)) {
@@ -111,20 +112,9 @@ window.addEventListener("keydown", (e) => {
         case "ArrowRight":
             window.player.moveRight()
             break;
-        case " ":
-            navAssistInit()
-            break;
         case "f":
         case "F":
             toFullscreen()
-            break;
-    }
-})
-window.addEventListener("keyup", (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey) return
-    switch (e.key) {
-        case " ":
-            navAssistStop()
             break;
     }
 })
