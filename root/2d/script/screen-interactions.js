@@ -1,4 +1,7 @@
+window.isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0) // Source: https://stackoverflow.com/a/4819886
+
 window.navAssistBtn = document.getElementById('nav-assist-btn');
+window.navAssistBtn.style.display = "none"
 // Code for handling navAssist drag is stolen from a file from the past (on-screen-nav.js)
 function dragHandler() { // Writing it in a function cuz I'm too lazy to change the variable names...
     // Initialize variables for tracking touch positions
@@ -70,7 +73,7 @@ function dragHandler() { // Writing it in a function cuz I'm too lazy to change 
 }
 dragHandler();
 
-document.getElementById("maze-grid").addEventListener('click', function(e) {
+if (isTouchDevice) document.getElementById("maze-grid").addEventListener('click', function(e) {
     const navAssistBCR = navAssistBtn.getBoundingClientRect();  
     const x = e.clientX - ((navAssistBCR.left + navAssistBCR.right)/2);
     const y = e.clientY - ((navAssistBCR.top + navAssistBCR.bottom)/2);

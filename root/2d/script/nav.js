@@ -143,7 +143,7 @@ function navAssistStop() {
     navAssistBtn.classList.remove('active')
 }
 function displayNavAssist() {
-    navAssistBtn.style.display = "block"
+    if (window.isTouchDevice) navAssistBtn.style.display = "block"
 }
 function hideNavAssist(by="") {
     window.navAssistHiddenBy = by
