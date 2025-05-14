@@ -10,15 +10,20 @@ function playNewMaze() {
     window.answerRevealed = false;
     window.navIndicatorsDisabled = false;
     const usp = new CookieManager();
-    if (usp.has("share-url")) {
-        window.shareURL = "https://" + usp.get("share-url").replace("equal_to", "=")
+    if (usp.has("shared-maze-id")) {
+        window.shareURL = "https://https://joth.in/maze?id=" + usp.get("shared-maze-id");
+    }
+    else if (usp.has("maze-collection-id")) {
+        const id = usp.get("maze-collection-id");
+        const level = usp.get("level");
+        const shareSlug = level === "easy" ? `@${id}`: `${level}/@${id}`;
+        window.shareURL = "https://mazes.jothin.tech/" + shareSlug;
     }
     A_Maze_main()
     displayNavAssist()
 }
 function summonMazeCollectionAgain() {
     deleteCookie("maze-collection-id")
-    deleteCookie("share-url")
     deleteCookie("shared-maze-id")
     document.getElementById("a-maze").style.opacity = "0"
     document.getElementById("maze-collection-integration").style.display = "block"
@@ -37,7 +42,6 @@ async function getMazeDataFromCollection(level, id) {
 }
 configureMazeClickCallback((level, id) => {
     const shareSlug = level === "easy" ? `@${id}`: `${level}/@${id}`;
-    setCookie("share-url", `mazes.jothin.tech/${shareSlug}`);
     setCookie("level", level);
     setCookie("maze-collection-id", id);
     deleteCookie("shared-maze-id")
@@ -47,6 +51,5 @@ configureMazeClickCallback((level, id) => {
 function playRandomlyGeneratedMaze() {
     deleteCookie("shared-maze-id")
     deleteCookie("maze-collection-id")
-    deleteCookie("share-url")
     playNewMaze()
 }

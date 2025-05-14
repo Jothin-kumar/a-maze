@@ -52,8 +52,6 @@
                     deleteCookie("shared-maze-id")
                     setCookie("maze-collection-id", id)
                     setCookie("level", level)
-                    const shareSlug = level === "easy" ? `@${id}`: `${level}/@${id}`;
-                    setCookie("share-url", `mazes.jothin.tech/${shareSlug}`)
                     window.location.href = `/2d`
                 }
                 else {

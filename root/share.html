@@ -52,7 +52,6 @@
                         setCookie("shared-maze-id", usp.get("id"))
                         deleteCookie("maze-collection-id")
                         deleteCookie("level")
-                        setCookie("share-url", `joth.in/maze?idequal_to${usp.get("id")}`)
                         window.location.href = `/2d`
                     }
                     catch (e) {
