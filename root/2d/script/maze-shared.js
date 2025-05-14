@@ -187,6 +187,7 @@ async function shareMaze(button) {
         setCookie("shared-maze-id", mazeID);
         deleteCookie("maze-collection-id");
         finish(url)
+        history.pushState({}, "", "/share?id="+mazeID);
     }
     catch (e) {
         button.innerText = "Error. Try again Later";
