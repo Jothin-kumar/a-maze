@@ -25,6 +25,7 @@ function playNewMaze() {
 function summonMazeCollectionAgain() {
     deleteCookie("maze-collection-id")
     deleteCookie("shared-maze-id")
+    history.pushState({}, "", "/");
     document.getElementById("a-maze").style.opacity = "0"
     document.getElementById("maze-collection-integration").style.display = "block"
     document.getElementById("reset-btn").style.display = "none"

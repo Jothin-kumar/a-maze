@@ -14,5 +14,4 @@ function gameOver(steps, startTime, custommsg="") {
     document.getElementById("help-btn").style.display = "none"
     deleteCookie("shared-maze-id");
     deleteCookie("maze-collection-id");
-    history.pushState({}, "", "/");
 }
