@@ -194,13 +194,16 @@ async function shareMaze(button) {
     }
     function finish(url) {
         window.shareURL = url;
-        navigator.clipboard.writeText(url).catch(() => {
+        navigator.clipboard.writeText(url)
+        .then(() => {
+            button.innerText = "Copied!";
+            setTimeout(() => button.innerText = originalText, 2500);
+        })
+        .catch(() => {
             document.getElementById("share-url-copy-link").innerText = url;
             document.getElementById("share-url").style.display = "flex";
             setTimeout(() => button.innerText = originalText, 2500);
-        });
-        button.innerText = "Copied!";
-        setTimeout(() => button.innerText = originalText, 2500);
+        })
     }
 }
 document.addEventListener("click", (e) => {
