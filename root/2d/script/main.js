@@ -68,9 +68,11 @@ function A_Maze_main() {
                     data = await getMazeDataFromCollection(lvl, sp.get("maze-collection-id"))
                 }
                 else if (sp.has("shared-maze-id")) {
-                    r = await getMazeData(sp.get("shared-maze-id"))
+                    const mazeID = sp.get("shared-maze-id")
+                    r = await getMazeData(mazeID)
                     lvl = r.lvl
                     data = r.data
+                    history.pushState({}, "", "/share?id=" + mazeID);
                 }
                 setCurrentLevel(lvl)
                 switch (lvl) {
