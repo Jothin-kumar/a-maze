@@ -116,9 +116,6 @@ window.addEventListener("keydown", (e) => {
         case "F":
             toFullscreen()
             break;
-        case " ":
-            navAssistStop()
-            break;
     }
 })
 
@@ -133,7 +130,7 @@ async function navAssist() {
                 window.player.moveBy(dx, dy)
             }
         }
-        await new Promise(r => setTimeout(r, 500))
+        await new Promise(r => setTimeout(r, 100))
     }
 }
 setTimeout(navAssist, 0)
@@ -173,7 +170,7 @@ function updateNavAssist() {
     const possibleMoves = getMovableNeighbours(player)
 
     if (possibleMoves.length === 1) {
-        window.navAssistCoordBy = possibleMoves[0]
+        window.navAssistCoordBy = null
     }
     else if (possibleMoves.length == 2) {
         if (isPrevPos(possibleMoves[0])) {
@@ -186,7 +183,12 @@ function updateNavAssist() {
     else {
         const pm2 = possibleMoves.filter(([dx, dy]) => getMovableNeighbours({x: player.x+dx, y: player.y+dy}).length > 1)
         if (pm2.length === 1) {
-            window.navAssistCoordBy = pm2[0]
+            if (isPrevPos(pm2[0])) {
+                window.navAssistCoordBy = null
+            }
+            else {
+                window.navAssistCoordBy = pm2[0]
+            }
         }
         else if (pm2.length == 2) {
             if (isPrevPos(pm2[0])) {
