@@ -27,10 +27,12 @@ style.innerHTML = `
     z-index: 1000;
     display: none;
     text-align: right;
+    align-items: center;
     font-family: 'Courier New', Courier, monospace;
     background-color: black;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(200, 200, 200, 0.5);
 }
 #user-name {
     font-size: 1.5em;
@@ -45,9 +47,8 @@ style.innerHTML = `
     color: #8888;
 }
 .pfp-button {
-    flex-grow: 1;
     padding: 10px;
-    margin: 5px;
+    margin: 5px auto;
     font-size: 1rem;
     background-color: black;
     color: white;
