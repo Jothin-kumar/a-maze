@@ -5,6 +5,7 @@ const hard = "hard"
 window.currentLevel = easy
 window.gridSize = 25
 window.zoomChangeEvt = new Event("zoomChange")
+history.pushState({}, "", "/");
 
 window.addEventListener("resize", optimizeZoom)
 function setCurrentLevel(lvl) {
