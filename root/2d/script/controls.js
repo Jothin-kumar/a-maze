@@ -4,7 +4,7 @@ window.controlsHidden = false
 
 function switchControlVisibility() {
     const fullscreenBtn = document.getElementById("fullscreen-btn")
-    const profileWidget = document.getElementById("profile-widget")
+    const profileWidget = document.getElementById("pfp")
     if (window.controlsHidden) {
         showControlsBtn.style.opacity = 0
         controls.style.display = "block"
