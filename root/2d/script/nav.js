@@ -31,6 +31,7 @@ class Player {
         if (by !== 'reveal-answer' &&(window.answerRevealed || window.gameIsOver || window.navNotAllowed)) {
             return
         }
+        document.getElementById("profile-card").style.display = "none"
         if (canMove(this.x, this.y, this.x+x, this.y+y)) {
             this.prevX = this.x
             this.prevY = this.y

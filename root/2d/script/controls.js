@@ -5,6 +5,7 @@ window.controlsHidden = false
 function switchControlVisibility() {
     const fullscreenBtn = document.getElementById("fullscreen-btn")
     const profileWidget = document.getElementById("pfp")
+    const profileCard = document.getElementById("profile-card")
     if (window.controlsHidden) {
         showControlsBtn.style.opacity = 0
         controls.style.display = "block"
@@ -16,6 +17,7 @@ function switchControlVisibility() {
         controls.style.display = "none"
         fullscreenBtn.style.display = "none"
         profileWidget.style.display = "none"
+        profileCard.style.display = "none"
     }
     window.controlsHidden = !window.controlsHidden
     adjustNavAssistPosition()
