@@ -38,6 +38,7 @@ if (sp.has("maze-collection-id") || sp.has("shared-maze-id")) {
     playNewMaze()
 }
 function A_Maze_main() {
+    history.pushState({}, "", "/");
     if (sp.has("level")) {
         const level = sp.get("level")
         setCurrentLevel(level)
