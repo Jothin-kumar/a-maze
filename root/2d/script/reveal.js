@@ -6,7 +6,6 @@ async function revealAnswer() {
     document.getElementById("reset-btn").style.display = "none"
     document.getElementById("reveal-answer").style.display = "none"
     document.getElementById("help-btn").style.display = "none"
-    window.navIndicatorsDisabled = true
     hideNavAssist()
 
     const pathFromLocation = [

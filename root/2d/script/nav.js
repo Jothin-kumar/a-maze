@@ -63,7 +63,6 @@ class Player {
             gameOver(this.steps, this.start)
         }
         updateNavAssist()
-        updateNavIndicators()
         focusElem(this.currentElem)
         unfocusControls()
     }
@@ -84,7 +83,6 @@ class Player {
         this.steps = 0
         this.startPos.startBlink()
         this.startPos.elem.classList.add("current-player")
-        updateNavIndicators()
         navAssistStop()
         updateNavAssist()
     }
@@ -209,24 +207,4 @@ function updateNavAssist() {
             window.navAssistCoordBy = null
         }
     }
-}
-function updateNavIndicators() {
-    if (window.prevIndicators) {
-        window.prevIndicators.forEach(sq => sq.hideIndicator())
-    }
-    window.prevIndicators = []
-    if (window.navIndicatorsDisabled) return
-    getMovableNeighbours(player).forEach(([dx, dy]) => {
-        const sq = window.mazeSquares[`${player.x+dx},${player.y+dy}`]
-        if (isPrevPos([dx, dy])) {
-            sq.displayIndicator(.5)
-        }
-        else if (getMovableNeighbours(sq).length > 1) {
-            sq.displayIndicator()
-        }
-        else {
-            sq.displayIndicator(.1)
-        }
-        window.prevIndicators.push(sq)
-    })
 }
