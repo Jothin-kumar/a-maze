@@ -8,7 +8,6 @@ function playNewMaze() {
     window.gameIsOver = false;
     window.shareURL = null;
     window.answerRevealed = false;
-    window.navIndicatorsDisabled = false;
     const usp = new CookieManager();
     if (usp.has("shared-maze-id")) {
         window.shareURL = "https://https://joth.in/maze?id=" + usp.get("shared-maze-id");

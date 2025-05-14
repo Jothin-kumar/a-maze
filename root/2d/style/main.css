@@ -49,12 +49,9 @@ body {
     padding: 25px;
     cursor: pointer;
     background-color: white;
-    opacity: .25;
+    opacity: .5;
     z-index: 11;
     border-radius: 50%;
-}
-#nav-assist-btn.active {
-    opacity: .5;
 }
 #nav-assist-btn:hover {
     box-shadow: 0 0 10px 10px rgba(255, 255, 255, .25);

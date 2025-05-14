@@ -63,9 +63,9 @@ class Player {
             gameOver(this.steps, this.start)
         }
         updateNavAssist()
-        updateNavIndicators()
         focusElem(this.currentElem)
         unfocusControls()
+        navAssistInit()
     }
     moveUp() {this.moveBy(0, -1)}
     moveDown() {this.moveBy(0, 1)}
@@ -84,7 +84,6 @@ class Player {
         this.steps = 0
         this.startPos.startBlink()
         this.startPos.elem.classList.add("current-player")
-        updateNavIndicators()
         navAssistStop()
         updateNavAssist()
     }
@@ -113,20 +112,9 @@ window.addEventListener("keydown", (e) => {
         case "ArrowRight":
             window.player.moveRight()
             break;
-        case " ":
-            navAssistInit()
-            break;
         case "f":
         case "F":
             toFullscreen()
-            break;
-    }
-})
-window.addEventListener("keyup", (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey) return
-    switch (e.key) {
-        case " ":
-            navAssistStop()
             break;
     }
 })
@@ -142,7 +130,7 @@ async function navAssist() {
                 window.player.moveBy(dx, dy)
             }
         }
-        await new Promise(r => setTimeout(r, 500))
+        await new Promise(r => setTimeout(r, 100))
     }
 }
 setTimeout(navAssist, 0)
@@ -155,7 +143,7 @@ function navAssistStop() {
     navAssistBtn.classList.remove('active')
 }
 function displayNavAssist() {
-    navAssistBtn.style.display = "block"
+    if (window.isTouchDevice) navAssistBtn.style.display = "block"
 }
 function hideNavAssist(by="") {
     window.navAssistHiddenBy = by
@@ -182,7 +170,7 @@ function updateNavAssist() {
     const possibleMoves = getMovableNeighbours(player)
 
     if (possibleMoves.length === 1) {
-        window.navAssistCoordBy = possibleMoves[0]
+        window.navAssistCoordBy = null
     }
     else if (possibleMoves.length == 2) {
         if (isPrevPos(possibleMoves[0])) {
@@ -195,7 +183,12 @@ function updateNavAssist() {
     else {
         const pm2 = possibleMoves.filter(([dx, dy]) => getMovableNeighbours({x: player.x+dx, y: player.y+dy}).length > 1)
         if (pm2.length === 1) {
-            window.navAssistCoordBy = pm2[0]
+            if (isPrevPos(pm2[0])) {
+                window.navAssistCoordBy = null
+            }
+            else {
+                window.navAssistCoordBy = pm2[0]
+            }
         }
         else if (pm2.length == 2) {
             if (isPrevPos(pm2[0])) {
@@ -209,24 +202,4 @@ function updateNavAssist() {
             window.navAssistCoordBy = null
         }
     }
-}
-function updateNavIndicators() {
-    if (window.prevIndicators) {
-        window.prevIndicators.forEach(sq => sq.hideIndicator())
-    }
-    window.prevIndicators = []
-    if (window.navIndicatorsDisabled) return
-    getMovableNeighbours(player).forEach(([dx, dy]) => {
-        const sq = window.mazeSquares[`${player.x+dx},${player.y+dy}`]
-        if (isPrevPos([dx, dy])) {
-            sq.displayIndicator(.5)
-        }
-        else if (getMovableNeighbours(sq).length > 1) {
-            sq.displayIndicator()
-        }
-        else {
-            sq.displayIndicator(.1)
-        }
-        window.prevIndicators.push(sq)
-    })
 }
