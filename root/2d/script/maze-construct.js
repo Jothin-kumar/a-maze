@@ -228,6 +228,8 @@ function postConstruct() {
     if (cm.has("guide-shown")) {
         document.getElementById("guide-btn").disabled = true;
         document.getElementById("guide-btn").style.opacity = 0;
+        document.getElementById("controls-new-maze-btn").disabled = true;
+        document.getElementById("controls-new-maze-btn").style.opacity = 0;
         setTimeout(() => {
             setZoom(window.zoom*2);
             window.player.endPos.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
@@ -243,6 +245,8 @@ function postConstruct() {
             document.getElementById("guide-btn").disabled = false;
             document.getElementById("guide-btn").style.opacity = 1;
             showGuideTooltip(window.player.startPos.elem, "Go!")
+            document.getElementById("controls-new-maze-btn").disabled = false;
+            document.getElementById("controls-new-maze-btn").style.opacity = 1;
         }, 4000)
     }
     else {
