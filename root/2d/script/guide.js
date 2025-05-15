@@ -59,19 +59,25 @@ function showGuide() {
         showGuideTooltip(window.mp.end.elem, "This is your goal. Click for next", () => {
             window.player.currentElem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
             showGuideTooltip(window.player.currentElem, "You're here.", async () => {
-                targetZoom = window.zoom/2;
-                while (targetZoom < window.zoom) {
-                    setZoom(window.zoom - .1);
-                    if (window.zoom - targetZoom < .1) {
-                        setZoom(targetZoom);
-                        break;
+                showGuideTooltip(document.getElementById("nav-assist-btn"),
+                    isTouchDevice ? "Click above, below, left or right to move." : "Use arrow keys or WASD to move.",
+                    async () => {
+                        targetZoom = window.zoom/2;
+                        while (targetZoom < window.zoom) {
+                            setZoom(window.zoom - .1);
+                            if (window.zoom - targetZoom < .1) {
+                                setZoom(targetZoom);
+                                break;
+                            }
+                            await new Promise(r => setTimeout(r, 1));
+                        }
+                        window.player.currentElem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+                        showGuideTooltip(window.player.currentElem, "You're all set!")
+                        window.navNotAllowed = false
+                        window.guideShowing = false;
+                        document.getElementById("guide-btn").style.opacity = 1;
                     }
-                    await new Promise(r => setTimeout(r, 1));
-                }
-                window.player.currentElem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-                window.navNotAllowed = false
-                window.guideShowing = false;
-                document.getElementById("guide-btn").style.opacity = 1;
+                )
             })
         });
     }, 100)
