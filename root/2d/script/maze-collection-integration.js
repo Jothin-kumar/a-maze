@@ -22,6 +22,7 @@ function playNewMaze() {
     displayNavAssist()
 }
 function summonMazeCollectionAgain() {
+    window.gameIsOver = true;
     deleteCookie("maze-collection-id")
     deleteCookie("shared-maze-id")
     history.pushState({}, "", "/");

@@ -1,5 +1,8 @@
 async function showGuideTooltip(elem, text, callback=() => {}) {
-    if (window.answerRevealed || window.gameIsOver) return;
+    if (window.gameIsOver) {
+        window.guideShowing = false;
+        return;
+    };
     const tooltip = document.createElement("p");
     tooltip.classList.add("guide-tooltip");
     document.body.appendChild(tooltip);
