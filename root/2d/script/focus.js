@@ -15,9 +15,6 @@ function focusElem(elem) {
         elem.scrollIntoView({ behavior: "smooth"});
     }
 }
-function focusStart() {
-    focusElem(window.mp.start.elem);
-}
 window.addEventListener("zoomChange", () => focusElem(player.currentElem))
 
 const controls = document.getElementById("controls")

@@ -33,6 +33,9 @@ body {
 
     display: none;
 }
+#maze-grid {
+    transition: 2s;
+}
 #maze-grid-parent {
     background-color: black;
     position: relative;

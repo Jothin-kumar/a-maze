@@ -225,9 +225,23 @@ function postConstruct() {
     updateNavAssist()
     adjustNavAssistPosition()
     setTimeout(() => {
-        focusStart()
+        setZoom(window.zoom*2);
+        window.mp.end.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+        showGuideTooltip(window.mp.end.elem, "This is your goal. Click for next", () => {
+            window.player.startPos.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+            showGuideTooltip(window.player.startPos.elem, "This is your starting point.", async () => {
+                targetZoom = window.zoom/2;
+                while (targetZoom < window.zoom) {
+                    setZoom(window.zoom - .1);
+                    if (window.zoom - targetZoom < .1) {
+                        setZoom(targetZoom);
+                        break;
+                    }
+                    await new Promise(r => setTimeout(r, 1));
+                }
+                window.player.startPos.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+                window.navNotAllowed = false
+            })
+        });
     }, 500)
-    setTimeout(() => {
-        window.navNotAllowed = false
-    }, 1000)
 }
