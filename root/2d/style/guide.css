@@ -10,8 +10,9 @@
   width: fit-content;
   height: fit-content;
   white-space: nowrap;
-  font-family: monospace;
-  font-size: large;
+  font-family: sans-serif;
+  font-size: small;
+  font-weight: bold;
 }
 @keyframes fade-in {
   0% {
