@@ -3,7 +3,7 @@ function playNewMaze() {
     document.getElementById("maze-collection-integration").style.display = "none"
     document.getElementById("reset-btn").style.display = "inline-block"
     document.getElementById("reveal-answer").style.display = "inline-block"
-    document.getElementById("help-btn").style.display = "inline-block"
+    document.getElementById("guide-btn").style.display = "inline-block"
     document.getElementById("game-over").style.display = "none";
     window.gameIsOver = false;
     window.shareURL = null;
@@ -22,6 +22,7 @@ function playNewMaze() {
     displayNavAssist()
 }
 function summonMazeCollectionAgain() {
+    window.gameIsOver = true;
     deleteCookie("maze-collection-id")
     deleteCookie("shared-maze-id")
     history.pushState({}, "", "/");

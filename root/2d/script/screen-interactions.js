@@ -1,7 +1,7 @@
 window.isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0) // Source: https://stackoverflow.com/a/4819886
 
 window.navAssistBtn = document.getElementById('nav-assist-btn');
-window.navAssistBtn.style.display = "none"
+if (!window.isTouchDevice) window.navAssistBtn.style.display = "none"
 // Code for handling navAssist drag is stolen from a file from the past (on-screen-nav.js)
 function dragHandler() { // Writing it in a function cuz I'm too lazy to change the variable names...
     // Initialize variables for tracking touch positions

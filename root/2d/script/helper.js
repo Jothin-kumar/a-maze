@@ -30,7 +30,7 @@ function resumeAllTransition() {
 }
 
 function setCookie(name, value) {
-    document.cookie = `${name}=${value}; path=/2d; max-age=31536000`;
+    document.cookie = `${name}=${value}; path=/; max-age=31536000`;
 }
 function getCookie(name) {
     const cookie = document.cookie.split("; ").find(cookie => cookie.startsWith(name));
@@ -48,8 +48,8 @@ class CookieManager {
             const [name, value] = cookie.split("=");
         });
     }
-    set(name, value) {
-        document.cookie = `${name}=${value}; path=/2d; max-age=31536000`;
+    set(name, value, duration=31536000) {
+        document.cookie = `${name}=${value}; path=/; max-age=${duration}`;
     }
     get(name) {
         const cookie = document.cookie.split("; ").find(cookie => cookie.startsWith(name));
