@@ -247,6 +247,6 @@ function postConstruct() {
     }
     else {
         showGuide()
-        cm.set("guide-shown", "1", 86400);
     }
+    cm.set("guide-shown", "1", 86400);
 }
