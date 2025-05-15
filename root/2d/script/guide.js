@@ -28,21 +28,46 @@ async function showGuideTooltip(elem, text, callback=() => {}) {
         ey = rect.top + rect.height / 2;        
         
         if (ex > cx) {
-            tooltip.style.right = `${window.innerWidth - ex}px`;
-            tooltip.style.left = "auto";
+            if (ex + tooltip.getBoundingClientRect().width > window.innerWidth) {
+                tooltip.style.right = "0px"
+                tooltip.style.left = "auto";
+            }
+            else {
+                tooltip.style.right = `${window.innerWidth - ex}px`;
+                tooltip.style.left = "auto";
+            }
         }
         else {
-            tooltip.style.left = `${ex}px`;
-            tooltip.style.right = "auto";
+            if (ex - tooltip.getBoundingClientRect().width < 0) {
+                tooltip.style.left = "0px"
+                tooltip.style.right = "auto";
+            }
+            else {
+                tooltip.style.left = `${ex}px`;
+                tooltip.style.right = "auto";
+            }
         }
         if (ey > cy) {
-            tooltip.style.bottom = `${window.innerHeight - ey}px`;
-            tooltip.style.top = "auto";
+            if (ey + tooltip.getBoundingClientRect().height > window.innerHeight) {
+                tooltip.style.bottom = "0px"
+                tooltip.style.top = "auto";
+            }
+            else {
+                tooltip.style.bottom = `${window.innerHeight - ey}px`;
+                tooltip.style.top = "auto";
+            }
         }
         else {
-            tooltip.style.top = `${ey}px`;
-            tooltip.style.bottom = "auto";
+            if (ey - tooltip.getBoundingClientRect().height < 0) {
+                tooltip.style.top = "0px"
+                tooltip.style.bottom = "auto";
+            }
+            else {
+                tooltip.style.top = `${ey}px`;
+                tooltip.style.bottom = "auto";
+            }
         }
+        
         await new Promise(resolve => setTimeout(resolve, 100));
     }
 }
