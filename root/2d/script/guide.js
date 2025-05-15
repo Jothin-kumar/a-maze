@@ -100,7 +100,7 @@ function showGuide() {
                     await new Promise(r => setTimeout(r, 1));
                 }
                 window.navNotAllowed = false
-                navAssistBtn.style.display = "block";
+                if (isTouchDevice) navAssistBtn.style.display = "block";
                 window.player.currentElem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
                 showGuideTooltip(navAssistBtn,
                     isTouchDevice ? "Click above, below, left or right with respect to the white circle to move." : "Use arrow keys or WASD to move.",
