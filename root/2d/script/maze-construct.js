@@ -224,22 +224,29 @@ function postConstruct() {
     alignMaze()
     updateNavAssist()
     adjustNavAssistPosition()
-    document.getElementById("guide-btn").disabled = true;
-    document.getElementById("guide-btn").style.opacity = 0;
-    setTimeout(() => {
-        setZoom(window.zoom*2);
-        window.player.endPos.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-    }, 500)
-    setTimeout(() => {
-        window.player.startPos.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+    const cm = new CookieManager()
+    if (cm.has("guide-shown")) {
+        document.getElementById("guide-btn").disabled = true;
+        document.getElementById("guide-btn").style.opacity = 0;
+        setTimeout(() => {
+            setZoom(window.zoom*2);
+            window.player.endPos.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+        }, 500)
+        setTimeout(() => {
+            window.player.startPos.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+        }
+        , 2000)
+        setTimeout(() => {
+            setZoom(window.zoom/2);
+            window.player.startPos.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+            window.navNotAllowed = false
+            document.getElementById("guide-btn").disabled = false;
+            document.getElementById("guide-btn").style.opacity = 1;
+            showGuideTooltip(window.player.startPos.elem, "Go!")
+        }, 4000)
     }
-    , 2000)
-    setTimeout(() => {
-        setZoom(window.zoom/2);
-        window.player.startPos.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-        window.navNotAllowed = false
-        document.getElementById("guide-btn").disabled = false;
-        document.getElementById("guide-btn").style.opacity = 1;
-        showGuideTooltip(window.player.startPos.elem, "Go!")
-    }, 4000)
+    else {
+        showGuide()
+        cm.set("guide-shown", "1", 86400);
+    }
 }

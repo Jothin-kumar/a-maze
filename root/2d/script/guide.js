@@ -5,9 +5,18 @@ async function showGuideTooltip(elem, text, callback=() => {}) {
     tooltip.innerHTML = text;
     tooltip.removed = false;
     function removeTooltip() {
-        document.body.removeChild(tooltip);
+        try {
+            document.body.removeChild(tooltip);
+            callback();
+        }
+        catch (e) {
+            if (e instanceof DOMException) {
+                // Ignore the error
+            } else {
+                throw e;
+            }
+        }
         tooltip.removed = true;
-        callback();
     }
     addEventListener("click", removeTooltip);
     addEventListener("keydown", removeTooltip);
