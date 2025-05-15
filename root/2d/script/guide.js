@@ -16,8 +16,7 @@ async function showGuideTooltip(elem, text, callback=() => {}) {
         cx = window.innerWidth / 2;
         cy = window.innerHeight / 2;
         ex = rect.left + rect.width / 2;
-        ey = rect.top + rect.height / 2;
-        console.log(`cx: ${cx}, cy: ${cy}, tx: ${ex}, ty: ${ey}`);
+        ey = rect.top + rect.height / 2;        
         
         if (ex > cx) {
             tooltip.style.right = `${window.innerWidth - ex}px`;
@@ -44,12 +43,13 @@ function showGuide() {
     if (window.guideShowing) return;
     window.guideShowing = true;
     window.navNotAllowed = true;
+    document.getElementById("guide-btn").style.opacity = 0;
     setTimeout(() => {
         setZoom(window.zoom*2);
         window.mp.end.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
         showGuideTooltip(window.mp.end.elem, "This is your goal. Click for next", () => {
             window.player.currentElem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
-            showGuideTooltip(window.player.startPos.elem, "You're here.", async () => {
+            showGuideTooltip(window.player.currentElem, "You're here.", async () => {
                 targetZoom = window.zoom/2;
                 while (targetZoom < window.zoom) {
                     setZoom(window.zoom - .1);
@@ -61,6 +61,8 @@ function showGuide() {
                 }
                 window.player.currentElem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
                 window.navNotAllowed = false
+                window.guideShowing = false;
+                document.getElementById("guide-btn").style.opacity = 1;
             })
         });
     }, 100)
