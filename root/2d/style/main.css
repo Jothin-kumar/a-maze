@@ -148,42 +148,6 @@ body {
     }
 }
 
-#help-parent {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-
-    width: fit-content;
-    overflow-y: scroll;
-    max-width: 95dvw;
-    max-height: 95dvh;
-    min-width: 70dvw;
-    min-height: 70dvh;
-    overflow-y: scroll;
-    padding: 10px;
-
-    background-color: rgba(0, 10, 0, .9);
-
-    display: none;
-}
-#help {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    height: 90%;
-    width: 60dvw;
-    overflow-y: scroll;
-}
-#close-help-btn {
-    padding: 10px;
-    cursor: pointer;
-    color: white;
-    background-color: transparent;
-    border: red 1px solid;
-    border-radius: 10px;
-}
 #msg {
     position: absolute;
     left: 50%;

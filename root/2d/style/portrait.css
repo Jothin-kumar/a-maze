@@ -9,9 +9,6 @@
     #controls {
         flex-direction: column;
     }
-    #help {
-        width: 90%;
-    }
     #msg {
         width: 90dvw;
         text-align: center;

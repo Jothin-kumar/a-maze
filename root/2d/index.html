@@ -61,47 +61,13 @@
             <div id="hide-controls-btn"><span class="material-symbols-outlined">expand_circle_down</span></div>
             <button onclick="this.blur(); revealAnswer()" id="reveal-answer">Reveal Answer</button>
             <button onclick="this.blur(); window.player.reset()" id="reset-btn">Reset</button>
-            <button onclick="this.blur(); helpBtn()" id="help-btn">Help</button>
+            <button onclick="this.blur(); showGuide()" id="guide-btn">Guide</button>
             <button onclick="this.blur(); summonMazeCollectionAgain()" id="controls-new-maze-btn">New Game</button>
             <button onclick="this.blur(); shareMaze(this)">Share Maze</button>
         </div>
     </div>
     <div id="show-controls-btn"><span class="material-symbols-outlined">expand_circle_up</span></div>
     <p id="game-over"></p>
-    <div id="help-parent">
-        <div id="help">
-            <button onclick="this.blur(); hideHelp()" id="close-help-btn">Close help</button>
-            <h2>How to play?</h2>
-            <ul>
-                <li>Find the <strong>green dot</strong> in the maze. This will be the <strong>starting position</strong></li>
-                <li>Find the <strong>red dot</strong> in the maze. This will be the <strong>final position</strong></li>
-                <li>Start navigating to the final position</li>
-            </ul>
-            <h2>Navigation</h2>
-            <ul>
-                <li><strong>Devices with physical keyboard: </strong>Use arrow keys or WASD to move. For Navigation Assist, press and hold space bar</li>
-                <li><strong>Touch screen devices: </strong>The white circle is navassist. Touch it to activate. Touch above, below, left, or right of navassist button to navigate. You can move the button.</li>
-            </ul>
-            <h2>Navigation Assist</h2>
-            <ul>
-                <li>In some cases, there is only one practical move other than going back</li>
-                <li>In these cases, you need not manually navigate. Navigation Assist comes in handy here</li>
-            </ul>
-            <h2>Controls</h2>
-            <ul>
-                <li>If you can't solve the maze, use "Reveal Answer"</li>
-                <li>If you wanna try again, use "Reset"</li>
-                <li>To play a different maze instead, use "New Game"</li>
-                <li>To share this maze, use "Share Maze"</li>
-                <li>To hide the controls, use the button at the bottom left corner. To show the controls, press the button again. Alternatively, you could also use the "c" key</li>
-            </ul>
-            <h2>Common problems & solutions</h2>
-            <ul>
-                <li><strong>Visibility issues: </strong>Disable any browser extensions that might interfere with color of the website. (eg: dark reader)</li>
-            </ul>
-            <br><p>Press "Esc" to quit help screen. You can also use the button at the top</p>
-        </div>
-    </div>
     <div id="msg"></div>
     <div id="share-url">
         <h3 id="share-url-h3">Please Copy share URL manually</h3>
@@ -146,7 +112,6 @@
     <script src="script/game-over.js"></script>
     <script src="script/focus.js"></script>
     <script src="script/nav.js"></script>
-    <script src="script/help.js"></script>
     <script src="script/difficulty.js"></script>
     <script src="script/maze-collection-integration.js"></script>
     <script src="script/fullscreen.js"></script>

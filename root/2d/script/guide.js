@@ -10,7 +10,7 @@ async function showGuideTooltip(elem, text, callback=() => {}) {
         callback();
     }
     addEventListener("click", removeTooltip);
-    addEventListener("keypress", removeTooltip);
+    addEventListener("keydown", removeTooltip);
     while (!tooltip.removed) {
         const rect = elem.getBoundingClientRect();
         cx = window.innerWidth / 2;
@@ -37,4 +37,31 @@ async function showGuideTooltip(elem, text, callback=() => {}) {
         }
         await new Promise(resolve => setTimeout(resolve, 100));
     }
+}
+
+window.guideShowing = false;
+function showGuide() {
+    if (window.guideShowing) return;
+    window.guideShowing = true;
+    window.navNotAllowed = true;
+    setTimeout(() => {
+        setZoom(window.zoom*2);
+        window.mp.end.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+        showGuideTooltip(window.mp.end.elem, "This is your goal. Click for next", () => {
+            window.player.currentElem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+            showGuideTooltip(window.player.startPos.elem, "You're here.", async () => {
+                targetZoom = window.zoom/2;
+                while (targetZoom < window.zoom) {
+                    setZoom(window.zoom - .1);
+                    if (window.zoom - targetZoom < .1) {
+                        setZoom(targetZoom);
+                        break;
+                    }
+                    await new Promise(r => setTimeout(r, 1));
+                }
+                window.player.currentElem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+                window.navNotAllowed = false
+            })
+        });
+    }, 100)
 }

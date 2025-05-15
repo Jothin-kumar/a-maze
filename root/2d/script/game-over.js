@@ -11,7 +11,7 @@ function gameOver(steps, startTime, custommsg="") {
     document.getElementById("game-over").style.display = "block";
     document.getElementById("reset-btn").style.display = "none"
     document.getElementById("reveal-answer").style.display = "none"
-    document.getElementById("help-btn").style.display = "none"
+    document.getElementById("guide-btn").style.display = "none"
     deleteCookie("shared-maze-id");
     deleteCookie("maze-collection-id");
 }
