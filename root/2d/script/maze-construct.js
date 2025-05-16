@@ -231,15 +231,16 @@ function postConstruct() {
         document.getElementById("controls-new-maze-btn").disabled = true;
         document.getElementById("controls-new-maze-btn").style.opacity = 0;
         setTimeout(() => {
-            setZoom(window.zoom*2);
+            setZoom(getOptimalZoom()*2);
             window.player.endPos.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
         }, 500)
         setTimeout(() => {
+            setZoom(getOptimalZoom()*2);
             window.player.startPos.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
         }
         , 2000)
         setTimeout(() => {
-            setZoom(window.zoom/2);
+            setZoom(getOptimalZoom());
             window.player.startPos.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
             window.navNotAllowed = false
             document.getElementById("guide-btn").disabled = false;

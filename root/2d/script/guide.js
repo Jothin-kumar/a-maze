@@ -85,16 +85,17 @@ function showGuide() {
     const navAssistBtn = document.getElementById("nav-assist-btn");
     navAssistBtn.style.display = "none";
     setTimeout(() => {
-        setZoom(window.zoom*2);
+        setZoom(getOptimalZoom()*2);
         window.mp.end.elem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
         showGuideTooltip(window.mp.end.elem, "This is your goal. Click for next", () => {
+            setZoom(getOptimalZoom()*2);
             window.player.currentElem.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
             showGuideTooltip(window.player.currentElem, "You're here.", async () => {
-                targetZoom = window.zoom/2;
+                targetZoom = getOptimalZoom();
                 while (targetZoom < window.zoom) {
                     setZoom(window.zoom - .1);
                     if (window.zoom - targetZoom < .1) {
-                        setZoom(targetZoom);
+                        setZoom(getOptimalZoom());
                         break;
                     }
                     await new Promise(r => setTimeout(r, 1));

@@ -6,7 +6,9 @@ window.currentLevel = easy
 window.gridSize = 25
 window.zoomChangeEvt = new Event("zoomChange")
 
-window.addEventListener("resize", optimizeZoom)
+window.addEventListener("resize", () => {
+    setZoom(getOptimalZoom())
+})
 function setCurrentLevel(lvl) {
     window.currentLevel = lvl
 }
@@ -20,17 +22,16 @@ function configForGridSize(size) { // Example: size = 49 for 49x49 grid
         mg.setAttribute("width", a*zoom)
     })
 }
-function optimizeZoom() {
+function getOptimalZoom() {
     const m = document.body.getBoundingClientRect()
     const h = m.height
     const w = m.width
     if (h > w) { // Portrait
-        window.zoom = h/((window.gridSize-.5)*10 + 10)
+        return h/((window.gridSize-.5)*10 + 10)
     }
     else { // Landscape
-        window.zoom = w/((window.gridSize-.5)*10 + 10)
+        return w/((window.gridSize-.5)*10 + 10)
     }
-    setZoom(window.zoom)
 }
 
 window.gameCount = 0
@@ -55,7 +56,7 @@ function A_Maze_main() {
         }
     }
     configForGridSize(window.gridSize)
-    optimizeZoom()
+    setZoom(getOptimalZoom())
     document.getElementById("loading").style.display = "block"
     document.getElementById("msg").style.display = "none"
     document.getElementById("main").style.display = "none"
@@ -87,7 +88,7 @@ function A_Maze_main() {
                         break
                 }
                 configForGridSize(window.gridSize)
-                optimizeZoom()
+                setZoom(getOptimalZoom())
                 loadMazeFromShared(data)
             }
             catch (e) {
