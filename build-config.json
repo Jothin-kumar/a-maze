@@ -6,10 +6,7 @@
         "2d/index.html",
         "/share.html",
         "/load-from-maze-collection.html",
-        {
-            "path": "/index.html",
-            "prefetches": ["https://a-maze.jothin.tech/assets/img/bg.png"]
-        }
+        "/index.html"
     ],
     "line-end": "\n"
 }
