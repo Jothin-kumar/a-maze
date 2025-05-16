@@ -9,14 +9,6 @@
         {
             "path": "/index.html",
             "prefetches": ["https://a-maze.jothin.tech/assets/img/bg.png"]
-        },
-        {
-            "path": "/support.html",
-            "prefetches": ["https://a-maze.jothin.tech/assets/img/bg.png"]
-        },
-        {
-            "path": "/how-to-play.html",
-            "prefetches": ["https://a-maze.jothin.tech/assets/img/bg.png"]
         }
     ],
     "line-end": "\n"
