@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A-Maze: Maze Generation Demo</title>
+    <link rel="stylesheet" href="style/main.css">
+</head>
+
+<body>
+    <div id="main">
+        <div id="maze-grid-parent">
+            <svg id="maze-grid" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+    </div>
+
+    <script src="script/helper.js"></script>
+    <script src="script/line.js"></script>
+    <script src="script/maze-construct.js"></script>
+    <script>
+        window.gridSize = 69
+        window.zoomChangeEvt = new Event("zoomChange")
+        window.mg = document.getElementById("maze-grid")
+        function alignMaze() {
+            const mgbc = mg.getBoundingClientRect()
+            const mbc = document.getElementById("main").getBoundingClientRect()
+            if (mbc.height > mgbc.height) mg.style.transform = `translateY(${Math.abs(mbc.height - mgbc.height) / 2}px)`
+        }
+        function setZoom(z) {
+            window.zoom = z
+            window.dispatchEvent(zoomChangeEvt)
+            alignMaze()
+        }
+        async function pathLine(path) {
+            for (let i = 0; i < path.length - 1; i++) {
+                clearLine(path[i].x, path[i].y, path[i + 1].x, path[i + 1].y)
+                await new Promise(r => setTimeout(r, 1))
+            }
+        }
+
+
+        window.addEventListener("resize", () => {
+            setZoom(getOptimalZoom())
+        })
+        function setCurrentLevel(lvl) {
+            window.currentLevel = lvl
+        }
+        function configForGridSize(size) { // Example: size = 49 for 49x49 grid
+            window.gridSize = size
+            const mg = document.getElementById("maze-grid")
+            const a = (size - .5) * 10 + 10
+
+            window.addEventListener("zoomChange", () => {
+                mg.setAttribute("height", a * zoom)
+                mg.setAttribute("width", a * zoom)
+            })
+        }
+        function getOptimalZoom() {
+            const m = document.body.getBoundingClientRect()
+            const h = m.height
+            const w = m.width
+            if (h > w) { // Portrait
+                return h / ((window.gridSize - .5) * 10 + 10)
+            }
+            else { // Landscape
+                return w / ((window.gridSize - .5) * 10 + 10)
+            }
+        }
+        document.getElementById("main").style.display = "block"
+        configForGridSize(window.gridSize)
+        window.addEventListener("keypress", (evt) => {
+            if (evt.key === "+") {
+                setZoom(zoom * 1.1)
+            }
+            else if (evt.key === "-") {
+                setZoom(zoom / 1.1)
+            }
+        })
+        preConstruct()
+        setZoom(getOptimalZoom())
+        async function my_func() {
+            const vals = {
+                25: [69, 88, 10, 20],
+                49: [169, 175, 50, 25],
+                69: [200, 256, 69, 88]
+            }
+            const val = vals[window.gridSize]
+            window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares)), randRange(val[0], val[1])) // Main path
+            f1 = () => {
+                mp.start.setColor("green")
+                pathLine(mp.path)
+                mp.end.setColor("red")
+            }
+            f2 = async () => {
+                const maxIter = 10000
+            const fp = 100 / maxIter
+            const fp_ = maxIter / 100
+            c = 0
+            while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < maxIter) {
+                pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => d.used)), randRange(val[2], val[3]), (dot) => !dot.used).path)
+                if (c % fp_ === 0) {
+                    await new Promise(r => setTimeout(r, 1))
+                }
+                c++
+            }
+            }
+            f3 = () => {
+                const toClear = Object.values(window.mazeSquares).filter((d) => {
+                function checkUsageWithRespectToLine(x1, y1, x2, y2) {
+                    try {
+                        return checkIfLineNotHidden(x1, y1, x2, y2)
+                    }
+                    catch {
+                        return true
+                    }
+                }
+                if (
+                    checkUsageWithRespectToLine(d.x, d.y, d.x + 1, d.y) &&
+                    checkUsageWithRespectToLine(d.x, d.y, d.x, d.y + 1) &&
+                    checkUsageWithRespectToLine(d.x, d.y, d.x - 1, d.y) &&
+                    checkUsageWithRespectToLine(d.x, d.y, d.x, d.y - 1)
+                ) {
+                    return true
+                }
+            })
+            toClear.forEach((d) => {
+                function handler(x, y) {
+                    if (toClear.includes(window.mazeSquares[`${d.x + x},${d.y + y}`])) {
+                        clearLine(d.x, d.y, d.x + x, d.y + y)
+                        window.lines[`${d.x * 2 + x},${d.y * 2 + y}`].ignore = true
+                    }
+                }
+                handler(1, 0)
+                handler(0, 1)
+                handler(-1, 0)
+                handler(0, -1)
+            })
+            }
+            window.navNotAllowed = true
+            startPos = window.mp.start
+            endPos = window.mp.end
+            window.dispatchEvent(zoomChangeEvt)
+            alignMaze()
+            f1_complete = false
+            f2_complete = false
+            f3_complete = false
+            window.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") {
+                    if (!f1_complete) {
+                        f1()
+                        f1_complete = true
+                    }
+                    else if (!f2_complete) {
+                        f2()
+                        f2_complete = true
+                    }
+                    else if (!f3_complete) {
+                        f3()
+                        f3_complete = true
+                    }
+                }
+            })
+        }
+        my_func()
+    </script>
+</body>
+
+</html>
