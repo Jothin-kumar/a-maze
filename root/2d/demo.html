@@ -27,7 +27,21 @@
     <script src="script/line.js"></script>
     <script src="script/maze-construct.js"></script>
     <script>
-        window.gridSize = 69
+        const usp = new URLSearchParams(window.location.search)
+        window.level = usp.get("level") || "easy"
+        switch (window.level) {
+            case "easy":
+                window.gridSize = 25
+                break
+            case "medium":
+                window.gridSize = 49
+                break
+            case "hard":
+                window.gridSize = 69
+                break
+            default:
+                window.gridSize = 25
+        }
         window.zoomChangeEvt = new Event("zoomChange")
         window.mg = document.getElementById("maze-grid")
         function alignMaze() {
