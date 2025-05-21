@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Maze: Maze Generation Demo</title>
     <link rel="stylesheet" href="style/main.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100dvh;
+        }
+    </style>
 </head>
 
 <body>
@@ -94,48 +102,61 @@
             }
             f2 = async () => {
                 const maxIter = 10000
-            const fp = 100 / maxIter
-            const fp_ = maxIter / 100
-            c = 0
-            while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < maxIter) {
-                pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => d.used)), randRange(val[2], val[3]), (dot) => !dot.used).path)
-                if (c % fp_ === 0) {
-                    await new Promise(r => setTimeout(r, 1))
+                const fp = 100 / maxIter
+                const fp_ = maxIter / 100
+                c = 0
+                while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < maxIter) {
+                    pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => d.used)), randRange(val[2], val[3]), (dot) => !dot.used).path)
+                    if (c % fp_ === 0) {
+                        await new Promise(r => setTimeout(r, 1))
+                    }
+                    c++
                 }
-                c++
-            }
             }
             f3 = () => {
-                const toClear = Object.values(window.mazeSquares).filter((d) => {
-                function checkUsageWithRespectToLine(x1, y1, x2, y2) {
-                    try {
-                        return checkIfLineNotHidden(x1, y1, x2, y2)
+                window.toClear = Object.values(window.mazeSquares).filter((d) => {
+                    function checkUsageWithRespectToLine(x1, y1, x2, y2) {
+                        try {
+                            return checkIfLineNotHidden(x1, y1, x2, y2)
+                        }
+                        catch {
+                            return true
+                        }
                     }
-                    catch {
+                    if (
+                        checkUsageWithRespectToLine(d.x, d.y, d.x + 1, d.y) &&
+                        checkUsageWithRespectToLine(d.x, d.y, d.x, d.y + 1) &&
+                        checkUsageWithRespectToLine(d.x, d.y, d.x - 1, d.y) &&
+                        checkUsageWithRespectToLine(d.x, d.y, d.x, d.y - 1)
+                    ) {
                         return true
                     }
-                }
-                if (
-                    checkUsageWithRespectToLine(d.x, d.y, d.x + 1, d.y) &&
-                    checkUsageWithRespectToLine(d.x, d.y, d.x, d.y + 1) &&
-                    checkUsageWithRespectToLine(d.x, d.y, d.x - 1, d.y) &&
-                    checkUsageWithRespectToLine(d.x, d.y, d.x, d.y - 1)
-                ) {
-                    return true
-                }
-            })
-            toClear.forEach((d) => {
-                function handler(x, y) {
-                    if (toClear.includes(window.mazeSquares[`${d.x + x},${d.y + y}`])) {
-                        clearLine(d.x, d.y, d.x + x, d.y + y)
-                        window.lines[`${d.x * 2 + x},${d.y * 2 + y}`].ignore = true
+                })
+                window.toClear.forEach((d) => {
+                    function handler(x, y) {
+                        if (window.toClear.includes(window.mazeSquares[`${d.x + x},${d.y + y}`])) {
+                            window.lines[`${d.x * 2 + x},${d.y * 2 + y}`].elem.setAttribute("stroke", "white")
+                        }
                     }
-                }
-                handler(1, 0)
-                handler(0, 1)
-                handler(-1, 0)
-                handler(0, -1)
-            })
+                    handler(1, 0)
+                    handler(0, 1)
+                    handler(-1, 0)
+                    handler(0, -1)
+                })
+            }
+            f4 = () => {
+                window.toClear.forEach((d) => {
+                    function handler(x, y) {
+                        if (window.toClear.includes(window.mazeSquares[`${d.x + x},${d.y + y}`])) {
+                            clearLine(d.x, d.y, d.x + x, d.y + y)
+                            window.lines[`${d.x * 2 + x},${d.y * 2 + y}`].ignore = true
+                        }
+                    }
+                    handler(1, 0)
+                    handler(0, 1)
+                    handler(-1, 0)
+                    handler(0, -1)
+                })
             }
             window.navNotAllowed = true
             startPos = window.mp.start
@@ -145,6 +166,7 @@
             f1_complete = false
             f2_complete = false
             f3_complete = false
+            f4_complete = false
             window.addEventListener("keypress", (e) => {
                 if (e.key === "Enter") {
                     if (!f1_complete) {
@@ -158,6 +180,10 @@
                     else if (!f3_complete) {
                         f3()
                         f3_complete = true
+                    }
+                    else if (!f4_complete) {
+                        f4()
+                        f4_complete = true
                     }
                 }
             })
