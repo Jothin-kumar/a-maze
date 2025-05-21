@@ -6,7 +6,8 @@
         "2d/index.html",
         "/share.html",
         "/load-from-maze-collection.html",
-        "/index.html"
+        "/index.html",
+        "2d/demo.html"
     ],
     "line-end": "\n"
 }
