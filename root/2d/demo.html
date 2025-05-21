@@ -109,10 +109,11 @@
             }
             const val = vals[window.gridSize]
             window.mp = constructPath(pickRandomElement(Object.values(window.mazeSquares)), randRange(val[0], val[1])) // Main path
-            f1 = () => {
+            f1 = async () => {
                 mp.start.setColor("green")
-                pathLine(mp.path)
+                await pathLine(mp.path)
                 mp.end.setColor("red")
+                window.f1_completed = true
             }
             f2 = async () => {
                 const maxIter = 10000
@@ -126,6 +127,7 @@
                     }
                     c++
                 }
+                window.f2_completed = true
             }
             f3 = () => {
                 window.toClear = Object.values(window.mazeSquares).filter((d) => {
@@ -157,6 +159,7 @@
                     handler(-1, 0)
                     handler(0, -1)
                 })
+                window.f3_completed = true
             }
             f4 = () => {
                 window.toClear.forEach((d) => {
@@ -171,32 +174,29 @@
                     handler(-1, 0)
                     handler(0, -1)
                 })
+                window.f4_completed = true
             }
             window.navNotAllowed = true
             startPos = window.mp.start
             endPos = window.mp.end
             window.dispatchEvent(zoomChangeEvt)
             alignMaze()
-            window.f1_complete = false
-            window.f2_complete = false
-            window.f3_complete = false
-            window.f4_complete = false
+            window.f1_completed = false
+            window.f2_completed = false
+            window.f3_completed = false
+            window.f4_completed = false
             function exec() {
-                if (!window.f1_complete) {
+                if (!window.f1_completed) {
                     f1()
-                    window.f1_complete = true
                 }
-                else if (!window.f2_complete) {
+                else if (!window.f2_completed) {
                     f2()
-                    window.f2_complete = true
                 }
-                else if (!window.f3_complete) {
+                else if (!window.f3_completed) {
                     f3()
-                    window.f3_complete = true
                 }
-                else if (!window.f4_complete) {
+                else if (!window.f4_completed) {
                     f4()
-                    window.f4_complete = true
                 }
             }
             window.addEventListener("keypress", (e) => {
