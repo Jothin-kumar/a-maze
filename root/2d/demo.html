@@ -177,30 +177,34 @@
             endPos = window.mp.end
             window.dispatchEvent(zoomChangeEvt)
             alignMaze()
-            f1_complete = false
-            f2_complete = false
-            f3_complete = false
-            f4_complete = false
+            window.f1_complete = false
+            window.f2_complete = false
+            window.f3_complete = false
+            window.f4_complete = false
+            function exec() {
+                if (!window.f1_complete) {
+                    f1()
+                    window.f1_complete = true
+                }
+                else if (!window.f2_complete) {
+                    f2()
+                    window.f2_complete = true
+                }
+                else if (!window.f3_complete) {
+                    f3()
+                    window.f3_complete = true
+                }
+                else if (!window.f4_complete) {
+                    f4()
+                    window.f4_complete = true
+                }
+            }
             window.addEventListener("keypress", (e) => {
                 if (e.key === "Enter") {
-                    if (!f1_complete) {
-                        f1()
-                        f1_complete = true
-                    }
-                    else if (!f2_complete) {
-                        f2()
-                        f2_complete = true
-                    }
-                    else if (!f3_complete) {
-                        f3()
-                        f3_complete = true
-                    }
-                    else if (!f4_complete) {
-                        f4()
-                        f4_complete = true
-                    }
+                    exec()
                 }
             })
+            window.addEventListener("click", exec)
         }
         my_func()
     </script>
