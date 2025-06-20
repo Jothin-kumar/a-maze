@@ -194,7 +194,7 @@
             alignMaze()
             const note = document.getElementById("note")
             await new Promise(r => setTimeout(r, 500))
-            note.innerText = `Level: ${window.level}`
+            note.innerText = `Maze Level: ${window.level}`
             await new Promise(r => setTimeout(r, 2000))
             await f1()
             await new Promise(r => setTimeout(r, 1500))
@@ -204,21 +204,25 @@
             await new Promise(r => setTimeout(r, 1500))
             note.innerText = "Other paths generated"
             await new Promise(r => setTimeout(r, 2000))
-            note.innerText = "Clearing unused paths..."
-            f3()
+            note.innerText = "Checking for unnecessary lines..."
             await new Promise(r => setTimeout(r, 2000))
+            f3()
             if (window.toClearLines.length === 0) {
-                note.innerText = "No unused paths found"
+                note.innerText = "No unnecessary lines found"
             }
             else {
-                note.innerText = `Found ${window.toClearLines.length} unused paths`
+                note.innerText = `Found ${window.toClearLines.length} unnecessary lines`
                 await new Promise(r => setTimeout(r, 2000));
+                note.innerText = "Clearing unnecessary lines..."
+                await new Promise(r => setTimeout(r, 1000))
                 await f4()
                 await new Promise(r => setTimeout(r, 1500))
-                note.innerText = `Cleared ${window.toClearLines.length} unused paths`
+                note.innerText = `Cleared ${window.toClearLines.length} unnecessary lines`
             }
             await new Promise(r => setTimeout(r, 2000))
-            note.innerText = `Completed\nMaze rating: ${Math.floor(getDifficulty())}`
+            note.innerText = "Done"
+            await new Promise(r => setTimeout(r, 2000))
+            note.innerText = `Maze rating: ${Math.floor(getDifficulty())}`
         }
         my_func()
     </script>
