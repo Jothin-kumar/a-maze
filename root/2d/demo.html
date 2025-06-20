@@ -161,19 +161,20 @@
                 })
                 window.f3_completed = true
             }
-            f4 = () => {
-                window.toClear.forEach((d) => {
-                    function handler(x, y) {
-                        if (window.toClear.includes(window.mazeSquares[`${d.x + x},${d.y + y}`])) {
-                            clearLine(d.x, d.y, d.x + x, d.y + y)
-                            window.lines[`${d.x * 2 + x},${d.y * 2 + y}`].ignore = true
+            f4 = async () => {
+                for (const l of window.toClear) {
+                    async function handler(x, y) {
+                        if (window.toClear.includes(window.mazeSquares[`${l.x + x},${l.y + y}`])) {
+                            clearLine(l.x, l.y, l.x + x, l.y + y)
+                            window.lines[`${l.x * 2 + x},${l.y * 2 + y}`].ignore = true
+                            await new Promise(r => setTimeout(r, 1))
                         }
                     }
-                    handler(1, 0)
-                    handler(0, 1)
-                    handler(-1, 0)
-                    handler(0, -1)
-                })
+                    await handler(1, 0)
+                    await handler(0, 1)
+                    await handler(-1, 0)
+                    await handler(0, -1)
+                }
                 window.f4_completed = true
             }
             window.navNotAllowed = true
