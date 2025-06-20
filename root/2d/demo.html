@@ -84,10 +84,10 @@
             const h = m.height
             const w = m.width
             if (h > w) { // Portrait
-                return h / ((window.gridSize - .5) * 10 + 10)
+                return w / ((window.gridSize - .5) * 10 + 10)
             }
             else { // Landscape
-                return w / ((window.gridSize - .5) * 10 + 10)
+                return h / ((window.gridSize - .5) * 10 + 10)
             }
         }
         document.getElementById("main").style.display = "block"
