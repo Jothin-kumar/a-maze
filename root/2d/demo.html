@@ -138,7 +138,7 @@
                 c = 0
                 while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < maxIter) {
                     pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => d.used)), randRange(val[2], val[3]), (dot) => !dot.used).path)
-                    if (c % 25 === 0) {
+                    if (c % 40 === 0) {
                         await new Promise(r => setTimeout(r, 1))
                     }
                     c++
@@ -208,14 +208,14 @@
             f3()
             await new Promise(r => setTimeout(r, 2000))
             if (window.toClearLines.length === 0) {
-                note.innerText = "No unused paths found."
+                note.innerText = "No unused paths found"
             }
             else {
-                note.innerText = `Found ${window.toClearLines.length} unused paths.`
+                note.innerText = `Found ${window.toClearLines.length} unused paths`
                 await new Promise(r => setTimeout(r, 2000));
                 await f4()
                 await new Promise(r => setTimeout(r, 1500))
-                note.innerText = `Cleared ${window.toClearLines.length} unused paths.`
+                note.innerText = `Cleared ${window.toClearLines.length} unused paths`
             }
             await new Promise(r => setTimeout(r, 2000))
             note.innerText = `Completed\nMaze rating: ${Math.floor(getDifficulty())}`
