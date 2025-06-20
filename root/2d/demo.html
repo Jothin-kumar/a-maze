@@ -14,6 +14,19 @@
             height: 100dvh;
             margin: 0;
         }
+        #note {
+            position: absolute;
+            top: 10dvh;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            background-color: #000a;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-wrap: nowrap;
+            line-height: 1.5;
+        }
     </style>
 </head>
 
@@ -23,11 +36,14 @@
             <svg id="maze-grid" xmlns="http://www.w3.org/2000/svg"></svg>
         </div>
     </div>
+    <p id="note"></p>
 
     <script src="script/helper.js"></script>
     <script src="script/line.js"></script>
     <script src="script/maze-construct.js"></script>
     <script src="script/maze-shared.js"></script>
+    <script src="script/nav.js"></script>
+    <script src="script/difficulty.js"></script>
     <script>
         const usp = new URLSearchParams(window.location.search)
         window.level = usp.get("level") || "medium"
@@ -148,10 +164,12 @@
                         return true
                     }
                 })
+                window.toClearLines = []
                 window.toClear.forEach((d) => {
                     function handler(x, y) {
                         if (window.toClear.includes(window.mazeSquares[`${d.x + x},${d.y + y}`])) {
                             window.lines[`${d.x * 2 + x},${d.y * 2 + y}`].elem.setAttribute("stroke", "white")
+                            window.toClearLines.push(window.lines[`${d.x * 2 + x},${d.y * 2 + y}`])
                         }
                     }
                     handler(1, 0)
@@ -162,18 +180,10 @@
                 window.f3_completed = true
             }
             f4 = async () => {
-                for (const l of window.toClear) {
-                    async function handler(x, y) {
-                        if (window.toClear.includes(window.mazeSquares[`${l.x + x},${l.y + y}`])) {
-                            clearLine(l.x, l.y, l.x + x, l.y + y)
-                            window.lines[`${l.x * 2 + x},${l.y * 2 + y}`].ignore = true
-                            await new Promise(r => setTimeout(r, 1))
-                        }
-                    }
-                    await handler(1, 0)
-                    await handler(0, 1)
-                    await handler(-1, 0)
-                    await handler(0, -1)
+                for (const l of window.toClearLines) {
+                    l.hide()
+                    l.ignore = true
+                    await new Promise(r => setTimeout(r, 1))
                 }
                 window.f4_completed = true
             }
@@ -182,30 +192,33 @@
             endPos = window.mp.end
             window.dispatchEvent(zoomChangeEvt)
             alignMaze()
-            window.f1_completed = false
-            window.f2_completed = false
-            window.f3_completed = false
-            window.f4_completed = false
-            function exec() {
-                if (!window.f1_completed) {
-                    f1()
-                }
-                else if (!window.f2_completed) {
-                    f2()
-                }
-                else if (!window.f3_completed) {
-                    f3()
-                }
-                else if (!window.f4_completed) {
-                    f4()
-                }
+            const note = document.getElementById("note")
+            await new Promise(r => setTimeout(r, 500))
+            note.innerText = `Level: ${window.level}`
+            await new Promise(r => setTimeout(r, 2000))
+            await f1()
+            await new Promise(r => setTimeout(r, 1500))
+            note.innerText = "Main path constructed.\nGenerating other paths..."
+            await new Promise(r => setTimeout(r, 2000))
+            await f2()
+            await new Promise(r => setTimeout(r, 1500))
+            note.innerText = "Other paths generated"
+            await new Promise(r => setTimeout(r, 2000))
+            note.innerText = "Clearing unused paths..."
+            f3()
+            await new Promise(r => setTimeout(r, 2000))
+            if (window.toClearLines.length === 0) {
+                note.innerText = "No unused paths found."
             }
-            window.addEventListener("keypress", (e) => {
-                if (e.key === "Enter") {
-                    exec()
-                }
-            })
-            window.addEventListener("click", exec)
+            else {
+                note.innerText = `Found ${window.toClearLines.length} unused paths.`
+                await new Promise(r => setTimeout(r, 2000));
+                await f4()
+                await new Promise(r => setTimeout(r, 1500))
+                note.innerText = `Cleared ${window.toClearLines.length} unused paths.`
+            }
+            await new Promise(r => setTimeout(r, 2000))
+            note.innerText = `Completed\nMaze rating: ${Math.floor(getDifficulty())}`
         }
         my_func()
     </script>
