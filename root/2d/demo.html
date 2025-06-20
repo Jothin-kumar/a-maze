@@ -12,6 +12,7 @@
             justify-content: center;
             align-items: center;
             height: 100dvh;
+            margin: 0;
         }
     </style>
 </head>
@@ -84,10 +85,10 @@
             const h = m.height
             const w = m.width
             if (h > w) { // Portrait
-                return w / ((window.gridSize - .5) * 10 + 10)
+                return w / (window.gridSize * 10 + 10)
             }
             else { // Landscape
-                return h / ((window.gridSize - .5) * 10 + 10)
+                return h / (window.gridSize * 10 + 10)
             }
         }
         document.getElementById("main").style.display = "block"
