@@ -119,12 +119,10 @@
             }
             f2 = async () => {
                 const maxIter = 10000
-                const fp = 100 / maxIter
-                const fp_ = maxIter / 100
                 c = 0
                 while (Object.values(window.mazeSquares).filter((d) => !d.used).length > 0 && c < maxIter) {
                     pathLine(constructPath(pickRandomElement(Object.values(window.mazeSquares).filter((d) => d.used)), randRange(val[2], val[3]), (dot) => !dot.used).path)
-                    if (c % fp_ === 0) {
+                    if (c % 25 === 0) {
                         await new Promise(r => setTimeout(r, 1))
                     }
                     c++
