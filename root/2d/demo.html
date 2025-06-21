@@ -211,13 +211,11 @@
                 note.innerText = "No unnecessary lines found"
             }
             else {
-                note.innerText = `Found ${window.toClearLines.length} unnecessary lines`
+                note.innerText = `Found some unnecessary lines`
                 await new Promise(r => setTimeout(r, 2000));
                 note.innerText = "Clearing unnecessary lines..."
                 await new Promise(r => setTimeout(r, 1000))
                 await f4()
-                await new Promise(r => setTimeout(r, 1500))
-                note.innerText = `Cleared ${window.toClearLines.length} unnecessary lines`
             }
             await new Promise(r => setTimeout(r, 2000))
             note.innerText = "Done"
